@@ -1,0 +1,103 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<!--
+  Configuration file for AntRun.
+  
+  Use this file to override the default properties contained
+  in build.xml. For example, to override the build.jar.filename
+  property (which sets the name of the compiled jar file), add
+  an element
+  
+  <jar>
+    <filename>foo</filename>
+  </jar>
+  
+  inside the <build> element.
+  
+  **Caveat emptor:** in some cases, changing this file and running ant
+  again will result in Ant using a cached version of the old file! Run
+  "ant dummy" to make sure that the correct data is being read. Otherwise
+  you might need to run "ant clean" and start over.
+-->
+<build>
+  <!-- Uncomment any of these if you want to override the build
+       script's default values -->
+                 
+  <!-- The project's name -->
+  <name>Part-time Logger II</name>
+  
+  <!-- The project's author. Currently this only
+  shows up in the footer of the Javadoc documentation. -->
+  <author>Sylvain Hallé</author>
+  
+  <!-- The project's main class -->
+  <mainclass>ca.uqac.lif.ptlogger2.Main</mainclass>
+  
+  <test>
+    <!-- The filename pattern to recognize test files -->
+    <!-- <filenamepattern>**/*Test.java</filenamepattern> -->
+  </test>
+  
+  <depdir>Source/Core/dep</depdir>
+  
+  <jar>
+  	<filename>ptlogger2.jar</filename>
+  </jar>
+  
+  <!--
+    Write JAR dependencies here.
+  -->
+  <dependencies>
+  <dependency>
+      <name>Apache Commons Lang</name>
+      <classname>org.apache.commons.lang3.RandomStringUtils</classname>
+      <files>
+        <zip>http://apache.mirror.rafal.ca/commons/lang/binaries/commons-lang3-3.9-bin.zip</zip>
+      </files>
+      <!-- The following parameter is mandatory. Set it to false if you don't
+           want this library to be bundled into the compiled JAR. -->
+      <bundle>true</bundle>
+    </dependency>
+    <dependency>
+      <name>Bullwinkle</name>
+      <classname>ca.uqac.lif.util.CliParser</classname>
+      <files>
+        <zip>https://github.com/sylvainhalle/Bullwinkle/releases/download/v1.4.4/bullwinkle-1.4.4.zip</zip>
+      </files>
+      <!-- The following parameter is mandatory. Set it to false if you don't
+           want this library to be bundled into the compiled JAR. -->
+      <bundle>true</bundle>
+    </dependency>
+  	<dependency>
+      <name>BeepBeep 3</name>
+      <classname>ca.uqac.lif.cep.Processor</classname>
+      <files>
+        <zip>https://github.com/liflab/beepbeep-3/releases/download/v0.10.2-alpha/beepbeep-3-0.10.2-alpha.zip</zip>
+      </files>
+      <!-- The following parameter is mandatory. Set it to false if you don't
+           want this library to be bundled into the compiled JAR. -->
+      <bundle>true</bundle>
+    </dependency>
+    <dependency>
+      <!--
+      BeepBeep tuples
+      -->
+      <name>BeepBeep 3 Tuples Palette</name>
+      <classname>ca.uqac.lif.cep.tuples.Tuple</classname>
+      <bundle>true</bundle>
+      <files>
+        <jar>https://github.com/liflab/beepbeep-3-palettes/releases/download/v20191002/tuples.jar</jar>
+      </files>
+    </dependency>
+    <dependency>
+      <!--
+      BeepBeep tables and plots
+      -->
+      <name>BeepBeep 3 MTNP Palette</name>
+      <classname>ca.uqac.lif.mtnp.plot.gnuplot.Scatterplot</classname>
+      <bundle>true</bundle>
+      <files>
+        <jar>https://github.com/liflab/beepbeep-3-palettes/releases/download/v20191002/mtnp.jar</jar>
+      </files>
+    </dependency>
+  </dependencies>
+</build>
