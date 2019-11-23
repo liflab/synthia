@@ -70,6 +70,8 @@ for (int i = 0; i < 8; i++)
 
 The Markov chain created by this block of code looks like this:
 
+![Markov chain](https://raw.githubusercontent.com/liflab/synthia/master/Source/Examples/src/doc-files/Markov.png)
+
 The program produces an output like this one:
 
 ```
