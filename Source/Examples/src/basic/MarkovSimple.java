@@ -2,8 +2,8 @@ package basic;
 
 import ca.uqac.lif.cep.synthia.random.MarkovChain;
 import ca.uqac.lif.cep.synthia.random.RandomFloat;
+import ca.uqac.lif.cep.synthia.replay.Playback;
 import ca.uqac.lif.cep.synthia.util.Constant;
-import ca.uqac.lif.cep.synthia.util.Enumerate;
 import ca.uqac.lif.cep.synthia.util.StringPattern;
 import ca.uqac.lif.cep.synthia.util.Tick;
 
@@ -11,7 +11,7 @@ public class MarkovSimple {
 
 	public static void main(String[] args)
 	{
-		Tick tick = new Tick(0, new Enumerate<Integer>(1, 2, 1));
+		Tick tick = new Tick(0, new Playback<Integer>(1, 2, 1));
 		MarkovChain<String> mc = new MarkovChain<String>(new RandomFloat());
 		mc.add(0, new Constant<String>(""));
 		mc.add(1, new Constant<String>("START"));

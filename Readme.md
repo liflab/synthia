@@ -13,6 +13,21 @@ Synthia can be used to generate test inputs for
 flexible responses than simple "canned answers", or create a semi-realistic
 simulation of a system's output, such as a log.
 
+Among the features in Synthia:
+
+- All sources of "choice" in the various generators are passed as arguments
+  in the form of `Picker` objects. Pickers can be random, but they can also
+  do something else, such as always returning the same value (special type
+  `Contstant`), or cycling through a user-defined list of values (special type
+  `Playback`). Users can define their own pickers, and they can return any
+  type of object, not just numbers.
+- The outputs of pickers can be wrapped into a `Record` object, which remembers
+  the successive values they produce. These values can be replayed through
+  a `Playback` picker. Since generators make choices only through pickers,
+  this makes it possible to regenerate any random object. This feature is
+  useful e.g. for debugging, by running a program on a specific input causing
+  a failure.
+
 Examples
 --------
 
@@ -22,7 +37,53 @@ things with Synthia. The
 folder has more complex examples, such as simulating multiple users visiting
 a web site.
 
+### Generate primitive objects
+
+The `ca.uqac.lif.synthia.random` package provides basic `Picker` objects that
+can generate primitive values selected with a uniform probability distribution.
+
+```java
+RandomInteger ri = new RandomInteger(2, 10); // uniform random int between 2 and 10
+RandomFloat rf = new RandomFloat(); // uniform random float between 0 and 1
+RandomBoolean rb = new RandomBoolean(0.7); // coin toss returning true 7 out of 10 times
+```
+
+All random pickers implement methods `setSeed()` (to specify the starting seed
+of their internal random source) and `reset()` (to reset their internal random
+source to the initial seed value), making it possible to reproduce the random
+sequences they generate.
+
+Random strings can also be generated (using `RandomStringUtils` from
+[Apache Commons Lang](http://commons.apache.org/proper/commons-lang/javadocs/api-release/index.html)
+in the background):
+
+```java
+// Generate strings of length 10
+RandomString rs1 = new RandomString(new Constant(10));
+// Generates strings of length randomly selected in the interval 2-10
+RandomString rs2 = new RandomString(new RandomInteger(2, 10));
+```
+
+This last example shows that the input to a Picker may itself be another Picker.
+For `rs2`, the length of the string is determined by the result of a random
+pick in the interval [2,10].
+
+Similarly, the `Tick` picker generates an increasing sequence of numbers:
+
+```java
+Tick t1 = new Tick(10, 1);
+Tick t2 = new Tick(new RandomInteger(5, 15), new RandomFloat(0.5, 1.5));
+```
+
+Here, `t1` will generate a sequence starting at 10 and incrementing by 1 on every
+call to `pick()` --that is, this object is completely deterministic. In contrast,
+`t2` wil generate a sequence starting at a randomly selected value between 5 and
+15, and incrementing each time by a randomly selected value between 0.5 and 1.5.
+
 ### Generate a string from generated parts
+
+The `StringPattern` picker can produce character strings where some parts are
+determined by the output of other pickers.
 
 ```java
 StringPattern pat = new StringPattern(
@@ -43,6 +104,9 @@ Produces an output like:
 1.5624087 3dF - Source: 187.212.61.155, Destination: 163.79.140.29, Duration: 368
 1.8029451 3dF - Source: 187.212.61.155, Destination: 152.200.85.64, Duration: 689
 ```
+
+Notice the use of the `Freeze` picker: it asks for the input of another picker once,
+and then returns that value forever.
 
 ### Generate sequences from a Markov chain
 
@@ -68,6 +132,8 @@ for (int i = 0; i < 8; i++)
 	System.out.println(mc.pick());
 ```
 
+Note how the generators for states 2-3-4 share the same `tick` source,
+ensuring that each string contains an incrementing "timestamp".
 The Markov chain created by this block of code looks like this:
 
 ![Markov chain](https://raw.githubusercontent.com/liflab/synthia/master/Source/Examples/src/doc-files/Markov.png)
@@ -108,218 +174,22 @@ The grey birds watch the ugly old brown bird .
 ...
 ```
 
-AntRun is a template structure for Java projects. Through its comprehensive
-Ant build script, it supports automated execution of unit tests, generation
-of [Javadoc](http://www.oracle.com/technetwork/articles/java/index-jsp-135444.html)
-documentation and code coverage reports (with
-[JaCoCo](http://www.eclemma.org/jacoco/)), and download and installation
-of JAR dependencies as specified in an external, user-definable XML file.
-It also includes a boilerplate `.gitignore` file suitable for an Eclipse
-project.
+Building Synthia
+----------------
 
-All this is done in a platform-independent way, so your build scripts
-should work on both MacOS, Linux and Windows.
+The library is structured using the [AntRun](https://github.com/sylvainhalle/AntRun)
+build scripts. Please see the AntRun Readme file for instructions on
+compiling.
 
-Table of Contents                                                    {#toc}
------------------
+About the name
+--------------
 
-- [Quick start guide](#quickstart)
-- [Available tasks](#tasks)
-- [Continuous integration](#ci)
-- [Cross-compiling](#xcompile)
-- [About the author](#about)
-
-Quick start guide                                             {#quickstart}
------------------
-
-1. First make sure you have the following installed:
-
-  - The Java Development Kit (JDK) to compile. AntRun was developed and
-    tested on version 6 and 7 of the JDK, but it is probably safe to use
-    any later version.
-  - [Ant](http://ant.apache.org) to automate the compilation and build
-    process
-
-2. Download the AntRun template from
-   [GitHub](https://github.com/sylvainhalle/AntRun) or clone the repository
-   using Git:
-   
-   git@github.com:sylvainhalle/AntRun.git
-
-3. Override any defaults, and specify any dependencies your project
-   requires by editing `config.xml`. In particular, you may want
-   to change the name of the Main class.
-
-4. Start writing your code in the `Source/Core` folder, and your unit
-   tests in `Source/CoreTest`. Optionally, you can create an Eclipse
-   workspace out of the `Source` folder, with `Core` and `CoreTest` as
-   two projects within this workspace.
-
-5. Use Ant to build your project. To compile the code, generate the
-   Javadoc, run the unit tests, generate a test and code coverage report
-   and bundle everything in a runnable JAR file, simply type `ant` (without
-   any arguments) on the command line.
-   
-6. If dependencies were specified in step 4 and are not present in the
-   system, type `ant download-deps`, followed by `ant install-deps` to
-   automatically download and install them before compiling. The latter
-   command might require to be run as administrator --the way to do this
-   varies according to your operating system (see below).
-
-Otherwise, use one of the many [tasks](#tasks) that are predefined.
-
-Available tasks                                                    {#tasks}
----------------
-
-This document is incomplete. Execute
-
-    $ ant -p
-
-from the project's top folder to get the list of all available targets.
-
-### dist
-
-The default task. Currently applies `jar`.
-
-### compile
-
-Compiles the project.
-
-### compile-tests
-
-Compiles the unit tests.
-
-### jar
-
-Compiles the project, generates the Javadoc and creates a runnable JAR,
-including the sources and the documentation (and possibly the project's
-dependencies, see `download-deps` below).
-
-### test
-
-Performs tests with jUnit and generates code coverage report with JaCoCo.
-The unit test report (in HTML format) is available in the `test/junit`
-folder (which will be created if it does not exist). The code coverage
-report is available in the `test/coverage` folder.
-
-### download-deps
-
-Downloads all the JAR dependencies declared in `config.xml`, and required
-to correctly build the project. The JAR files are extracted and placed in
-the `dep` or the `lib` folder. When compiling (with the `compile` task), the
-compiler is instructed to include these JARs in its classpath. Depending on the
-setting specified in `config.xml`, these JARs are also bundled in the
-output JAR file of the `jar` task.
-
-### download-rt6
-
-Downloads the bootstrap classpath (`rt.jar`) for Java 6, and places it in
-the project's root folder. See [cross-compiling](#xcompile).
-
-Continuous integration                                               {#ci}
-----------------------
-
-AntRun makes it easy to use [continuous
-integration](https://en.wikipedia.org/wiki/Continuous_integration) services
-like [Travis CI](https://travis-ci.org) or
-[Semaphore](http://semaphoreapp.com). The sequence of commands to
-automatically setup the environment, build and test it is (for Linux):
-
-    $ ant download-deps
-    $ ant dist test
-
-The second command must be run as administrator, as it copies the required
-dependencies into a system folder that generally requires that access. For
-Windows systems, running as administrator is done with the
-[`runas` command](https://technet.microsoft.com/en-us/library/cc771525.aspx#BKMK_examples).
-
-Notice how, apart from the call to `sudo`, all the process is
-platform-independent.
-
-Declaring dependencies                                              {#deps}
-----------------------
-
-Among other configuration settings, dependencies can be declared in the file
-`config.xml`. Locate the `<dependencies>` section in that file, and add as
-many `<dependency>` entries as required. The structure of such a section is as
-follows:
-
-``` xml
-<dependency>
-      <name>Test Dep</name>
-      <classname>ca.uqac.lif.NonExistentClass</classname>
-      <files>
-        <jar>http://sylvainhalle.github.io/AntRun/placeholders/dummy-jar.jar</jar>
-        <zip>http://sylvainhalle.github.io/AntRun/placeholders/dummy-zip.zip</zip>
-      </files>
-      <bundle>true</bundle>
-</dependency>
-```
-
-The parameters are:
-
-- `name`: a human-readable name for the dependency, only used for display
-- `classname`: a fully qualified class name that is supposed to be provided
-  by the dependency. AntRun checks if this class name is present in the
-  classpath; if not, it will download the files specified in the `files`
-  section
-- `files`: a list of either `jar` or `zip` elements, each containing a URL to
-  a JAR file, or an archive of JAR files. AntRun downloads these files and
-  places them in either the `dep` or the `lib` folders of the project (both are
-  in the classpath). If the URL is a zip, it also unzips the content of the
-  archive.
-- `bundle`: when this element has the value `true`, the dependency is copied
-  to the `dep` folder; otherwise, it is copied to the `lib` folder. As was
-  said, both are in the classpath, but only the JARs in the `dep` folder are
-  bundled when creating a JAR file for the project (using the `jar` task).
-
-Cross-compiling                                                 {#xcompile}
----------------
-
-The `.class` files are marked with the major version number of the compiler
-that created them; hence a file compiled with JDK 1.7 will contain this
-version number in its metadata. A JRE 1.6 will refuse to run them,
-regardless of whether they were built from 1.6-compliant code.
-*Cross-compiling* is necessary if one wants to make a project compatible
-with a version of Java earlier than the one used to compile it. 
-
-By default, AntRun compiles your project using the default JDK installed on
-your computer. However, you can compile files that are compatible with
-a specific version of Java by putting the *bootstrap* JAR file `rt.jar`
-that corresponds to that version in the project's root folder (i.e. in the
-same folder as `build.xml`). When started, AntRun checks for the presence
-bootstrap JAR; if present, it uses it instead of the system's bootstrap
-classpath.
-
-For example, if one downloads the `rt.jar` file from JDK 1.6 (using
-the `download-rt6` task), the compiled files will be able to be run by
-a Java 6 virtual machine. (Assuming the code itself is Java 6-compliant.)
-
-Projects that use AntRun                                        {#projects}
-------------------------
-
-Virtually every Java project developed at [LIF](http://liflab.ca) uses
-an AntRun template project. This includes:
-
-- [Azrael](https://github.com/sylvainhalle/Azrael), a generic serialization
-  library
-- [BeepBeep 3](https://liflab.github.io/beepbeep-3), an event stream
-  processing engine, and most of its
-  [palettes](https://github.com/liflab/beepbeep-3-palettes)
-- [Bullwinkle](https://github.com/sylvainhalle/Bullwinkle), a runtime BNF
-  parser
-- [Jerrydog](https://github.com/sylvainhalle/Jerrydog), a lightweight web
-  server
-- [LabPal](https://liflab.github.io/labpal), a framework for running
-  computer experiments
-- [TeXtidote](https://github.com/sylvainhalle/textidote), a spelling and
-  grammar checker for LaTeX documents
-
-...and more.
+Synthia is a play on "*synth*esizing" data structures.
 
 About the author                                                   {#about}
 ----------------
 
-AntRun was written by [Sylvain Hallé](http://leduotang.ca/sylvain),
-Full Professor at [Université du Québec à
-Chicoutimi](http://www.uqac.ca/), Canada.
+Synthia was written by Sylvain Hallé, professor at Université
+du Québec à Chicoutimi, Canada.
+
+<!-- :maxLineLen=76: -->

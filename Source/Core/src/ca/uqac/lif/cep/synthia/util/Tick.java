@@ -5,34 +5,46 @@ import ca.uqac.lif.synthia.Picker;
 
 public class Tick implements Picker<Number>
 {
-	protected float m_startValue;
+	protected Picker<? extends Number> m_startValue;
 	
 	protected float m_currentValue;
 
 	protected Picker<? extends Number> m_increment;
 	
-	public Tick(Number start, Picker<? extends Number> increment)
+	public Tick(Picker<? extends Number> start, Picker<? extends Number> increment)
 	{
 		super();
-		m_startValue = start.floatValue();
+		m_startValue = start;
 		m_increment = increment;
-		m_currentValue = m_startValue;
+		m_currentValue = m_startValue.pick().floatValue();
+	}
+	
+	public Tick(Number start, Number increment)
+	{
+		this(new Constant<Number>(start), new Constant<Number>(increment));
+	}
+	
+	public Tick(Number start, Picker<? extends Number> increment)
+	{
+		this(new Constant<Number>(start), increment);
 	}
 	
 	public Tick(Picker<? extends Number> increment)
 	{
-		this(0, increment);
+		this(new Constant<Number>(0), increment);
 	}
 	
 	public Tick()
 	{
-		this(0, new RandomFloat());
+		this(new Constant<Number>(0), new RandomFloat());
 	}
 
 	@Override
 	public void reset()
 	{
-		m_currentValue = m_startValue;
+		m_startValue.reset();
+		m_increment.reset();
+		m_currentValue = m_startValue.pick().floatValue();
 	}
 
 	@Override

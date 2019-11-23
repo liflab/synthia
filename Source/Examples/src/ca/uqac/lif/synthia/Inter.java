@@ -1,11 +1,11 @@
 package ca.uqac.lif.synthia;
 
+import basic.IpAddressProvider;
 import ca.uqac.lif.cep.synthia.random.BoundedProvider;
-import ca.uqac.lif.cep.synthia.random.IpAddressProvider;
 import ca.uqac.lif.cep.synthia.random.RandomString;
 import ca.uqac.lif.cep.synthia.random.UniformRandomPicker.RandomFloat;
 import ca.uqac.lif.cep.synthia.random.UniformRandomPicker.RandomInteger;
-import ca.uqac.lif.cep.synthia.util.Enumerate;
+import ca.uqac.lif.cep.synthia.replay.Playback;
 import ca.uqac.lif.cep.synthia.util.Freeze;
 import ca.uqac.lif.cep.synthia.util.Interleave;
 import ca.uqac.lif.cep.synthia.util.StringPattern;
@@ -16,7 +16,7 @@ public class Inter {
 	public static void main(String[] args) 
 	{
 		//FloatSource tick_source = new UniformIntervalFloatSource(0.5, 1);
-		Picker<Number> tick_source = new Enumerate<Number>(1, 2, 3);
+		Picker<Number> tick_source = new Playback<Number>(1, 2, 3);
 		Tick ticker = new Tick(1000, tick_source);
 		StringPattern rsp1 = new StringPattern("{$0} - {$1}", 
 				new Freeze<String>(new RandomString(3, 5)), 

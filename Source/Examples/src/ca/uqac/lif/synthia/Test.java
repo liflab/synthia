@@ -2,7 +2,7 @@ package ca.uqac.lif.synthia;
 
 import java.util.Random;
 
-import ca.uqac.lif.cep.synthia.random.IpAddressProvider;
+import basic.IpAddressProvider;
 import ca.uqac.lif.cep.synthia.random.MarkovChain;
 import ca.uqac.lif.cep.synthia.random.RandomString;
 import ca.uqac.lif.cep.synthia.random.RandomFloat;
