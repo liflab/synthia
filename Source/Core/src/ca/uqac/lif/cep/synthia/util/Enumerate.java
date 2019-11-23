@@ -1,13 +1,17 @@
-package ca.uqac.lif.synthia;
+package ca.uqac.lif.cep.synthia.util;
 
-public class ListPicker<T> implements Picker<T>
+import ca.uqac.lif.synthia.Picker;
+
+public class Enumerate<T> implements Picker<T>
 {
 	/*@ non_null @*/ protected T[] m_values;
+	
+	/*@ non_null @*/ protected float[] m_probabilities;
 	
 	protected int m_index;
 	
 	@SuppressWarnings("unchecked")
-	public ListPicker(/*@ non_null @*/ T ... values)
+	public Enumerate(/*@ non_null @*/ T ... values)
 	{
 		m_values = values;
 		m_index = 0;
@@ -27,9 +31,9 @@ public class ListPicker<T> implements Picker<T>
 	}
 	
 	@Override
-	public ListPicker<T> duplicate(boolean with_state)
+	public Enumerate<T> duplicate(boolean with_state)
 	{
-		ListPicker<T> lp = new ListPicker<T>(m_values);
+		Enumerate<T> lp = new Enumerate<T>(m_values);
 		if (with_state)
 		{
 			lp.m_index = m_index;

@@ -1,5 +1,6 @@
-package ca.uqac.lif.cep.synthia.random;
+package ca.uqac.lif.cep.synthia.util;
 
+import ca.uqac.lif.cep.synthia.random.RandomFloat;
 import ca.uqac.lif.synthia.Picker;
 
 public class Tick implements Picker<Number>
@@ -8,9 +9,9 @@ public class Tick implements Picker<Number>
 	
 	protected float m_currentValue;
 
-	protected Picker<Number> m_increment;
+	protected Picker<? extends Number> m_increment;
 	
-	public Tick(Number start, Picker<Number> increment)
+	public Tick(Number start, Picker<? extends Number> increment)
 	{
 		super();
 		m_startValue = start.floatValue();
@@ -18,9 +19,14 @@ public class Tick implements Picker<Number>
 		m_currentValue = m_startValue;
 	}
 	
-	public Tick(Picker<Number> increment)
+	public Tick(Picker<? extends Number> increment)
 	{
 		this(0, increment);
+	}
+	
+	public Tick()
+	{
+		this(0, new RandomFloat());
 	}
 
 	@Override

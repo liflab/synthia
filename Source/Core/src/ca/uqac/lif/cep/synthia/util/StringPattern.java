@@ -14,6 +14,12 @@ public class StringPattern implements Picker<String>
 		m_pattern = pattern;
 		m_providers = parts;
 	}
+	
+	@Override
+	public String toString()
+	{
+		return m_pattern;
+	}
 
 	@Override
 	public void reset() 

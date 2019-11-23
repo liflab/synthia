@@ -1,4 +1,4 @@
-package ca.uqac.lif.cep.synthia.random;
+package ca.uqac.lif.cep.synthia.util;
 
 import ca.uqac.lif.synthia.Picker;
 

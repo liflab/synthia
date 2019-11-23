@@ -36,4 +36,10 @@ public class Constant<T> implements Picker<T>
 	{
 		return new Constant<T>(m_value);
 	}
+	
+	@Override
+	public String toString()
+	{
+		return m_value.toString();
+	}
 }
