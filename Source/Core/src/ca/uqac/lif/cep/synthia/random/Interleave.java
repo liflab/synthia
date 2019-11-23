@@ -7,7 +7,7 @@ import java.util.Map;
 
 import ca.uqac.lif.synthia.Picker;
 
-public class InterleavedProvider<T> implements Picker<T>
+public class Interleave<T> implements Picker<T>
 {
 	protected Map<Integer,Picker<T>> m_sessions;
 
@@ -36,7 +36,7 @@ public class InterleavedProvider<T> implements Picker<T>
 	 */
 	protected static final transient int MAX_TRIES = 1000;
 
-	public InterleavedProvider(Picker<Float> float_source, Number mid_probability, Number end_probability)
+	public Interleave(Picker<Float> float_source, Number mid_probability, Number end_probability)
 	{
 		super();
 		m_sessions = new HashMap<Integer,Picker<T>>();
@@ -47,7 +47,7 @@ public class InterleavedProvider<T> implements Picker<T>
 		m_idCount = 0;
 	}
 
-	public InterleavedProvider<T> add(Picker<T> provider, Number probability)
+	public Interleave<T> add(Picker<T> provider, Number probability)
 	{
 		m_choices.add(new ProviderChoice(provider, probability.floatValue()));
 		return this;
@@ -93,9 +93,9 @@ public class InterleavedProvider<T> implements Picker<T>
 	}
 
 	@Override
-	public InterleavedProvider<T> duplicate(boolean with_state)
+	public Interleave<T> duplicate(boolean with_state)
 	{
-		InterleavedProvider<T> ilp = new InterleavedProvider<T>(m_floatSource, m_midProbability, m_endProbability);
+		Interleave<T> ilp = new Interleave<T>(m_floatSource, m_midProbability, m_endProbability);
 		ilp.m_choices.addAll(m_choices);
 		if (with_state)
 		{

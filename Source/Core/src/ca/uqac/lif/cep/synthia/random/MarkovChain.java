@@ -9,7 +9,7 @@ import java.util.Map;
 import ca.uqac.lif.cep.ProcessorException;
 import ca.uqac.lif.synthia.Picker;
 
-public class MarkovProvider<T> implements Picker<T> 
+public class MarkovChain<T> implements Picker<T> 
 {
 	protected int m_currentState;
 	
@@ -19,7 +19,7 @@ public class MarkovProvider<T> implements Picker<T>
 	
 	protected Picker<Float> m_floatSource;
 	
-	public MarkovProvider(Picker<Float> float_source)
+	public MarkovChain(Picker<Float> float_source)
 	{
 		super();
 		m_transitions = new HashMap<Integer,List<Transition>>();
@@ -34,7 +34,7 @@ public class MarkovProvider<T> implements Picker<T>
 	 * @param probability The probability of taking this transition (between 0 and 1)
 	 * @return This machine
 	 */
-	public MarkovProvider<T> add(int source, int destination, Number probability)
+	public MarkovChain<T> add(int source, int destination, Number probability)
 	{
 		Transition t = new Transition(destination, probability.floatValue());
 		List<Transition> trans = m_transitions.get(source);
@@ -53,7 +53,7 @@ public class MarkovProvider<T> implements Picker<T>
 	 * @param p The provider
 	 * @return This machine
 	 */
-	public MarkovProvider<T> add(int state, Picker<T> p)
+	public MarkovChain<T> add(int state, Picker<T> p)
 	{
 		m_providers.put(state, p);
 		return this;
@@ -102,9 +102,9 @@ public class MarkovProvider<T> implements Picker<T>
 	}
 
 	@Override
-	public MarkovProvider<T> duplicate(boolean with_state)
+	public MarkovChain<T> duplicate(boolean with_state)
 	{
-		MarkovProvider<T> mmm = new MarkovProvider<T>(m_floatSource);
+		MarkovChain<T> mmm = new MarkovChain<T>(m_floatSource);
 		mmm.m_transitions.putAll(m_transitions);
 		mmm.m_providers.putAll(m_providers);
 		if (with_state)

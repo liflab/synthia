@@ -1,18 +1,18 @@
-package ca.uqac.lif.cep.synthia.random;
+package ca.uqac.lif.cep.synthia.util;
 
 import ca.uqac.lif.synthia.Picker;
 
 /**
  * Provider that returns the same object every time  
  */
-public class StaticObjectProvider<T> implements Picker<T>
+public class Constant<T> implements Picker<T>
 {
 	/**
 	 * The value to return
 	 */
 	/*@ non_null @*/ protected T m_value;
 	
-	public StaticObjectProvider(/*@ non_null @*/ T value)
+	public Constant(/*@ non_null @*/ T value)
 	{
 		super();
 		m_value = value;
@@ -32,8 +32,8 @@ public class StaticObjectProvider<T> implements Picker<T>
 	}
 
 	@Override
-	public StaticObjectProvider<T> duplicate(boolean with_state)
+	public Constant<T> duplicate(boolean with_state)
 	{
-		return new StaticObjectProvider<T>(m_value);
+		return new Constant<T>(m_value);
 	}
 }
