@@ -1,4 +1,4 @@
-package ca.uqac.lif.cep.synthia.random;
+package ca.uqac.lif.synthia.sequence;
 
 import java.io.PrintStream;
 import java.util.ArrayList;

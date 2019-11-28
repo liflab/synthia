@@ -1,4 +1,4 @@
-package ca.uqac.lif.cep.synthia.util;
+package ca.uqac.lif.synthia.sequence;
 
 import java.util.ArrayList;
 import java.util.HashMap;

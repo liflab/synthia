@@ -1,11 +1,11 @@
 package basic;
 
-import ca.uqac.lif.cep.synthia.random.MarkovChain;
 import ca.uqac.lif.cep.synthia.random.RandomFloat;
 import ca.uqac.lif.cep.synthia.replay.Playback;
 import ca.uqac.lif.cep.synthia.util.Constant;
 import ca.uqac.lif.cep.synthia.util.StringPattern;
 import ca.uqac.lif.cep.synthia.util.Tick;
+import ca.uqac.lif.synthia.sequence.MarkovChain;
 
 public class MarkovSimple {
 

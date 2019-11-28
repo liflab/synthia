@@ -7,9 +7,9 @@ import ca.uqac.lif.cep.synthia.random.UniformRandomPicker.RandomFloat;
 import ca.uqac.lif.cep.synthia.random.UniformRandomPicker.RandomInteger;
 import ca.uqac.lif.cep.synthia.replay.Playback;
 import ca.uqac.lif.cep.synthia.util.Freeze;
-import ca.uqac.lif.cep.synthia.util.Interleave;
 import ca.uqac.lif.cep.synthia.util.StringPattern;
-import ca.uqac.lif.cep.synthia.util.Tick;;
+import ca.uqac.lif.cep.synthia.util.Tick;
+import ca.uqac.lif.synthia.sequence.Interleave;;
 
 public class Inter {
 
