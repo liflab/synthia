@@ -4,6 +4,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 import ca.uqac.lif.cep.synthia.util.Constant;
+import ca.uqac.lif.cep.synthia.util.Once;
 import ca.uqac.lif.synthia.Picker;
 
 public abstract class BehaviorTree<T> implements Picker<T> 
@@ -84,7 +85,7 @@ public abstract class BehaviorTree<T> implements Picker<T>
 		}
 	}
 	
-	public static class Choice<T> extends BehaviorTree<T>
+	public static class Selector<T> extends BehaviorTree<T>
 	{
 		/*@ non_null @*/ protected List<ProbabilityChoice<T>> m_choices;
 		
@@ -92,7 +93,7 @@ public abstract class BehaviorTree<T> implements Picker<T>
 		
 		/*@ non_null @*/ protected Picker<Float> m_floatPicker;
 		
-		public Choice(/*@ non_null @*/ Picker<Float> float_picker)
+		public Selector(/*@ non_null @*/ Picker<Float> float_picker)
 		{
 			super();
 			m_choices = new ArrayList<ProbabilityChoice<T>>();
@@ -142,9 +143,9 @@ public abstract class BehaviorTree<T> implements Picker<T>
 		}
 
 		@Override
-		public Choice<T> duplicate(boolean with_state)
+		public Selector<T> duplicate(boolean with_state)
 		{
-			Choice<T> ch = new Choice<T>(m_floatPicker.duplicate(with_state));
+			Selector<T> ch = new Selector<T>(m_floatPicker.duplicate(with_state));
 			for (ProbabilityChoice<T> pc : m_choices)
 			{
 				ch.m_choices.add(pc.duplicate(with_state));
@@ -156,7 +157,7 @@ public abstract class BehaviorTree<T> implements Picker<T>
 			return ch;
 		}
 		
-		public Choice<T> add(BehaviorTree<T> node, Number probability)
+		public Selector<T> add(BehaviorTree<T> node, Number probability)
 		{
 			m_choices.add(new ProbabilityChoice<T>(node, probability));
 			return this;
@@ -246,7 +247,7 @@ public abstract class BehaviorTree<T> implements Picker<T>
 		public Leaf(/*@ non_null @*/ T t)
 		{
 			super();
-			m_picker = new Constant<T>(t);
+			m_picker = new Once<T>(new Constant<T>(t));
 		}
 
 		@Override
