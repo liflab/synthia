@@ -3,14 +3,14 @@ package ca.uqac.lif.synthia;
 import java.util.Random;
 
 import basic.IpAddressProvider;
-import ca.uqac.lif.cep.synthia.random.RandomString;
-import ca.uqac.lif.cep.synthia.random.RandomFloat;
-import ca.uqac.lif.cep.synthia.random.RandomInteger;
-import ca.uqac.lif.cep.synthia.util.Constant;
-import ca.uqac.lif.cep.synthia.util.Freeze;
-import ca.uqac.lif.cep.synthia.util.StringPattern;
-import ca.uqac.lif.cep.synthia.util.Tick;
+import ca.uqac.lif.synthia.random.RandomFloat;
+import ca.uqac.lif.synthia.random.RandomInteger;
+import ca.uqac.lif.synthia.random.RandomString;
 import ca.uqac.lif.synthia.sequence.MarkovChain;
+import ca.uqac.lif.synthia.util.Constant;
+import ca.uqac.lif.synthia.util.Freeze;
+import ca.uqac.lif.synthia.util.StringPattern;
+import ca.uqac.lif.synthia.util.Tick;
 
 public class Test 
 {

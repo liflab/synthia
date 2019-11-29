@@ -2,8 +2,8 @@ package grammar;
 
 import ca.uqac.lif.bullwinkle.BnfParser;
 import ca.uqac.lif.bullwinkle.BnfParser.InvalidGrammarException;
-import ca.uqac.lif.cep.synthia.grammar.GrammarSentence;
-import ca.uqac.lif.cep.synthia.random.RandomIndex;
+import ca.uqac.lif.synthia.grammar.GrammarSentence;
+import ca.uqac.lif.synthia.random.RandomIndex;
 
 public class GrammarDemo {
 

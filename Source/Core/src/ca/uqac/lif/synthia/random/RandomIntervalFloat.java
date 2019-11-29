@@ -16,12 +16,30 @@
     You should have received a copy of the GNU Lesser General Public License
     along with this program.  If not, see <http://www.gnu.org/licenses/>.
  */
-package ca.uqac.lif.synthia;
+package ca.uqac.lif.synthia.random;
 
-public interface IndexPicker extends Picker<Integer>
+public class RandomIntervalFloat extends RandomPicker<Float>
 {
-	public IndexPicker setRange(int size);
+	protected float m_min;
+	
+	protected float m_max;
+	
+	public RandomIntervalFloat(Number min, Number max)
+	{
+		super();
+		m_min = min.floatValue();
+		m_max = max.floatValue();
+	}
 	
 	@Override
-	public IndexPicker duplicate(boolean with_state);
+	public Float pick() 
+	{
+		return m_random.nextFloat() * (m_max - m_min) + m_min;
+	}
+	
+	@Override
+	public RandomIntervalFloat duplicate(boolean with_state)
+	{
+		return new RandomIntervalFloat(m_min, m_max);
+	}
 }

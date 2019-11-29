@@ -1,3 +1,21 @@
+/*
+    Synthia, a data structure generator
+    Copyright (C) 2019-2020 Laboratoire d'informatique formelle
+    Université du Québec à Chicoutimi, Canada
+
+    This program is free software: you can redistribute it and/or modify
+    it under the terms of the GNU Lesser General Public License as published
+    by the Free Software Foundation, either version 3 of the License, or
+    (at your option) any later version.
+
+    This program is distributed in the hope that it will be useful,
+    but WITHOUT ANY WARRANTY; without even the implied warranty of
+    MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+    GNU Lesser General Public License for more details.
+
+    You should have received a copy of the GNU Lesser General Public License
+    along with this program.  If not, see <http://www.gnu.org/licenses/>.
+ */
 package ca.uqac.lif.synthia.sequence;
 
 import java.io.PrintStream;
@@ -9,21 +27,56 @@ import java.util.Map;
 import ca.uqac.lif.cep.ProcessorException;
 import ca.uqac.lif.synthia.Picker;
 
+/**
+ * Generates a sequence of objects by a random walk in a Markov chain.
+ * A <a href="https://en.wikipedia.org/wiki/Markov_chain">Markov chain</a>
+ * is a stochastic model describing a sequence of possible events. Each state
+ * of the chain is associated to a {@link Picker}; transitions between states
+ * A &rarr; B are labelled with the probability of going to B when the
+ * current state ia A. The following picture shows an example of a Markov
+ * chain: 
+ * <p>
+ * <img src="{@docRoot}/doc-files/Markov.png" alt="Markov chain">
+ * <p>
+ * 
+ * @param <T> The type of objects returned by the Markov chain. The pickers
+ * associated to each state must return objects of type <tt>T</tt> or its
+ * descendants.
+ */
 public class MarkovChain<T> implements Picker<T> 
 {
+	/**
+	 * The index of the current state of the machine
+	 */
 	protected int m_currentState;
 	
-	protected Map<Integer,Picker<T>> m_providers;
+	/**
+	 * The pickers associated to each state
+	 */
+	protected Map<Integer,Picker<? extends T>> m_pickers;
 	
+	/**
+	 * A map associating state numbers with the list of their outgoing
+	 * transitions
+	 */
 	protected Map<Integer,List<Transition>> m_transitions;
 	
+	/**
+	 * A source of numbers between 0 and 1. This source is used to pick the
+	 * next transition to take. 
+	 */
 	protected Picker<Float> m_floatSource;
 	
+	/**
+	 * Creates a new empty Markov chain.
+	 * @param float_source A source of numbers between 0 and 1. This source is
+	 * used to pick the next transition to take. 
+	 */
 	public MarkovChain(Picker<Float> float_source)
 	{
 		super();
 		m_transitions = new HashMap<Integer,List<Transition>>();
-		m_providers = new HashMap<Integer,Picker<T>>();
+		m_pickers = new HashMap<Integer,Picker<? extends T>>();
 		m_floatSource = float_source;
 	}
 		
@@ -48,14 +101,14 @@ public class MarkovChain<T> implements Picker<T>
 	}
 	
 	/**
-	 * Associates a provider to a state 
+	 * Associates a picker to a state 
 	 * @param state The state
-	 * @param p The provider
+	 * @param p The picker
 	 * @return This machine
 	 */
 	public MarkovChain<T> add(int state, Picker<T> p)
 	{
-		m_providers.put(state, p);
+		m_pickers.put(state, p);
 		return this;
 	}
 	
@@ -68,10 +121,10 @@ public class MarkovChain<T> implements Picker<T>
 		{
 			return null;
 		}
-		Picker<T> lp = m_providers.get(new_state);
+		Picker<? extends T> lp = m_pickers.get(new_state);
 		if (lp == null)
 		{
-			throw new ProcessorException("State " + new_state + " does not have a line provider");
+			throw new ProcessorException("State " + new_state + " does not have a picker");
 		}
 		m_currentState = new_state;
 		return lp.pick();
@@ -106,7 +159,7 @@ public class MarkovChain<T> implements Picker<T>
 	{
 		MarkovChain<T> mmm = new MarkovChain<T>(m_floatSource);
 		mmm.m_transitions.putAll(m_transitions);
-		mmm.m_providers.putAll(m_providers);
+		mmm.m_pickers.putAll(m_pickers);
 		if (with_state)
 		{
 			mmm.m_currentState = m_currentState;
@@ -128,7 +181,7 @@ public class MarkovChain<T> implements Picker<T>
 	{
 		out.println("digraph G {");
 		out.println(" node [style=filled];");
-		for (Map.Entry<Integer,Picker<T>> e : m_providers.entrySet())
+		for (Map.Entry<Integer,Picker<? extends T>> e : m_pickers.entrySet())
 		{
 			out.print(" ");
 			out.print(e.getKey());

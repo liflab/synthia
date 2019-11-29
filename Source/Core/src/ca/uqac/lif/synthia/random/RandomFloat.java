@@ -1,6 +1,6 @@
-package ca.uqac.lif.cep.synthia.random;
+package ca.uqac.lif.synthia.random;
 
-public class RandomFloat extends UniformRandomPicker<Float>
+public class RandomFloat extends RandomPicker<Float>
 {
 	public RandomFloat()
 	{

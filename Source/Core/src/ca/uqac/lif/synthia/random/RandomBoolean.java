@@ -16,12 +16,33 @@
     You should have received a copy of the GNU Lesser General Public License
     along with this program.  If not, see <http://www.gnu.org/licenses/>.
  */
-package ca.uqac.lif.synthia;
+package ca.uqac.lif.synthia.random;
 
-public interface IndexPicker extends Picker<Integer>
+public class RandomBoolean extends RandomPicker<Boolean>
 {
-	public IndexPicker setRange(int size);
+
+	protected float m_trueProbability;
+	
+	public RandomBoolean(/*@ non_null @*/ Number true_probability)
+	{
+		super();
+		m_trueProbability = true_probability.floatValue();
+	}
+	
+	public RandomBoolean()
+	{
+		this(0.5);
+	}
 	
 	@Override
-	public IndexPicker duplicate(boolean with_state);
+	public Boolean pick()
+	{
+		return m_random.nextFloat() <= m_trueProbability;
+	}
+
+	@Override
+	public RandomBoolean duplicate(boolean with_state) 
+	{
+		return new RandomBoolean(m_trueProbability);
+	}
 }

@@ -16,12 +16,24 @@
     You should have received a copy of the GNU Lesser General Public License
     along with this program.  If not, see <http://www.gnu.org/licenses/>.
  */
-package ca.uqac.lif.synthia;
+package ca.uqac.lif.synthia.random;
 
-public interface IndexPicker extends Picker<Integer>
+import ca.uqac.lif.synthia.Picker;
+
+public class GaussianFloat extends RandomPicker<Float>
 {
-	public IndexPicker setRange(int size);
-	
 	@Override
-	public IndexPicker duplicate(boolean with_state);
+	public Float pick() 
+	{
+		return ((Double) m_random.nextGaussian()).floatValue();
+	}
+
+	@Override
+	public Picker<Float> duplicate(boolean with_state) 
+	{
+		GaussianFloat gf = new GaussianFloat();
+		gf.m_seed = m_seed;
+		return gf;
+	}
+
 }

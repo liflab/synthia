@@ -1,6 +1,6 @@
 package sequences;
 
-import ca.uqac.lif.cep.synthia.random.RandomFloat;
+import ca.uqac.lif.synthia.random.RandomFloat;
 import ca.uqac.lif.synthia.sequence.BehaviorTree;
 import ca.uqac.lif.synthia.sequence.BehaviorTree.Selector;
 import ca.uqac.lif.synthia.sequence.BehaviorTree.Leaf;

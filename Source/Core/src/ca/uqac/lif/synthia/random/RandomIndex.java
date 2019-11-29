@@ -16,12 +16,32 @@
     You should have received a copy of the GNU Lesser General Public License
     along with this program.  If not, see <http://www.gnu.org/licenses/>.
  */
-package ca.uqac.lif.synthia;
+package ca.uqac.lif.synthia.random;
 
-public interface IndexPicker extends Picker<Integer>
+import ca.uqac.lif.synthia.IndexPicker;
+
+public class RandomIndex extends RandomInteger implements IndexPicker
 {
-	public IndexPicker setRange(int size);
+	public RandomIndex()
+	{
+		this(0, 1);
+	}
+	
+	public RandomIndex(int min, int max) 
+	{
+		super(min, max);
+	}
+
+	@Override
+	public RandomIndex setRange(int size)
+	{
+		setInterval(0, size);
+		return this;
+	}
 	
 	@Override
-	public IndexPicker duplicate(boolean with_state);
+	public RandomIndex duplicate(boolean with_state)
+	{
+		return new RandomIndex(m_min, m_max);
+	}
 }
