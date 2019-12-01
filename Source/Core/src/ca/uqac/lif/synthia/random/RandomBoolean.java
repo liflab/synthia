@@ -18,17 +18,33 @@
  */
 package ca.uqac.lif.synthia.random;
 
+/**
+ * Picks a Boolean value. This class actually implements a Bernoulli
+ * trial, with the possibility of setting the probability of success
+ * <i>p</i>.
+ */
 public class RandomBoolean extends RandomPicker<Boolean>
 {
-
+	/**
+	 * The probability of picking <tt>true</tt>
+	 */
 	protected float m_trueProbability;
 	
+	/**
+	 * Creates a new instance of the picker
+	 * @param true_probability The probability of picking <tt>true</tt>;
+	 * must be between 0 and 1.
+	 */
 	public RandomBoolean(/*@ non_null @*/ Number true_probability)
 	{
 		super();
 		m_trueProbability = true_probability.floatValue();
 	}
 	
+	/**
+	 * Creates a new instance of the picker, with a 50-50 chance of
+	 * producing <tt>true</tt> or <tt>false</tt>
+	 */
 	public RandomBoolean()
 	{
 		this(0.5);

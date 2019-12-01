@@ -18,12 +18,26 @@
  */
 package ca.uqac.lif.synthia.random;
 
+/**
+ * Picks a floating point number uniformly in an interval
+ */
 public class RandomIntervalFloat extends RandomPicker<Float>
 {
+	/**
+	 * The lower bound of the interval
+	 */
 	protected float m_min;
 	
+	/**
+	 * The higher bound of the interval
+	 */
 	protected float m_max;
 	
+	/**
+	 * Creates a new instance of the picker.
+	 * @param min The lower bound of the interval
+	 * @param max The higher bound of the interval
+	 */
 	public RandomIntervalFloat(Number min, Number max)
 	{
 		super();

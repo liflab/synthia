@@ -24,12 +24,13 @@ import java.util.List;
 import java.util.Map;
 
 import ca.uqac.lif.synthia.Picker;
+import ca.uqac.lif.synthia.util.ElementPicker.ProbabilityChoice;
 
 public class Interleave<T> implements Picker<T>
 {
 	protected Map<Integer,Picker<T>> m_sessions;
 
-	protected List<ProviderChoice> m_choices;
+	protected List<ProbabilityChoice<Picker<T>>> m_choices;
 
 	protected int m_idCount;
 
@@ -59,7 +60,7 @@ public class Interleave<T> implements Picker<T>
 		super();
 		m_sessions = new HashMap<Integer,Picker<T>>();
 		m_floatSource = float_source;
-		m_choices = new ArrayList<ProviderChoice>();
+		m_choices = new ArrayList<ProbabilityChoice<Picker<T>>>();
 		m_midProbability = mid_probability.floatValue();
 		m_endProbability = end_probability.floatValue();
 		m_idCount = 0;
@@ -67,7 +68,7 @@ public class Interleave<T> implements Picker<T>
 
 	public Interleave<T> add(Picker<T> provider, Number probability)
 	{
-		m_choices.add(new ProviderChoice(provider, probability.floatValue()));
+		m_choices.add(new ProbabilityChoice<Picker<T>>(provider, probability.floatValue()));
 		return this;
 	}
 
@@ -130,28 +131,14 @@ public class Interleave<T> implements Picker<T>
 	{
 		float f = m_floatSource.pick();
 		float sum_prob = 0;
-		for (ProviderChoice pc : m_choices)
+		for (ProbabilityChoice<Picker<T>> pc : m_choices)
 		{
-			sum_prob += pc.m_probability;
+			sum_prob += pc.getProbability();
 			if (f <= sum_prob)
 			{
-				return pc.m_provider.duplicate(false);
+				return pc.getObject().duplicate(false);
 			}
 		}
 		return null;
-	}
-
-	protected class ProviderChoice
-	{
-		Picker<T> m_provider;
-
-		float m_probability;
-
-		public ProviderChoice(Picker<T> provider, float probability)
-		{
-			super();
-			m_provider = provider;
-			m_probability = probability;
-		}
 	}
 }

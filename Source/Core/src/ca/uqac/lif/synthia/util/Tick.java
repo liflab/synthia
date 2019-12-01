@@ -138,4 +138,16 @@ public class Tick implements Picker<Number>
 		}
 		return tp;
 	}
+	
+	/*@ pure non_null @*/ public Tick duplicate(float start_value)
+	{
+		return new Tick(start_value, m_increment);
+	}
+	
+	/*@ non_null @*/ public Tick setValue(float value)
+	{
+		m_currentValue = value;
+		m_startValue = new Constant<Float>(value);
+		return this;
+	}
 }

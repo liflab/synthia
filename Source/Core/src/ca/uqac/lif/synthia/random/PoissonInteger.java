@@ -18,20 +18,64 @@
  */
 package ca.uqac.lif.synthia.random;
 
+/**
+ * Generates integer numbers following a Poisson distribution.
+ * The <a href="https://en.wikipedia.org/wiki/Poisson_distribution">Poisson
+ * distribution</a> is a discrete probability distribution that expresses
+ * the probability of a given number of events occurring in a fixed interval
+ * of time or space if these events occur with a known constant rate and
+ * independently of the time since the last event.
+ * The distribution is parameterized by a value, &lambda;, which
+ * expresses the probability of occurrence of an event in a given time
+ * interval. The probability of generating a nonnegative integer <i>k</i> is
+ * &lambda;<sup><i>k</i></sup><i>e</i><sup>-&lambda;</sup>/<i>k</i>!.
+ * <p>
+ * The class uses two algorithms for generating Poisson integers, depending
+ * on the value of &lambda;. For small values (&leq; 30), a simple algorithm
+ * attributed to Knuth is used. For larger values (&gt; 30), it uses an
+ * algorithm described by
+ * <a href="https://www.johndcook.com/blog/2010/06/14/generating-poisson-random-values/">John
+ * D. Cook</a>.
+ */
 public class PoissonInteger extends RandomPicker<Integer>
 {
+	/**
+	 * The &lambda; parameter of the underlying Poisson distribution
+	 */
 	protected float m_lambda;
 	
+	/**
+	 * Value of constant <i>c</i> in Cook's algorithm
+	 */
 	protected double m_c;
 	
+	/**
+	 * Value of constant &alpha; in Cook's algorithm
+	 */
 	protected double m_alpha;
 	
+	/**
+	 * Value of constant &beta; in Cook's algorithm
+	 */
 	protected double m_beta;
 	
+	/**
+	 * Value of constant <i>c</i> in Cook's algorithm
+	 */
 	protected double m_k;
 	
+	/**
+	 * Maximum number of iterations in Cook's algorithm. The original
+	 * implementation is <em>theoretically</em> unbounded; this parameter
+	 * makes sure that it ends after a maximum number of iterations.
+	 */
 	protected static final transient int s_maxIterations = 10000; 
 	
+	/**
+	 * Creates a new instance of the picker 
+	 * @param lambda The &lambda; parameter of the underlying Poisson
+	 * distribution
+	 */
 	public PoissonInteger(/*@ non_null @*/ Number lambda)
 	{
 		super();
@@ -42,6 +86,16 @@ public class PoissonInteger extends RandomPicker<Integer>
 		m_k = Math.log(m_c) - m_lambda - Math.log(m_beta);
 	}
 	
+	/**
+	 * Creates a new instance of the picker, with pre-computed values for the
+	 * constants in Cook's algorithm. 
+	 * @param lambda The &lambda; parameter of the underlying Poisson
+	 * distribution
+	 * @param c Value of constant <i>c</i> in Cook's algorithm
+	 * @param alpha Value of constant &alpha; in Cook's algorithm
+	 * @param beta Value of constant &beta; in Cook's algorithm
+	 * @param k Value of constant <i>k</i> in Cook's algorithm
+	 */
 	protected PoissonInteger(float lambda, double c, double alpha, double beta, double k)
 	{
 		super();
@@ -62,6 +116,11 @@ public class PoissonInteger extends RandomPicker<Integer>
 		return bigPoisson();
 	}
 	
+	/**
+	 * Generates a Poisson integer using Knuth's algorithm, which is efficient
+	 * for small values of &lambda;
+	 * @return A Poisson integer
+	 */
 	protected int smallPoisson()
 	{
 		double L = Math.exp(-m_lambda);
@@ -76,6 +135,11 @@ public class PoissonInteger extends RandomPicker<Integer>
 		return k - 1;
 	}
 	
+	/**
+	 * Generates a Poisson integer using Cook's algorithm, which is efficient
+	 * for larger values of &lambda;
+	 * @return A Poisson integer
+	 */
 	protected int bigPoisson()
 	{
 		for (int i = 0; i < s_maxIterations; i++)
@@ -107,6 +171,12 @@ public class PoissonInteger extends RandomPicker<Integer>
 		return gf;
 	}
 	
+	/**
+	 * Computes the factorial of a number. This is a very straightforward
+	 * implementation that is not expected to be efficient.
+	 * @param n The number to calculate the factorial of
+	 * @return The factorial of that number
+	 */
 	protected static long factorial(long n)
 	{
 		long x = 1;
@@ -116,5 +186,4 @@ public class PoissonInteger extends RandomPicker<Integer>
 		}
 		return x;
 	}
-
 }

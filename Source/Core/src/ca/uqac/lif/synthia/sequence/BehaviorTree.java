@@ -23,6 +23,7 @@ import java.util.List;
 
 import ca.uqac.lif.synthia.Picker;
 import ca.uqac.lif.synthia.util.Constant;
+import ca.uqac.lif.synthia.util.ElementPicker.ProbabilityChoice;
 import ca.uqac.lif.synthia.util.Once;
 
 /**
@@ -151,7 +152,7 @@ public abstract class BehaviorTree<T> implements Picker<T>
 	 */
 	public static class Selector<T> extends BehaviorTree<T>
 	{
-		/*@ non_null @*/ protected List<ProbabilityChoice<T>> m_choices;
+		/*@ non_null @*/ protected List<NodeProbabilityChoice<T>> m_choices;
 		
 		/**
 		 * The index of the child node that is being "executed"
@@ -174,7 +175,7 @@ public abstract class BehaviorTree<T> implements Picker<T>
 		public Selector(/*@ non_null @*/ Picker<Float> float_picker)
 		{
 			super();
-			m_choices = new ArrayList<ProbabilityChoice<T>>();
+			m_choices = new ArrayList<NodeProbabilityChoice<T>>();
 			m_chosenIndex = -1;
 			m_floatPicker = float_picker;
 		}
@@ -183,7 +184,7 @@ public abstract class BehaviorTree<T> implements Picker<T>
 		public void reset()
 		{
 			m_chosenIndex = -1;
-			for (ProbabilityChoice<T> pc : m_choices)
+			for (NodeProbabilityChoice<T> pc : m_choices)
 			{
 				pc.reset();
 			}
@@ -217,14 +218,14 @@ public abstract class BehaviorTree<T> implements Picker<T>
 			{
 				return null;
 			}
-			return m_choices.get(m_chosenIndex).getNode().pick();
+			return m_choices.get(m_chosenIndex).getObject().pick();
 		}
 
 		@Override
 		public Selector<T> duplicate(boolean with_state)
 		{
 			Selector<T> ch = new Selector<T>(m_floatPicker.duplicate(with_state));
-			for (ProbabilityChoice<T> pc : m_choices)
+			for (NodeProbabilityChoice<T> pc : m_choices)
 			{
 				ch.m_choices.add(pc.duplicate(with_state));
 			}
@@ -245,7 +246,7 @@ public abstract class BehaviorTree<T> implements Picker<T>
 		 */
 		public Selector<T> add(BehaviorTree<T> node, Number probability)
 		{
-			m_choices.add(new ProbabilityChoice<T>(node, probability));
+			m_choices.add(new NodeProbabilityChoice<T>(node, probability));
 			return this;
 		}
 		
@@ -279,46 +280,16 @@ public abstract class BehaviorTree<T> implements Picker<T>
 		 * {@link Selector} to handle child nodes with probabilities.
 		 * @param <T> The type of objects returned by the behavior tree
 		 */
-		protected static class ProbabilityChoice<T>
-		{
-			/**
-			 * The probability of taking this choice
-			 */
-			protected float m_probability;
-			
-			/**
-			 * The tree node corresponding to that choice
-			 */
-			/*@ non_null @*/ protected BehaviorTree<T> m_node;
-			
+		protected static class NodeProbabilityChoice<T> extends ProbabilityChoice<BehaviorTree<T>>
+		{	
 			/**
 			 * Creates a new probability-node association
-			 * @param node The node
-			 * @param probability The probability of picking this node
+			 * @param t The object
+			 * @param p The probability of picking this node
 			 */
-			public ProbabilityChoice(/*@ non_null @*/ BehaviorTree<T> node, /*@ non_null @*/ Number probability)
+			public NodeProbabilityChoice(/*@ non_null @*/ BehaviorTree<T> t, /*@ non_null @*/ Number p)
 			{
-				super();
-				m_node = node;
-				m_probability = probability.floatValue();
-			}
-			
-			/**
-			 * Gets the probability for this association
-			 * @return The probability
-			 */
-			/*@ pure @*/ public float getProbability()
-			{
-				return m_probability;
-			}
-			
-			/**
-			 * Gets the tree node for this association
-			 * @return The node
-			 */
-			/*@ pure non_null @*/ public BehaviorTree<T> getNode()
-			{
-				return m_node;
+				super(t, p);
 			}
 			
 			/**
@@ -326,13 +297,7 @@ public abstract class BehaviorTree<T> implements Picker<T>
 			 */
 			public void reset()
 			{
-				m_node.reset();
-			}
-			
-			@Override
-			public String toString()
-			{
-				return m_node.toString() + " (" + m_probability + ")";
+				m_object.reset();
 			}
 			
 			/**
@@ -341,9 +306,9 @@ public abstract class BehaviorTree<T> implements Picker<T>
 			 * with its state
 			 * @return A duplicate of this association
 			 */
-			/*@ pure non_null @*/ public ProbabilityChoice<T> duplicate(boolean with_state)
+			/*@ pure non_null @*/ public NodeProbabilityChoice<T> duplicate(boolean with_state)
 			{
-				return new ProbabilityChoice<T>(m_node.duplicate(with_state), m_probability);
+				return new NodeProbabilityChoice<T>(m_object.duplicate(with_state), m_probability);
 			}
 		}
 	}

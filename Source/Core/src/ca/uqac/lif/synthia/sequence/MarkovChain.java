@@ -68,6 +68,11 @@ public class MarkovChain<T> implements Picker<T>
 	protected Picker<Float> m_floatSource;
 	
 	/**
+	 * Whether to exhaust each state before moving to another
+	 */
+	protected boolean m_exhaust;
+	
+	/**
 	 * Creates a new empty Markov chain.
 	 * @param float_source A source of numbers between 0 and 1. This source is
 	 * used to pick the next transition to take. 
@@ -78,6 +83,7 @@ public class MarkovChain<T> implements Picker<T>
 		m_transitions = new HashMap<Integer,List<Transition>>();
 		m_pickers = new HashMap<Integer,Picker<? extends T>>();
 		m_floatSource = float_source;
+		m_exhaust = false;
 	}
 		
 	/**
@@ -112,9 +118,30 @@ public class MarkovChain<T> implements Picker<T>
 		return this;
 	}
 	
+	/**
+	 * Sets whether to exhaust the picker associated to a state before
+	 * transitioning to another state
+	 * @param b Set to <tt>true</tt> to exhaust each picker, <tt>false</tt>
+	 * otherwise
+	 * @return This Markov chain
+	 */
+	public MarkovChain<T> exhaust(boolean b)
+	{
+		m_exhaust = b;
+		return this;
+	}
+	
 	@Override
 	public T pick()
 	{
+		if (m_exhaust)
+		{
+			T t = m_pickers.get(m_currentState).pick();
+			if (t != null)
+			{
+				return t;
+			}
+		}
 		float p = m_floatSource.pick();
 		int new_state = selectTransition(p);
 		if (new_state < 0)
@@ -127,6 +154,10 @@ public class MarkovChain<T> implements Picker<T>
 			throw new ProcessorException("State " + new_state + " does not have a picker");
 		}
 		m_currentState = new_state;
+		if (m_exhaust)
+		{
+			lp.reset();
+		}
 		return lp.pick();
 	}
 	
@@ -160,6 +191,7 @@ public class MarkovChain<T> implements Picker<T>
 		MarkovChain<T> mmm = new MarkovChain<T>(m_floatSource);
 		mmm.m_transitions.putAll(m_transitions);
 		mmm.m_pickers.putAll(m_pickers);
+		mmm.m_exhaust = m_exhaust;
 		if (with_state)
 		{
 			mmm.m_currentState = m_currentState;

@@ -26,7 +26,7 @@ import ca.uqac.lif.synthia.Picker;
  * Picker that returns values taken from a list. As its name implies,
  * <tt>Playback</tt> literally replays the values fetched from a list that
  * was passed to its constructor. It loops back to the beginning when the list
- * is over.
+ * is over (this can optionally be disabled).
  * <pre>
  * Playback&lt;Integer&gt; p = new Playback&lt;Integer&gt;(2, 7, 1);
  * System.out.println(p.pick()); // 2
@@ -56,6 +56,11 @@ public class Playback<T> implements Picker<T>
 	protected int m_startIndex;
 	
 	/**
+	 * Whether to loop through the values
+	 */
+	protected boolean m_loop;
+	
+	/**
 	 * Creates a new Playback picker
 	 * @param start_index The position of the first value to return
 	 * @param values The values to play back
@@ -66,6 +71,7 @@ public class Playback<T> implements Picker<T>
 		m_values = values;
 		m_index = start_index;
 		m_startIndex = start_index;
+		m_loop = true;
 	}
 	
 	/**
@@ -103,8 +109,16 @@ public class Playback<T> implements Picker<T>
 	@Override
 	public T pick()
 	{
+		if (m_index >= m_values.length && !m_loop)
+		{
+			return null;
+		}
 		T f = m_values[m_index];
-		m_index = (m_index + 1) % m_values.length;
+		m_index++;
+		if (m_index == m_values.length && m_loop)
+		{
+			m_index = 0;
+		}
 		return f;
 	}
 	
@@ -123,5 +137,18 @@ public class Playback<T> implements Picker<T>
 			lp.m_index = m_index;
 		}
 		return lp;
+	}
+	
+	/**
+	 * Sets whether to loop through the list of values or play them back
+	 * only once.
+	 * @param b Set to <tt>true</tt> to loop through values, <tt>false</tt>
+	 * otherwise
+	 * @return This object
+	 */
+	public Playback<T> loop(boolean b)
+	{
+		m_loop = b;
+		return this;
 	}
 }

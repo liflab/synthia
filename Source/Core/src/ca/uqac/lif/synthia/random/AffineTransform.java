@@ -20,14 +20,40 @@ package ca.uqac.lif.synthia.random;
 
 import ca.uqac.lif.synthia.Picker;
 
+/**
+ * Applies an affine transform to a value produced by another picker.
+ * It takes two parameters <i>m</i> and <i>b</i>. If <i>x</i> is
+ * the value produced by the picker, the affine transforms returns
+ * <i>mx</i>+<i>b</i>.
+ * <p>
+ * This class is abstract; it has two concrete descendants,
+ * {@link AffineTransformInteger} and {@link AffineTransformFloat}.
+ * @param <T> The type of number produced (i.e. <tt>Float</tt>,
+ * <tt>Integer</tt>, etc.)
+ */
 public abstract class AffineTransform<T extends Number> implements Picker<T>
 {
+	/**
+	 * The slope of the affine transform
+	 */
 	protected float m_m;
 	
+	/**
+	 * The intercept of the affine transform
+	 */
 	protected float m_b;
 	
+	/**
+	 * The underlying number picker
+	 */
 	/*@ non_null @*/ protected Picker<T> m_picker;
 	
+	/**
+	 * Creates a new instance of affine transform
+	 * @param picker The underlying number picker
+	 * @param m The slope of the affine transform
+	 * @param b The intercept of the affine transform
+	 */
 	public AffineTransform(/*@ non_null @*/ Picker<T> picker, /*@ non_null @*/ Number m, /*@ non_null @*/ Number b)
 	{
 		super();
@@ -41,13 +67,27 @@ public abstract class AffineTransform<T extends Number> implements Picker<T>
 		m_picker.reset();
 	}
 	
+	/**
+	 * Applies the affine transform to the next floating point number
+	 * produced by the underlying picker
+	 * @return The transformed float
+	 */
 	protected float pickFloat()
 	{
 		return m_picker.pick().floatValue() * m_m + m_b;
 	}
 	
+	/**
+	 * Affine transform producing <tt>int</tt>s
+	 */
 	public static class AffineTransformInteger extends AffineTransform<Integer>
 	{
+		/**
+		 * Creates a new instance of affine transform
+		 * @param picker The underlying number picker
+		 * @param m The slope of the affine transform
+		 * @param b The intercept of the affine transform
+		 */
 		public AffineTransformInteger(/*@ non_null @*/ Picker<Integer> picker, /*@ non_null @*/ Number m, /*@ non_null @*/ Number b)
 		{
 			super(picker, m, b);
@@ -67,8 +107,17 @@ public abstract class AffineTransform<T extends Number> implements Picker<T>
 		}
 	}
 	
+	/**
+	 * Affine transform producing <tt>float</tt>s
+	 */
 	public static class AffineTransformFloat extends AffineTransform<Float>
 	{
+		/**
+		 * Creates a new instance of affine transform
+		 * @param picker The underlying number picker
+		 * @param m The slope of the affine transform
+		 * @param b The intercept of the affine transform
+		 */
 		public AffineTransformFloat(/*@ non_null @*/ Picker<Float> picker, /*@ non_null @*/ Number m, /*@ non_null @*/ Number b)
 		{
 			super(picker, m, b);

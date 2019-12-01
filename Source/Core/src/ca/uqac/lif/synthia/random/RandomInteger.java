@@ -18,18 +18,37 @@
  */
 package ca.uqac.lif.synthia.random;
 
+/**
+ * Picks an integer uniformly in an interval
+ */
 public class RandomInteger extends RandomPicker<Integer>
 {
+	/**
+	 * The lower bound of the interval
+	 */
 	protected int m_min;
 	
+	/**
+	 * The higher bound of the interval
+	 */
 	protected int m_max;
 	
+	/**
+	 * Creates a new instance of the picker.
+	 * @param min The lower bound of the interval
+	 * @param max The higher bound of the interval
+	 */
 	public RandomInteger(int min, int max)
 	{
 		super();
 		setInterval(min, max);
 	}
 	
+	/**
+	 * Sets the interval in which integers are picked
+	 * @param min The lower bound of the interval
+	 * @param max The higher bound of the interval
+	 */
 	public void setInterval(int min, int max)
 	{
 		m_min = min;
