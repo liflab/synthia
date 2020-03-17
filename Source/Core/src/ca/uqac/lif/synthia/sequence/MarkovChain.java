@@ -24,8 +24,8 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
-import ca.uqac.lif.cep.ProcessorException;
 import ca.uqac.lif.synthia.Picker;
+import ca.uqac.lif.synthia.PickerException;
 
 /**
  * Generates a sequence of objects by a random walk in a Markov chain.
@@ -151,7 +151,7 @@ public class MarkovChain<T> implements Picker<T>
 		Picker<? extends T> lp = m_pickers.get(new_state);
 		if (lp == null)
 		{
-			throw new ProcessorException("State " + new_state + " does not have a picker");
+			throw new PickerException("State " + new_state + " does not have a picker");
 		}
 		m_currentState = new_state;
 		if (m_exhaust)

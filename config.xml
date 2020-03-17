@@ -23,7 +23,7 @@
        script's default values -->
                  
   <!-- The project's name -->
-  <name>Part-time Logger II</name>
+  <name>Synthia</name>
   
   <!-- The project's author. Currently this only
   shows up in the footer of the Javadoc documentation. -->
@@ -40,64 +40,23 @@
   <depdir>Source/Core/dep</depdir>
   
   <jar>
-  	<filename>ptlogger2.jar</filename>
+  	<filename>synthia.jar</filename>
   </jar>
   
   <!--
     Write JAR dependencies here.
   -->
   <dependencies>
-  <dependency>
-      <name>Apache Commons Lang</name>
-      <classname>org.apache.commons.lang3.RandomStringUtils</classname>
-      <files>
-        <zip>http://apache.mirror.rafal.ca/commons/lang/binaries/commons-lang3-3.9-bin.zip</zip>
-      </files>
-      <!-- The following parameter is mandatory. Set it to false if you don't
-           want this library to be bundled into the compiled JAR. -->
-      <bundle>true</bundle>
-    </dependency>
+ 
     <dependency>
       <name>Bullwinkle</name>
       <classname>ca.uqac.lif.util.CliParser</classname>
       <files>
-        <zip>https://github.com/sylvainhalle/Bullwinkle/releases/download/v1.4.4/bullwinkle-1.4.4.zip</zip>
+        <zip>https://github.com/sylvainhalle/Bullwinkle/releases/download/v1.4.5/bullwinkle-1.4.5.zip</zip>
       </files>
       <!-- The following parameter is mandatory. Set it to false if you don't
            want this library to be bundled into the compiled JAR. -->
       <bundle>true</bundle>
-    </dependency>
-  	<dependency>
-      <name>BeepBeep 3</name>
-      <classname>ca.uqac.lif.cep.Processor</classname>
-      <files>
-        <zip>https://github.com/liflab/beepbeep-3/releases/download/v0.10.2-alpha/beepbeep-3-0.10.2-alpha.zip</zip>
-      </files>
-      <!-- The following parameter is mandatory. Set it to false if you don't
-           want this library to be bundled into the compiled JAR. -->
-      <bundle>true</bundle>
-    </dependency>
-    <dependency>
-      <!--
-      BeepBeep tuples
-      -->
-      <name>BeepBeep 3 Tuples Palette</name>
-      <classname>ca.uqac.lif.cep.tuples.Tuple</classname>
-      <bundle>true</bundle>
-      <files>
-        <jar>https://github.com/liflab/beepbeep-3-palettes/releases/download/v20191002/tuples.jar</jar>
-      </files>
-    </dependency>
-    <dependency>
-      <!--
-      BeepBeep tables and plots
-      -->
-      <name>BeepBeep 3 MTNP Palette</name>
-      <classname>ca.uqac.lif.mtnp.plot.gnuplot.Scatterplot</classname>
-      <bundle>true</bundle>
-      <files>
-        <jar>https://github.com/liflab/beepbeep-3-palettes/releases/download/v20191002/mtnp.jar</jar>
-      </files>
     </dependency>
   </dependencies>
 </build>
