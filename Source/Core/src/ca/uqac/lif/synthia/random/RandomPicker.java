@@ -37,6 +37,12 @@ import ca.uqac.lif.synthia.Seedable;
  */
 public abstract class RandomPicker<T> implements Picker<T>, Seedable
 {
+	/**
+	 * A random number generator used to set the seed when none is
+	 * specified
+	 */
+	protected static final transient Random s_random = new Random();
+	
 	/*@ non_null @*/ protected transient Random m_random;
 	
 	protected int m_seed;
@@ -49,7 +55,7 @@ public abstract class RandomPicker<T> implements Picker<T>, Seedable
 	
 	public RandomPicker()
 	{
-		this(0);
+		this(s_random.nextInt());
 	}
 
 	@Override

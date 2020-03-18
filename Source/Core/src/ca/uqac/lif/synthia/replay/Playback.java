@@ -35,7 +35,9 @@ import ca.uqac.lif.synthia.Picker;
  * System.out.println(p.pick()); // 2
  * ...</pre>
  * Optionally, the picker can be told to start at a different element than the
- * first one.
+ * first one. By default, the picker keeps outputting the last value of the
+ * sequence if more values are requested and the <tt>loop</tt> parameter is
+ * set to false.
  * @param <T> The type of objects to return
  */
 public class Playback<T> implements Picker<T>
@@ -111,7 +113,7 @@ public class Playback<T> implements Picker<T>
 	{
 		if (m_index >= m_values.length && !m_loop)
 		{
-			return null;
+			return m_values[m_values.length - 1];
 		}
 		T f = m_values[m_index];
 		m_index++;

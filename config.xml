@@ -30,7 +30,10 @@
   <author>Sylvain Hallé</author>
   
   <!-- The project's main class -->
-  <mainclass>ca.uqac.lif.ptlogger2.Main</mainclass>
+  <mainclass>ca.uqac.lif.synthia.Main</mainclass>
+  
+  <!-- The project's version number -->
+  <version>0.1.1</version>
   
   <test>
     <!-- The filename pattern to recognize test files -->
