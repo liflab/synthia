@@ -209,7 +209,7 @@ public class MarkovChain<T> implements Picker<T>
 	 * Produces a rendition of the machine as Graphviz input file.
 	 * @param out The print stream to which the graph is written
 	 */
-	public String toDot(PrintStream out)
+	public void toDot(PrintStream out)
 	{
 		out.println("digraph G {");
 		out.println(" node [style=filled];");
@@ -235,7 +235,6 @@ public class MarkovChain<T> implements Picker<T>
 			}			
 		}
 		out.println("}");
-		return out.toString();
 	}
 	
 	/**

@@ -57,6 +57,7 @@ public abstract class AffineTransform<T extends Number> implements Picker<T>
 	public AffineTransform(/*@ non_null @*/ Picker<T> picker, /*@ non_null @*/ Number m, /*@ non_null @*/ Number b)
 	{
 		super();
+		m_picker = picker;
 		m_m = m.floatValue();
 		m_b = b.floatValue();
 	}

@@ -147,7 +147,7 @@ public class ElementPicker<T> implements Picker<T>
 		/**
 		 * Creates a new probability-object association
 		 * @param t The object
-		 * @param probability The probability of picking this node
+		 * @param p The probability of picking this node
 		 */
 		public ProbabilityChoice(/*@ non_null @*/ T t, /*@ non_null @*/ Number p)
 		{

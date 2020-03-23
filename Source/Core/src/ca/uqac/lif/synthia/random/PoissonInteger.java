@@ -31,7 +31,7 @@ package ca.uqac.lif.synthia.random;
  * &lambda;<sup><i>k</i></sup><i>e</i><sup>-&lambda;</sup>/<i>k</i>!.
  * <p>
  * The class uses two algorithms for generating Poisson integers, depending
- * on the value of &lambda;. For small values (&leq; 30), a simple algorithm
+ * on the value of &lambda;. For small values (&le; 30), a simple algorithm
  * attributed to Knuth is used. For larger values (&gt; 30), it uses an
  * algorithm described by
  * <a href="https://www.johndcook.com/blog/2010/06/14/generating-poisson-random-values/">John
