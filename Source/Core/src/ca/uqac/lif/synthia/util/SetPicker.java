@@ -18,31 +18,39 @@
  */
 package ca.uqac.lif.synthia.util;
 
+import java.util.ArrayList;
+import java.util.List;
+
 import ca.uqac.lif.synthia.Picker;
 
 /**
  * Picker that merges the result of other pickers into an array.
  */
-public class ArrayPicker extends CompositePicker<Object[]>
+public class SetPicker extends CompositePicker<List<Object>>
 {
 	/**
-	 * Creates a new array picker 
+	 * Creates a new list picker 
 	 * @param pickers The pickers used to generate the values
 	 */
-	public ArrayPicker(Picker<?> ... pickers)
+	public SetPicker(Picker<?> ... pickers)
 	{
 		super(pickers);
 	}
 
 	@Override
-	public ArrayPicker newPicker(Picker<?> ... pickers)
+	public SetPicker newPicker(Picker<?> ... pickers)
 	{
-		return new ArrayPicker(pickers);
+		return new SetPicker(pickers);
 	}
 	
 	@Override
-	public Object[] getOutput(Object ... values)
+	public List<Object> getOutput(Object ... values)
 	{
-		return values;
+		List<Object> list = new ArrayList<Object>(values.length);
+		for (Object v : values)
+		{
+			list.add(v);
+		}
+		return list;
 	}
 }

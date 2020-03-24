@@ -33,10 +33,8 @@ import ca.uqac.lif.synthia.Picker;
  * String s2 = pat.pick(); // "aGhRe is equal to true"
  * ...</pre>
  */
-public class StringPattern implements Picker<String>
-{
-	/*@ non_null @*/ protected Picker<?>[] m_pickers;
-	
+public class StringPattern extends CompositePicker<String>
+{	
 	/**
 	 * The string pattern
 	 */
@@ -49,9 +47,8 @@ public class StringPattern implements Picker<String>
 	 */
 	public StringPattern(/*@ non_null @*/ String pattern, /*@ non_null @*/ Picker<?> ... parts)
 	{
-		super();
+		super(parts);
 		m_pattern = pattern;
-		m_pickers = parts;
 	}
 	
 	@Override
@@ -61,38 +58,19 @@ public class StringPattern implements Picker<String>
 	}
 
 	@Override
-	public void reset() 
+	public String getOutput(Object ... parts)
 	{
-		for (Picker<?> p : m_pickers)
-		{
-			p.reset();
-		}
-	}
-
-	@Override
-	public String pick()
-	{
-		String[] parts = new String[m_pickers.length];
-		for (int i = 0; i < parts.length; i++)
-		{
-			parts[i] = m_pickers[i].pick().toString();
-		}
 		String out = m_pattern;
 		for (int i = 0; i < parts.length; i++)
 		{
-			out = out.replaceAll("\\{\\$" + i + "\\}", parts[i]);
+			out = out.replaceAll("\\{\\$" + i + "\\}", parts[i].toString());
 		}
 		return out;
 	}
 
 	@Override
-	public StringPattern duplicate(boolean with_state)
+	public StringPattern newPicker(Picker<?> ... pickers)
 	{
-		Picker<?>[] new_provs = new Picker<?>[m_pickers.length];
-		for (int i = 0; i < m_pickers.length; i++)
-		{
-			new_provs[i] = m_pickers[i].duplicate(with_state);
-		}
-		return new StringPattern(m_pattern, new_provs);
+		return new StringPattern(m_pattern, pickers);
 	}
 }
