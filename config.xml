@@ -33,7 +33,7 @@
   <mainclass>ca.uqac.lif.synthia.Main</mainclass>
   
   <!-- The project's version number -->
-  <version>0.1.1</version>
+  <version>0.2</version>
   
   <test>
     <!-- The filename pattern to recognize test files -->

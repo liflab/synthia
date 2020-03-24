@@ -18,8 +18,17 @@
  */
 package ca.uqac.lif.synthia;
 
+/**
+ * Picker for an integer from 0 to a fixed bound.
+ * @author Sylvain Hallé
+ */
 public interface IndexPicker extends Picker<Integer>
 {
+	/**
+	 * Sets the range for the index picker
+	 * @param size The maximum value that can be picked
+	 * @return This picker
+	 */
 	public IndexPicker setRange(int size);
 	
 	@Override

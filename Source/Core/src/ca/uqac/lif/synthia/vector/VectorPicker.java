@@ -32,4 +32,7 @@ public interface VectorPicker extends Picker<float[]>
 	 * @return The dimension
 	 */
 	public int getDimension();
+	
+	@Override
+	public VectorPicker duplicate(boolean with_state);
 }
