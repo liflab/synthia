@@ -3,8 +3,8 @@ package ca.uqac.lif.synthia;
 import basic.IpAddressProvider;
 import ca.uqac.lif.synthia.random.BoundedPicker;
 import ca.uqac.lif.synthia.random.RandomString;
-import ca.uqac.lif.synthia.random.RandomPicker.RandomFloat;
-import ca.uqac.lif.synthia.random.RandomPicker.RandomInteger;
+import ca.uqac.lif.synthia.random.RandomFloat;
+import ca.uqac.lif.synthia.random.RandomInteger;
 import ca.uqac.lif.synthia.replay.Playback;
 import ca.uqac.lif.synthia.sequence.Interleave;
 import ca.uqac.lif.synthia.util.Freeze;
@@ -16,15 +16,17 @@ public class Inter {
 	public static void main(String[] args) 
 	{
 		//FloatSource tick_source = new UniformIntervalFloatSource(0.5, 1);
-		Picker<Number> tick_source = new Playback<Number>(1, 2, 3);
+		Picker<Number> tick_source = new Playback<Number>(new Number[] {1, 2, 3});
+		RandomInteger length_1 = new RandomInteger(3, 5);
+		RandomInteger length_2 = new RandomInteger(5, 8);
 		Tick ticker = new Tick(1000, tick_source);
 		StringPattern rsp1 = new StringPattern("{$0} - {$1}", 
-				new Freeze<String>(new RandomString(3, 5)), 
+				new Freeze<String>(new RandomString(length_1)), 
 				new IpAddressProvider(new RandomInteger(0, 256)));
 		BoundedPicker<String> bp1 = new BoundedPicker<String>(new TickLineProvider(ticker, rsp1), new RandomInteger(2, 10));
 		StringPattern rsp2 = new StringPattern("FOO [{$0};{$1}]", 
-				new Freeze<String>(new RandomString(3, 5)), 
-				new RandomString(5, 8));
+				new Freeze<String>(new RandomString(length_1)), 
+				new RandomString(length_2));
 		BoundedPicker<String> bp2 = new BoundedPicker<String>(new TickLineProvider(ticker, rsp2), new RandomInteger(5, 6));
 		Interleave<String> ip = new Interleave<String>(new RandomFloat(), 0.5, 0.85);
 		ip.add(bp1, 0.55);
