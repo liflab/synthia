@@ -10,6 +10,10 @@ public class NoMoreElementException extends PickerException{
         super(m_message);
     }
 
+    public NoMoreElementException(String message) {
+        super(message);
+    }
+
     public NoMoreElementException(Throwable t) {
         super(t);
     }
