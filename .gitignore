@@ -57,3 +57,8 @@ jacoco.exec
 
 # PDT-specific
 **/.buildpath
+.idea/BRPC21_pullRequestRepos.iml
+.idea/checkstyle-idea.xml
+.idea/misc.xml
+.idea/modules.xml
+.idea/vcs.xml
