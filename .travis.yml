@@ -1,0 +1,12 @@
+language: java
+jdk: openjdk8
+dist: bionic
+sudo: required
+notifications:
+  email: false
+before_install:
+- sudo apt-get install ant-optional
+script:
+- ant download-deps
+- ant
+- ant test
