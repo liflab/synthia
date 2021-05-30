@@ -22,6 +22,8 @@ import java.util.List;
 
 import ca.uqac.lif.synthia.Picker;
 
+import ca.uqac.lif.synthia.NoMoreElementException;
+
 /**
  * Picker that returns values taken from a list. As its name implies,
  * <tt>Playback</tt> literally replays the values fetched from a list that
@@ -113,7 +115,7 @@ public class Playback<T> implements Picker<T>
 	{
 		if (m_index >= m_values.length && !m_loop)
 		{
-			return m_values[m_values.length - 1];
+			throw new NoMoreElementException();
 		}
 		T f = m_values[m_index];
 		m_index++;
