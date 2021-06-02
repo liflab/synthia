@@ -18,6 +18,7 @@
  */
 package ca.uqac.lif.synthia.util;
 
+import ca.uqac.lif.synthia.NoMoreElementException;
 import ca.uqac.lif.synthia.Picker;
 
 /**
@@ -77,7 +78,7 @@ public class Once<T> implements Picker<T>
 	{
 		if (m_picked)
 		{
-			return null;
+			throw new NoMoreElementException();
 		}
 		m_picked = true;
 		return m_picker.pick();
