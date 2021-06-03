@@ -54,4 +54,16 @@ public class PlaybackTest {
             }
         });
     }
+    
+  @Test
+  public void isDone(){
+      Integer[] int_array = new Integer[] { 1, 2, 1 };
+      Playback int_pb = new Playback<Integer>(int_array);
+      int_pb.loop(false);
+      for (int i = 0; i < int_array.length; i++)
+      {
+          int_pb.pick();
+      }
+      Assertions.assertEquals(true, int_pb.isDone());
+  }
 }
