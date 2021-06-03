@@ -21,7 +21,7 @@ package ca.uqac.lif.synthia.replay;
 import java.util.List;
 
 import ca.uqac.lif.synthia.Picker;
-
+import ca.uqac.lif.synthia.EnumerativePicker;
 import ca.uqac.lif.synthia.NoMoreElementException;
 
 /**
@@ -42,7 +42,7 @@ import ca.uqac.lif.synthia.NoMoreElementException;
  * set to false.
  * @param <T> The type of objects to return
  */
-public class Playback<T> implements Picker<T>
+public class Playback<T> implements EnumerativePicker<T>, Picker<T>
 {
 	/**
 	 * The values to play back
@@ -154,5 +154,16 @@ public class Playback<T> implements Picker<T>
 	{
 		m_loop = b;
 		return this;
+	}
+	
+	/**
+	 * Signals if the playback picker enumerates all values from m_values.
+	 * Loop attributes must be false. If loop is true, the method will always return false.
+	 * @return true if the picker enumerates all values of m_values and false if it's not the case.
+	 */
+	@Override
+	public boolean isDone()
+	{
+		return (m_index >= (m_values.length)) && !m_loop;
 	}
 }
