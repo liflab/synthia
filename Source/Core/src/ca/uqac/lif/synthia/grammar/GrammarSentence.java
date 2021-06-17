@@ -18,20 +18,11 @@
  */
 package ca.uqac.lif.synthia.grammar;
 
-import java.util.List;
-
-import ca.uqac.lif.bullwinkle.BnfParser;
-import ca.uqac.lif.bullwinkle.BnfRule;
-import ca.uqac.lif.bullwinkle.EpsilonTerminalToken;
-import ca.uqac.lif.bullwinkle.NonTerminalToken;
-import ca.uqac.lif.bullwinkle.NumberTerminalToken;
-import ca.uqac.lif.bullwinkle.RegexTerminalToken;
-import ca.uqac.lif.bullwinkle.StringTerminalToken;
-import ca.uqac.lif.bullwinkle.TerminalToken;
-import ca.uqac.lif.bullwinkle.Token;
-import ca.uqac.lif.bullwinkle.TokenString;
+import ca.uqac.lif.bullwinkle.*;
 import ca.uqac.lif.synthia.IndexPicker;
 import ca.uqac.lif.synthia.Picker;
+
+import java.util.List;
 
 /**
  * Picker that generates sentences from a format grammar. The picker's constructor
