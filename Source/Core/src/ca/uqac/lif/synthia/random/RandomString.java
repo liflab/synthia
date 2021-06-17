@@ -18,6 +18,7 @@
  */
 package ca.uqac.lif.synthia.random;
 
+import ca.uqac.lif.synthia.Seedable;
 import org.apache.commons.lang3.RandomStringUtils;
 
 import ca.uqac.lif.synthia.Picker;
@@ -29,7 +30,7 @@ import java.util.List;
 /**
  * Generates a random character string.
  */
-public class RandomString implements Picker<String>
+public class RandomString implements Picker<String>, Seedable
 {
 	/**
 	 * A picker used to determine the string's length
@@ -149,5 +150,11 @@ public class RandomString implements Picker<String>
 	{
 		return new RandomString(m_lengthPicker.duplicate(with_state),
 				m_charValuePicker.duplicate(with_state));
+	}
+
+	@Override
+	public void setSeed(int seed)
+	{
+		m_charValuePicker.setSeed(seed);
 	}
 }

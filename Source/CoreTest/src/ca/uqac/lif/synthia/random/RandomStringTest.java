@@ -17,26 +17,25 @@ public class RandomStringTest
 		}
 	}
 
-	//TODO rewrite the test when RandomString will implement Seedable
 	@Test
 	public void sameValuesSameSeed()
 	{
 		for (int i = 0; i < 10000; i++)
 		{
-			RandomInteger random_seed_gen = new RandomInteger(0, 10);
+			RandomInteger random_seed_gen = new RandomInteger(0, 1000);
 			int randomSeed = random_seed_gen.pick();
-			RandomInteger random_size_gen_string = new RandomInteger(0, 10);
-			RandomInteger random_size_gen_string1 = new RandomInteger(0, 10);
-			random_size_gen_string.setSeed(randomSeed);
-			random_size_gen_string1.setSeed(randomSeed);
-			RandomString random_string = new RandomString(random_size_gen_string.pick());
-			RandomString random_string1 = new RandomString(random_size_gen_string1.pick());
-			String test = random_string.pick();
-			String test1 = random_string1.pick();
+
+			RandomString random_string = new RandomString(10);
+			RandomString random_string1 = new RandomString(10);
+
+			random_string.setSeed(randomSeed);
+			random_string1.setSeed(randomSeed);
+
 			for (int j = 0; j < 100; j++)
 			{
 				Assertions.assertEquals(random_string.pick(), random_string1.pick());
 			}
+
 		}
 	}
 

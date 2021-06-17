@@ -80,3 +80,5 @@ Source/Examples/src/basic/.idea/modules.xml
 Source/Examples/src/basic/.idea/vcs.xml
 Source/Examples/src/basic/.idea/workspace.xml
 Source/Examples/src/basic/basic.iml
+Source/CoreTest/CoreTest.iml
+.idea/libraries/commons_lang3_3_12_0.xml
