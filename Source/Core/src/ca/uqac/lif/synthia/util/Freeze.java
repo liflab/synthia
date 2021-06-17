@@ -58,7 +58,13 @@ public class Freeze<T> implements Picker<T>
 		super();
 		m_innerPicker = picker;
 	}
-	
+
+
+	/**
+	 * Puts the freeze picker back into its initial state. This means that the
+	 * sequence of calls to {@link #pick()} will produce the same values
+	 * as when the object was instantiated.
+	 */
 	@Override
 	public void reset()
 	{
@@ -66,6 +72,15 @@ public class Freeze<T> implements Picker<T>
 		m_innerPicker.reset();
 	}
 
+
+	/**
+	 * Picks a value or returns the same value if m_value is not null. Typically, this method is expected to return non-null
+	 * objects; a <tt>null</tt> return value is used to signal that no more
+	 * objects will be produced. That is, once this method returns
+	 * <tt>null</tt>, it should normally return <tt>null</tt> on all subsequent
+	 * calls.
+	 * @return The frozen value.
+	 */
 	@Override
 	public T pick()
 	{

@@ -107,12 +107,27 @@ public abstract class BehaviorTree<T> implements Picker<T>
 			}
 			return this;
 		}
-		
+
+		/**
+		 * Puts the BehaviorTree back into its initial state. This means that the
+		 * sequence of calls to {@link #pick()} will produce the same values
+		 * as when the object was instantiated.
+		 */
 		@Override
 		public void reset()
 		{
 			m_index = 0;
 		}
+
+
+		/**
+		 * Picks a value from a child of the BehaviorTree. Typically, this method is expected
+		 * to return non-null objects; a <tt>null</tt> return value is used to signal that no more
+		 * objects will be produced. That is, once this method returns
+		 * <tt>null</tt>, it should normally return <tt>null</tt> on all subsequent
+		 * calls.
+		 * @return The value from a child of the BehaviorTree.
+		 */
 
 		@Override
 		public T pick() 
@@ -130,6 +145,14 @@ public abstract class BehaviorTree<T> implements Picker<T>
 			return t;
 		}
 
+		/**
+		 * Creates a copy of the BehaviorTree.
+		 * @param with_state If set to <tt>false</tt>, the returned copy is set to
+		 * the class' initial state (i.e. same thing as calling the picker's
+		 * constructor). If set to <tt>true</tt>, the returned copy is put into the
+		 * same internal state as the object it is copied from.
+		 * @return The copy of the BehaviorTree
+		 */
 		@Override
 		public Sequence<T> duplicate(boolean with_state)
 		{
@@ -179,7 +202,13 @@ public abstract class BehaviorTree<T> implements Picker<T>
 			m_chosenIndex = -1;
 			m_floatPicker = float_picker;
 		}
-		
+
+
+		/**
+		 * Puts the Selector back into its initial state. This means that the
+		 * sequence of calls to {@link #pick()} will produce the same values
+		 * as when the object was instantiated.
+		 */
 		@Override
 		public void reset()
 		{
@@ -189,7 +218,16 @@ public abstract class BehaviorTree<T> implements Picker<T>
 				pc.reset();
 			}
 		}
-		
+
+
+		/**
+		 * Picks a value from a child of the Node. Typically, this method is expected to return non-null
+		 * objects; a <tt>null</tt> return value is used to signal that no more
+		 * objects will be produced. That is, once this method returns
+		 * <tt>null</tt>, it should normally return <tt>null</tt> on all subsequent
+		 * calls.
+		 * @return The value picked from a child of the Selector Node.
+		 */
 		@Override
 		public T pick() 
 		{
@@ -221,6 +259,15 @@ public abstract class BehaviorTree<T> implements Picker<T>
 			return m_choices.get(m_chosenIndex).getObject().pick();
 		}
 
+
+		/**
+		 * Creates a copy of the Selector.
+		 * @param with_state If set to <tt>false</tt>, the returned copy is set to
+		 * the class' initial state (i.e. same thing as calling the picker's
+		 * constructor). If set to <tt>true</tt>, the returned copy is put into the
+		 * same internal state as the object it is copied from.
+		 * @return The copy of the Selector
+		 */
 		@Override
 		public Selector<T> duplicate(boolean with_state)
 		{
@@ -249,7 +296,12 @@ public abstract class BehaviorTree<T> implements Picker<T>
 			m_choices.add(new NodeProbabilityChoice<T>(node, probability));
 			return this;
 		}
-		
+
+
+		/**
+		 * Returns the BehaviorTree Node as a string.
+		 * @return The string representing the BehaviorTree Node.
+		 */
 		@Override
 		public String toString()
 		{
@@ -347,24 +399,51 @@ public abstract class BehaviorTree<T> implements Picker<T>
 			m_picker = new Once<T>(new Constant<T>(t));
 		}
 
+		/**
+		 * Puts the Leaf back into its initial state. This means that the
+		 * sequence of calls to {@link #pick()} will produce the same values
+		 * as when the object was instantiated.
+		 */
 		@Override
 		public void reset() 
 		{
 			m_picker.reset();
 		}
 
+		/**
+		 * Picks the value from the leaf node. Typically, this method is expected to return non-null
+		 * objects; a <tt>null</tt> return value is used to signal that no more
+		 * objects will be produced. That is, once this method returns
+		 * <tt>null</tt>, it should normally return <tt>null</tt> on all subsequent
+		 * calls.
+		 * @return The value of the leaf node
+		 */
 		@Override
 		public T pick() 
 		{
 			return m_picker.pick();
 		}
 
+
+		/**
+		 * Creates a copy of the Leaf.
+		 * @param with_state If set to <tt>false</tt>, the returned copy is set to
+		 * the class' initial state (i.e. same thing as calling the picker's
+		 * constructor). If set to <tt>true</tt>, the returned copy is put into the
+		 * same internal state as the object it is copied from.
+		 * @return The copy of the leaf node
+		 */
 		@Override
 		public Leaf<T> duplicate(boolean with_state) 
 		{
 			return new Leaf<T>(m_picker.duplicate(with_state));
 		}
-		
+
+
+		/**
+		 * Returns the Leaf Node as a string.
+		 * @return The string representing the Leaf Node.
+		 */
 		@Override
 		public String toString()
 		{
