@@ -33,6 +33,13 @@ public class GaussianFloat extends RandomPicker<Float>
 	{
 		GaussianFloat gf = new GaussianFloat();
 		gf.m_seed = m_seed;
+		gf.m_random = this.m_random.Duplicate();
+
+		if (!with_state)
+		{
+			gf.reset();
+		}
+
 		return gf;
 	}
 

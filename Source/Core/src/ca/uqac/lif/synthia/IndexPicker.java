@@ -30,7 +30,15 @@ public interface IndexPicker extends Picker<Integer>
 	 * @return This picker
 	 */
 	public IndexPicker setRange(int size);
-	
+
+	/**
+	 * Creates a copy of the picker.
+	 * @param with_state If set to <tt>false</tt>, the returned copy is set to
+	 * the class' initial state (i.e. same thing as calling the picker's
+	 * constructor). If set to <tt>true</tt>, the returned copy is put into the
+	 * same internal state as the object it is copied from.
+	 * @return The copy of the picker
+	 */
 	@Override
 	public IndexPicker duplicate(boolean with_state);
 }

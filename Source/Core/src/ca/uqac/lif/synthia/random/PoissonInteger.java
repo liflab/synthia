@@ -167,7 +167,15 @@ public class PoissonInteger extends RandomPicker<Integer>
 	public PoissonInteger duplicate(boolean with_state) 
 	{
 		PoissonInteger gf = new PoissonInteger(m_lambda, m_c, m_alpha, m_beta, m_k);
+
 		gf.m_seed = m_seed;
+		gf.m_random = this.m_random.Duplicate();
+
+		if (!with_state)
+		{
+			gf.reset();
+		}
+
 		return gf;
 	}
 	
