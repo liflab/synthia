@@ -37,7 +37,7 @@ import ca.uqac.lif.synthia.Picker;
  * </pre>
  * @param <T> The type of objects to pick
  */
-public class Record<T> implements Picker<T>
+public class Record<T> implements Picker<Object>
 {
 	/**
 	 * The picker that generates the values
@@ -60,6 +60,17 @@ public class Record<T> implements Picker<T>
 		m_values = new ArrayList<T>();
 	}
 
+	private Record(Picker<T> picker, List<T> values)
+	{
+		m_picker = picker;
+		m_values = values;
+	}
+
+	/**
+	 * Puts the Record picker back into its initial state. This means that the
+	 * sequence of calls to {@link #pick()} will produce the same values
+	 * as when the object was instantiated.
+	 */
 	@Override
 	public void reset() 
 	{
@@ -67,19 +78,41 @@ public class Record<T> implements Picker<T>
 		m_values.clear();
 	}
 
+
+	/**
+	 * Picks a value, records it and returns the value. Typically, this method is expected to return non-null
+	 * objects; a <tt>null</tt> return value is used to signal that no more
+	 * objects will be produced. That is, once this method returns
+	 * <tt>null</tt>, it should normally return <tt>null</tt> on all subsequent
+	 * calls.
+	 * @return The value recorded from another picker.
+	 */
 	@Override
-	public T pick() 
+	public Object pick()
 	{
 		T value = m_picker.pick();
 		m_values.add(value);
 		return value;
 	}
 
+
+	/**
+	 * Creates a copy of the Record picker.
+	 * @param with_state If set to <tt>false</tt>, the returned copy is set to
+	 * the class' initial state (i.e. same thing as calling the picker's
+	 * constructor). If set to <tt>true</tt>, the returned copy is put into the
+	 * same internal state as the object it is copied from.
+	 * @return The copy of the Record picker
+	 */
 	@Override
-	/*@ pure non_null @*/ public Picker<T> duplicate(boolean with_state) 
+	/*@ pure non_null @*/ public Record duplicate(boolean with_state)
 	{
-		// TODO Auto-generated method stub
-		return null;
+		Record copy = new Record<T>(m_picker.duplicate(with_state), new ArrayList<T>(m_values));
+		if (!with_state)
+		{
+			copy.m_values.clear();
+		}
+		return copy;
 	}
 	
 	/**
