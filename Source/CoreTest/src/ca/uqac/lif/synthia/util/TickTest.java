@@ -43,4 +43,42 @@ public class TickTest {
 
 
     }
+
+
+	@Test
+  public void duplicateWithState()
+  {
+      int start = 0;
+      int increment = 1;
+      Tick tick = new Tick(start, increment);
+      tick.pick();
+      tick.pick();
+      Tick tick_copy = tick.duplicate(true);
+      Assertions.assertEquals(tick.pick(), tick_copy.pick());
+  }
+
+    @Test
+    public void duplicateWithoutState()
+    {
+        int start = 0;
+        int increment = 1;
+        Tick tick = new Tick(start, increment);
+        tick.pick();
+        tick.pick();
+        Tick tick_copy = tick.duplicate(false);
+        Assertions.assertNotEquals(tick.pick(), tick_copy.pick());
+    }
+
+    @Test
+    public void duplicateStartValue()
+    {
+        int start = 0;
+        int increment = 1;
+        Tick tick = new Tick(start, increment);
+        Tick tick_copy = tick.duplicate((float) 2);
+        tick.pick();
+        tick.pick();
+        Assertions.assertEquals(tick.pick(), tick_copy.pick());
+    }
 }
+

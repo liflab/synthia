@@ -1,0 +1,15 @@
+<S>               := The <adjective-group> <noun-verb> the <adjective-group> <noun> . ;
+<adjective-group> := <observation> <size> <age> <color> ;
+<noun-verb>       := <nv-singular> | <nv-plural> ;
+<nv-singular>     := <noun> <verb> ;
+<nv-plural>       := <nouns> <verbs> ;
+<noun>            := fox | <dog> | <cat> | bird ;
+<verb>            := watches | plays with | runs after ;
+<nouns>           := cats | dogs | birds | farmers ;
+<verbs>           := play with | run after | watch ;
+<observation>     := lovely | funny | ugly | quick | ε ;
+<size>            := big | small | ε ;
+<age>             := young | old | ε ;
+<color>           := brown | black | white | grey | ε ;
+<dog>             := poodle | pitbull | dog ;
+<cat>             := siamese | Cheshire cat | burmese cat | cat ;
