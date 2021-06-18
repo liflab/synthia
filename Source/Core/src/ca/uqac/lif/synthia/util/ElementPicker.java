@@ -92,7 +92,7 @@ public class ElementPicker<T> implements Picker<T>
 	@Override
 	public void reset()
 	{
-		// Nothing to do
+		m_floatPicker.reset();
 	}
 
 
