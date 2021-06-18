@@ -34,12 +34,23 @@ public class ArrayPicker extends CompositePicker<Object[]>
 		super(pickers);
 	}
 
+	/**
+	 * Returns a new array picker
+	 * @param pickers The pickers used to generate the values
+	 * @return The new array picker
+	 */
 	@Override
 	public ArrayPicker newPicker(Picker<?> ... pickers)
 	{
 		return new ArrayPicker(pickers);
 	}
-	
+
+
+	/**
+	 * Return a list of values
+	 * @param values The values to return
+	 * @return The values
+	 */
 	@Override
 	public Object[] getOutput(Object ... values)
 	{

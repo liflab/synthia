@@ -18,6 +18,8 @@
  */
 package ca.uqac.lif.synthia.random;
 
+import ca.uqac.lif.synthia.random.generators.Random;
+
 /**
  * Picks a floating point number uniformly in an interval
  */
@@ -44,9 +46,32 @@ public class RandomIntervalFloat extends RandomPicker<Float>
 		m_min = min.floatValue();
 		m_max = max.floatValue();
 	}
-	
+
+	/**
+	 * Private constructor used to duplicate the picker.
+	 * @param min The lower bound of the interval.
+	 * @param max The higher bound of the interval.
+	 * @param seed The initial seed of the random genarator.
+	 * @param random The random generator.
+	 */
+	private RandomIntervalFloat(Number min, Number max, int seed, Random random)
+	{
+		m_min = min.floatValue();
+		m_max = max.floatValue();
+		m_seed = seed;
+		m_random = random;
+	}
+
+	/**
+	 * Picks a random float in the specified interval. Typically, this method is expected to return non-null
+	 * objects; a <tt>null</tt> return value is used to signal that no more
+	 * objects will be produced. That is, once this method returns
+	 * <tt>null</tt>, it should normally return <tt>null</tt> on all subsequent
+	 * calls.
+	 * @return The random float
+	 */
 	@Override
-	public Float pick() 
+	public Float pick()
 	{
 		return m_random.nextFloat() * (m_max - m_min) + m_min;
 	}
@@ -54,6 +79,13 @@ public class RandomIntervalFloat extends RandomPicker<Float>
 	@Override
 	public RandomIntervalFloat duplicate(boolean with_state)
 	{
-		return new RandomIntervalFloat(m_min, m_max);
+		RandomIntervalFloat copy = new RandomIntervalFloat(m_min, m_max, m_seed, m_random.Duplicate());
+
+		if (!with_state)
+		{
+			copy.reset();
+		}
+
+		return copy;
 	}
 }

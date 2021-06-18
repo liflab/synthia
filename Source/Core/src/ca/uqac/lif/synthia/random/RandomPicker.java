@@ -2,23 +2,20 @@
     Synthia, a data structure generator
     Copyright (C) 2019-2020 Laboratoire d'informatique formelle
     Université du Québec à Chicoutimi, Canada
-
     This program is free software: you can redistribute it and/or modify
     it under the terms of the GNU Lesser General Public License as published
     by the Free Software Foundation, either version 3 of the License, or
     (at your option) any later version.
-
     This program is distributed in the hope that it will be useful,
     but WITHOUT ANY WARRANTY; without even the implied warranty of
     MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
     GNU Lesser General Public License for more details.
-
     You should have received a copy of the GNU Lesser General Public License
     along with this program.  If not, see <http://www.gnu.org/licenses/>.
  */
 package ca.uqac.lif.synthia.random;
 
-import java.util.Random;
+import ca.uqac.lif.synthia.random.generators.Random;
 
 import ca.uqac.lif.synthia.Picker;
 import ca.uqac.lif.synthia.Seedable;
@@ -42,31 +39,28 @@ public abstract class RandomPicker<T> implements Picker<T>, Seedable
 	 * specified
 	 */
 	protected static final transient Random s_random = new Random();
-	
+
 	/*@ non_null @*/ protected transient Random m_random;
-	
+
 	protected int m_seed;
-	
+
 	public RandomPicker(int seed)
 	{
 		super();
 		setSeed(seed);
 	}
-	
-	public RandomPicker()
-	{
-		this(s_random.nextInt());
-	}
+
+	public RandomPicker() { this(s_random.nextInt()); }
 
 	@Override
-	public void setSeed(int seed) 
+	public void setSeed(int seed)
 	{
 		m_seed = seed;
 		m_random = new Random(seed);
 	}
 
 	@Override
-	public void reset() 
+	public void reset()
 	{
 		m_random = new Random(m_seed);
 	}

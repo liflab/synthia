@@ -50,7 +50,12 @@ public class StringPattern extends CompositePicker<String>
 		super(parts);
 		m_pattern = pattern;
 	}
-	
+
+
+	/**
+	 * Returns the pattern into a string
+	 * @return The string containing the pattern.
+	 */
 	@Override
 	public String toString()
 	{
@@ -68,6 +73,12 @@ public class StringPattern extends CompositePicker<String>
 		return out;
 	}
 
+
+	/**
+	 * Returns a new string pattern picker.
+	 * @param pickers The internal pickers, already duplicated
+	 * @return The new string pattern picker.
+	 */
 	@Override
 	public StringPattern newPicker(Picker<?> ... pickers)
 	{

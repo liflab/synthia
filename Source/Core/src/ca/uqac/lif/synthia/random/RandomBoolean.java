@@ -18,6 +18,8 @@
  */
 package ca.uqac.lif.synthia.random;
 
+import ca.uqac.lif.synthia.random.generators.Random;
+
 /**
  * Picks a Boolean value. This class actually implements a Bernoulli
  * trial, with the possibility of setting the probability of success
@@ -40,7 +42,20 @@ public class RandomBoolean extends RandomPicker<Boolean>
 		super();
 		m_trueProbability = true_probability.floatValue();
 	}
-	
+
+	/**
+	 * Private constructor used in the duplicate method.
+	 * @param true_probability The probability of picking <tt>true</tt>.
+	 * @param seed The initial seed of the random genarator.
+	 * @param random The random generator.
+	 */
+	private RandomBoolean(Number true_probability, int seed, Random random)
+	{
+		m_trueProbability = true_probability.floatValue();
+		m_seed = seed;
+		m_random = random;
+	}
+
 	/**
 	 * Creates a new instance of the picker, with a 50-50 chance of
 	 * producing <tt>true</tt> or <tt>false</tt>
@@ -49,16 +64,41 @@ public class RandomBoolean extends RandomPicker<Boolean>
 	{
 		this(0.5);
 	}
-	
+
+
+	/**
+	 * Picks a random boolean. Typically, this method is expected to return non-null
+	 * objects; a <tt>null</tt> return value is used to signal that no more
+	 * objects will be produced. That is, once this method returns
+	 * <tt>null</tt>, it should normally return <tt>null</tt> on all subsequent
+	 * calls.
+	 * @return The random boolean.
+	 */
 	@Override
 	public Boolean pick()
 	{
 		return m_random.nextFloat() <= m_trueProbability;
 	}
 
+
+	/**
+	 * Creates a copy of the RandomBoolean picker.
+	 * @param with_state If set to <tt>false</tt>, the returned copy is set to
+	 * the class' initial state (i.e. same thing as calling the picker's
+	 * constructor). If set to <tt>true</tt>, the returned copy is put into the
+	 * same internal state as the object it is copied from.
+	 * @return The copy of the RandomBoolean picker
+	 */
 	@Override
 	public RandomBoolean duplicate(boolean with_state) 
 	{
-		return new RandomBoolean(m_trueProbability);
+		RandomBoolean copy = new RandomBoolean(m_trueProbability, m_seed, m_random.Duplicate());
+
+		if (!with_state)
+		{
+			copy.reset();
+		}
+
+		return copy;
 	}
 }

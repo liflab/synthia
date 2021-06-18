@@ -64,7 +64,13 @@ public class Once<T> implements Picker<T>
 		m_picker = picker;
 		m_picked = false;
 	}
-	
+
+
+	/**
+	 * Puts the once picker back into its initial state. This means that the
+	 * sequence of calls to {@link #pick()} will produce the same values
+	 * as when the object was instantiated.
+	 */
 	@Override
 	public void reset() 
 	{
@@ -73,6 +79,15 @@ public class Once<T> implements Picker<T>
 		
 	}
 
+
+	/**
+	 * Picks a random value. Typically, this method is expected to return non-null
+	 * objects; a <tt>null</tt> return value is used to signal that no more
+	 * objects will be produced. That is, once this method returns
+	 * <tt>null</tt>, it should normally return <tt>null</tt> on all subsequent
+	 * calls.
+	 * @return The random string.
+	 */
 	@Override
 	public T pick() 
 	{
@@ -84,6 +99,15 @@ public class Once<T> implements Picker<T>
 		return m_picker.pick();
 	}
 
+
+	/**
+	 * Creates a copy of the once picker.
+	 * @param with_state If set to <tt>false</tt>, the returned copy is set to
+	 * the class' initial state (i.e. same thing as calling the picker's
+	 * constructor). If set to <tt>true</tt>, the returned copy is put into the
+	 * same internal state as the object it is copied from.
+	 * @return The copy of the RandomString picker
+	 */
 	@Override
 	public Once<T> duplicate(boolean with_state)
 	{

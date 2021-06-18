@@ -113,6 +113,12 @@ public class Tick implements Picker<Number>
 		this(new Constant<Number>(0), new RandomFloat());
 	}
 
+
+	/**
+	 * Puts the tick back into its initial state. This means that the
+	 * sequence of calls to {@link #pick()} will produce the same values
+	 * as when the object was instantiated.
+	 */
 	@Override
 	public void reset()
 	{
@@ -121,6 +127,15 @@ public class Tick implements Picker<Number>
 		m_currentValue = m_startValue.pick().floatValue();
 	}
 
+
+	/**
+	 * Picks a tick value. Typically, this method is expected to return non-null
+	 * objects; a <tt>null</tt> return value is used to signal that no more
+	 * objects will be produced. That is, once this method returns
+	 * <tt>null</tt>, it should normally return <tt>null</tt> on all subsequent
+	 * calls.
+	 * @return The tick value.
+	 */
 	@Override
 	public Number pick() 
 	{
@@ -128,6 +143,15 @@ public class Tick implements Picker<Number>
 		return m_currentValue;
 	}
 
+
+	/**
+	 * Creates a copy of the tick picker.
+	 * @param with_state If set to <tt>false</tt>, the returned copy is set to
+	 * the class' initial state (i.e. same thing as calling the picker's
+	 * constructor). If set to <tt>true</tt>, the returned copy is put into the
+	 * same internal state as the object it is copied from.
+	 * @return The copy of the tick picker
+	 */
 	@Override
 	public Tick duplicate(boolean with_state) 
 	{
@@ -138,12 +162,17 @@ public class Tick implements Picker<Number>
 		}
 		return tp;
 	}
-	
+
 	/*@ pure non_null @*/ public Tick duplicate(float start_value)
 	{
 		return new Tick(start_value, m_increment);
 	}
-	
+
+	/**
+	 * Sets the current value of the tick picker
+	 * @param value The new current value
+	 * @return The actual instance of the tick picker
+	 */
 	/*@ non_null @*/ public Tick setValue(float value)
 	{
 		m_currentValue = value;

@@ -41,7 +41,16 @@ public abstract class CompositePicker<T> implements Picker<T>
 		super();
 		m_pickers = pickers;
 	}
-	
+
+
+	/**
+	 * Creates a copy of the composite picker.
+	 * @param with_state If set to <tt>false</tt>, the returned copy is set to
+	 * the class' initial state (i.e. same thing as calling the picker's
+	 * constructor). If set to <tt>true</tt>, the returned copy is put into the
+	 * same internal state as the object it is copied from.
+	 * @return The copy of the composite picker
+	 */
 	@Override
 	public Picker<T> duplicate(boolean with_state)
 	{
@@ -52,7 +61,17 @@ public abstract class CompositePicker<T> implements Picker<T>
 		}
 		return newPicker(duplicates);
 	}
-	
+
+
+
+	/**
+	 * Picks a value of each picker in m_pickers. Typically, this method is expected to return non-null
+	 * objects; a <tt>null</tt> return value is used to signal that no more
+	 * objects will be produced. That is, once this method returns
+	 * <tt>null</tt>, it should normally return <tt>null</tt> on all subsequent
+	 * calls.
+	 * @return An array with a value picked from each picker in the picker list.
+	 */
 	@Override
 	public T pick()
 	{
@@ -63,7 +82,13 @@ public abstract class CompositePicker<T> implements Picker<T>
 		}
 		return getOutput(out);
 	}
-	
+
+
+	/**
+	 * Puts the composite picker back into its initial state. This means that the
+	 * sequence of calls to {@link #pick()} will produce the same values
+	 * as when the object was instantiated.
+	 */
 	@Override
 	public void reset()
 	{

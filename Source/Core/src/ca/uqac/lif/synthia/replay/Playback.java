@@ -20,10 +20,13 @@ package ca.uqac.lif.synthia.replay;
 
 import java.util.List;
 
+import ca.uqac.lif.synthia.EnumerativePicker;
+import ca.uqac.lif.synthia.NoMoreElementException;
 import ca.uqac.lif.synthia.Picker;
-
+import ca.uqac.lif.synthia.EnumerativePicker;
 import ca.uqac.lif.synthia.NoMoreElementException;
 
+//TODO check constructors whit a list as parameter for m_values
 /**
  * Picker that returns values taken from a list. As its name implies,
  * <tt>Playback</tt> literally replays the values fetched from a list that
@@ -42,28 +45,28 @@ import ca.uqac.lif.synthia.NoMoreElementException;
  * set to false.
  * @param <T> The type of objects to return
  */
-public class Playback<T> implements Picker<T>
+public class Playback<T> implements EnumerativePicker<T>, Picker<T>
 {
 	/**
 	 * The values to play back
 	 */
 	/*@ non_null @*/ protected T[] m_values;
-	
+
 	/**
 	 * The index of the current value
 	 */
 	protected int m_index;
-	
+
 	/**
 	 * The start index
 	 */
 	protected int m_startIndex;
-	
+
 	/**
 	 * Whether to loop through the values
 	 */
 	protected boolean m_loop;
-	
+
 	/**
 	 * Creates a new Playback picker
 	 * @param start_index The position of the first value to return
@@ -77,7 +80,19 @@ public class Playback<T> implements Picker<T>
 		m_startIndex = start_index;
 		m_loop = true;
 	}
-	
+
+	/**
+	 * Set the m_loop attribute of the playback picker. If the attribute is set to false, the next call to
+	 * the {@link #pick()} method will return a {@link ca.uqac.lif.synthia.NoMoreElementException} after
+	 * producing the last element of the list.
+	 * @param m_loop boolean value to enable playback loop or not
+	 * @return
+	 */
+	public Playback<T> setM_loop(boolean m_loop) {
+		this.m_loop = m_loop;
+		return this;
+	}
+
 	/**
 	 * Creates a new Playback picker
 	 * @param values The values to play back
@@ -87,7 +102,7 @@ public class Playback<T> implements Picker<T>
 	{
 		this(0, values);
 	}
-	
+
 	/**
 	 * Creates a new Playback picker
 	 * @param start_index The position of the first value to return
@@ -100,7 +115,7 @@ public class Playback<T> implements Picker<T>
 		m_index = start_index;
 		m_startIndex = start_index;
 	}
-	
+
 	/**
 	 * Creates a new Playback picker
 	 * @param values The values to play back
@@ -109,7 +124,17 @@ public class Playback<T> implements Picker<T>
 	{
 		this(0, values);
 	}
-	
+
+
+
+	/**
+	 * Picks the next value in the list of the Playback picker. Typically, this method is expected to return non-null
+	 * objects; a <tt>null</tt> return value is used to signal that no more
+	 * objects will be produced. That is, once this method returns
+	 * <tt>null</tt>, it should normally return <tt>null</tt> on all subsequent
+	 * calls.
+	 * @return The next value
+	 */
 	@Override
 	public T pick()
 	{
@@ -125,13 +150,28 @@ public class Playback<T> implements Picker<T>
 		}
 		return f;
 	}
-	
+
+
+	/**
+	 * Puts the Playback picker back into its initial state. This means that the
+	 * sequence of calls to {@link #pick()} will produce the same values
+	 * as when the object was instantiated.
+	 */
 	@Override
-	public void reset() 
+	public void reset()
 	{
 		m_index = 0;
 	}
-	
+
+
+	/**
+	 * Picks a random string. Typically, this method is expected to return non-null
+	 * objects; a <tt>null</tt> return value is used to signal that no more
+	 * objects will be produced. That is, once this method returns
+	 * <tt>null</tt>, it should normally return <tt>null</tt> on all subsequent
+	 * calls.
+	 * @return The random string.
+	 */
 	@Override
 	public Playback<T> duplicate(boolean with_state)
 	{
@@ -140,9 +180,13 @@ public class Playback<T> implements Picker<T>
 		{
 			lp.m_index = m_index;
 		}
+		if (!this.m_loop){
+			lp.setM_loop(false);
+		}
 		return lp;
 	}
-	
+
+
 	/**
 	 * Sets whether to loop through the list of values or play them back
 	 * only once.
@@ -154,5 +198,16 @@ public class Playback<T> implements Picker<T>
 	{
 		m_loop = b;
 		return this;
+	}
+
+	/**
+	 * Signals if the playback picker enumerates all values from m_values.
+	 * Loop attributes must be false. If loop is true, the method will always return false.
+	 * @return true if the picker enumerates all values of m_values and false if it's not the case.
+	 */
+	@Override
+	public boolean isDone()
+	{
+		return (m_index >= (m_values.length)) && !m_loop;
 	}
 }

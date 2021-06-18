@@ -21,6 +21,7 @@ package ca.uqac.lif.synthia.vector;
 import ca.uqac.lif.synthia.Picker;
 import ca.uqac.lif.synthia.util.Constant;
 
+//liste une vecteur avec un certain angle suivant une sphère de n dimensions
 /**
  * Generates <i>n</i>-dimensional vectors with a given modulus. This
  * picker does so by taking a positive value <i>r</i> and <i>n</i>-1 pickers
@@ -74,7 +75,13 @@ public class HyperspherePicker implements VectorPicker
 			m_dimensions[i + 1] = dimensions[i];
 		}
 	}
-	
+
+
+	/**
+	 * Puts the hypersphere picker back into its initial state. This means that the
+	 * sequence of calls to {@link #pick()} will produce the same values
+	 * as when the object was instantiated.
+	 */
 	@Override
 	public void reset()
 	{
@@ -104,6 +111,14 @@ public class HyperspherePicker implements VectorPicker
 		return v;
 	}
 
+	/**
+	 * Creates a copy of the hypersphere picker.
+	 * @param with_state If set to <tt>false</tt>, the returned copy is set to
+	 * the class' initial state (i.e. same thing as calling the picker's
+	 * constructor). If set to <tt>true</tt>, the returned copy is put into the
+	 * same internal state as the object it is copied from.
+	 * @return The copy of the hypersphere picker
+	 */
 	@SuppressWarnings("unchecked")
 	@Override
 	public HyperspherePicker duplicate(boolean with_state)
@@ -115,6 +130,7 @@ public class HyperspherePicker implements VectorPicker
 		}
 		return new HyperspherePicker(dimensions);
 	}
+
 
 	@Override
 	public int getDimension()

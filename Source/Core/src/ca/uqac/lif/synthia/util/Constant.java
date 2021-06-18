@@ -47,13 +47,23 @@ public class Constant<T> implements Picker<T>
 		super();
 		m_value = value;
 	}
-	
+
+	/**
+	 * Picks the constant value.
+	 * @return The constant value.
+	 */
 	@Override
 	public T pick() 
 	{
 		return m_value;
 	}
 
+
+	/**
+	 * Puts the constant back into its initial state. This means that the
+	 * sequence of calls to {@link #pick()} will produce the same values
+	 * as when the object was instantiated.
+	 */
 	@Override
 	public void reset() 
 	{
@@ -61,12 +71,26 @@ public class Constant<T> implements Picker<T>
 		
 	}
 
+
+	/**
+	 * Creates a copy of the constant picker.
+	 * @param with_state If set to <tt>false</tt>, the returned copy is set to
+	 * the class' initial state (i.e. same thing as calling the picker's
+	 * constructor). If set to <tt>true</tt>, the returned copy is put into the
+	 * same internal state as the object it is copied from.
+	 * @return The copy of the constant picker
+	 */
 	@Override
 	public Constant<T> duplicate(boolean with_state)
 	{
 		return new Constant<T>(m_value);
 	}
-	
+
+
+	/**
+	 * Returns the constant value into a string.
+	 * @return The string who contains the constant value.
+	 */
 	@Override
 	public String toString()
 	{

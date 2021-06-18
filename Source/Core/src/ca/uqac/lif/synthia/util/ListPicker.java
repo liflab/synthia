@@ -37,12 +37,19 @@ public class ListPicker extends CompositePicker<Set<Object>>
 		super(pickers);
 	}
 
+	/**
+	 * Returns a new list picker
+	 * @param pickers The pickers used to generate the values
+	 * @return The new list picker
+	 */
 	@Override
 	public ListPicker newPicker(Picker<?> ... pickers)
 	{
 		return new ListPicker(pickers);
 	}
-	
+
+
+
 	@Override
 	public Set<Object> getOutput(Object ... values)
 	{
