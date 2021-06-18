@@ -2,8 +2,9 @@ package ca.uqac.lif.synthia.grammar;
 
 import ca.uqac.lif.bullwinkle.BnfParser;
 import ca.uqac.lif.synthia.random.RandomIndex;
+import org.junit.Test;
 import org.junit.jupiter.api.Assertions;
-import org.junit.jupiter.api.Test;
+
 
 public class GrammarSentenceTest
 {

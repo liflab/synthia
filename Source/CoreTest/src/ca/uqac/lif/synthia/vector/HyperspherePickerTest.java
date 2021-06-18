@@ -22,13 +22,8 @@ public class HyperspherePickerTest
 		for (int i = 0; i < 10000 ; i++)
 		{
 			float[] random_floats = hypersphere_picker.pick();
-			double sum = 0;
-			for (int j = 0; j < random_floats.length; j++)
-			{
-				sum = Math.pow((double) random_floats[j], (double) 2);
-			}
-			double modulus_result =  Math.sqrt(sum);
-			Assertions.assertTrue(0 <= modulus_result && modulus_result <= modulus);
+			double result = rootSquareSum(random_floats);
+			Assertions.assertTrue(0 <= result && result <= modulus);
 		}
 	}
 
@@ -52,10 +47,7 @@ public class HyperspherePickerTest
 		HyperspherePicker hypersphere_picker_copy = hypersphere_picker.duplicate(true);
 		float[] random_floats_copy = hypersphere_picker_copy.pick();
 		random_floats = hypersphere_picker.pick();
-		for (int i = 0; i < random_floats.length; i++)
-		{
-			Assertions.assertEquals(random_floats[i], random_floats_copy[i]);
-		}
+		Assertions.assertEquals(rootSquareSum(random_floats),rootSquareSum(random_floats_copy));
 	}
 
 	@Test
@@ -77,18 +69,22 @@ public class HyperspherePickerTest
 		}
 		HyperspherePicker hypersphere_picker_copy = hypersphere_picker.duplicate(false);
 		float[] random_floats_copy = hypersphere_picker_copy.pick();
-		random_floats = hypersphere_picker.pick();
-		for (int i = 0; i < random_floats.length; i++)
-		{
-			Assertions.assertNotEquals(random_floats[i], random_floats_copy[i]);
-		}
+		Assertions.assertNotEquals(rootSquareSum(random_floats), rootSquareSum(random_floats_copy));
 		hypersphere_picker.reset();
 		hypersphere_picker_copy.reset();
 		random_floats = hypersphere_picker.pick();
 		random_floats_copy = hypersphere_picker_copy.pick();
-		for (int i = 0; i < random_floats.length; i++)
+		Assertions.assertEquals(rootSquareSum(random_floats), rootSquareSum(random_floats_copy));
+
+	}
+
+	public double rootSquareSum(float[] values)
+	{
+		double sum = 0;
+		for (int i = 0; i < values.length; i++)
 		{
-			Assertions.assertEquals(random_floats[i], random_floats_copy[i]);
+			sum = Math.pow((double) values[i], (double) 2);
 		}
+		return Math.sqrt(sum);
 	}
 }

@@ -105,7 +105,6 @@ public class FreezeTest
 		Freeze freeze = new Freeze(random_float);
 		freeze.pick();
 		Freeze freeze_copy = freeze.duplicate(false);
-		Assertions.assertNotEquals(freeze.pick(), freeze_copy.pick());
 		freeze.reset();
 		freeze_copy.reset();
 		Assertions.assertEquals(freeze.pick(), freeze_copy.pick());

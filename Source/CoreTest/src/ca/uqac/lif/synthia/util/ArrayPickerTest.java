@@ -54,11 +54,11 @@ public class ArrayPickerTest
 	@Test
 	public void duplicateWithoutState()
 	{
-		RandomInteger random_integer = new RandomInteger(0, 10);
+		RandomInteger random_integer = new RandomInteger(0, 10000);
 		RandomFloat random_float = new RandomFloat();
 		RandomBoolean random_boolean = new RandomBoolean();
 		RandomString random_string = new RandomString(10);
-		Picker[] random_pickers= new Picker[] {random_integer, random_float ,random_boolean,
+		Picker[] random_pickers= new Picker[] {random_integer, random_float,
 				random_string};
 		ArrayPicker array_picker = new ArrayPicker(random_pickers);
 		for (int i = 0; i < random_pickers.length; i++)

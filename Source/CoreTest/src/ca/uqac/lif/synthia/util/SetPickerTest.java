@@ -33,12 +33,11 @@ public class SetPickerTest
 	@Test
 	public void duplicateWithState()
 	{
-		RandomInteger random_integer = new RandomInteger(0, 10);
+		RandomInteger random_integer = new RandomInteger(0, 10000);
 		RandomFloat random_float = new RandomFloat();
 		RandomBoolean random_boolean = new RandomBoolean();
 		RandomString random_string = new RandomString(10);
-		Picker[] random_pickers= new Picker[] {random_integer, random_float ,random_boolean,
-				random_string};
+		Picker[] random_pickers= new Picker[] {random_integer, random_float, random_string};
 		SetPicker set_picker = new SetPicker(random_pickers);
 		for (int i = 0; i < random_pickers.length; i++)
 		{
@@ -53,22 +52,19 @@ public class SetPickerTest
 		}
 	}
 
-	//TODO fix this
 	@Test
 	public void duplicateWithoutState()
 	{
-		RandomInteger random_integer = new RandomInteger(0, 10);
+		RandomInteger random_integer = new RandomInteger(0, 10000);
 		RandomFloat random_float = new RandomFloat();
-		RandomBoolean random_boolean = new RandomBoolean();
 		RandomString random_string = new RandomString(10);
-		Picker[] random_pickers= new Picker[] {random_integer, random_float ,random_boolean,
-				random_string};
+		Picker[] random_pickers= new Picker[] {random_integer, random_float, random_string};
 		SetPicker set_picker = new SetPicker(random_pickers);
 		for (int i = 0; i < random_pickers.length; i++)
 		{
 			set_picker.pick();
 		}
-		SetPicker set_picker_copy = (SetPicker) set_picker.duplicate(true);
+		SetPicker set_picker_copy = (SetPicker) set_picker.duplicate(false);
 		List<Object> set_picker_res = set_picker.pick();
 		List<Object> set_picker_copy_res = set_picker_copy.pick();
 		for (int i = 0; i < set_picker_res.size(); i++)
