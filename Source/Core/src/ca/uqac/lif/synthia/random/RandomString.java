@@ -18,10 +18,8 @@
  */
 package ca.uqac.lif.synthia.random;
 
-import ca.uqac.lif.synthia.Seedable;
-import org.apache.commons.lang3.RandomStringUtils;
-
 import ca.uqac.lif.synthia.Picker;
+import ca.uqac.lif.synthia.Seedable;
 import ca.uqac.lif.synthia.util.Constant;
 
 import java.util.ArrayList;
@@ -37,41 +35,99 @@ public class RandomString implements Picker<String>, Seedable
 	 */
 	protected Picker<Integer> m_lengthPicker;
 
-	protected RandomInteger m_charValuePicker;
+	protected RandomInteger m_charIndexPicker;
 
+	protected char[] m_chars;
 
 	/**
-	 * Creates a new RandomString picker
+	 * Creates a new RandomString picker with a default alphanumeric values array
+	 *
 	 * @param length A picker used to determine the string's length
 	 */
 	public RandomString(Picker<Integer> length)
 	{
 		super();
+		defaultCharArrayInitialize();
 		m_lengthPicker = length;
-		m_charValuePicker = new RandomInteger(48,122); //ASCII numeric value range
+		m_charIndexPicker = new RandomInteger(0, m_chars.length - 1);
+	}
+
+	/**
+	 * Creates a new RandomString picker with a default alphanumeric values array
+	 *
+	 * @param length A picker used to determine the string's length
+	 * @param char_array An array containing the characters allowed in the random string.
+	 */
+	public RandomString(Picker<Integer> length, char[] char_array)
+	{
+		super();
+		m_chars = char_array;
+		m_lengthPicker = length;
+		m_charIndexPicker = new RandomInteger(0, m_chars.length - 1);
 	}
 
 	/**
 	 * Private constructor used to duplicate the picker.
-	 * @param length The picker used to pick the lenght of the random string.
-	 * @param char_value_picker The picker used to generate random strings.
+	 *
+	 * @param length            The picker used to pick the lenght of the random string.
+	 * @param char_index_picker The picker used to generate random strings.
+	 * @param char_array An array containing the characters allowed in the random string.
 	 */
-	private RandomString(Picker<Integer> length, RandomInteger char_value_picker)
+	private RandomString(Picker<Integer> length, RandomInteger char_index_picker, char[] char_array)
 	{
 		super();
 		m_lengthPicker = length;
-		m_charValuePicker = char_value_picker;
+		m_charIndexPicker = char_index_picker;
+		m_chars = char_array;
 	}
-	
+
 	/**
-	 * Creates a new RandomString picker
+	 * Creates a new RandomString picker, with a default alphanumeric values array.
+	 *
 	 * @param length The length of each generated string
 	 */
 	public RandomString(int length)
 	{
 		super();
+		defaultCharArrayInitialize();
 		m_lengthPicker = new Constant<Integer>(length);
-		m_charValuePicker = new RandomInteger(48,122); //ASCII numeric value range
+		m_charIndexPicker = new RandomInteger(0, m_chars.length - 1);
+	}
+
+	/**
+	 * Creates a new RandomString picker, with a specified alphanumeric values array.
+	 *
+	 * @param length The length of each generated string.
+	 * @param char_array An array containing the characters allowed in the random string.
+	 */
+	public RandomString(int length, char[] char_array)
+	{
+		super();
+		m_lengthPicker = new Constant<Integer>(length);
+		m_chars = char_array;
+		m_charIndexPicker = new RandomInteger(0, m_chars.length - 1);
+	}
+
+	/**
+	 * A private method to initialize the default characters array
+	 */
+	private void defaultCharArrayInitialize()
+	{
+		m_chars = new char[62];
+		int i =0;
+
+		// 0 to 9
+		for (i = 0; i < 10; i++)
+		{
+			m_chars[i] = (char) (i + 48);
+		}
+
+		// A to Z and a to z
+		for (i = 0; i < 26; i++)
+		{
+			m_chars[i + 10] = (char) (i +65);
+			m_chars[i + 36] = (char) (i + 97);
+		}
 	}
 
 	/**
@@ -80,12 +136,11 @@ public class RandomString implements Picker<String>, Seedable
 	 * as when the object was instantiated.
 	 */
 	@Override
-	public void reset() 
+	public void reset()
 	{
 		m_lengthPicker.reset();
-		m_charValuePicker.reset();
+		m_charIndexPicker.reset();
 	}
-
 
 	/**
 	 * Picks a random string. Typically, this method is expected to return non-null
@@ -93,45 +148,39 @@ public class RandomString implements Picker<String>, Seedable
 	 * objects will be produced. That is, once this method returns
 	 * <tt>null</tt>, it should normally return <tt>null</tt> on all subsequent
 	 * calls.
+	 *
 	 * @return The random string.
 	 */
 	@Override
-	public String pick() 
+	public String pick()
 	{
 		int len = m_lengthPicker.pick();
-		List<Integer> char_code_values = new ArrayList<Integer>();
-		int next_char_value;
+		List<Integer> char_index_list = new ArrayList<Integer>();
+		int char_index;
 		for (int i = 0; i < len; i++)
 		{
-				next_char_value = m_charValuePicker.pick();
-
-				while (!((next_char_value >= 48 && next_char_value <= 57) ||
-						(next_char_value >= 65 && next_char_value <= 90) ||
-						(next_char_value >= 97 && next_char_value <= 122)))
-				{
-					next_char_value = m_charValuePicker.pick();
-				}
-
-				char_code_values.add(next_char_value);
+			char_index = m_charIndexPicker.pick();
+			char_index_list.add(char_index);
 		}
 
-		return toString(char_code_values);
+		return toString(char_index_list);
 	}
 
 	/**
-	 * Private method used to convert a list of integers representing each ascii code of
-	 * the random string into a string.
-	 * @param char_code_values The list containing each ascii code of the string.
+	 * Private method used to convert a list of integers representing indexes in the m_chars
+	 * array into a string.
+	 *
+	 * @param char_index_list The list containing the indexes in the m_chars array who will be used
+	 *                       to create the string.
 	 * @return A string.
 	 */
-	private String toString(List<Integer> char_code_values)
+	private String toString(List<Integer> char_index_list)
 	{
-		StringBuilder str= new StringBuilder();
+		StringBuilder str = new StringBuilder();
 
-		for (Integer char_code_value : char_code_values)
+		for (Integer char_code_value : char_index_list)
 		{
-
-			str.append((char) char_code_value.intValue());
+			str.append(m_chars[char_code_value]);
 		}
 
 		return str.toString();
@@ -139,22 +188,23 @@ public class RandomString implements Picker<String>, Seedable
 
 	/**
 	 * Creates a copy of the RandomString picker.
+	 *
 	 * @param with_state If set to <tt>false</tt>, the returned copy is set to
-	 * the class' initial state (i.e. same thing as calling the picker's
-	 * constructor). If set to <tt>true</tt>, the returned copy is put into the
-	 * same internal state as the object it is copied from.
+	 *                   the class' initial state (i.e. same thing as calling the picker's
+	 *                   constructor). If set to <tt>true</tt>, the returned copy is put into the
+	 *                   same internal state as the object it is copied from.
 	 * @return The copy of the RandomString picker
 	 */
 	@Override
 	public Picker<String> duplicate(boolean with_state)
 	{
 		return new RandomString(m_lengthPicker.duplicate(with_state),
-				m_charValuePicker.duplicate(with_state));
+				m_charIndexPicker.duplicate(with_state), m_chars);
 	}
 
 	@Override
 	public void setSeed(int seed)
 	{
-		m_charValuePicker.setSeed(seed);
+		m_charIndexPicker.setSeed(seed);
 	}
 }
