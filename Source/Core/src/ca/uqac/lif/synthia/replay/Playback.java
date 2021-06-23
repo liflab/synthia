@@ -20,11 +20,9 @@ package ca.uqac.lif.synthia.replay;
 
 import java.util.List;
 
-import ca.uqac.lif.synthia.EnumerativePicker;
+import ca.uqac.lif.synthia.enumerative.EnumerativePicker;
 import ca.uqac.lif.synthia.NoMoreElementException;
 import ca.uqac.lif.synthia.Picker;
-import ca.uqac.lif.synthia.EnumerativePicker;
-import ca.uqac.lif.synthia.NoMoreElementException;
 
 //TODO check constructors whit a list as parameter for m_values
 /**
