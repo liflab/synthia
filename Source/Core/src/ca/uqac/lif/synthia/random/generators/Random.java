@@ -116,7 +116,7 @@ public class Random {
 	}
 
 	/**
-	 * Creates a new instance of the class with the exact same internal state that the original one.
+	 * Creates a new instance of the class with the exact same internal states that the original one.
 	 * @return The copy of the actual instance of the class.
 	 */
 	public Random Duplicate() {

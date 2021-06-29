@@ -199,9 +199,9 @@ public class Playback<T> implements EnumerativePicker<T>, Picker<T>
 	}
 
 	/**
-	 * Signals if the playback picker enumerates all values from m_values.
+	 * Signals if the playback picker picked all the objects from m_values.
 	 * Loop attributes must be false. If loop is true, the method will always return false.
-	 * @return true if the picker enumerates all values of m_values and false if it's not the case.
+	 * @return true if the picker picked all the objects from m_values and false if it's not the case.
 	 */
 	@Override
 	public boolean isDone()

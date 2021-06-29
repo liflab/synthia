@@ -75,7 +75,15 @@ public class RandomIntervalFloat extends RandomPicker<Float>
 	{
 		return m_random.nextFloat() * (m_max - m_min) + m_min;
 	}
-	
+
+	/**
+	 * Creates a copy of the RandomIntervalFloat picker.
+	 * @param with_state If set to <tt>false</tt>, the returned copy is set to
+	 * the class' initial state (i.e. same thing as calling the picker's
+	 * constructor). If set to <tt>true</tt>, the returned copy is put into the
+	 * same internal state as the object it is copied from.
+	 * @return The copy of the RandomIntervalFloat picker
+	 */
 	@Override
 	public RandomIntervalFloat duplicate(boolean with_state)
 	{

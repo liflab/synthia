@@ -3,17 +3,49 @@ package ca.uqac.lif.synthia.enumerative;
 import ca.uqac.lif.synthia.NoMoreElementException;
 import ca.uqac.lif.synthia.Picker;
 
+/**
+ * Picker who implements {@link EnumerativePicker}. This picker enumerates all the possibility of
+ * of combinaisons of picked value from an array of Enumerative pickers. For example, an
+ * AllPickers containing an array of 2 {@link AllBooleans} will generates one array
+ * in the following order :
+ * <ol>
+ *   <li>[<Boolean>false</Boolean>, <Boolean>false</Boolean>]</li>
+ *   <li>[<Boolean>true</Boolean>, <Boolean>false</Boolean>]</li>
+ *   <li>[<Boolean>false</Boolean>, <Boolean>true</Boolean>]</li>
+ *   <li>[<Boolean>true</Boolean>, <Boolean>true</Boolean>]</li>
+ * </ol>
+ * After that, the picker will throw a {@link NoMoreElementException} if the pick method is called
+ * one more time.
+ */
 public class AllPickers implements EnumerativePicker
 {
+	/**
+	 * The array of pickers used to generate all the possible combinations.
+	 */
 	protected EnumerativePicker[] m_enumPickers;
 
+	/**
+	 * Flag to check if it's the first pick.
+	 */
 	protected boolean m_firstPick;
 
+	/**
+	 * Flag to check if the picker finished generating objects.
+	 */
 	protected boolean m_done;
 
+	/**
+	 * An array to store the combination to return.
+	 */
 	protected Object[] m_values;
 
-
+	/**
+	 * Private constructor used to duplicate the picker.
+	 * @param enum_pickers The m_enumPickers attribute of the AllPickers instance to duplicate.
+	 * @param first_pick The m_firstPick attribute of the AllPickers instance to duplicate.
+	 * @param values The m_values attribute of the AllPickers instance to duplicate.
+	 * @param done The m_done attribute of the AllPickers instance to duplicate.
+	 */
 	private AllPickers(EnumerativePicker[] enum_pickers, boolean first_pick, Object[] values
 			, boolean done)
 	{
@@ -69,6 +101,10 @@ public class AllPickers implements EnumerativePicker
 		return m_values;
 	}
 
+	/**
+	 * Private method to generate a combination of values from the array of pickers.
+	 * This private method is to simplify the pick public method.
+	 */
 	private void internalPick()
 	{
 		if (!m_enumPickers[0].isDone())
@@ -104,6 +140,12 @@ public class AllPickers implements EnumerativePicker
 		}
 	}
 
+	/**
+	 * Private method used by the private pick method to check if at least one more object can be
+	 * generated.
+	 * @return <tt>true</tt> if the picker can still generate at least one more object and
+	 * <tt>false</tt> if it's not the case.
+	 */
 	private boolean internalIsDone()
 	{
 		int counter = 0;
@@ -117,6 +159,10 @@ public class AllPickers implements EnumerativePicker
 		return counter == m_enumPickers.length;
 	}
 
+	/**
+	 * Private method used to generate the first combination of value from the
+	 * array of EnumarativePickers.
+	 */
 	private void firstPick()
 	{
 		for (int i = 0; i < m_enumPickers.length; i++)
