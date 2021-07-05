@@ -20,11 +20,9 @@ package ca.uqac.lif.synthia.replay;
 
 import java.util.List;
 
-import ca.uqac.lif.synthia.EnumerativePicker;
+import ca.uqac.lif.synthia.enumerative.EnumerativePicker;
 import ca.uqac.lif.synthia.NoMoreElementException;
 import ca.uqac.lif.synthia.Picker;
-import ca.uqac.lif.synthia.EnumerativePicker;
-import ca.uqac.lif.synthia.NoMoreElementException;
 
 //TODO check constructors whit a list as parameter for m_values
 /**
@@ -201,9 +199,9 @@ public class Playback<T> implements EnumerativePicker<T>, Picker<T>
 	}
 
 	/**
-	 * Signals if the playback picker enumerates all values from m_values.
+	 * Signals if the playback picker picked all the objects from m_values.
 	 * Loop attributes must be false. If loop is true, the method will always return false.
-	 * @return true if the picker enumerates all values of m_values and false if it's not the case.
+	 * @return true if the picker picked all the objects from m_values and false if it's not the case.
 	 */
 	@Override
 	public boolean isDone()
