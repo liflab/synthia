@@ -2,7 +2,6 @@ package basic;
 
 import ca.uqac.lif.synthia.Picker;
 import ca.uqac.lif.synthia.random.RandomFloat;
-import ca.uqac.lif.synthia.random.RandomIntervalFloat;
 import ca.uqac.lif.synthia.random.RandomString;
 import ca.uqac.lif.synthia.sequence.TimedInterleave;
 import ca.uqac.lif.synthia.sequence.TimedInterleave.StartSettable;
@@ -14,7 +13,7 @@ public class TimedInterleaveDemo
 {
 	public static void main(String[] args)
 	{
-		Tick tick = new Tick(new RandomIntervalFloat(0, 10), new RandomIntervalFloat(0.5, 10));
+		Tick tick = new Tick(new RandomFloat(0, 10), new RandomFloat(0.5, 10));
 		SimpleTimedInterleave ti = new SimpleTimedInterleave(new RandomFloat(), 0.5, 0.4);
 		Picker<String> session = new TimedSession(tick);
 		ti.add(session, 1);

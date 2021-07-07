@@ -1,7 +1,7 @@
 package ca.uqac.lif.synthia.vector;
 
 import ca.uqac.lif.synthia.Picker;
-import ca.uqac.lif.synthia.random.RandomIntervalFloat;
+import ca.uqac.lif.synthia.random.RandomFloat;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
 
@@ -16,7 +16,7 @@ public class HyperspherePickerTest
 		int modulus = 10;
 		for (int i = 0; i < pickers.length; i++)
 		{
-			pickers[i] = new RandomIntervalFloat(min, max);
+			pickers[i] = new RandomFloat(min, max);
 		}
 		HyperspherePicker hypersphere_picker = new HyperspherePicker((float) modulus, pickers);
 		for (int i = 0; i < 10000 ; i++)
@@ -36,7 +36,7 @@ public class HyperspherePickerTest
 		int modulus = 10;
 		for (int i = 0; i < pickers.length; i++)
 		{
-			pickers[i] = new RandomIntervalFloat(min, max);
+			pickers[i] = new RandomFloat(min, max);
 		}
 		HyperspherePicker hypersphere_picker = new HyperspherePicker((float) modulus, pickers);
 		float[] random_floats = hypersphere_picker.pick();
@@ -59,7 +59,7 @@ public class HyperspherePickerTest
 		int modulus = 10;
 		for (int i = 0; i < pickers.length; i++)
 		{
-			pickers[i] = new RandomIntervalFloat(min, max);
+			pickers[i] = new RandomFloat(min, max);
 		}
 		HyperspherePicker hypersphere_picker = new HyperspherePicker((float) modulus, pickers);
 		float[] random_floats = hypersphere_picker.pick();

@@ -34,7 +34,17 @@ public class RandomInteger extends RandomPicker<Integer>
 	 * The higher bound of the interval
 	 */
 	protected int m_max;
-	
+
+	/**
+	 * Default constructor
+	 */
+	public RandomInteger()
+	{
+		super();
+		setInterval(0,1);
+	}
+
+
 	/**
 	 * Creates a new instance of the picker.
 	 * @param min The lower bound of the interval
@@ -66,11 +76,14 @@ public class RandomInteger extends RandomPicker<Integer>
 	 * @param min The lower bound of the interval
 	 * @param max The higher bound of the interval
 	 */
-	public void setInterval(int min, int max)
+	public RandomInteger setInterval(int min, int max)
 	{
 		m_min = min;
 		m_max = max;
+		return this;
 	}
+
+
 
 
 	/**

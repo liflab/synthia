@@ -21,6 +21,7 @@ package ca.uqac.lif.synthia.grammar;
 import ca.uqac.lif.bullwinkle.*;
 import ca.uqac.lif.synthia.IndexPicker;
 import ca.uqac.lif.synthia.Picker;
+import ca.uqac.lif.synthia.random.RandomInteger;
 
 import java.util.List;
 
@@ -50,7 +51,7 @@ public class GrammarSentence implements Picker<String>
 	 * A picker used to choose the cases from the grammar rules
 	 * to expand
 	 */
-	/*@ non_null @*/ protected IndexPicker m_indexPicker;
+	/*@ non_null @*/ protected RandomInteger m_indexPicker;
 	
 	/**
 	 * Creates a new instance of the picker
@@ -58,7 +59,7 @@ public class GrammarSentence implements Picker<String>
 	 * @param picker A picker used to choose the cases from the grammar rules
 	 * to expand
 	 */
-	public GrammarSentence(/*@ non_null @*/ BnfParser parser, /*@ non_null @*/ IndexPicker picker)
+	public GrammarSentence(/*@ non_null @*/ BnfParser parser, /*@ non_null @*/ RandomInteger picker)
 	{
 		super();
 		m_parser = parser;
@@ -86,7 +87,7 @@ public class GrammarSentence implements Picker<String>
 	protected String pickRecursive(BnfRule rule)
 	{
 		List<TokenString> alternatives = rule.getAlternatives();
-		int chosen_index = m_indexPicker.setRange(alternatives.size()).pick();
+		int chosen_index = m_indexPicker.setInterval(0,alternatives.size()).pick();
 		TokenString chosen_string = alternatives.get(chosen_index);
 		StringBuilder out = new StringBuilder();
 		for (Token t : chosen_string)

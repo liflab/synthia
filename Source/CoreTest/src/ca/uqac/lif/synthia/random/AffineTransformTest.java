@@ -78,7 +78,7 @@ public class AffineTransformTest
     {
         int min = 0;
         int max = 25;
-        RandomIntervalFloat random_float = new RandomIntervalFloat(min, max);
+        RandomFloat random_float = new RandomFloat(min, max);
         RandomInteger random_integer = new RandomInteger(0, 100000);
         random_float.setSeed(random_integer.pick());
         AffineTransform.AffineTransformFloat affine_transform_float = new AffineTransform
