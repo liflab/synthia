@@ -84,7 +84,7 @@ public class Playback<T> implements EnumerativePicker<T>, Picker<T>
 	 * the {@link #pick()} method will return a {@link ca.uqac.lif.synthia.NoMoreElementException} after
 	 * producing the last element of the list.
 	 * @param m_loop boolean value to enable playback loop or not
-	 * @return
+	 * @return The actual instance of the class.
 	 */
 	public Playback<T> setM_loop(boolean m_loop) {
 		this.m_loop = m_loop;
@@ -158,7 +158,7 @@ public class Playback<T> implements EnumerativePicker<T>, Picker<T>
 	@Override
 	public void reset()
 	{
-		m_index = 0;
+		m_index = m_startIndex;
 	}
 
 
