@@ -2,7 +2,6 @@ package ca.uqac.lif.synthia.vector;
 
 import ca.uqac.lif.synthia.Picker;
 import ca.uqac.lif.synthia.random.RandomFloat;
-import ca.uqac.lif.synthia.random.RandomIntervalFloat;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
 
@@ -35,7 +34,7 @@ public class PrismPickerTest
 		int max = 25;
 		for (int i = 0; i < pickers.length; i++)
 		{
-			pickers[i] = new RandomIntervalFloat(min, max);
+			pickers[i] = new RandomFloat(min, max);
 		}
 		PrismPicker prism_picker = new PrismPicker(pickers);
 		for (int i = 0; i < 10000 ; i++)
@@ -56,7 +55,7 @@ public class PrismPickerTest
 		int max = 25;
 		for (int i = 0; i < pickers.length; i++)
 		{
-			pickers[i] = new RandomIntervalFloat(min, max);
+			pickers[i] = new RandomFloat(min, max);
 		}
 		PrismPicker prism_picker = new PrismPicker(pickers);
 		float[] random_floats = prism_picker.pick();
@@ -81,7 +80,7 @@ public class PrismPickerTest
 		int max = 25;
 		for (int i = 0; i < pickers.length; i++)
 		{
-			pickers[i] = new RandomIntervalFloat(min, max);
+			pickers[i] = new RandomFloat(min, max);
 		}
 		PrismPicker prism_picker = new PrismPicker(pickers);
 		float[] random_floats = prism_picker.pick();

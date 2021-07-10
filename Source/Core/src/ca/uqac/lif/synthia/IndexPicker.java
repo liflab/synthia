@@ -29,7 +29,7 @@ public interface IndexPicker extends Picker<Integer>
 	 * @param size The maximum value that can be picked
 	 * @return This picker
 	 */
-	public IndexPicker setRange(int size);
+	public IndexPicker setInterval(int size);
 
 	/**
 	 * Creates a copy of the picker.

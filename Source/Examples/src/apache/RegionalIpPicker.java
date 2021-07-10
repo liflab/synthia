@@ -81,7 +81,7 @@ public class RegionalIpPicker implements Picker<String>
 		@Override
 		/*@ non_null @*/ public String pick()
 		{
-			m_picker.setRange(256);
+			m_picker.setInterval(256);
 			return "10." + m_picker.pick() + "." + m_picker.pick() + "." + m_picker.pick();
 		}
 
@@ -102,7 +102,7 @@ public class RegionalIpPicker implements Picker<String>
 		@Override
 		/*@ non_null @*/ public String pick()
 		{
-			m_picker.setRange(256);
+			m_picker.setInterval(256);
 			return "11." + m_picker.pick() + "." + m_picker.pick() + "." + m_picker.pick();
 		}
 		
@@ -123,9 +123,9 @@ public class RegionalIpPicker implements Picker<String>
 		@Override
 		/*@ non_null @*/ public String pick()
 		{
-			m_picker.setRange(40);
+			m_picker.setInterval(40);
 			String prefix = (m_picker.pick() + 20) + ".";
-			m_picker.setRange(256);
+			m_picker.setInterval(256);
 			return prefix + m_picker.pick() + "." + m_picker.pick() + "." + m_picker.pick();
 		}
 		

@@ -3,7 +3,7 @@ package grammar;
 import ca.uqac.lif.bullwinkle.BnfParser;
 import ca.uqac.lif.bullwinkle.BnfParser.InvalidGrammarException;
 import ca.uqac.lif.synthia.grammar.GrammarSentence;
-import ca.uqac.lif.synthia.random.RandomIndex;
+import ca.uqac.lif.synthia.random.RandomInteger;
 
 public class GrammarDemo {
 
@@ -11,7 +11,7 @@ public class GrammarDemo {
 	{
 		BnfParser parser = new BnfParser(GrammarDemo.class.getResourceAsStream("grammar.bnf"));
 		parser.setStartRule("<S>");
-		GrammarSentence gp = new GrammarSentence(parser, new RandomIndex());
+		GrammarSentence gp = new GrammarSentence(parser, new RandomInteger());
 		for (int i = 0; i < 10; i++)
 		{
 			System.out.println(gp.pick());

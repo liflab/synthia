@@ -1,5 +1,6 @@
 package ca.uqac.lif.synthia.enumerative;
 
+import ca.uqac.lif.synthia.NoMoreElementException;
 import ca.uqac.lif.synthia.Picker;
 
 /**
@@ -16,6 +17,8 @@ public class AllBooleans implements EnumerativePicker<Boolean>
 	 */
 	protected AllIntegers m_picker;
 
+
+
 	/**
 	 * Private constructor used for the duplication of the picker.
 	 * @param picker The internal picker used by the Allbooleans picker to generate objects.
@@ -23,14 +26,30 @@ public class AllBooleans implements EnumerativePicker<Boolean>
 	private AllBooleans(AllIntegers picker)
 	{
 		m_picker = picker;
+
 	}
 
+	/**
+	 * Default constructor using the <tt>false</tt> default value of the {@link AllIntegers} scramble
+	 * flag.
+	 */
 	public AllBooleans()
 	{
 		m_picker = new AllIntegers(0, 1);
 	}
 
-	@Override public void reset()
+	/**
+	 * Constructor taking a parameter for the scramble flag.
+	 * @param scramble <tt>true</tt> to generate scramble values or <tt>false</tt> to generate
+	 *                 values in order.
+	 */
+	public AllBooleans(boolean scramble)
+	{
+		m_picker = new AllIntegers(0, 1, scramble);
+	}
+
+	@Override
+	public void reset()
 	{
 		m_picker.reset();
 	}
@@ -38,6 +57,7 @@ public class AllBooleans implements EnumerativePicker<Boolean>
 	@Override
 	public Boolean pick()
 	{
+
 		return m_picker.pick() == 1;
 	}
 

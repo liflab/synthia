@@ -1,7 +1,7 @@
 package ca.uqac.lif.synthia.grammar;
 
 import ca.uqac.lif.bullwinkle.BnfParser;
-import ca.uqac.lif.synthia.random.RandomIndex;
+import ca.uqac.lif.synthia.random.RandomInteger;
 import org.junit.Test;
 import org.junit.jupiter.api.Assertions;
 
@@ -13,7 +13,7 @@ public class GrammarSentenceTest
 	{
 		BnfParser b_parser = new BnfParser(GrammarSentenceTest.class.getResourceAsStream("grammar.bnf"));
 		b_parser.setStartRule("<S>");
-		GrammarSentence grammar_sentence = new GrammarSentence(b_parser, new RandomIndex());
+		GrammarSentence grammar_sentence = new GrammarSentence(b_parser, new RandomInteger());
 		for (int i = 0; i < 10; i++)
 		{
 			grammar_sentence.pick();
@@ -27,7 +27,7 @@ public class GrammarSentenceTest
 	{
 		BnfParser b_parser = new BnfParser(GrammarSentenceTest.class.getResourceAsStream("grammar.bnf"));
 		b_parser.setStartRule("<S>");
-		GrammarSentence grammar_sentence = new GrammarSentence(b_parser, new RandomIndex());
+		GrammarSentence grammar_sentence = new GrammarSentence(b_parser, new RandomInteger());
 		for (int i = 0; i < 10; i++)
 		{
 			grammar_sentence.pick();

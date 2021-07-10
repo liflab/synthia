@@ -19,7 +19,7 @@
 <project
   name="AntRun"
   default="dist"
-  basedir="."
+  basedir="../.."
   xmlns:jacoco="antlib:org.jacoco.ant">
   
   <!-- The build script's version number. Do not edit! -->
@@ -45,7 +45,7 @@
   <property name="build.libdir" value="lib"/>
 
   <!-- The folder with the project's source files -->
-  <property name="build.srcdir" value="Source/Core/src"/>
+  <property name="build.srcdir" value="src"/>
   
   <!-- The folder where the compiled files should go -->
   <property name="build.bindir" value="Source/Core/bin"/>
@@ -54,7 +54,7 @@
   <property name="build.depdir" value="dep"/>
   
   <!-- The folder with the project's test source files -->
-  <property name="build.test.srcdir" value="Source/CoreTest/src"/>
+  <property name="build.test.srcdir" value="../CoreTest/src"/>
   
   <!-- The folder where the compiled test files should go -->
   <property name="build.test.bindir" value="Source/CoreTest/bin"/>
@@ -170,7 +170,7 @@
   -->
   <target name="zip" description="Zips the compiled jar">
     <delete file="${build.jar.basename}-${build.version}.zip"/>
-    <zip basedir="." destfile="${build.jar.basename}-${build.version}.zip" includes="${build.jar.filename},Readme.md"/>
+    <zip basedir="../.." destfile="${build.jar.basename}-${build.version}.zip" includes="${build.jar.filename},Readme.md"/>
   </target>
   
   <!-- Target: dist
@@ -195,7 +195,7 @@
       <classpath refid="build.classpath"/>
     </javac>
     <copy todir="${build.bindir}" includeemptydirs="false">
-      <fileset dir="${build.srcdir}">
+      <fileset dir="src">
         <exclude name="**/*.java"/>
         <exclude name="**/doc-files/**"/>
       </fileset>
@@ -216,8 +216,8 @@
       <classpath refid="build.classpath"/>
     </javac>
     <copy todir="${build.test.bindir}" includeemptydirs="false">
-      <fileset dir="${build.test.srcdir}" excludes="**/*.java"/>
-      <fileset dir="${build.test.srcdir}" excludes="**/doc-files/*.*"/>
+      <fileset dir="../CoreTest/src" excludes="**/*.java"/>
+      <fileset dir="../CoreTest/src" excludes="**/doc-files/*.*"/>
     </copy>
   </target>
   
@@ -273,7 +273,7 @@
 	  <zipgroupfileset dir="${build.depdir}">
 	    <include name="**/*.jar" if="${build.jar.withdeps}"/>
 	  </zipgroupfileset>
-	  <fileset dir="${build.srcdir}">
+	  <fileset dir="src">
 	     <include name="**/*" if="${build.jar.withsrc}"/>
 	  </fileset>
 	  <fileset dir="${build.docdir}">
@@ -347,7 +347,7 @@
   -->
   <target name="clean" description="Clean the project">
     <delete>
-      <fileset dir="." includes="**/*.xml~"/>
+      <fileset dir="../.." includes="**/*.xml~"/>
     </delete>
     <delete dir="${build.libdir}"/>
     <delete dir="${build.bindir}"/>
