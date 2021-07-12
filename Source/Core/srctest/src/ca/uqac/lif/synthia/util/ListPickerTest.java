@@ -8,10 +8,9 @@ import ca.uqac.lif.synthia.random.RandomString;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
 
-import java.util.ArrayList;
 import java.util.List;
 
-public class SetPickerTest
+public class ListPickerTest
 {
 	@ Test
 	public void output(){
@@ -21,7 +20,7 @@ public class SetPickerTest
 		RandomString random_string = new RandomString(10);
 		Picker[] random_pickers= new Picker[] {random_integer, random_float ,random_boolean,
 				random_string};
-		SetPicker set_picker = new SetPicker(random_pickers);
+		ListPicker set_picker = new ListPicker(random_pickers);
 		List<Object> set_picker_res = set_picker.pick();
 		String[] expected_types = new String[] {"Integer", "Float", "Boolean", "String"};
 		for (int i = 0; i < set_picker_res.size(); i++)
@@ -38,12 +37,12 @@ public class SetPickerTest
 		RandomBoolean random_boolean = new RandomBoolean();
 		RandomString random_string = new RandomString(10);
 		Picker[] random_pickers= new Picker[] {random_integer, random_float, random_string};
-		SetPicker set_picker = new SetPicker(random_pickers);
+		ListPicker set_picker = new ListPicker(random_pickers);
 		for (int i = 0; i < random_pickers.length; i++)
 		{
 			set_picker.pick();
 		}
-		SetPicker set_picker_copy = (SetPicker) set_picker.duplicate(true);
+		ListPicker set_picker_copy = (ListPicker) set_picker.duplicate(true);
 		List<Object> set_picker_res = set_picker.pick();
 		List<Object> set_picker_copy_res = set_picker_copy.pick();
 		for (int i = 0; i < set_picker_res.size(); i++)
@@ -59,12 +58,12 @@ public class SetPickerTest
 		RandomFloat random_float = new RandomFloat();
 		RandomString random_string = new RandomString(10);
 		Picker[] random_pickers= new Picker[] {random_integer, random_float, random_string};
-		SetPicker set_picker = new SetPicker(random_pickers);
+		ListPicker set_picker = new ListPicker(random_pickers);
 		for (int i = 0; i < random_pickers.length; i++)
 		{
 			set_picker.pick();
 		}
-		SetPicker set_picker_copy = (SetPicker) set_picker.duplicate(false);
+		ListPicker set_picker_copy = (ListPicker) set_picker.duplicate(false);
 		List<Object> set_picker_res = set_picker.pick();
 		List<Object> set_picker_copy_res = set_picker_copy.pick();
 		for (int i = 0; i < set_picker_res.size(); i++)
