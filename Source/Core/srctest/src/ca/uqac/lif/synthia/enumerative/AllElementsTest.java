@@ -149,7 +149,7 @@ public class AllElementsTest
 			all_elements.pick();
 		}
 
-		all_elements.loop(false);
+		all_elements.setLoop(false);
 
 		noMoreExceptionThrow(all_elements);
 	}

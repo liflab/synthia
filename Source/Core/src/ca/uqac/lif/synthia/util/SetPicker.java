@@ -18,18 +18,18 @@
  */
 package ca.uqac.lif.synthia.util;
 
-import java.util.ArrayList;
-import java.util.List;
+import java.util.HashSet;
+import java.util.Set;
 
 import ca.uqac.lif.synthia.Picker;
 
 /**
- * Picker that merges the result of other pickers into an array.
+ * Picker that merges the result of other pickers into a set.
  */
-public class SetPicker extends CompositePicker<List<Object>>
+public class SetPicker extends CompositePicker<Set<Object>>
 {
 	/**
-	 * Creates a new list picker 
+	 * Creates a new set picker 
 	 * @param pickers The pickers used to generate the values
 	 */
 	public SetPicker(Picker<?> ... pickers)
@@ -37,20 +37,27 @@ public class SetPicker extends CompositePicker<List<Object>>
 		super(pickers);
 	}
 
+	/**
+	 * Returns a new set picker
+	 * @param pickers The pickers used to generate the values
+	 * @return The new set picker
+	 */
 	@Override
 	public SetPicker newPicker(Picker<?> ... pickers)
 	{
 		return new SetPicker(pickers);
 	}
-	
+
+
+
 	@Override
-	public List<Object> getOutput(Object ... values)
+	public Set<Object> getOutput(Object ... values)
 	{
-		List<Object> list = new ArrayList<Object>(values.length);
+		Set<Object> set = new HashSet<Object>(values.length);
 		for (Object v : values)
 		{
-			list.add(v);
+			set.add(v);
 		}
-		return list;
+		return set;
 	}
 }

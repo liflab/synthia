@@ -47,7 +47,7 @@ public class ArrayPicker extends CompositePicker<Object[]>
 
 
 	/**
-	 * Return a list of values
+	 * Return an array of values
 	 * @param values The values to return
 	 * @return The values
 	 */
