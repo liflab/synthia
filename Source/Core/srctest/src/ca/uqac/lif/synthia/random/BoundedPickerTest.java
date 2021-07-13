@@ -1,7 +1,6 @@
 package ca.uqac.lif.synthia.random;
 
-import ca.uqac.lif.synthia.NoMoreElementException;
-import ca.uqac.lif.synthia.replay.Playback;
+import ca.uqac.lif.synthia.exception.NoMoreElementException;
 import org.junit.Test;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.function.Executable;

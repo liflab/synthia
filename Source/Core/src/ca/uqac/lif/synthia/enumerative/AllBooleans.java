@@ -1,12 +1,12 @@
 package ca.uqac.lif.synthia.enumerative;
 
-import ca.uqac.lif.synthia.NoMoreElementException;
+import ca.uqac.lif.synthia.exception.NoMoreElementException;
 import ca.uqac.lif.synthia.Picker;
 
 /**
  * Picker who implements EnumerativePicker. This picker enumerates the boolean value
  * (<Boolean>false</Boolean>, <Boolean>true</Boolean>) and throws a
- * {@link ca.uqac.lif.synthia.NoMoreElementException} if the picker picks another value after
+ * {@link NoMoreElementException} if the picker picks another value after
  * the picker has finished to enumerates the boolean values.
  */
 public class AllBooleans implements EnumerativePicker<Boolean>

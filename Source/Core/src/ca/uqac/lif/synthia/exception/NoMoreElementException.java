@@ -1,4 +1,4 @@
-package ca.uqac.lif.synthia;
+package ca.uqac.lif.synthia.exception;
 
 /**
  * An exception to throw when a picker can't pick an other element.

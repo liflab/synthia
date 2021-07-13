@@ -21,7 +21,7 @@ package ca.uqac.lif.synthia.replay;
 import java.util.List;
 
 import ca.uqac.lif.synthia.enumerative.EnumerativePicker;
-import ca.uqac.lif.synthia.NoMoreElementException;
+import ca.uqac.lif.synthia.exception.NoMoreElementException;
 import ca.uqac.lif.synthia.Picker;
 
 //TODO check constructors whit a list as parameter for m_values
@@ -175,7 +175,7 @@ public class Playback<T> implements EnumerativePicker<T>, Picker<T>
 
 	/**
 	 * Set the m_loop attribute of the playback picker. If the attribute is set to false, the next call to
-	 * the {@link #pick()} method will return a {@link ca.uqac.lif.synthia.NoMoreElementException} after
+	 * the {@link #pick()} method will return a {@link NoMoreElementException} after
 	 * producing the last element of the list.
 	 * @param b boolean value to enable playback loop or not
 	 * @return The actual instance of the class.

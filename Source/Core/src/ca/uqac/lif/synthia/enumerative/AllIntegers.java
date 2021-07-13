@@ -1,6 +1,6 @@
 package ca.uqac.lif.synthia.enumerative;
 
-import ca.uqac.lif.synthia.NoMoreElementException;
+import ca.uqac.lif.synthia.exception.NoMoreElementException;
 import ca.uqac.lif.synthia.Picker;
 import ca.uqac.lif.synthia.Seedable;
 import ca.uqac.lif.synthia.random.RandomInteger;
@@ -10,7 +10,7 @@ import java.util.List;
 
 /**
  * Picker who implements EnumerativePicker. This picker enumerates the integer values
- * from x to y and throws a {@link ca.uqac.lif.synthia.NoMoreElementException} if the picker picks
+ * from x to y and throws a {@link NoMoreElementException} if the picker picks
  * another value after the picker has finished to enumerates the values.
  */
 public class AllIntegers implements EnumerativePicker<Integer>, Seedable

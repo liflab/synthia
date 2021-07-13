@@ -18,9 +18,8 @@
  */
 package ca.uqac.lif.synthia.random;
 
-import ca.uqac.lif.synthia.NoMoreElementException;
+import ca.uqac.lif.synthia.exception.NoMoreElementException;
 import ca.uqac.lif.synthia.Picker;
-import ca.uqac.lif.synthia.util.Constant;
 import ca.uqac.lif.synthia.util.Tick;
 
 /**
