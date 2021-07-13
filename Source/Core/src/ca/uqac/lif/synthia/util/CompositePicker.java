@@ -42,7 +42,16 @@ public abstract class CompositePicker<T> implements Picker<T>
 		m_pickers = pickers;
 	}
 
-
+	/**
+	 * Protected method to duplicate {@link #m_pickers}. This method allows to reuse code in the
+	 * duplicate method of other classes who extend this one.
+	 *
+	 * @param with_state If set to <tt>false</tt>, the returned copy is set to
+	 * the class' initial state (i.e. same thing as calling the picker's
+	 * constructor). If set to <tt>true</tt>, the returned copy is put into the
+	 * same internal state as the object it is copied from.
+	 * @return The copy of the {@link #m_pickers}.
+	 */
 	protected Picker<?>[] duplicateM_pickers(boolean with_state)
 	{
 		Picker<?>[] duplicates = new Picker<?>[m_pickers.length];
@@ -57,6 +66,7 @@ public abstract class CompositePicker<T> implements Picker<T>
 
 	/**
 	 * Creates a copy of the composite picker.
+	 *
 	 * @param with_state If set to <tt>false</tt>, the returned copy is set to
 	 * the class' initial state (i.e. same thing as calling the picker's
 	 * constructor). If set to <tt>true</tt>, the returned copy is put into the

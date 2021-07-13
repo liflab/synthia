@@ -41,25 +41,53 @@ public class ListPicker extends CompositePicker<List<Object>>
 		m_sizePicker = new Constant<Integer>(pickers.length);
 	}
 
+	/**
+	 * Constructor who takes a {@link ca.uqac.lif.synthia.Picker<Integer>} to determine the size of
+	 * the list returned by the {@link #pick()} method.
+	 *
+	 * @param size_picker A picker who picks the size of the list returned by
+	 *                    the {@link #pick()} method.
+	 * @param pickers A list of {@link ca.uqac.lif.synthia.Picker} used to produce lists of values.
+	 */
 	public ListPicker(Picker<Integer> size_picker, Picker<?>... pickers)
 	{
 		super(pickers);
 		m_sizePicker = size_picker;
 	}
 
-
+	/**
+	 * Returns a new list picker. This version will return an instance who returns lists of constant
+	 * size with {@link #pick()} method.
+	 *
+	 * @param pickers The pickers used to generate the values
+	 * @return A new instance of {@link ListPicker}.
+	 */
 	@Override
 	public ListPicker newPicker(Picker<?> ... pickers)
 	{
 		return new ListPicker(pickers);
 	}
 
-
+	/**
+	 * Returns a new list picker. This version will return an instance who returns lists of variable
+	 * size with {@link #pick()} method. The size of the lists returned by the {@link #pick()} method
+	 * is determined by a {@link ca.uqac.lif.synthia.Picker<Integer>}.
+	 *
+	 * @param size_picker A picker who picks the size of the list returned by
+	 *                    the {@link #pick()} method.
+	 * @param pickers A list of {@link ca.uqac.lif.synthia.Picker} used to produce lists of values.
+	 * @return A new instance of {@link ListPicker}.
+	 */
 	public ListPicker newPicker(Picker<Integer> size_picker, Picker<?>... pickers)
 	{
 		return new ListPicker(size_picker, pickers);
 	}
-	
+
+	/**
+	 * Return a list of values
+	 * @param values The values to return
+	 * @return The values
+	 */
 	@Override
 	public List<Object> getOutput(Object ... values)
 	{
