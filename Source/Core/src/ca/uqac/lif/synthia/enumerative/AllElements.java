@@ -35,7 +35,7 @@ public class AllElements<T> extends Playback implements EnumerativePicker, Seeda
 		m_scramble = scramble;
 		m_indexes = new ArrayList<Integer>();
 		m_indexPicker = new RandomInteger(0, 1);
-		loop(loop);
+		setLoop(loop);
 
 		if(scramble)
 		{

@@ -1,7 +1,6 @@
 package ca.uqac.lif.synthia.replay;
 
 import ca.uqac.lif.synthia.NoMoreElementException;
-import ca.uqac.lif.synthia.replay.Playback;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.function.Executable;
@@ -32,7 +31,7 @@ public class PlaybackTest
 
 		Integer[] int_array = new Integer[] { 1, 2, 1 };
 		Playback int_pb = new Playback<Integer>(int_array);
-		int_pb.loop(false);
+		int_pb.setLoop(false);
 		for (int i = 0; i < int_array.length; i++)
 		{
 			int_pb.pick();
@@ -52,7 +51,7 @@ public class PlaybackTest
 	{
 		Integer[] intarray = new Integer[] { 1, 2, 1 };
 		Playback intpb = new Playback<Integer>(intarray);
-		intpb.loop(false);
+		intpb.setLoop(false);
 		for (int i = 0; i < intarray.length; i++)
 		{
 			intpb.pick();
@@ -71,7 +70,7 @@ public class PlaybackTest
   public void isDone(){
       Integer[] int_array = new Integer[] { 1, 2, 1 };
       Playback int_pb = new Playback<Integer>(int_array);
-      int_pb.loop(false);
+      int_pb.setLoop(false);
       for (int i = 0; i < int_array.length; i++)
       {
       		Assertions.assertEquals(false,int_pb.isDone());

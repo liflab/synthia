@@ -28,19 +28,36 @@ import ca.uqac.lif.synthia.Picker;
  */
 public class ListPicker extends CompositePicker<List<Object>>
 {
+	protected Picker<Integer> m_sizePicker;
+
+
 	/**
-	 * Creates a new list picker 
-	 * @param pickers The pickers used to generate the values
+	 * Default constructor using a constant list size.
+	 * @param pickers The array of pickers used to generate the values
 	 */
 	public ListPicker(Picker<?> ... pickers)
 	{
 		super(pickers);
+		m_sizePicker = new Constant<Integer>(pickers.length);
 	}
+
+	public ListPicker(Picker<Integer> size_picker, Picker<?>... pickers)
+	{
+		super(pickers);
+		m_sizePicker = size_picker;
+	}
+
 
 	@Override
 	public ListPicker newPicker(Picker<?> ... pickers)
 	{
 		return new ListPicker(pickers);
+	}
+
+
+	public ListPicker newPicker(Picker<Integer> size_picker, Picker<?>... pickers)
+	{
+		return new ListPicker(size_picker, pickers);
 	}
 	
 	@Override
@@ -52,5 +69,40 @@ public class ListPicker extends CompositePicker<List<Object>>
 			list.add(v);
 		}
 		return list;
+	}
+
+	@Override
+	public List<Object> pick ()
+	{
+		List<Object> picked_elements = new ArrayList<Object>();
+		int size = m_sizePicker.pick();
+		int index =0;
+
+		for (int i = 0; i < size; i++)
+		{
+			picked_elements.add(m_pickers[index].pick());
+			index++;
+
+			// reset index if size >= m_pickers.length
+			if (index == m_pickers.length)
+			{
+				index = 0;
+			}
+		}
+
+		return picked_elements;
+	}
+
+	@Override
+	public void reset()
+	{
+		super.reset(); //reset m_pickers
+		m_sizePicker.reset();
+	}
+
+	@Override
+	public ListPicker duplicate(boolean with_state)
+	{
+		return newPicker(m_sizePicker.duplicate(with_state), super.duplicateM_pickers(with_state));
 	}
 }

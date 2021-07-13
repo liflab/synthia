@@ -43,6 +43,18 @@ public abstract class CompositePicker<T> implements Picker<T>
 	}
 
 
+	protected Picker<?>[] duplicateM_pickers(boolean with_state)
+	{
+		Picker<?>[] duplicates = new Picker<?>[m_pickers.length];
+		for (int i = 0; i < m_pickers.length; i++)
+		{
+			duplicates[i] = m_pickers[i].duplicate(with_state);
+		}
+
+		return duplicates;
+	}
+
+
 	/**
 	 * Creates a copy of the composite picker.
 	 * @param with_state If set to <tt>false</tt>, the returned copy is set to
@@ -54,12 +66,7 @@ public abstract class CompositePicker<T> implements Picker<T>
 	@Override
 	public Picker<T> duplicate(boolean with_state)
 	{
-		Picker<?>[] duplicates = new Picker<?>[m_pickers.length];
-		for (int i = 0; i < m_pickers.length; i++)
-		{
-			duplicates[i] = m_pickers[i].duplicate(with_state);
-		}
-		return newPicker(duplicates);
+		return newPicker(duplicateM_pickers(with_state));
 	}
 
 

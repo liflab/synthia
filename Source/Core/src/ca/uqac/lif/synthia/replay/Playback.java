@@ -80,18 +80,6 @@ public class Playback<T> implements EnumerativePicker<T>, Picker<T>
 	}
 
 	/**
-	 * Set the m_loop attribute of the playback picker. If the attribute is set to false, the next call to
-	 * the {@link #pick()} method will return a {@link ca.uqac.lif.synthia.NoMoreElementException} after
-	 * producing the last element of the list.
-	 * @param m_loop boolean value to enable playback loop or not
-	 * @return The actual instance of the class.
-	 */
-	public Playback<T> setM_loop(boolean m_loop) {
-		this.m_loop = m_loop;
-		return this;
-	}
-
-	/**
 	 * Creates a new Playback picker
 	 * @param values The values to play back
 	 */
@@ -179,20 +167,20 @@ public class Playback<T> implements EnumerativePicker<T>, Picker<T>
 			lp.m_index = m_index;
 		}
 		if (!this.m_loop){
-			lp.setM_loop(false);
+			lp.setLoop(false);
 		}
 		return lp;
 	}
 
 
 	/**
-	 * Sets whether to loop through the list of values or play them back
-	 * only once.
-	 * @param b Set to <tt>true</tt> to loop through values, <tt>false</tt>
-	 * otherwise
-	 * @return This object
+	 * Set the m_loop attribute of the playback picker. If the attribute is set to false, the next call to
+	 * the {@link #pick()} method will return a {@link ca.uqac.lif.synthia.NoMoreElementException} after
+	 * producing the last element of the list.
+	 * @param b boolean value to enable playback loop or not
+	 * @return The actual instance of the class.
 	 */
-	public Playback<T> loop(boolean b)
+	public Playback<T> setLoop(boolean b)
 	{
 		m_loop = b;
 		return this;
