@@ -173,7 +173,7 @@ public class AllIntegers implements EnumerativePicker<Integer>, Seedable
 	}
 
 	@Override
-	public Picker<Integer> duplicate(boolean with_state)
+	public AllIntegers duplicate(boolean with_state)
 	{
 		AllIntegers copy = new AllIntegers(m_min, m_max, m_actualValue, m_scramble
 				, new ArrayList<Integer> (m_valuesToScramble), m_indexGenerator.duplicate(with_state));

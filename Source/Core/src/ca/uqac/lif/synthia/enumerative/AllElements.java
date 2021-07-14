@@ -137,7 +137,7 @@ public class AllElements<T> extends Playback implements EnumerativePicker, Seeda
 	}
 
 	@Override
-	public Playback<T> duplicate(boolean with_state)
+	public AllElements duplicate(boolean with_state)
 	{
 
 		AllElements copy = new AllElements(m_values, m_scramble, m_indexPicker.duplicate(with_state)
