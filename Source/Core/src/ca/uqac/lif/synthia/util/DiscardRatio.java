@@ -8,13 +8,28 @@ import ca.uqac.lif.synthia.exception.GiveUpException;
  */
 public class DiscardRatio implements Picker<Float>
 {
+	/**
+	 * Max rejected ratio of generated object autorized.
+	 */
 	protected final float m_maxRejectedRatio;
 
+	/**
+	 * Generated object counter.
+	 */
 	protected int m_generatedCounter;
 
+	/**
+	 * Discarted generated object counter.
+	 */
 	protected int m_discartedCounter;
 
-
+	/**
+	 * Private constructor used to duplicate de picker.
+	 *
+	 * @param ratio Maximal rejected ratio.
+	 * @param generated_counter Generated object counter.
+	 * @param discarted_counter Discarted generated object counter.
+	 */
 	private DiscardRatio(float ratio, int generated_counter, int discarted_counter)
 	{
 		m_maxRejectedRatio = ratio;
@@ -29,11 +44,17 @@ public class DiscardRatio implements Picker<Float>
 		m_discartedCounter = 0;
 	}
 
+	/**
+	 * Count the generated object as accepted.
+	 */
 	public void countAsAccepted()
 	{
 		m_generatedCounter++;
 	}
 
+	/**
+	 * Count the generated object as discarted.
+	 */
 	public void countAsDiscarted()
 	{
 		m_generatedCounter++;
@@ -52,16 +73,12 @@ public class DiscardRatio implements Picker<Float>
 	{
 		float ratio = (float) m_discartedCounter / (float) m_generatedCounter;
 
-		if(checkRatio(ratio))
+		if(ratio > m_maxRejectedRatio)
 		{
 			throw new GiveUpException();
 		}
-		return ratio;
-	}
 
-	private boolean checkRatio(float ratio)
-	{
-		return ratio > m_maxRejectedRatio;
+		return ratio;
 	}
 
 	@Override
