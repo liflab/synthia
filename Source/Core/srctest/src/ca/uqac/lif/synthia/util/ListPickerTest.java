@@ -63,7 +63,7 @@ public class ListPickerTest
 		{
 			list_picker.pick();
 		}
-		ListPicker list_picker_copy = list_picker.duplicate(false);
+		ListPicker list_picker_copy = (ListPicker) list_picker.duplicate(false);
 		List<Object> list_picker_res = list_picker.pick();
 		List<Object> list_picker_copy_res = list_picker_copy.pick();
 		for (int i = 0; i < list_picker_res.size(); i++)

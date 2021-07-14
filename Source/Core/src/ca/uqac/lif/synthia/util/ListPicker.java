@@ -129,7 +129,7 @@ public class ListPicker extends CompositePicker<List<Object>>
 	}
 
 	@Override
-	public ListPicker duplicate(boolean with_state)
+	public Picker duplicate(boolean with_state)
 	{
 		return newPicker(m_sizePicker.duplicate(with_state), super.duplicateM_pickers(with_state));
 	}
