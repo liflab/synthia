@@ -1,0 +1,122 @@
+package ca.uqac.lif.synthia.relative;
+
+import ca.uqac.lif.synthia.random.RandomInteger;
+import ca.uqac.lif.synthia.random.RandomString;
+import org.junit.jupiter.api.Assertions;
+import org.junit.jupiter.api.Test;
+
+public class SmallerStringTest
+{
+
+	@Test
+	public void smallerString()
+	{
+		String bigger_string = "";
+		String smaller_string = "";
+		for (int i = 0; i < 10; i++)
+		{
+			SmallerString1 s_string = new SmallerString1();
+			RandomInteger test_strings_length = new RandomInteger(1, 100);
+			RandomString test_strings = new RandomString(test_strings_length);
+
+			for (int j = 0; j < 10000; j++)
+			{
+				bigger_string = test_strings.pick();
+				smaller_string = s_string.pick(bigger_string);
+				Assertions.assertNotEquals(bigger_string, smaller_string);
+				Assertions.assertTrue((smaller_string.length() < bigger_string.length()));
+			}
+		}
+	}
+
+	@Test
+	public void duplicateWithState()
+	{
+		for (int i = 0; i < 10; i++)
+		{
+			SmallerString1 s_string = new SmallerString1();
+			RandomInteger test_strings_length = new RandomInteger(1, 100);
+			RandomString test_strings = new RandomString(test_strings_length);
+			RandomString test_strings_copy = (RandomString) test_strings.duplicate(true);
+			SmallerString1 s_string_copy = (SmallerString1) s_string.duplicate(true);
+
+			for (int j = 0; j < 1; j++)
+			{
+				String bs1 = test_strings.pick();
+				String bs2 = test_strings_copy.pick();
+				String ss1 = s_string.pick(bs1);
+				String ss2 = s_string_copy.pick(bs2);
+				Assertions.assertEquals(ss1, ss2);
+			}
+		}
+	}
+
+	//may fail
+	@Test
+	public void duplicateWithoutState()
+	{
+		for (int i = 0; i < 10; i++)
+		{
+			SmallerString1 s_string = new SmallerString1();
+			RandomInteger test_strings_length = new RandomInteger(1, 100);
+			RandomString test_strings = new RandomString(test_strings_length);
+			RandomString test_strings_copy = (RandomString) test_strings.duplicate(false);
+			SmallerString1 s_string_copy = (SmallerString1) s_string.duplicate(false);
+			String bs1 = "";
+			String bs2 = "";
+			String ss1 = "";
+			String ss2 = "";
+			for (int j = 0; j < 1000; j++)
+			{
+				bs1 = test_strings.pick();
+				ss1 = s_string.pick(bs1);
+				bs1 = test_strings.pick();
+				ss1 = s_string.pick(bs1);
+				bs1 = test_strings.pick();
+				ss1 = s_string.pick(bs1);
+				bs2 = test_strings_copy.pick();
+				ss2 = s_string_copy.pick(bs2);
+				if(!((ss1.isEmpty()) && (ss2.isEmpty())))
+				{
+					Assertions.assertNotEquals(ss1, ss2);
+				}
+			}
+			s_string.reset();
+			s_string_copy.reset();
+			test_strings.reset();
+			test_strings_copy.reset();
+			for (int j = 0; j < 1000; j++)
+			{
+				Assertions.assertEquals(s_string.pick(test_strings.pick())
+						, s_string_copy.pick(test_strings_copy.pick()));
+			}
+		}
+	}
+
+	@Test
+	public void charArray()
+	{
+		RandomString random_string = new RandomString(10);
+		SmallerString1 smaller_string = new SmallerString1(new char[] { 'a', 'b' });
+		String big_s;
+		String small_s;
+
+		big_s = random_string.pick();
+		small_s = smaller_string.pick(big_s);
+
+		Assertions.assertTrue(small_s.length() < big_s.length());
+
+		int true_counter = 0;
+
+		for (int i = 0; i < small_s.length(); i++)
+		{
+			if((small_s.charAt(i) == 'a') || (small_s.charAt(i) == 'b'))
+			{
+				true_counter++;
+			}
+		}
+
+		Assertions.assertEquals(small_s.length(), true_counter);
+	}
+
+}

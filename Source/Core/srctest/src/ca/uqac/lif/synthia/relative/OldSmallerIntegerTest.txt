@@ -1,0 +1,183 @@
+package ca.uqac.lif.synthia.relative;
+
+import ca.uqac.lif.synthia.random.RandomInteger;
+import ca.uqac.lif.synthia.random.RandomString;
+import org.junit.jupiter.api.Assertions;
+import org.junit.jupiter.api.Test;
+
+public class SmallerIntegerTest
+{
+	@Test
+	public void smallerInt()
+	{
+		Integer b_int;
+		Integer s_int;
+		for (int i = 0; i < 100; i++)
+		{
+			RandomInteger random_int = new RandomInteger(2, Integer.MAX_VALUE);
+			SmallerInteger1 smaller_int = new SmallerInteger1(false);
+
+			b_int = random_int.pick();
+
+
+			for (int j = 0; j < 10000; j++)
+			{
+				s_int = smaller_int.pick(b_int);
+				Assertions.assertTrue(s_int <= b_int);
+			}
+		}
+	}
+
+	@Test
+	public void smallerInt2()
+	{
+
+		Integer b_int;
+		Integer s_int;
+
+		for (int i = 0; i < 100; i++)
+		{
+			RandomInteger random_int = new RandomInteger(Integer.MIN_VALUE, -1);
+			SmallerInteger1 smaller_int = new SmallerInteger1(true);
+
+			b_int = random_int.pick();
+
+
+			for (int j = 0; j < 10000; j++)
+			{
+				s_int = smaller_int.pick(b_int);
+				Assertions.assertTrue(s_int <= b_int);
+			}
+		}
+	}
+
+	@Test
+	public void duplicateWithStatePositive()
+	{
+		Integer b_int;
+		Integer picked_value1;
+		Integer picked_value2;
+
+		for (int i = 0; i < 1000; i++)
+		{
+			RandomInteger random_int = new RandomInteger(0, Integer.MAX_VALUE);
+			SmallerInteger1 smaller_int = new SmallerInteger1(false);
+
+			for (int j = 0; j < 10; j++)
+			{
+				b_int = random_int.pick();
+				smaller_int.pick(b_int);
+			}
+
+			SmallerInteger1 smaller_int_copy = (SmallerInteger1) smaller_int.duplicate(true);
+
+			for (int j = 0; j < 10000; j++)
+			{
+				b_int = random_int.pick();
+				picked_value1 = smaller_int.pick(b_int);
+				picked_value2 = smaller_int_copy.pick(b_int);
+
+				Assertions.assertEquals(picked_value1, picked_value2);
+				Assertions.assertTrue(picked_value1 < b_int);
+				Assertions.assertTrue(picked_value1 >= 0);
+
+			}
+
+		}
+
+	}
+
+	@Test
+	public void duplicateWithStateNegative()
+	{
+		Integer b_int;
+		Integer picked_value1;
+		Integer picked_value2;
+
+		for (int i = 0; i < 1000; i++)
+		{
+			RandomInteger random_int = new RandomInteger(Integer.MIN_VALUE, -1);
+			SmallerInteger1 smaller_int = new SmallerInteger1(true);
+
+			for (int j = 0; j < 10; j++)
+			{
+				b_int = random_int.pick();
+				smaller_int.pick(b_int);
+			}
+
+			SmallerInteger1 smaller_int_copy = (SmallerInteger1) smaller_int.duplicate(true);
+
+			for (int j = 0; j < 10000; j++)
+			{
+				b_int = random_int.pick();
+				picked_value1 = smaller_int.pick(b_int);
+				picked_value2 = smaller_int_copy.pick(b_int);
+
+				Assertions.assertEquals(picked_value1, picked_value2);
+				Assertions.assertTrue(picked_value1 < b_int);
+				Assertions.assertTrue(picked_value1 < -1);
+
+			}
+
+		}
+
+	}
+
+	@Test
+	public void duplicateWithState()
+	{
+		for (int i = 0; i < 10; i++)
+		{
+			SmallerString1 s_string = new SmallerString1();
+			RandomInteger test_strings_length = new RandomInteger(1, 100);
+			RandomString test_strings = new RandomString(test_strings_length);
+			RandomString test_strings_copy = (RandomString) test_strings.duplicate(true);
+			SmallerString1 s_string_copy = (SmallerString1) s_string.duplicate(true);
+
+			for (int j = 0; j < 1; j++)
+			{
+				String bs1 = test_strings.pick();
+				String bs2 = test_strings_copy.pick();
+				String ss1 = s_string.pick(bs1);
+				String ss2 = s_string_copy.pick(bs2);
+				Assertions.assertEquals(ss1, ss2);
+			}
+		}
+	}
+
+	@Test
+	public void duplicateWithoutState()
+	{
+		for (int i = 0; i < 10; i++)
+		{
+			SmallerString1 s_string = new SmallerString1();
+			RandomInteger test_strings_length = new RandomInteger(1, 100);
+			RandomString test_strings = new RandomString(test_strings_length);
+			RandomString test_strings_copy = (RandomString) test_strings.duplicate(true);
+			SmallerString1 s_string_copy = (SmallerString1) s_string.duplicate(true);
+			String bs1 = "";
+			String bs2 = "";
+			String ss1 = "";
+			String ss2 = "";
+			for (int j = 0; j < 1; j++)
+			{
+				bs1 = test_strings.pick();
+				ss1 = s_string.pick(bs1);
+				bs1 = test_strings.pick();
+				ss1 = s_string.pick(bs1);
+				bs2 = test_strings_copy.pick();
+				ss2 = s_string_copy.pick(bs2);
+				Assertions.assertNotEquals(ss1, ss2);
+			}
+			s_string.reset();
+			s_string_copy.reset();
+			test_strings.reset();
+			test_strings_copy.reset();
+			for (int j = 0; j < 1; j++)
+			{
+				Assertions.assertEquals(s_string.pick(test_strings.pick())
+						, s_string_copy.pick(test_strings_copy.pick()));
+			}
+		}
+	}
+}
