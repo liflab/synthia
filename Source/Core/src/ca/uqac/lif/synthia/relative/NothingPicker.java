@@ -25,6 +25,8 @@ public class NothingPicker<T> implements Picker, RelativePicker
 		return duplicate(true);
 	}
 
+
+
 	@Override
 	public void reset()
 	{

@@ -10,4 +10,6 @@ import ca.uqac.lif.synthia.Picker;
 public interface RelativePicker<T> extends Picker<T>
 {
 	public RelativePicker<T> getPicker(T element);
+
+
 }
