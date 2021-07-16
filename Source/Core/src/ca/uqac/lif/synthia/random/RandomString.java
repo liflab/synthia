@@ -26,7 +26,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 /**
- * Generates a random character string.
+ * Generates a random characters string.
  */
 public class RandomString implements Picker<String>, Seedable
 {
@@ -49,13 +49,13 @@ public class RandomString implements Picker<String>, Seedable
 		super();
 		defaultCharArrayInitialize();
 		m_lengthPicker = length;
-		m_charIndexPicker = new RandomInteger(0, m_chars.length - 1);
+		m_charIndexPicker = new RandomInteger(0, m_chars.length);
 	}
 
 	/**
 	 * Creates a new RandomString picker with a default alphanumeric values array
 	 *
-	 * @param length A picker used to determine the string's length
+	 * @param length     A picker used to determine the string's length
 	 * @param char_array An array containing the characters allowed in the random string.
 	 */
 	public RandomString(Picker<Integer> length, char[] char_array)
@@ -63,7 +63,7 @@ public class RandomString implements Picker<String>, Seedable
 		super();
 		m_chars = char_array;
 		m_lengthPicker = length;
-		m_charIndexPicker = new RandomInteger(0, m_chars.length - 1);
+		m_charIndexPicker = new RandomInteger(0, m_chars.length);
 	}
 
 	/**
@@ -71,7 +71,7 @@ public class RandomString implements Picker<String>, Seedable
 	 *
 	 * @param length            The picker used to pick the lenght of the random string.
 	 * @param char_index_picker The picker used to generate random strings.
-	 * @param char_array An array containing the characters allowed in the random string.
+	 * @param char_array        An array containing the characters allowed in the random string.
 	 */
 	private RandomString(Picker<Integer> length, RandomInteger char_index_picker, char[] char_array)
 	{
@@ -84,20 +84,20 @@ public class RandomString implements Picker<String>, Seedable
 	/**
 	 * Creates a new RandomString picker, with a default alphanumeric values array.
 	 *
-	 * @param length The length of each generated string
+	 * @param length The max length of each generated string.
 	 */
 	public RandomString(int length)
 	{
 		super();
 		defaultCharArrayInitialize();
 		m_lengthPicker = new Constant<Integer>(length);
-		m_charIndexPicker = new RandomInteger(0, m_chars.length - 1);
+		m_charIndexPicker = new RandomInteger(0, m_chars.length);
 	}
 
 	/**
 	 * Creates a new RandomString picker, with a specified alphanumeric values array.
 	 *
-	 * @param length The length of each generated string.
+	 * @param length     The length of each generated string.
 	 * @param char_array An array containing the characters allowed in the random string.
 	 */
 	public RandomString(int length, char[] char_array)
@@ -105,7 +105,7 @@ public class RandomString implements Picker<String>, Seedable
 		super();
 		m_lengthPicker = new Constant<Integer>(length);
 		m_chars = char_array;
-		m_charIndexPicker = new RandomInteger(0, m_chars.length - 1);
+		m_charIndexPicker = new RandomInteger(0, m_chars.length);
 	}
 
 	/**
@@ -114,7 +114,7 @@ public class RandomString implements Picker<String>, Seedable
 	private void defaultCharArrayInitialize()
 	{
 		m_chars = new char[62];
-		int i =0;
+		int i = 0;
 
 		// 0 to 9
 		for (i = 0; i < 10; i++)
@@ -125,7 +125,7 @@ public class RandomString implements Picker<String>, Seedable
 		// A to Z and a to z
 		for (i = 0; i < 26; i++)
 		{
-			m_chars[i + 10] = (char) (i +65);
+			m_chars[i + 10] = (char) (i + 65);
 			m_chars[i + 36] = (char) (i + 97);
 		}
 	}
@@ -171,7 +171,7 @@ public class RandomString implements Picker<String>, Seedable
 	 * array into a string.
 	 *
 	 * @param char_index_list The list containing the indexes in the m_chars array who will be used
-	 *                       to create the string.
+	 *                        to create the string.
 	 * @return A string.
 	 */
 	private String toString(List<Integer> char_index_list)
@@ -207,4 +207,23 @@ public class RandomString implements Picker<String>, Seedable
 	{
 		m_charIndexPicker.setSeed(seed);
 	}
+
+	//can only be used if m_lenghtPicker is a RandomInteger or RandomIndex
+	public void setInterval(int min, int max)
+	{
+
+		if ( m_lengthPicker.getClass().getSimpleName().equals("RandomInteger"))
+		{
+			RandomInteger random_integer_copy = (RandomInteger) m_lengthPicker.duplicate(true);
+			random_integer_copy.setInterval(min, max);
+			m_lengthPicker = random_integer_copy;
+		}
+		else if (m_lengthPicker.getClass().getSimpleName().equals("RandomIndex"))
+		{
+			RandomInteger random_integer_copy = (RandomInteger) m_lengthPicker.duplicate(true);
+			random_integer_copy.setInterval(min, max);
+			m_lengthPicker = random_integer_copy;
+		}
+	}
+
 }
