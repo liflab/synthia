@@ -1,5 +1,7 @@
 package ca.uqac.lif.synthia.relative;
 
+
+
 import java.util.ArrayList;
 import java.util.List;
 
@@ -55,5 +57,6 @@ public class SubStrings
 		resetList();
 		fillList();
 	}
+
 
 }
