@@ -22,6 +22,7 @@ import ca.uqac.lif.synthia.random.generators.Random;
 import ca.uqac.lif.synthia.relative.NothingPicker;
 import ca.uqac.lif.synthia.relative.RelativePicker;
 
+//TODO talk to Sylvain about using same internal attributes for getPicker. Same thing for RandomFloat.
 /**
  * Picks an integer uniformly in an interval
  */
