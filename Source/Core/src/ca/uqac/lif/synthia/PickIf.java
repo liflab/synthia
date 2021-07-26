@@ -54,7 +54,7 @@ public abstract class PickIf<T> implements Picker
 	 *
 	 * @return The object.
 	 */
-	public Object pick()
+	public T pick()
 	{
 		int iteration_counter = 0;
 		T picked_value = m_picker.pick();
