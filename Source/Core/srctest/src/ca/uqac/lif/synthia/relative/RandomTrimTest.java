@@ -37,9 +37,8 @@ public class RandomTrimTest
 	@Test
 	public void duplicateWithoutState()
 	{
-		String s = "foobarbaz";
-		RandomTrim random_trim = new RandomTrim(s);
-		for (int i = 0; i < 10000; i++)
+		RandomTrim random_trim = new RandomTrim("foobarbaz");
+		for (int i = 0; i < 1000; i++)
 		{
 			random_trim.pick();
 		}

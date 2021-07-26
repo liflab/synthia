@@ -35,7 +35,11 @@ public class RandomTrim extends RandomPrefix
 	{
 		String s = super.pick();
 		m_prefixSize.setInterval(0, s.length() + 1);
-		return s.substring(m_prefixSize.pick(), s.length());
+		int start_index = m_prefixSize.pick();
+
+		m_prefixSize.setInterval(0, m_string.length()+1); // reset index interval before next pick
+
+		return s.substring(start_index, s.length());
 	}
 
 	@Override
