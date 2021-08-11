@@ -25,7 +25,7 @@ import java.util.List;
 import java.util.Map;
 
 import ca.uqac.lif.synthia.Picker;
-import ca.uqac.lif.synthia.PickerException;
+import ca.uqac.lif.synthia.exception.PickerException;
 
 /**
  * Generates a sequence of objects by a random walk in a Markov chain.

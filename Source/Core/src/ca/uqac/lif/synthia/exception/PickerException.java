@@ -16,7 +16,9 @@
     You should have received a copy of the GNU Lesser General Public License
     along with this program.  If not, see <http://www.gnu.org/licenses/>.
  */
-package ca.uqac.lif.synthia;
+package ca.uqac.lif.synthia.exception;
+
+import ca.uqac.lif.synthia.Picker;
 
 /**
  * Generic runtime exception thrown by the {@link Picker}

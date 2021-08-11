@@ -19,11 +19,14 @@
 package ca.uqac.lif.synthia.random;
 
 import ca.uqac.lif.synthia.random.generators.Random;
+import ca.uqac.lif.synthia.relative.NothingPicker;
+import ca.uqac.lif.synthia.relative.RelativePicker;
 
+//TODO talk to Sylvain about using same internal attributes for getPicker. Same thing for RandomFloat.
 /**
  * Picks an integer uniformly in an interval
  */
-public class RandomInteger extends RandomPicker<Integer>
+public class RandomInteger extends RandomPicker<Integer> implements RelativePicker<Integer>
 {
 	/**
 	 * The lower bound of the interval
@@ -121,4 +124,29 @@ public class RandomInteger extends RandomPicker<Integer>
 
 		return copy;
 	}
+
+	/**
+	 * Create a new {@link RandomInteger} picker guaranteeing to produce lower values than the one
+	 * taken as input. If the input is lower or equal to the {@link #m_min} attribute value, the
+	 * method will return a {@link ca.uqac.lif.synthia.relative.NothingPicker}.
+	 *
+	 * @param element The value to which those which will be produced by the new instance of the class
+	 *                must be lower.
+	 *
+	 * @return The new instance of the class or a {@link ca.uqac.lif.synthia.relative.NothingPicker}.
+	 */
+	@Override
+	public RelativePicker<Integer> getPicker(Integer element)
+	{
+		if(element <= m_min)
+		{
+			return new NothingPicker();
+		}
+		else
+		{
+			return new RandomInteger(m_min, element);
+		}
+	}
+
+
 }

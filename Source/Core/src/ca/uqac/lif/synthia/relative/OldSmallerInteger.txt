@@ -1,0 +1,124 @@
+package ca.uqac.lif.synthia.relative;
+
+import ca.uqac.lif.synthia.Picker;
+import ca.uqac.lif.synthia.random.RandomInteger;
+
+/**
+ * Generates an <tt>Integer</tt> inferior to a given value or the latter if it's not possible
+ * to generate a smaller value.
+ */
+public class SmallerInteger1 implements RelativePicker<Integer>
+{
+	protected RandomInteger m_smallInts;
+
+	protected final boolean m_negativeValues;
+
+	/**
+	 * Private constructor used to duplicate the picker.
+	 *
+	 * @param random_ints
+	 * @param negative_values
+	 */
+	private SmallerInteger1(RandomInteger random_ints, boolean negative_values)
+	{
+		m_smallInts = random_ints;
+		m_negativeValues = negative_values;
+
+	}
+
+	/**
+	 * Create a new SmallerInteger picker.
+	 *
+	 * @param negative_vals <tt>boolean</tt> to use or not use negative values interval.
+	 */
+	public SmallerInteger1(boolean negative_vals)
+	{
+		m_negativeValues = negative_vals;
+		m_smallInts = new RandomInteger(0, 1); //default interval
+	}
+
+	protected void setInterval(Integer val)
+	{
+		// val in [Integer.MIN_VALUE, val[ where val max value is -1.
+		if(m_negativeValues)
+		{
+
+			if(val >= 0)
+			{
+				/*
+				 * Because negative values are used here, every val value superior or equal to 0
+				 * are rejected and in this case, all the negative values supported by the Integer type are
+				 * inferior to val.
+				 */
+				m_smallInts.setInterval(Integer.MIN_VALUE, -1); // [Integer.MIN_VALUE, -1[
+			}
+
+			else if((val < 0) && (val >= (Integer.MIN_VALUE + 1)))
+			{
+				m_smallInts.setInterval(Integer.MIN_VALUE, val); // [Integer.MIN_VALUE, val[
+			}
+
+			else
+			{
+				// [Integer.MIN_VALUE, (Integer.MIN_VALUE + 1)[
+				m_smallInts.setInterval(Integer.MIN_VALUE, (Integer.MIN_VALUE + 1));
+			}
+
+		}
+
+		else // return value in [0, val[ where val max value is Integer.MAX_VALUE
+		{
+
+			// Because only positive values are allowed here, the minimum possible value is zero.
+			if(val <= 0)
+			{
+				m_smallInts.setInterval(0, 1); // [0, 1[
+			}
+
+			else
+			{
+				m_smallInts.setInterval(0, val); // [0, val[
+			}
+
+		}
+	}
+
+	@Override
+	public Integer pick(Integer element)
+	{
+
+		setInterval(element);
+
+		return m_smallInts.pick();
+	}
+
+
+	@Override
+	public void reset()
+	{
+		m_smallInts.reset();
+		m_smallInts.setInterval(0, 1); // default interval
+	}
+
+	//TODO do something whit this
+	@Override
+	public Integer pick()
+	{
+		return null;
+	}
+
+	/**
+	 * Creates a copy of the picker.
+	 *
+	 * @param with_state If set to <tt>false</tt>, the returned copy is set to
+	 *                   the class' initial state (i.e. same thing as calling the picker's
+	 *                   constructor). If set to <tt>true</tt>, the returned copy is put into the
+	 *                   same internal state as the object it is copied from.
+	 * @return The copy of the picker.
+	 */
+	@Override
+	public Picker<Integer> duplicate(boolean with_state)
+	{
+		return new SmallerInteger1(m_smallInts.duplicate(with_state), m_negativeValues);
+	}
+}

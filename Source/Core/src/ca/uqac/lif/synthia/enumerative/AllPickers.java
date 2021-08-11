@@ -1,6 +1,6 @@
 package ca.uqac.lif.synthia.enumerative;
 
-import ca.uqac.lif.synthia.NoMoreElementException;
+import ca.uqac.lif.synthia.exception.NoMoreElementException;
 import ca.uqac.lif.synthia.Picker;
 
 /**
@@ -173,7 +173,7 @@ public class AllPickers implements EnumerativePicker
 	}
 
 	@Override
-	public Picker duplicate(boolean with_state)
+	public AllPickers duplicate(boolean with_state)
 	{
 		EnumerativePicker[] enum_picker_copy = new EnumerativePicker[m_enumPickers.length];
 		Object[] values_copy = new Object[m_enumPickers.length];

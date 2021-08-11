@@ -1,12 +1,12 @@
 package ca.uqac.lif.synthia.enumerative;
 
-import ca.uqac.lif.synthia.NoMoreElementException;
+import ca.uqac.lif.synthia.exception.NoMoreElementException;
 import ca.uqac.lif.synthia.Picker;
 
 /**
  * Picker who implements EnumerativePicker. This picker enumerates the boolean value
  * (<Boolean>false</Boolean>, <Boolean>true</Boolean>) and throws a
- * {@link ca.uqac.lif.synthia.NoMoreElementException} if the picker picks another value after
+ * {@link NoMoreElementException} if the picker picks another value after
  * the picker has finished to enumerates the boolean values.
  */
 public class AllBooleans implements EnumerativePicker<Boolean>
@@ -61,7 +61,8 @@ public class AllBooleans implements EnumerativePicker<Boolean>
 		return m_picker.pick() == 1;
 	}
 
-	@Override public Picker<Boolean> duplicate(boolean with_state)
+	@Override
+	public AllBooleans duplicate(boolean with_state)
 	{
 		return new AllBooleans((AllIntegers) m_picker.duplicate(with_state));
 	}
@@ -71,7 +72,8 @@ public class AllBooleans implements EnumerativePicker<Boolean>
 	 * Loop attributes must be false. If loop is true, the method will always return false.
 	 * @return true if the picker picked all the objects from m_picker and false if it's not the case.
 	 */
-	@Override public boolean isDone()
+	@Override
+	public boolean isDone()
 	{
 		return m_picker.isDone();
 	}

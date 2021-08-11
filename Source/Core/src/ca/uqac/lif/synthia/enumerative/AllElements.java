@@ -1,6 +1,6 @@
 package ca.uqac.lif.synthia.enumerative;
 
-import ca.uqac.lif.synthia.NoMoreElementException;
+import ca.uqac.lif.synthia.exception.NoMoreElementException;
 import ca.uqac.lif.synthia.Seedable;
 import ca.uqac.lif.synthia.random.RandomInteger;
 import ca.uqac.lif.synthia.replay.Playback;
@@ -35,7 +35,7 @@ public class AllElements<T> extends Playback implements EnumerativePicker, Seeda
 		m_scramble = scramble;
 		m_indexes = new ArrayList<Integer>();
 		m_indexPicker = new RandomInteger(0, 1);
-		loop(loop);
+		setLoop(loop);
 
 		if(scramble)
 		{
@@ -137,7 +137,7 @@ public class AllElements<T> extends Playback implements EnumerativePicker, Seeda
 	}
 
 	@Override
-	public Playback<T> duplicate(boolean with_state)
+	public AllElements duplicate(boolean with_state)
 	{
 
 		AllElements copy = new AllElements(m_values, m_scramble, m_indexPicker.duplicate(with_state)
