@@ -1,5 +1,6 @@
-package ca.uqac.lif.synthia;
+package ca.uqac.lif.synthia.relative;
 
+import ca.uqac.lif.synthia.Picker;
 import ca.uqac.lif.synthia.exception.GiveUpException;
 
 /**
@@ -21,8 +22,11 @@ public abstract class PickIf<T> implements Picker
 	 */
 	protected final int m_maxIteration;
 
-
-
+	/**
+	 * Constructor with default {@link #m_maxIteration} value.
+	 *
+	 * @param picker The picker used to generate objects.
+	 */
 	public PickIf(Picker<T> picker)
 
 	{
@@ -31,6 +35,13 @@ public abstract class PickIf<T> implements Picker
 
 	}
 
+	/**
+	 * Constructor who takes a {@link #m_maxIteration} value.
+	 *
+	 * @param picker The picker used to generate objects.
+	 * @param max_iteration The maximum number of iterations the {@link #pick()} will try to generate
+	 *                      an object before giving up.
+	 */
 	public PickIf(Picker<T> picker, int max_iteration)
 
 	{
@@ -43,7 +54,7 @@ public abstract class PickIf<T> implements Picker
 	 * Abstract method to evaluate if an element is satisfying a condition.
 	 *
 	 * @param element The element to check
-	 * @return The element if the condition is satisfied and <tt>false</tt> if it's not the case
+	 * @return <tt>true</tt> if the condition is satisfied and <tt>false</tt> if it's not the case.
 	 */
 	protected abstract boolean select(T element);
 
