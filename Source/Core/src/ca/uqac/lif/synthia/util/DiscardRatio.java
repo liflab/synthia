@@ -2,9 +2,10 @@ package ca.uqac.lif.synthia.util;
 
 import ca.uqac.lif.synthia.Picker;
 import ca.uqac.lif.synthia.exception.GiveUpException;
+import ca.uqac.lif.synthia.relative.PickIf;
 
 /**
- * A utility picker to calculate the discard ratio of a {@link ca.uqac.lif.synthia.PickIf} picker.
+ * A utility picker to calculate the discard ratio of a {@link PickIf} picker.
  */
 public class DiscardRatio implements Picker<Float>
 {
