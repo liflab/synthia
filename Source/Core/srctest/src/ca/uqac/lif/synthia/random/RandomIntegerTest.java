@@ -25,7 +25,8 @@ public class RandomIntegerTest
 
 	}
 
-	@Test public void interval()
+	@Test
+	public void interval()
 	{
 		int min = 0;
 		int max = 25;
@@ -69,5 +70,7 @@ public class RandomIntegerTest
 			Assertions.assertEquals(random_integer.pick(), random_integer_copy.pick());
 		}
 	}
+
+
 
 }
