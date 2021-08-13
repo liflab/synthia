@@ -144,7 +144,7 @@ public class RandomInteger extends RandomPicker<Integer> implements RelativePick
 		}
 		else
 		{
-			return new RandomInteger(m_min, element);
+			return new RandomInteger(m_min, element, m_seed, m_random.Duplicate());
 		}
 	}
 
