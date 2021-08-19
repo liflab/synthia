@@ -41,5 +41,4 @@ public class RandomSuffix extends RandomPrefix
 		return new RandomSuffix(m_string, m_prefixSize.duplicate(with_state));
 	}
 
-
 }

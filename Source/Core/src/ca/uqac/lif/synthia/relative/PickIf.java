@@ -14,7 +14,7 @@ public abstract class PickIf<T> implements Picker
 	/**
 	 * The picker used for the evaluations.
 	 */
-	protected Picker<T> m_picker;
+	protected RelativePicker<T> m_picker;
 
 	/**
 	 * The maximal number of iteration that the while loop of the {@link #pick()} method can do.
@@ -27,7 +27,7 @@ public abstract class PickIf<T> implements Picker
 	 *
 	 * @param picker The picker used to generate objects.
 	 */
-	public PickIf(Picker<T> picker)
+	public PickIf(RelativePicker<T> picker)
 
 	{
 		m_picker = picker;
@@ -42,7 +42,7 @@ public abstract class PickIf<T> implements Picker
 	 * @param max_iteration The maximum number of iterations the {@link #pick()} will try to generate
 	 *                      an object before giving up.
 	 */
-	public PickIf(Picker<T> picker, int max_iteration)
+	public PickIf(RelativePicker picker, int max_iteration)
 
 	{
 		m_picker = picker;

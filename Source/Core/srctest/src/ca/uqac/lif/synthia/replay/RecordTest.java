@@ -38,7 +38,6 @@ public class RecordTest
 		Assertions.assertEquals(results.isEmpty(), record.getValues().isEmpty());
 	}
 
-	//TODO fix duplicate
 	@Test
 	public void duplicateWithState()
 	{
@@ -58,7 +57,6 @@ public class RecordTest
 		}
 	}
 
-	//TODO fix duplicate
 	@Test
 	public void duplicateWithoutState()
 	{

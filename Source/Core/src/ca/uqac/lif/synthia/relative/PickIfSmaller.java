@@ -1,10 +1,6 @@
 package ca.uqac.lif.synthia.relative;
 
-import ca.uqac.lif.synthia.Picker;
 
-import java.util.List;
-
-//TODO talk to Sylvain about the duplicate(false) problem
 
 /**
  * This is an abstract class that descends from {@link PickIf}.Its constructor takes a
@@ -19,7 +15,7 @@ public class PickIfSmaller<T> extends PickIf
 	/**
 	 * Initial state of {@link PickIf#m_picker}. Used to reinitialize it to his original state.
 	 */
-	protected Picker<T> m_OriginalStatePicker;// Fix the duplicate(false) problem.
+	protected RelativePicker<T> m_OriginalStatePicker;// Fix the duplicate(false) problem.
 
 	/**
 	 * The last object produced.
@@ -51,7 +47,7 @@ public class PickIfSmaller<T> extends PickIf
 	{
 		super(picker);
 		m_previousElement = null;
-		m_OriginalStatePicker = picker.duplicate(true);
+		m_OriginalStatePicker = (RelativePicker<T>) picker.duplicate(true);
 	}
 
 	/**
@@ -65,7 +61,7 @@ public class PickIfSmaller<T> extends PickIf
 	{
 		super(picker, max_iteration);
 		m_previousElement = null;
-		m_OriginalStatePicker = picker.duplicate(true);
+		m_OriginalStatePicker = (RelativePicker<T>) picker.duplicate(true);
 	}
 
 	@Override
@@ -82,7 +78,7 @@ public class PickIfSmaller<T> extends PickIf
 	public void reset()
 	{
 		m_previousElement = null;
-		m_picker = m_OriginalStatePicker.duplicate(true); //overwrite the picker to his original state.
+		m_picker = (RelativePicker) m_OriginalStatePicker.duplicate(true); //overwrite the picker to his original state.
 	}
 
 	/**
@@ -94,57 +90,22 @@ public class PickIfSmaller<T> extends PickIf
 	@Override
 	protected boolean select(Object element)
 	{
+		boolean anwser;
+
 		if (m_previousElement == null)
 		{
-			m_previousElement = element;
-			return true;
+			anwser = true;
 		}
 		else
 		{
-			//TODO talk to Sylvain about that
-			boolean return_bool = false;
-			if(!element.getClass().getSimpleName().equals(m_previousElement.getClass().getSimpleName()))
-			{
-				return_bool = false;
-			}
-			else
-			{
-				if(m_previousElement.getClass().getSimpleName().equals("Integer") )
-				{
-					Integer previous_element_int = (Integer) m_previousElement;
-					return_bool = ((Integer) element < previous_element_int);
-				}
-				else
-				{
-					if(m_previousElement.getClass().getSimpleName().equals("Float"))
-					{
-						Float previous_element_float = (Float) m_previousElement;
-						return_bool = ((Float) element < previous_element_float);
-					}
-					else
-					{
-						if (m_previousElement.getClass().getSimpleName().equals("String"))
-						{
-							String previous_element_string = (String) m_previousElement;
-							return_bool = ( ((String) element).length() < previous_element_string.length());
-						}
-						else
-						{
-							if(m_previousElement.getClass().getSimpleName().equals(("ArrayList")))
-							{
-								List<Object> previous_element_list = (List<Object>) m_previousElement;
-								return_bool = (((List<Object>) element).size() < previous_element_list.size());
-							}
-						}
-					}
-				}
-			}
-
-			m_previousElement = element;
-			return return_bool;
+			anwser = m_picker.compare(m_previousElement, element) == -1;
 		}
 
+		m_previousElement = element;
+
+		return anwser;
 	}
+
 
 
 	@Override
@@ -163,4 +124,7 @@ public class PickIfSmaller<T> extends PickIf
 		}
 
 	}
+
+
+
 }

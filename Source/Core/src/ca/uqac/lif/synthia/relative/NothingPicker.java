@@ -25,7 +25,20 @@ public class NothingPicker<T> implements Picker, RelativePicker
 		return duplicate(true);
 	}
 
-
+	/**
+	 *
+	 * @warning ALWAYS RETURN 0.
+	 * @param old_value
+	 * @param new_value
+	 *
+	 *
+	 * @return
+	 */
+	@Override
+	public int compare(Object old_value, Object new_value)
+	{
+		return 0;
+	}
 
 	@Override
 	public void reset()

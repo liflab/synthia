@@ -22,7 +22,8 @@ import ca.uqac.lif.synthia.random.generators.Random;
 import ca.uqac.lif.synthia.relative.NothingPicker;
 import ca.uqac.lif.synthia.relative.RelativePicker;
 
-//TODO talk to Sylvain about using same internal attributes for getPicker. Same thing for RandomFloat.
+
+
 /**
  * Picks an integer uniformly in an interval
  */
@@ -145,6 +146,23 @@ public class RandomInteger extends RandomPicker<Integer> implements RelativePick
 		else
 		{
 			return new RandomInteger(m_min, element, m_seed, m_random.Duplicate());
+		}
+	}
+
+	@Override
+	public int compare(Object old_value, Object new_value)
+	{
+		if ((Integer)new_value < (Integer)old_value)
+		{
+			return -1;
+		}
+		else if ((Integer)new_value == (Integer)old_value)
+		{
+			return 0;
+		}
+		else
+		{
+			return 1;
 		}
 	}
 

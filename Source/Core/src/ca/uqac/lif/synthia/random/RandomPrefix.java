@@ -5,6 +5,8 @@ import ca.uqac.lif.synthia.Seedable;
 import ca.uqac.lif.synthia.relative.NothingPicker;
 import ca.uqac.lif.synthia.relative.RelativePicker;
 
+
+
 /**
  * Like {@link RandomSubString}, but this time, the {@link Picker} returns a prefix of the original
  * strings of randomly selected length. The {@link RandomSubString#m_charSelect} is replaced by a
@@ -87,5 +89,22 @@ public class RandomPrefix implements Picker<String>, Seedable, RelativePicker<St
 	public void setSeed(int seed)
 	{
 		m_prefixSize.setSeed(seed);
+	}
+
+	@Override
+	public int compare(Object old_value, Object new_value)
+	{
+		if (((String)new_value).length() < ((String)old_value).length())
+		{
+			return -1;
+		}
+		else if (((String)new_value).length() == ((String)old_value).length())
+		{
+			return 0;
+		}
+		else
+		{
+			return 1;
+		}
 	}
 }
