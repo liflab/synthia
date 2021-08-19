@@ -22,10 +22,13 @@ import ca.uqac.lif.synthia.random.generators.Random;
 import ca.uqac.lif.synthia.relative.NothingPicker;
 import ca.uqac.lif.synthia.relative.RelativePicker;
 
+
+
 /**
  * Picks a floating point number uniformly in an interval
  */
 public class RandomFloat extends RandomPicker<Float> implements RelativePicker<Float>
+
 {
 	/**
 	 * The lower bound of the interval
@@ -130,6 +133,23 @@ public class RandomFloat extends RandomPicker<Float> implements RelativePicker<F
 		else
 		{
 			return new RandomFloat(m_min, element);
+		}
+	}
+
+	@Override
+	public int compare(Object old_value, Object new_value)
+	{
+		if ((Float)new_value < (Float)old_value)
+		{
+			return -1;
+		}
+		else if ((Float)new_value == (Float)old_value)
+		{
+			return 0;
+		}
+		else
+		{
+			return 1;
 		}
 	}
 }

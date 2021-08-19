@@ -7,7 +7,6 @@ import ca.uqac.lif.synthia.relative.RelativePicker;
 import java.util.ArrayList;
 import java.util.List;
 
-//TODO Ask Sylvain about seedable and in wich package we should place this class
 
 /**
  * An equivalent of {@link RandomSubString} but for lists.
@@ -111,7 +110,6 @@ public class RandomSubList<T> implements RelativePicker
 				new ArrayList<T>(m_elements), (RelativePicker<T>) m_listReducer.duplicate(with_state));
 	}
 
-	//TODO Check with Sylvain if what to do with this method. Do we only accept list for the param?
 	/**
 	 * Create a new {@link RandomSubList} picker based on a given list. If this list is
 	 * empty, the method will return a {@link NothingPicker}. The new instance will also have the same
@@ -144,5 +142,23 @@ public class RandomSubList<T> implements RelativePicker
 					(RelativePicker) m_listReducer.duplicate(true));
 		}
 	}
+
+	@Override
+	public int compare(Object old_value, Object new_value)
+	{
+		if(((List<T>)new_value).size() < ((List<T>)old_value).size())
+		{
+			return -1;
+		}
+		else if (((List<T>)new_value).size() == ((List<T>)old_value).size())
+		{
+			return 0;
+		}
+		else
+		{
+			return 1;
+		}
+	}
+
 
 }
