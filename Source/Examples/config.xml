@@ -30,7 +30,7 @@
   <author>Sylvain Hallé, Marc-Antoine Plourde</author>
   
   <!-- The project's main class -->
-  <mainclass>ca.uqac.lif.synthia.Main</mainclass>
+  <mainclass>ca.uqac.lif.synthia.grammar.Main</mainclass>
 
   <!-- Default folders -->
   <srcdir>src</srcdir>
@@ -40,14 +40,14 @@
 
   <!-- JAR filename -->
   <jar>
-    <filename>../synthia-core.jar</filename>
+    <filename>../synthia-examples.jar</filename>
   </jar>
   
   <test>
-    <srcdir>srctest</srcdir>
-    <bindir>bin</bindir>
+    <srcdir>src</srcdir> <!-- Actually, no test for Examples project -->
     <depdir>dep</depdir>
     <libdir>lib</libdir>
+    <bindir>bin</bindir>
     <!-- The filename pattern to recognize test files -->
     <filenamepattern>**/*Test.java</filenamepattern>
   </test>
@@ -56,5 +56,15 @@
     Write JAR dependencies here.
   -->
   <dependencies>
+    <dependency>
+      <name>Bullwinkle</name>
+      <classname>ca.uqac.lif.bullwinkle.BnfParser</classname>
+      <files>
+        <jar>https://github.com/sylvainhalle/Bullwinkle/releases/download/v1.4.5/bullwinkle.jar</jar>
+      </files>
+      <!-- The following parameter is mandatory. Set it to false if you don't
+           want this library to be bundled into the compiled JAR. -->
+      <bundle>false</bundle>
+    </dependency>
   </dependencies>
 </build>

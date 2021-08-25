@@ -222,12 +222,10 @@
       includeantruntime="false">
       <classpath refid="build.classpath"/>
     </javac>
-    <!--
     <copy todir="${build.test.bindir}" includeemptydirs="false">
       <fileset dir="${build.test.srcdir}" excludes="**/*.java"/>
       <fileset dir="${build.test.srcdir}" excludes="**/doc-files/*.*"/>
     </copy>
-    -->
   </target>
   
   <!-- Target: javadoc

@@ -1,0 +1,97 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<!--
+	A build script for a super-project containing multiple sub-projects
+    Copyright (C) 2019  Sylvain Hallé
+
+    This program is free software: you can redistribute it and/or modify
+    it under the terms of the GNU General Public License as published by
+    the Free Software Foundation, either version 3 of the License, or
+    (at your option) any later version.
+
+    This program is distributed in the hope that it will be useful,
+    but WITHOUT ANY WARRANTY; without even the implied warranty of
+    MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+    GNU General Public License for more details.
+
+    You should have received a copy of the GNU General Public License
+    along with this program.  If not, see <http://www.gnu.org/licenses/>.
+-->
+<project name="SuperProject" default="all" basedir=".">
+
+  <!-- The project's display name -->
+  <property name="build.name" value="Synthia"/>
+  
+  <!-- The author -->
+  <property name="build.author" value="Sylvain Hallé and Marc-Antoine Plourde"/>
+  
+  <target name="all">
+    <!-- Compile core -->
+    <ant dir="Core" target="jar" />
+    <!-- Copy core to other projects -->
+    <copy file="synthia-core.jar" todir="Grammar/lib" />
+    <copy file="synthia-core.jar" todir="Examples/lib" />
+    <!-- Compile Grammar -->
+    <ant dir="Grammar" target="jar" />
+    <!-- Copy Grammar to Examples -->
+    <copy file="synthia-grammar.jar" todir="Examples/lib" />
+    <!-- Compile Examples -->
+    <ant dir="Examples" target="jar" />
+  </target>
+  
+  <target name="download-deps">
+    <ant dir="Core" target="download-deps" />
+    <ant dir="Examples" target="download-deps" />
+  </target>
+  
+  <target name="test">
+    <ant dir="Core" target="test" />
+    <ant dir="Grammar" target="test" />
+  </target>
+  
+  <target name="clean">
+    <ant dir="Core" target="clean" />
+    <ant dir="Grammar" target="clean" />
+    <ant dir="Examples" target="clean" />
+  </target>
+  
+  <target name="javadoc">
+    <mkdir dir="../docs/javadoc"/>
+    <mkdir dir="../docs/javadoc/doc-files"/>
+    <javadoc
+      overview="project-overview.html"
+      destdir="../docs/javadoc"
+      packagenames="*"
+      excludepackagenames=""
+      defaultexcludes="yes"
+      author="true"
+      version="true"
+      use="true"
+      Encoding="utf8"
+      docencoding="utf8"
+      charset="utf8"
+      windowtitle="Synthia Documentation">
+      <doctitle><![CDATA[<h1>]]>${build.name}<![CDATA[ Documentation</h1>]]></doctitle>
+      <bottom><![CDATA[<i>Copyright&nbsp;&#169; ]]>${build.author}<![CDATA[. All Rights Reserved.</i>]]></bottom>
+      <link href="https://docs.oracle.com/en/java/javase/11/docs/api/"/>
+      <sourcepath>
+        <pathelement path="Core/src"/>
+        <pathelement path="Examples/src"/>
+      </sourcepath>
+      <classpath>
+        <fileset dir="Core/dep">
+          <include name="**/*.jar"/>
+        </fileset>
+        <fileset dir="Core/lib">
+          <include name="**/*.jar"/>
+        </fileset>
+      </classpath>
+      <group title="Core" packages="ca.uqac.lif.synthia"/>
+      <group title="Grammar" packages="ca.uqac.lif.synthia.grammar"/>
+      <group title="Examples" packages="examples:examples.*"/>
+    </javadoc>
+    <copy todir="../docs/javadoc/doc-files">
+      <fileset dir="Grammar/src/doc-files"/>
+      <fileset dir="Examples/src/doc-files"/>
+    </copy>
+  </target>
+</project>

@@ -7,6 +7,7 @@ import org.junit.jupiter.api.function.Executable;
 
 import static org.junit.jupiter.api.Assertions.assertThrows;
 
+@org.junit.Ignore // Use JUnit5
 public class AllBooleansTest
 {
 	private void noMoreExceptionThrow(AllBooleans picker)
