@@ -4,10 +4,10 @@ import ca.uqac.lif.synthia.exception.NoMoreElementException;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.function.Executable;
+import org.junit.runner.RunWith;
 
 import static org.junit.jupiter.api.Assertions.assertThrows;
 
-@org.junit.Ignore // Use JUnit5
 public class AllBooleansTest
 {
 	private void noMoreExceptionThrow(AllBooleans picker)
