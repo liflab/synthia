@@ -17,6 +17,8 @@
 **/lib/
 **/dep/
 **/tests/
+**/bin/
+**/bintest/
 
 # JARs
 *.jar

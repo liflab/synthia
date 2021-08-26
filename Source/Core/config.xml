@@ -45,7 +45,7 @@
   
   <test>
     <srcdir>srctest</srcdir>
-    <bindir>bin</bindir>
+    <bindir>bintest</bindir>
     <depdir>dep</depdir>
     <libdir>lib</libdir>
     <!-- The filename pattern to recognize test files -->
