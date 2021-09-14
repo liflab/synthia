@@ -10,7 +10,7 @@ package ca.uqac.lif.synthia.relative;
  *
  * @param <T> The type of the {@link RelativePicker} used.
  */
-public class PickIfSmaller<T> extends PickIf
+public class PickIfSmaller<T> extends PickIf<T>
 {
 	/**
 	 * Initial state of {@link PickIf#m_picker}. Used to reinitialize it to his original state.
@@ -30,8 +30,8 @@ public class PickIfSmaller<T> extends PickIf
 	 * @param previous_element The {@link #m_previousElement} attribute.
 	 * @param original_picker The {@link #m_OriginalStatePicker} attribute.
 	 */
-	private PickIfSmaller(RelativePicker picker, int max_iteration, Object previous_element
-			, RelativePicker original_picker)
+	private PickIfSmaller(RelativePicker<T> picker, int max_iteration, Object previous_element
+			, RelativePicker<T> original_picker)
 	{
 		super(picker, max_iteration);
 		m_previousElement = previous_element;
@@ -43,7 +43,7 @@ public class PickIfSmaller<T> extends PickIf
 	 *
 	 * @param picker The picker used to generate objects.
 	 */
-	public PickIfSmaller(RelativePicker picker)
+	public PickIfSmaller(RelativePicker<T> picker)
 	{
 		super(picker);
 		m_previousElement = null;
@@ -57,7 +57,7 @@ public class PickIfSmaller<T> extends PickIf
 	 * @param max_iteration The maximum number of iterations the {@link #pick()} will try to generate
 	 *                      an object before giving up.
 	 */
-	public PickIfSmaller(RelativePicker picker, int max_iteration)
+	public PickIfSmaller(RelativePicker<T> picker, int max_iteration)
 	{
 		super(picker, max_iteration);
 		m_previousElement = null;
@@ -65,12 +65,11 @@ public class PickIfSmaller<T> extends PickIf
 	}
 
 	@Override
-	public Object pick()
+	public T pick()
 	{
-		Object e = super.pick();
-		RelativePicker temp_mpicker = (RelativePicker) m_picker.duplicate(true);
+		T e = super.pick();
+		RelativePicker<T> temp_mpicker = (RelativePicker<T>) m_picker.duplicate(true);
 		m_picker = temp_mpicker.getPicker(e);
-
 		return e;
 	}
 
@@ -78,7 +77,7 @@ public class PickIfSmaller<T> extends PickIf
 	public void reset()
 	{
 		m_previousElement = null;
-		m_picker = (RelativePicker) m_OriginalStatePicker.duplicate(true); //overwrite the picker to his original state.
+		m_picker = (RelativePicker<T>) m_OriginalStatePicker.duplicate(true); //overwrite the picker to his original state.
 	}
 
 	/**
@@ -109,18 +108,18 @@ public class PickIfSmaller<T> extends PickIf
 
 
 	@Override
-	public PickIfSmaller duplicate(boolean with_state)
+	public PickIfSmaller<T> duplicate(boolean with_state)
 	{
 		if (with_state)
 		{
-			return new PickIfSmaller((RelativePicker) m_picker.duplicate(with_state), m_maxIteration
-					, m_previousElement, (RelativePicker) m_OriginalStatePicker.duplicate(true));
+			return new PickIfSmaller<T>((RelativePicker<T>) m_picker.duplicate(with_state), m_maxIteration
+					, m_previousElement, (RelativePicker<T>) m_OriginalStatePicker.duplicate(true));
 		}
 		else
 		{
-			return new PickIfSmaller((RelativePicker) m_OriginalStatePicker.duplicate(true)
+			return new PickIfSmaller<T>((RelativePicker<T>) m_OriginalStatePicker.duplicate(true)
 					, m_maxIteration, null
-					, (RelativePicker) m_OriginalStatePicker.duplicate(true));
+					, (RelativePicker<T>) m_OriginalStatePicker.duplicate(true));
 		}
 
 	}
