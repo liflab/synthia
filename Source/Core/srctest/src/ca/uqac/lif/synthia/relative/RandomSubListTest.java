@@ -3,8 +3,8 @@ package ca.uqac.lif.synthia.relative;
 import ca.uqac.lif.synthia.exception.NoMoreElementException;
 import ca.uqac.lif.synthia.random.RandomSubList;
 import ca.uqac.lif.synthia.random.RandomSubString;
-import org.junit.jupiter.api.Assertions;
-import org.junit.jupiter.api.Test;
+import org.junit.Assert;
+import org.junit.Test;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -62,7 +62,7 @@ public class RandomSubListTest
 
 		for (int i = 0; i < 1000; i++)
 		{
-			Assertions.assertTrue(compareList(random_sublist.pick(), random_sublist_copy.pick()
+			Assert.assertTrue(compareList(random_sublist.pick(), random_sublist_copy.pick()
 					, true));
 		}
 	}
@@ -89,7 +89,7 @@ public class RandomSubListTest
 			}
 		}
 
-		Assertions.assertFalse(counter == 1000);
+		Assert.assertFalse(counter == 1000);
 		counter = 0;
 		random_sublist.reset();
 		random_sublist_copy.reset();
@@ -101,7 +101,7 @@ public class RandomSubListTest
 				counter++;
 			}
 		}
-		Assertions.assertTrue(counter == 10000);
+		Assert.assertTrue(counter == 10000);
 
 	}
 
