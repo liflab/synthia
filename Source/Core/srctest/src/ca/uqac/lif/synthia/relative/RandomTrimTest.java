@@ -1,8 +1,8 @@
 package ca.uqac.lif.synthia.relative;
 
 import ca.uqac.lif.synthia.random.RandomTrim;
-import org.junit.jupiter.api.Assertions;
-import org.junit.jupiter.api.Test;
+import org.junit.Assert;
+import org.junit.Test;
 
 public class RandomTrimTest
 {
@@ -13,7 +13,7 @@ public class RandomTrimTest
 		RandomTrim random_trim = new RandomTrim(s);
 		for (int i = 0; i < 10000; i++)
 		{
-			Assertions.assertTrue(random_trim.pick().length() <= s.length());
+			Assert.assertTrue(random_trim.pick().length() <= s.length());
 		}
 	}
 
@@ -30,7 +30,7 @@ public class RandomTrimTest
 
 		for (int i = 0; i < 10000; i++)
 		{
-			Assertions.assertEquals(random_trim.pick(), random_trim_copy.pick());
+			Assert.assertEquals(random_trim.pick(), random_trim_copy.pick());
 		}
 	}
 
@@ -54,14 +54,14 @@ public class RandomTrimTest
 			}
 		}
 
-		Assertions.assertTrue(counter < 100000);
+		Assert.assertTrue(counter < 100000);
 
 		random_trim.reset();
 		random_trim_copy.reset();
 
 		for (int i = 0; i < 100000; i++)
 		{
-			Assertions.assertEquals(random_trim.pick(), random_trim_copy.pick());
+			Assert.assertEquals(random_trim.pick(), random_trim_copy.pick());
 		}
 	}
 
@@ -78,11 +78,11 @@ public class RandomTrimTest
 
 			if(picked_string.isEmpty())
 			{
-				Assertions.assertTrue(relative_picker.getClass().getSimpleName().equals("NothingPicker"));
+				Assert.assertTrue(relative_picker.getClass().getSimpleName().equals("NothingPicker"));
 			}
 			else
 			{
-				Assertions.assertTrue(relative_picker.getClass().getSimpleName().equals("RandomTrim"));
+				Assert.assertTrue(relative_picker.getClass().getSimpleName().equals("RandomTrim"));
 			}
 
 		}

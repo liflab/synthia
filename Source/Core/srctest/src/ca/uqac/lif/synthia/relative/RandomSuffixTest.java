@@ -2,8 +2,8 @@ package ca.uqac.lif.synthia.relative;
 
 
 import ca.uqac.lif.synthia.random.RandomSuffix;
-import org.junit.jupiter.api.Assertions;
-import org.junit.jupiter.api.Test;
+import org.junit.Assert;
+import org.junit.Test;
 
 public class RandomSuffixTest
 {
@@ -14,7 +14,7 @@ public class RandomSuffixTest
 		RandomSuffix random_suffix = new RandomSuffix(s);
 		for (int i = 0; i < 10000; i++)
 		{
-			Assertions.assertTrue(random_suffix.pick().length() <= s.length());
+			Assert.assertTrue(random_suffix.pick().length() <= s.length());
 		}
 	}
 
@@ -31,7 +31,7 @@ public class RandomSuffixTest
 
 		for (int i = 0; i < 10000; i++)
 		{
-			Assertions.assertEquals(random_suffix.pick(), random_sufix_copy.pick());
+			Assert.assertEquals(random_suffix.pick(), random_sufix_copy.pick());
 		}
 	}
 
@@ -56,14 +56,14 @@ public class RandomSuffixTest
 			}
 		}
 
-		Assertions.assertTrue(counter < 100000);
+		Assert.assertTrue(counter < 100000);
 
 		random_suffix.reset();
 		random_sufix_copy.reset();
 
 		for (int i = 0; i < 100000; i++)
 		{
-			Assertions.assertEquals(random_suffix.pick(), random_sufix_copy.pick());
+			Assert.assertEquals(random_suffix.pick(), random_sufix_copy.pick());
 		}
 	}
 
@@ -80,11 +80,11 @@ public class RandomSuffixTest
 
 			if(picked_string.isEmpty())
 			{
-				Assertions.assertTrue(relative_picker.getClass().getSimpleName().equals("NothingPicker"));
+				Assert.assertTrue(relative_picker.getClass().getSimpleName().equals("NothingPicker"));
 			}
 			else
 			{
-				Assertions.assertTrue(relative_picker.getClass().getSimpleName().equals("RandomSuffix"));
+				Assert.assertTrue(relative_picker.getClass().getSimpleName().equals("RandomSuffix"));
 			}
 
 		}

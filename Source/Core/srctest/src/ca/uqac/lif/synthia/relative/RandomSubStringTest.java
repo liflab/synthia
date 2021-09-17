@@ -112,4 +112,5 @@ public class RandomSubStringTest
 
 		Assertions.assertTrue(relative_picker.getClass().getSimpleName().equals("NothingPicker"));
 	}
+
 }
