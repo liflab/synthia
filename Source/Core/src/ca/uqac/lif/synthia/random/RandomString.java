@@ -27,6 +27,8 @@ import java.util.List;
 
 /**
  * Generates a random characters string.
+ *
+ * @author Marc-Antoine Plourde & Sylvain Hallé
  */
 public class RandomString implements Picker<String>, Seedable
 {
@@ -208,17 +210,10 @@ public class RandomString implements Picker<String>, Seedable
 		m_charIndexPicker.setSeed(seed);
 	}
 
-	//can only be used if m_lenghtPicker is a RandomInteger or RandomIndex
+	//can only be used if m_lenghtPicker is a RandomInteger.
 	public void setInterval(int min, int max)
 	{
-
-		if ( m_lengthPicker.getClass().getSimpleName().equals("RandomInteger"))
-		{
-			RandomInteger random_integer_copy = (RandomInteger) m_lengthPicker.duplicate(true);
-			random_integer_copy.setInterval(min, max);
-			m_lengthPicker = random_integer_copy;
-		}
-		else if (m_lengthPicker.getClass().getSimpleName().equals("RandomIndex"))
+		if(m_lengthPicker instanceof RandomInteger)
 		{
 			RandomInteger random_integer_copy = (RandomInteger) m_lengthPicker.duplicate(true);
 			random_integer_copy.setInterval(min, max);

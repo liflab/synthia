@@ -30,6 +30,7 @@ import ca.uqac.lif.synthia.Picker;
  * {@link AffineTransformInteger} and {@link AffineTransformFloat}.
  * @param <T> The type of number produced (i.e. <tt>Float</tt>,
  * <tt>Integer</tt>, etc.)
+ * @author Sylvain Hallé
  */
 public abstract class AffineTransform<T extends Number> implements Picker<T>
 {

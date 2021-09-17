@@ -26,6 +26,10 @@ import java.util.Map;
 import ca.uqac.lif.synthia.Picker;
 import ca.uqac.lif.synthia.util.ElementPicker.ProbabilityChoice;
 
+/**
+ * @author Sylvain Hallé
+ * @param <T> The type of the {@link Interleave}.
+ */
 public class Interleave<T> implements Picker<T>
 {
 	protected Map<Integer,Picker<T>> m_sessions;

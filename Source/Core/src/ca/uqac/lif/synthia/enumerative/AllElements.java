@@ -8,6 +8,11 @@ import ca.uqac.lif.synthia.replay.Playback;
 import java.util.ArrayList;
 import java.util.List;
 
+/**
+ *
+ * @author Marc-Antoine Plourde
+ * @param <T> The type of the {@link AllElements} {@link ca.uqac.lif.synthia.Picker}.
+ */
 public class AllElements<T> extends Playback implements EnumerativePicker, Seedable
 {
 

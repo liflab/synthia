@@ -30,6 +30,7 @@ import ca.uqac.lif.synthia.Picker;
  * String s2 = c.pick(); // "foo"
  * ...
  * </pre>
+ * @author Sylvain Hallé
  */
 public class Constant<T> implements Picker<T>
 {

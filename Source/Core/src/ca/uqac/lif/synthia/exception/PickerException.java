@@ -23,6 +23,8 @@ import ca.uqac.lif.synthia.Picker;
 /**
  * Generic runtime exception thrown by the {@link Picker}
  * interface.
+ *
+ * @author Sylvain Hallé
  */
 public class PickerException extends RuntimeException
 {

@@ -40,8 +40,11 @@ import ca.uqac.lif.synthia.random.RandomFloat;
  * instruction creates a <tt>Tick</tt> picker whose initial value is picked in
  * the interval [8,12), and where each subsequent value is incremented by a
  * number randomly chosen between 0.5 and 1.5.
+ *
+ * @author Sylvain Hallé
  */
-public class Tick implements Picker<Number>
+public class
+Tick implements Picker<Number>
 {
 	/**
 	 * Picker that determines the start value

@@ -24,6 +24,7 @@ import ca.uqac.lif.synthia.random.generators.Random;
  * Picks a Boolean value. This class actually implements a Bernoulli
  * trial, with the possibility of setting the probability of success
  * <i>p</i>.
+ * @author Marc-Antoine Plourde & Sylvain Hallé
  */
 public class RandomBoolean extends RandomPicker<Boolean>
 {

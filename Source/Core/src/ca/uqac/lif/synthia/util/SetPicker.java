@@ -25,6 +25,8 @@ import ca.uqac.lif.synthia.Picker;
 
 /**
  * Picker that merges the result of other pickers into a set.
+ *
+ * @author Sylvain Hallé
  */
 public class SetPicker extends CompositePicker<Set<Object>>
 {

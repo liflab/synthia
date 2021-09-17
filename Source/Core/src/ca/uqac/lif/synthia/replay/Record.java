@@ -36,6 +36,7 @@ import ca.uqac.lif.synthia.Picker;
  * List&lt;Integer&gt; values = rec.getValues(); // [3, 1, 4]
  * </pre>
  * @param <T> The type of objects to pick
+ * @author Sylvain Hallé
  */
 public class Record<T> implements Picker<Object>
 {

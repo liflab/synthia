@@ -6,6 +6,8 @@ import ca.uqac.lif.synthia.relative.PickIf;
 
 /**
  * A utility picker to calculate the discard ratio of a {@link PickIf} picker.
+ *
+ * @author Marc-Antoine Plourde
  */
 public class DiscardRatio implements Picker<Float>
 {
@@ -23,6 +25,7 @@ public class DiscardRatio implements Picker<Float>
 	 * Discarted generated object counter.
 	 */
 	protected int m_discartedCounter;
+
 
 	/**
 	 * Private constructor used to duplicate de picker.
@@ -69,14 +72,36 @@ public class DiscardRatio implements Picker<Float>
 		m_discartedCounter = 0;
 	}
 
+	public float getMaxRejectedRatio()
+	{
+		return m_maxRejectedRatio;
+	}
+
 	@Override
 	public Float pick()
 	{
-		float ratio = (float) m_discartedCounter / (float) m_generatedCounter;
 
-		if(ratio > m_maxRejectedRatio)
+		float ratio;
+
+		if (0 > m_maxRejectedRatio)
 		{
-			throw new GiveUpException();
+			ratio = m_maxRejectedRatio;
+		}
+		else
+		{
+			if (m_generatedCounter == 0)
+			{
+				ratio = (float) m_generatedCounter;
+			}
+			else
+			{
+				ratio = (float) m_discartedCounter / (float) m_generatedCounter;
+
+				if(ratio > m_maxRejectedRatio)
+				{
+					throw new GiveUpException();
+				}
+			}
 		}
 
 		return ratio;

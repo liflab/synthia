@@ -37,6 +37,8 @@ import ca.uqac.lif.synthia.util.Constant;
  * to points that lie on the surface of an <i>n</i>-dimensional
  * hypersphere of some radius <i>r</i>.
  *
+ * @author Sylvain Hallé
+ *
  */
 public class HyperspherePicker implements VectorPicker
 {

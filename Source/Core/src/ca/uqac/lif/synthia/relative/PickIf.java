@@ -2,11 +2,15 @@ package ca.uqac.lif.synthia.relative;
 
 import ca.uqac.lif.synthia.Picker;
 import ca.uqac.lif.synthia.exception.GiveUpException;
+import ca.uqac.lif.synthia.util.DiscardRatio;
+
+//TODO Ask Sylvain about the 1 ratio problem at the beging.
 
 /**
  * Returns object from a picker satisfying a condition.
  *
  * @param <T> The object type returned by the picker.
+ * @author Marc-Antoine Plourde
  */
 public abstract class PickIf<T> implements Picker
 {
@@ -15,6 +19,8 @@ public abstract class PickIf<T> implements Picker
 	 * The picker used for the evaluations.
 	 */
 	protected RelativePicker<T> m_picker;
+
+	protected DiscardRatio m_discardRatio;
 
 	/**
 	 * The maximal number of iteration that the while loop of the {@link #pick()} method can do.
@@ -32,8 +38,10 @@ public abstract class PickIf<T> implements Picker
 	{
 		m_picker = picker;
 		m_maxIteration = 100;
+		m_discardRatio = new DiscardRatio((float) -1);
 
 	}
+
 
 	/**
 	 * Constructor who takes a {@link #m_maxIteration} value.
@@ -42,11 +50,12 @@ public abstract class PickIf<T> implements Picker
 	 * @param max_iteration The maximum number of iterations the {@link #pick()} will try to generate
 	 *                      an object before giving up.
 	 */
-	public PickIf(RelativePicker picker, int max_iteration)
+	public PickIf(RelativePicker picker, int max_iteration, Float ratio)
 
 	{
 		m_picker = picker;
 		m_maxIteration = max_iteration;
+		m_discardRatio = new DiscardRatio(ratio);
 
 	}
 
@@ -114,6 +123,7 @@ public abstract class PickIf<T> implements Picker
 	public void reset()
 	{
 		m_picker.reset();
+		m_discardRatio.reset();
 	}
 
 	public abstract Picker duplicate(boolean with_state);

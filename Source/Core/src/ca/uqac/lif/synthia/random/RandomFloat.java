@@ -26,6 +26,7 @@ import ca.uqac.lif.synthia.relative.RelativePicker;
 
 /**
  * Picks a floating point number uniformly in an interval
+ * @author Marc-Antoine Plourde & Sylvain Hallé
  */
 public class RandomFloat extends RandomPicker<Float> implements RelativePicker<Float>
 
@@ -136,20 +137,5 @@ public class RandomFloat extends RandomPicker<Float> implements RelativePicker<F
 		}
 	}
 
-	@Override
-	public int compare(Object old_value, Object new_value)
-	{
-		if ((Float)new_value < (Float)old_value)
-		{
-			return -1;
-		}
-		else if ((Float)new_value == (Float)old_value)
-		{
-			return 0;
-		}
-		else
-		{
-			return 1;
-		}
-	}
+
 }

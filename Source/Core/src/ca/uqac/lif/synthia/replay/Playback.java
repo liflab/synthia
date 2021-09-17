@@ -42,6 +42,7 @@ import ca.uqac.lif.synthia.Picker;
  * sequence if more values are requested and the <tt>loop</tt> parameter is
  * set to false.
  * @param <T> The type of objects to return
+ * @author Sylvain Hallé
  */
 public class Playback<T> implements EnumerativePicker<T>, Picker<T>
 {

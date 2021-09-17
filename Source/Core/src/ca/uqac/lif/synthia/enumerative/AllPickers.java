@@ -16,6 +16,8 @@ import ca.uqac.lif.synthia.Picker;
  * </ol>
  * After that, the picker will throw a {@link NoMoreElementException} if the pick method is called
  * one more time.
+ *
+ * @author Marc-Antoine Plourde
  */
 public class AllPickers implements EnumerativePicker
 {

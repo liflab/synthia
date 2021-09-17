@@ -70,6 +70,9 @@ import java.util.stream.StreamSupport;
  *
  * @author  Frank Yellin
  * @since   1.0
+ *
+ * @note This is a custom version of the Oracle's Random class. This version allows to duplicate
+ * the instance of the class with the same internal states than the original one.
  */
 public class Random {
 	/** use serialVersionUID from JDK 1.1 for interoperability */

@@ -20,6 +20,9 @@ package ca.uqac.lif.synthia.random;
 
 import ca.uqac.lif.synthia.Picker;
 
+/**
+ * @author Sylvain Hallé
+ */
 public class GaussianFloat extends RandomPicker<Float>
 {
 	@Override

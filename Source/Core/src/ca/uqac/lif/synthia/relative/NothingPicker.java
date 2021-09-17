@@ -9,6 +9,7 @@ import ca.uqac.lif.synthia.exception.NoMoreElementException;
  * called.
  *
  * @param <T> The type of the picker(but not really important here).
+ * @author Marc-Antoine Plourde
  */
 public class NothingPicker<T> implements Picker, RelativePicker
 {
@@ -25,20 +26,6 @@ public class NothingPicker<T> implements Picker, RelativePicker
 		return duplicate(true);
 	}
 
-	/**
-	 *
-	 * @warning ALWAYS RETURN 0.
-	 * @param old_value
-	 * @param new_value
-	 *
-	 *
-	 * @return
-	 */
-	@Override
-	public int compare(Object old_value, Object new_value)
-	{
-		return 0;
-	}
 
 	@Override
 	public void reset()

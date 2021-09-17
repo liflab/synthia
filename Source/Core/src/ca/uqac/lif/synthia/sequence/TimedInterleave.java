@@ -6,6 +6,10 @@ import java.util.Map;
 import ca.uqac.lif.synthia.Picker;
 import ca.uqac.lif.synthia.util.ElementPicker.ProbabilityChoice;
 
+/**
+ * @author Sylvain Hallé
+ * @param <T> The type of the {@link TimedInterleave}.
+ */
 public class TimedInterleave<T> extends Interleave<T>
 {
 	protected Map<Integer,Float> m_timestamps;

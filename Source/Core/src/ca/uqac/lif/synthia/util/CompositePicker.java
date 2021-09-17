@@ -24,6 +24,8 @@ import ca.uqac.lif.synthia.Picker;
  * Picker that merges the result of other pickers into a
  * composite data structure. Descendants of this class use a
  * different data structure.
+ *
+ * @author Sylvain Hallé
  */
 public abstract class CompositePicker<T> implements Picker<T>
 {

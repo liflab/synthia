@@ -12,6 +12,8 @@ import java.util.List;
  * Picker who implements EnumerativePicker. This picker enumerates the integer values
  * from x to y and throws a {@link NoMoreElementException} if the picker picks
  * another value after the picker has finished to enumerates the values.
+ *
+ * @author Marc-Antoine Plourde
  */
 public class AllIntegers implements EnumerativePicker<Integer>, Seedable
 {

@@ -32,6 +32,7 @@ import java.util.Comparator;
  * method. One can ask whether the copied is put in the initial state, or
  * in the same state as the picker it is copied from.</li>
  * </ul>
+ * @author Sylvain Hallé
  * @param <T> The type of object that the picker picks
  */
 public interface Picker<T>

@@ -36,6 +36,7 @@ import ca.uqac.lif.synthia.Picker;
  * When adding elements, one must make sure that the sum of probabilities
  * is equal to 1.
  * @param <T> The type of the object to pick
+ * @author Sylvain Hallé
  */
 public class ElementPicker<T> implements Picker<T>
 {

@@ -7,6 +7,8 @@ import ca.uqac.lif.synthia.relative.RelativePicker;
  * A combination of {@link RandomPrefix} and {@link RandomSuffix}. This
  * {@link ca.uqac.lif.synthia.Picker} first calculates a prefix of the stringm and on this prefix,
  * then calculates a suffix and returns the resulting string.
+ *
+ * @author Marc-Antoine Plourde
  */
 public class RandomTrim extends RandomPrefix
 {

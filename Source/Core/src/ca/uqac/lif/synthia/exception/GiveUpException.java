@@ -5,6 +5,8 @@ import ca.uqac.lif.synthia.relative.PickIf;
 /**
  * An exception to throw to prevent the pick method of a {@link PickIf} picker
  * from falling into an infinite loop.
+ *
+ * @author Marc-Antoine Plourde
  */
 public class GiveUpException extends PickerException
 {

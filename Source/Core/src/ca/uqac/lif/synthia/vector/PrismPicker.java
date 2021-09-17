@@ -25,6 +25,7 @@ import ca.uqac.lif.synthia.Picker;
  * its coordinates. If each of the pickers define a possible range of
  * values, this picker amounts to generating points inside a
  * multi-dimensional "prism" --hence its name.
+ * @author Sylvain Hallé
  */
 public class PrismPicker implements VectorPicker
 {

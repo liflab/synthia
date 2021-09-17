@@ -8,6 +8,8 @@ import ca.uqac.lif.synthia.Picker;
  * (<Boolean>false</Boolean>, <Boolean>true</Boolean>) and throws a
  * {@link NoMoreElementException} if the picker picks another value after
  * the picker has finished to enumerates the boolean values.
+ *
+ * @author Marc-Antoine Plourde
  */
 public class AllBooleans implements EnumerativePicker<Boolean>
 {

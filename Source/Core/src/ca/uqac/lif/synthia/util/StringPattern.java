@@ -32,6 +32,8 @@ import ca.uqac.lif.synthia.Picker;
  * String s1 = pat.pick(); // "FhTuN is equal to false"
  * String s2 = pat.pick(); // "aGhRe is equal to true"
  * ...</pre>
+ *
+ * @author Sylvain Hallé
  */
 public class StringPattern extends CompositePicker<String>
 {	

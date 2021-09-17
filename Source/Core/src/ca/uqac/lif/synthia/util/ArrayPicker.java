@@ -22,6 +22,8 @@ import ca.uqac.lif.synthia.Picker;
 
 /**
  * Picker that merges the result of other pickers into an array.
+ *
+ * @author Marc-Antoine Plourde & Sylvain Hallé
  */
 public class ArrayPicker extends CompositePicker<Object[]>
 {

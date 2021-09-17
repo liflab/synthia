@@ -34,6 +34,8 @@ import java.util.List;
  * initial symbol of the grammar and randomly selects one of the rule's cases; it
  * recursively expands this case until the expression is only composed of terminal
  * symbols, and returns that expression.
+ *
+ * @author Sylvain Hallé
  */
 public class GrammarSentence implements Picker<String>
 {

@@ -9,6 +9,7 @@ import ca.uqac.lif.synthia.relative.RelativePicker;
 
 /**
  * {@link RandomPicker} who produces random substrings from an original one.
+ * @author Marc-Antoine Plourde
  */
 public class RandomSubString implements Picker<String>, Seedable, RelativePicker<String>
 
@@ -117,20 +118,5 @@ public class RandomSubString implements Picker<String>, Seedable, RelativePicker
 		m_charSelect.setSeed(seed);
 	}
 
-	@Override
-	public int compare(Object old_value, Object new_value)
-	{
-		if (((String)new_value).length() < ((String)old_value).length())
-		{
-			return -1;
-		}
-		else if (((String)new_value).length() == ((String)old_value).length())
-		{
-			return 0;
-		}
-		else
-		{
-			return 1;
-		}
-	}
+
 }

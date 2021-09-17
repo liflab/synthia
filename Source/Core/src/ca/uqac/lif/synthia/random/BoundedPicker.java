@@ -24,6 +24,7 @@ import ca.uqac.lif.synthia.util.Tick;
 
 /**
  * Return the value picked by a picker a defined number of times.
+ * @author Sylvain Hallé
  */
 public class BoundedPicker<T> implements Picker<T>
 {

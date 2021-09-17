@@ -12,6 +12,7 @@ import java.util.List;
  * An equivalent of {@link RandomSubString} but for lists.
  *
  * @param <T> The type of the list used by the {@link Picker}.
+ * @author Marc-Antoine Plourde
  */
 public class RandomSubList<T> implements RelativePicker
 {
@@ -125,7 +126,7 @@ public class RandomSubList<T> implements RelativePicker
 	 */
 	@Override public RelativePicker getPicker(Object element)
 	{
-		if (!element.getClass().getSimpleName().equals("ArrayList"))
+		if (!(element instanceof List))
 		{
 			return new NothingPicker();
 		}
@@ -142,23 +143,5 @@ public class RandomSubList<T> implements RelativePicker
 					(RelativePicker) m_listReducer.duplicate(true));
 		}
 	}
-
-	@Override
-	public int compare(Object old_value, Object new_value)
-	{
-		if(((List<T>)new_value).size() < ((List<T>)old_value).size())
-		{
-			return -1;
-		}
-		else if (((List<T>)new_value).size() == ((List<T>)old_value).size())
-		{
-			return 0;
-		}
-		else
-		{
-			return 1;
-		}
-	}
-
 
 }

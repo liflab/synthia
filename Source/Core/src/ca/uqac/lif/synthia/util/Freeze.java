@@ -35,6 +35,7 @@ import ca.uqac.lif.synthia.Picker;
  * ...
  * </pre>
  * @param <T> The type of object to pick
+ * @author Sylvain Hallé
  */
 public class Freeze<T> implements Picker<T>
 {

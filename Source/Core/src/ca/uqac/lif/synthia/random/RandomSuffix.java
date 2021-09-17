@@ -5,6 +5,7 @@ import ca.uqac.lif.synthia.relative.RelativePicker;
 
 /**
  * Just like {@link RandomPrefix} but for suffixes.
+ * @author Marc-Antoine Plourde
  */
 public class RandomSuffix extends RandomPrefix
 {

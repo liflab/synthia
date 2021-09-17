@@ -23,6 +23,7 @@ package ca.uqac.lif.synthia;
  * is an integer value that is used to determine the internal state of an
  * object. It is principally used for {@link Picker} instances that rely
  * on an underlying random number generator.
+ * @author Sylvain Hallé
  */
 public interface Seedable
 {
