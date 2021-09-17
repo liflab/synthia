@@ -1,36 +1,24 @@
 package ca.uqac.lif.synthia.relative;
 
 import ca.uqac.lif.synthia.exception.NoMoreElementException;
-import org.junit.jupiter.api.Test;
-import org.junit.jupiter.api.function.Executable;
-
-import static org.junit.jupiter.api.Assertions.assertThrows;
+import org.junit.Test;
+import org.junit.Assert;
 
 public class NothingPickerTest
 {
-	private void noMoreElementThrow(NothingPicker picker)
-	{assertThrows(NoMoreElementException.class, new Executable()
-		{
-			@Override
-			public void execute() throws Throwable
-			{
-				picker.pick();
-			}
-		});
-	}
 
-	@Test
+	@Test(expected = NoMoreElementException.class)
 	public void pick()
 	{
 		NothingPicker picker = new NothingPicker();
-		noMoreElementThrow(picker);
+		picker.pick();
 	}
 
-	@Test
+	@Test(expected = NoMoreElementException.class)
 	public void getPicker()
 	{
 		int element = 2;
 		NothingPicker picker = new NothingPicker();
-		noMoreElementThrow((NothingPicker) picker.getPicker(element));
+		((NothingPicker) picker.getPicker(element)).pick();
 	}
 }
