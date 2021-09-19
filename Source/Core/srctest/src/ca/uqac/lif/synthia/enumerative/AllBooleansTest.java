@@ -1,27 +1,15 @@
 package ca.uqac.lif.synthia.enumerative;
 
 import ca.uqac.lif.synthia.exception.NoMoreElementException;
-import org.junit.jupiter.api.Assertions;
-import org.junit.jupiter.api.Test;
-import org.junit.jupiter.api.function.Executable;
+import org.junit.Assert;
+import org.junit.Test;
 
-import static org.junit.jupiter.api.Assertions.assertThrows;
+
 
 public class AllBooleansTest
 {
-	private void noMoreExceptionThrow(AllBooleans picker)
-	{
-		assertThrows(NoMoreElementException.class, new Executable()
-		{
-			@Override public void execute() throws Throwable
-			{
-				picker.pick();
-			}
-		});
-	}
 
-
-	@Test
+	@Test(expected = NoMoreElementException.class)
 	public void noMoreException()
 	{
 		AllBooleans all_bool =  new AllBooleans();
@@ -31,7 +19,7 @@ public class AllBooleansTest
 			all_bool.pick();
 		}
 
-		noMoreExceptionThrow(all_bool);
+		all_bool.pick();
 	}
 
 	@Test
@@ -39,8 +27,8 @@ public class AllBooleansTest
 	{
 		AllBooleans all_bool =  new AllBooleans();
 
-		Assertions.assertEquals(false, all_bool.pick());
-		Assertions.assertEquals(true, all_bool.pick());
+		Assert.assertEquals(false, all_bool.pick());
+		Assert.assertEquals(true, all_bool.pick());
 	}
 
 	@Test
@@ -50,11 +38,11 @@ public class AllBooleansTest
 
 		for (int i = 0; i < 2; i++)
 		{
-			Assertions.assertEquals(false, all_bool.isDone());
+			Assert.assertEquals(false, all_bool.isDone());
 			all_bool.pick();
 		}
 
-		Assertions.assertEquals(true, all_bool.isDone());
+		Assert.assertEquals(true, all_bool.isDone());
 	}
 
 	@Test
@@ -65,7 +53,7 @@ public class AllBooleansTest
 
 		AllBooleans all_bool_copy = (AllBooleans) all_bool.duplicate(true);
 
-		Assertions.assertEquals(all_bool.pick(), all_bool_copy.pick());
+		Assert.assertEquals(all_bool.pick(), all_bool_copy.pick());
 	}
 
 	@Test
@@ -76,13 +64,13 @@ public class AllBooleansTest
 
 		AllBooleans all_bool_copy = (AllBooleans) all_bool.duplicate(false);
 
-		Assertions.assertNotEquals(all_bool.pick(), all_bool_copy.pick());
+		Assert.assertNotEquals(all_bool.pick(), all_bool_copy.pick());
 
 		all_bool.reset();
 		all_bool_copy.reset();
 
-		Assertions.assertEquals(all_bool.pick(), all_bool_copy.pick());
-		Assertions.assertEquals(all_bool.pick(), all_bool_copy.pick());
+		Assert.assertEquals(all_bool.pick(), all_bool_copy.pick());
+		Assert.assertEquals(all_bool.pick(), all_bool_copy.pick());
 	}
 
 	@Test
@@ -90,23 +78,13 @@ public class AllBooleansTest
 	{
 		AllBooleans all_bool =  new AllBooleans(false);
 
-		Assertions.assertEquals(false, all_bool.pick());
-		Assertions.assertEquals(true, all_bool.pick());
-	}
-
-	@Test
-	public void scrambleTrue()
-	{
-		AllBooleans all_bool = new AllBooleans(true);
-
-		while(!all_bool.isDone())
-		{
-			System.out.println(all_bool.pick());
-		}
+		Assert.assertEquals(false, all_bool.pick());
+		Assert.assertEquals(true, all_bool.pick());
 	}
 
 
-	@Test
+
+	@Test(expected = NoMoreElementException.class)
 	public void noMoreExceptionScramble()
 	{
 		AllBooleans all_bool =  new AllBooleans(true);
@@ -116,7 +94,7 @@ public class AllBooleansTest
 			all_bool.pick();
 		}
 
-		noMoreExceptionThrow(all_bool);
+		all_bool.pick();
 	}
 
 	@Test
@@ -126,11 +104,11 @@ public class AllBooleansTest
 
 		for (int i = 0; i < 2; i++)
 		{
-			Assertions.assertEquals(false, all_bool.isDone());
+			Assert.assertEquals(false, all_bool.isDone());
 			all_bool.pick();
 		}
 
-		Assertions.assertEquals(true, all_bool.isDone());
+		Assert.assertEquals(true, all_bool.isDone());
 	}
 
 	@Test
@@ -141,7 +119,7 @@ public class AllBooleansTest
 
 		AllBooleans all_bool_copy = (AllBooleans) all_bool.duplicate(true);
 
-		Assertions.assertEquals(all_bool.pick(), all_bool_copy.pick());
+		Assert.assertEquals(all_bool.pick(), all_bool_copy.pick());
 	}
 
 	@Test
@@ -152,12 +130,12 @@ public class AllBooleansTest
 
 		AllBooleans all_bool_copy = (AllBooleans) all_bool.duplicate(false);
 
-		Assertions.assertNotEquals(all_bool.pick(), all_bool_copy.pick());
+		Assert.assertNotEquals(all_bool.pick(), all_bool_copy.pick());
 
 		all_bool.reset();
 		all_bool_copy.reset();
 
-		Assertions.assertEquals(all_bool.pick(), all_bool_copy.pick());
-		Assertions.assertEquals(all_bool.pick(), all_bool_copy.pick());
+		Assert.assertEquals(all_bool.pick(), all_bool_copy.pick());
+		Assert.assertEquals(all_bool.pick(), all_bool_copy.pick());
 	}
 }

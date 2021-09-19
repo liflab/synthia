@@ -1,7 +1,6 @@
 package ca.uqac.lif.synthia.relative;
 
 import ca.uqac.lif.synthia.random.RandomFloat;
-import ca.uqac.lif.synthia.random.RandomInteger;
 import org.junit.Assert;
 import org.junit.Test;
 

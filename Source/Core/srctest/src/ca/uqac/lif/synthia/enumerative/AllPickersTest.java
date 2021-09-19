@@ -1,24 +1,12 @@
 package ca.uqac.lif.synthia.enumerative;
 
 import ca.uqac.lif.synthia.exception.NoMoreElementException;
-import org.junit.jupiter.api.Assertions;
-import org.junit.jupiter.api.Test;
-import org.junit.jupiter.api.function.Executable;
-
-import static org.junit.jupiter.api.Assertions.assertThrows;
+import org.junit.Assert;
+import org.junit.Test;
 
 public class AllPickersTest
 {
-	private void throwNoMoreException(AllPickers picker)
-	{
-		assertThrows(NoMoreElementException.class, new Executable()
-		{
-			@Override public void execute() throws Throwable
-			{
-				picker.pick();
-			}
-		});
-	}
+
 
 	private Object[] getResultsArray()
 	{
@@ -48,7 +36,7 @@ public class AllPickersTest
 			Object[] expected_results = (Object[]) results[i];
 			for (int j = 0; j < picked_results.length; j++)
 			{
-				Assertions.assertEquals(expected_results[j], picked_results[j]);
+				Assert.assertEquals(expected_results[j], picked_results[j]);
 			}
 			i++;
 		}
@@ -74,7 +62,7 @@ public class AllPickersTest
 
 			for (int j = 0; j < results.length; j++)
 			{
-				Assertions.assertEquals(results[j], results_copy[j]);
+				Assert.assertEquals(results[j], results_copy[j]);
 			}
 
 		}
@@ -106,7 +94,7 @@ public class AllPickersTest
 				{
 					counter++;
 				}
-				Assertions.assertNotEquals(results.length, counter);
+				Assert.assertNotEquals(results.length, counter);
 			}
 
 		}
@@ -121,14 +109,14 @@ public class AllPickersTest
 
 		for (int i = 0; i < 8; i++)
 		{
-			Assertions.assertEquals(false, all_picks.isDone());
+			Assert.assertEquals(false, all_picks.isDone());
 			all_picks.pick();
 		}
 
-		Assertions.assertEquals(true, all_picks.isDone());
+		Assert.assertEquals(true, all_picks.isDone());
 	}
 
-	@Test
+	@Test(expected = NoMoreElementException.class)
 	public void NoMoreException()
 	{
 		EnumerativePicker[] enum_picks = new EnumerativePicker[]{new AllBooleans(), new AllBooleans()
@@ -140,6 +128,6 @@ public class AllPickersTest
 			all_picks.pick();
 		}
 
-		throwNoMoreException(all_picks);
+		all_picks.pick();
 	}
 }
