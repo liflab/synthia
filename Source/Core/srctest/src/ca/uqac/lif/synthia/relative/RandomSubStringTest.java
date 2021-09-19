@@ -14,7 +14,7 @@ public class RandomSubStringTest
 		List<String> substrings = new SubStrings("abbc").getSubStrings();
 		RandomSubString random_substring = new RandomSubString("abbc");
 
-		for (int i = 0; i < 10000; i++)
+		for (int i = 0; i < 100; i++)
 		{
 			String picked_string = random_substring.pick();
 			Assertions.assertEquals(true, substrings.contains(picked_string));
@@ -36,7 +36,7 @@ public class RandomSubStringTest
 		RandomSubString random_substring_copy = (RandomSubString) random_substring
 				.duplicate(true);
 
-		for (int i = 0; i < 10000; i++)
+		for (int i = 0; i < 100; i++)
 		{
 			Assertions.assertEquals(random_substring.pick(),random_substring_copy.pick());
 		}
@@ -50,7 +50,7 @@ public class RandomSubStringTest
 		List<String> substrings = new SubStrings("abbc").getSubStrings();
 		RandomSubString random_substring = new RandomSubString("abbc");
 
-		for (int i = 0; i < 1000; i++)
+		for (int i = 0; i < 100; i++)
 		{
 			random_substring.pick();
 		}
@@ -59,7 +59,7 @@ public class RandomSubStringTest
 				.duplicate(false);
 
 		int counter = 0;
-		for (int i = 0; i < 10000; i++)
+		for (int i = 0; i < 100; i++)
 		{
 			if (random_substring.pick() == random_substring_copy.pick())
 			{
@@ -67,12 +67,12 @@ public class RandomSubStringTest
 			}
 
 		}
-		Assertions.assertTrue(counter < 10000);
+		Assertions.assertTrue(counter < 100);
 
 		random_substring.reset();
 		random_substring_copy.reset();
 
-		for (int i = 0; i < 10000; i++)
+		for (int i = 0; i < 100; i++)
 		{
 			Assertions.assertEquals(random_substring.pick(),random_substring_copy.pick());
 		}
@@ -96,7 +96,7 @@ public class RandomSubStringTest
 
 		RandomSubString smaller_substring = (RandomSubString) relative_substring;
 
-		for (int i = 0; i < 10000; i++)
+		for (int i = 0; i < 100; i++)
 		{
 			Assertions.assertTrue(((smaller_substring.pick().length() < "foobarbaz".length()) &&
 					(smaller_substring.pick().length() <= smaller_string.length())));

@@ -8,19 +8,9 @@ public class RandomStringTest
 {
 
 	@Test
-	public void newRandomStringHelloWorld()
-	{
-		RandomString random_string = new RandomString(10);
-		for (int i = 0; i < 10; i++)
-		{
-			System.out.println(random_string.pick());
-		}
-	}
-
-	@Test
 	public void sameValuesSameSeed()
 	{
-		for (int i = 0; i < 10000; i++)
+		for (int i = 0; i < 10; i++)
 		{
 			RandomInteger random_seed_gen = new RandomInteger(0, 1000);
 			int randomSeed = random_seed_gen.pick();
@@ -46,7 +36,7 @@ public class RandomStringTest
 		int max = 25;
 		RandomInteger random_integer = new RandomInteger(min, max);
 		RandomString random_string = new RandomString(random_integer);
-		for (int i = 0; i < 10000; i++)
+		for (int i = 0; i < 100; i++)
 		{
 			String random_val = random_string.pick();
 			Assertions.assertTrue(min <= random_val.length() && random_val.length() <= max);
@@ -61,7 +51,7 @@ public class RandomStringTest
 		RandomInteger random_integer = new RandomInteger(min, max);
 		int random_string_lenght = random_integer.pick();
 		RandomString random_string = new RandomString(random_string_lenght);
-		for (int i = 0; i < 10000; i++)
+		for (int i = 0; i < 100; i++)
 		{
 			String random_val = random_string.pick();
 			Assertions.assertEquals(random_string_lenght, random_val.length());
@@ -71,7 +61,7 @@ public class RandomStringTest
 	@Test
 	public void duplicateWithState()
 	{
-		for (int i = 0; i < 10000; i++)
+		for (int i = 0; i < 10; i++)
 		{
 			RandomString random_string = new RandomString(100);
 			for (int j = 0; j < 100; j++)
@@ -86,7 +76,7 @@ public class RandomStringTest
 	@Test
 	public void duplicateWithoutState()
 	{
-		for (int i = 0; i < 10000; i++)
+		for (int i = 0; i < 10; i++)
 		{
 			RandomString random_string = new RandomString(100);
 			for (int j = 0; j < 100; j++)

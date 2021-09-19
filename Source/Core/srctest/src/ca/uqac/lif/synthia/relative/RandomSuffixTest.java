@@ -12,7 +12,7 @@ public class RandomSuffixTest
 	{
 		String s = "foobarbaz";
 		RandomSuffix random_suffix = new RandomSuffix(s);
-		for (int i = 0; i < 10000; i++)
+		for (int i = 0; i < 100; i++)
 		{
 			Assert.assertTrue(random_suffix.pick().length() <= s.length());
 		}
@@ -23,13 +23,13 @@ public class RandomSuffixTest
 	{
 		String s = "foobarbaz";
 		RandomSuffix random_suffix = new RandomSuffix(s);
-		for (int i = 0; i < 10000; i++)
+		for (int i = 0; i < 100; i++)
 		{
 			random_suffix.pick();
 		}
 		RandomSuffix random_sufix_copy = random_suffix.duplicate(true);
 
-		for (int i = 0; i < 10000; i++)
+		for (int i = 0; i < 100; i++)
 		{
 			Assert.assertEquals(random_suffix.pick(), random_sufix_copy.pick());
 		}
@@ -40,7 +40,7 @@ public class RandomSuffixTest
 	{
 		String s = "foobarbaz";
 		RandomSuffix random_suffix = new RandomSuffix(s);
-		for (int i = 0; i < 10000; i++)
+		for (int i = 0; i < 100; i++)
 		{
 			random_suffix.pick();
 		}
@@ -48,7 +48,7 @@ public class RandomSuffixTest
 		RandomSuffix random_sufix_copy = random_suffix.duplicate(false);
 		int counter = 0;
 
-		for (int i = 0; i < 100000; i++)
+		for (int i = 0; i < 100; i++)
 		{
 			if(random_suffix.pick().equals(random_sufix_copy.pick()))
 			{
@@ -56,12 +56,12 @@ public class RandomSuffixTest
 			}
 		}
 
-		Assert.assertTrue(counter < 100000);
+		Assert.assertTrue(counter < 100);
 
 		random_suffix.reset();
 		random_sufix_copy.reset();
 
-		for (int i = 0; i < 100000; i++)
+		for (int i = 0; i < 100; i++)
 		{
 			Assert.assertEquals(random_suffix.pick(), random_sufix_copy.pick());
 		}
@@ -73,7 +73,7 @@ public class RandomSuffixTest
 		String s = "foobarbaz";
 		RandomSuffix random_suffix = new RandomSuffix(s);
 
-		for (int i = 0; i < 10000; i++)
+		for (int i = 0; i < 100; i++)
 		{
 			String picked_string = random_suffix.pick();
 			RelativePicker relative_picker = random_suffix.getPicker(picked_string);

@@ -11,7 +11,7 @@ public class RandomPrefixTest
 	{
 		String s = "foobarbaz";
 		RandomPrefix random_prefix = new RandomPrefix(s);
-		for (int i = 0; i < 10000; i++)
+		for (int i = 0; i < 100; i++)
 		{
 			Assert.assertTrue(random_prefix.pick().length() <= s.length());
 		}
@@ -22,13 +22,13 @@ public class RandomPrefixTest
 	{
 		String s = "foobarbaz";
 		RandomPrefix random_prefix = new RandomPrefix(s);
-		for (int i = 0; i < 10000; i++)
+		for (int i = 0; i < 100; i++)
 		{
 			random_prefix.pick();
 		}
 		RandomPrefix random_prefix_copy = random_prefix.duplicate(true);
 
-		for (int i = 0; i < 10000; i++)
+		for (int i = 0; i < 100; i++)
 		{
 			Assert.assertEquals(random_prefix.pick(), random_prefix_copy.pick());
 		}
@@ -39,7 +39,7 @@ public class RandomPrefixTest
 	{
 		String s = "foobarbaz";
 		RandomPrefix random_prefix = new RandomPrefix(s);
-		for (int i = 0; i < 10000; i++)
+		for (int i = 0; i < 100; i++)
 		{
 			random_prefix.pick();
 		}
@@ -47,7 +47,7 @@ public class RandomPrefixTest
 		RandomPrefix random_prefix_copy = random_prefix.duplicate(false);
 		int counter = 0;
 
-		for (int i = 0; i < 100000; i++)
+		for (int i = 0; i < 100; i++)
 		{
 			if(random_prefix.pick().equals(random_prefix_copy.pick()))
 			{
@@ -55,12 +55,12 @@ public class RandomPrefixTest
 			}
 		}
 
-		Assert.assertTrue(counter < 100000);
+		Assert.assertTrue(counter < 100);
 
 		random_prefix.reset();
 		random_prefix_copy.reset();
 
-		for (int i = 0; i < 100000; i++)
+		for (int i = 0; i < 100; i++)
 		{
 			Assert.assertEquals(random_prefix.pick(), random_prefix_copy.pick());
 		}
@@ -72,7 +72,7 @@ public class RandomPrefixTest
 		String s = "foobarbaz";
 		RandomPrefix random_prefix = new RandomPrefix(s);
 
-		for (int i = 0; i < 10000; i++)
+		for (int i = 0; i < 100; i++)
 		{
 			String picked_string = random_prefix.pick();
 			RelativePicker relative_picker = random_prefix.getPicker(picked_string);

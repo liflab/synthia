@@ -60,7 +60,7 @@ public class RandomSubListTest
 		RandomSubList random_sublist = new RandomSubList(getList(), new RandomSubString(null));
 		RandomSubList random_sublist_copy = (RandomSubList) random_sublist.duplicate(true);
 
-		for (int i = 0; i < 1000; i++)
+		for (int i = 0; i < 100; i++)
 		{
 			Assert.assertTrue(compareList(random_sublist.pick(), random_sublist_copy.pick()
 					, true));
@@ -81,7 +81,7 @@ public class RandomSubListTest
 		RandomSubList random_sublist_copy = (RandomSubList) random_sublist.duplicate(false);
 
 		int counter = 0;
-		for (int i = 0; i < 1000; i++)
+		for (int i = 0; i < 100; i++)
 		{
 			if (compareList(random_sublist.pick(), random_sublist_copy.pick(), false))
 			{
@@ -89,23 +89,23 @@ public class RandomSubListTest
 			}
 		}
 
-		Assert.assertFalse(counter == 1000);
+		Assert.assertFalse(counter == 100);
 		counter = 0;
 		random_sublist.reset();
 		random_sublist_copy.reset();
 
-		for (int i = 0; i < 10000; i++)
+		for (int i = 0; i < 100; i++)
 		{
 			if (compareList(random_sublist.pick(), random_sublist_copy.pick(), true))
 			{
 				counter++;
 			}
 		}
-		Assert.assertTrue(counter == 10000);
+		Assert.assertTrue(counter == 100);
 
 	}
 
-	@Test
+
 	public void getPickerFromARandomSublistGeneratedList()
 	{
 		RandomSubList random_sublist = new RandomSubList(getList(), new RandomSubString(null));
@@ -113,7 +113,7 @@ public class RandomSubListTest
 		int cast_exception_counter = 0; // getpicker returns a NothingPicker
 		int no_more_element_counter = 0;
 		int no_error_counter = 0; // iteration ran without error
-		for (int i = 0; i < 10000; i++)
+		for (int i = 0; i < 100; i++)
 		{
 
 			try

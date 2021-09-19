@@ -10,7 +10,7 @@ public class PoissonIntegerTest
 	public void sameValuesSameSeed()
 	{
 
-		for (int i = 0; i < 1000; i++)
+		for (int i = 0; i < 10; i++)
 		{
 			RandomInteger random_integer = new RandomInteger(0, 1000000);
 			int randomSeed = random_integer.pick();
@@ -23,7 +23,7 @@ public class PoissonIntegerTest
 			small_poisson_integer1.setSeed(randomSeed);
 			big_poisson_integer.setSeed(randomSeed1);
 			big_poisson_integer1.setSeed(randomSeed1);
-			for (int j = 0; j < 1000; j++)
+			for (int j = 0; j < 100; j++)
 			{
 				Assertions.assertEquals(small_poisson_integer.pick(), small_poisson_integer1.pick());
 				Assertions.assertEquals(big_poisson_integer.pick(), big_poisson_integer1.pick());
@@ -34,11 +34,11 @@ public class PoissonIntegerTest
 	@Test
 	public void duplicateWithState()
 	{
-		for (int i = 0; i < 1000; i++)
+		for (int i = 0; i < 10; i++)
 		{
 			PoissonInteger small_poisson_integer = new PoissonInteger(25);
 			PoissonInteger big_poisson_integer = new PoissonInteger(1000);
-			for (int j = 0; j < 1000; j++)
+			for (int j = 0; j < 100; j++)
 			{
 				small_poisson_integer.pick();
 				big_poisson_integer.pick();
@@ -53,11 +53,11 @@ public class PoissonIntegerTest
 	@Test
 	public void duplicateWithoutState()
 	{
-		for (int i = 0; i < 1000; i++)
+		for (int i = 0; i < 10; i++)
 		{
 			PoissonInteger small_poisson_integer = new PoissonInteger(25);
 			PoissonInteger big_poisson_integer = new PoissonInteger(1000);
-			for (int j = 0; j < 1000; j++)
+			for (int j = 0; j < 100; j++)
 			{
 				small_poisson_integer.pick();
 				big_poisson_integer.pick();

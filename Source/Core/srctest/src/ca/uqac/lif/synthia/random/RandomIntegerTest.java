@@ -9,7 +9,7 @@ public class RandomIntegerTest
 	@Test public void sameValuesSameSeed()
 	{
 
-		for (int i = 0; i < 10000; i++)
+		for (int i = 0; i < 10; i++)
 		{
 			RandomInteger random_seed_gen = new RandomInteger(0, 1000000);
 			RandomInteger random_integer1 = new RandomInteger(0, 1000);
@@ -17,7 +17,7 @@ public class RandomIntegerTest
 			int randomSeed = random_seed_gen.pick();
 			random_integer1.setSeed(randomSeed);
 			random_integer2.setSeed(randomSeed);
-			for (int j = 0; j < 10000; j++)
+			for (int j = 0; j < 100; j++)
 			{
 				Assertions.assertEquals(random_integer1.pick(), random_integer2.pick());
 			}
@@ -31,7 +31,7 @@ public class RandomIntegerTest
 		int min = 0;
 		int max = 25;
 		RandomInteger random_integer = new RandomInteger(min, max);
-		for (int i = 0; i < 10000; i++)
+		for (int i = 0; i < 100; i++)
 		{
 			int random_val = random_integer.pick();
 			Assertions.assertTrue(min <= random_val && random_val <= max);
@@ -41,10 +41,10 @@ public class RandomIntegerTest
 	@Test
 	public void duplicateWithState()
 	{
-		for (int i = 0; i < 10000; i++)
+		for (int i = 0; i < 10; i++)
 		{
 			RandomInteger random_integer = new RandomInteger(0, 1000);
-			for (int j = 0; j < 10000; j++)
+			for (int j = 0; j < 100; j++)
 			{
 				random_integer.pick();
 			}
@@ -56,10 +56,10 @@ public class RandomIntegerTest
 	@Test
 	public void duplicateWithoutState()
 	{
-		for (int i = 10000; i < 1; i++)
+		for (int i = 0; i < 10; i++)
 		{
 			RandomInteger random_integer = new RandomInteger(0, 1000);
-			for (int j = 0; j < 10000; j++)
+			for (int j = 0; j < 100; j++)
 			{
 				random_integer.pick();
 			}

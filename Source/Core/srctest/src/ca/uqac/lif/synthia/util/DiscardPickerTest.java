@@ -18,7 +18,7 @@ public class DiscardPickerTest
 		ratio.countAsAccepted();
 		ratio.countAsDiscarted();
 
-		Assertions.assertEquals(true,(((float)0.5) > ratio.pick()));
+		Assertions.assertTrue((float)0.5 >= ratio.pick());
 	}
 
 	@Test
@@ -31,9 +31,7 @@ public class DiscardPickerTest
 
 		ratio.reset();
 
-		float nan = 0f / 0f;
-
-		Assertions.assertEquals(nan, ratio.pick());
+		Assertions.assertEquals(0, ratio.pick());
 	}
 
 	@Test

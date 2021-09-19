@@ -7,14 +7,14 @@ public class RandomBooleanTest {
     @Test
     public void sameValuesSameSeed()
     {
-        for (int i = 0; i < 10000; i++) {
+        for (int i = 0; i < 10; i++) {
             RandomInteger random_seed = new RandomInteger(0, 1000000);
             RandomBoolean random_boolean = new RandomBoolean();
             RandomBoolean random_boolean1 = new RandomBoolean();
             int randomSeed = random_seed.pick();
             random_boolean.setSeed(randomSeed);
             random_boolean1.setSeed(randomSeed);
-            for (int j = 0; j < 10000; j++)
+            for (int j = 0; j < 100; j++)
             {
                 Assertions.assertEquals(random_boolean.pick(), random_boolean1.pick());
             }
@@ -24,10 +24,10 @@ public class RandomBooleanTest {
     @Test
     public void duplicateWithState()
     {
-        for (int i = 0; i < 10000; i++)
+        for (int i = 0; i < 10; i++)
         {
             RandomBoolean random_boolean = new RandomBoolean();
-            for (int j = 0; j < 10000; j++)
+            for (int j = 0; j < 100; j++)
             {
                 random_boolean.pick();
             }
@@ -39,10 +39,10 @@ public class RandomBooleanTest {
     @Test
     public void duplicateWithoutState()
     {
-        for (int i = 0; i < 10000; i++)
+        for (int i = 0; i < 10; i++)
         {
             RandomBoolean random_boolean = new RandomBoolean();
-            for (int j = 0; j < 10000; j++)
+            for (int j = 0; j < 100; j++)
             {
                 random_boolean.pick();
             }

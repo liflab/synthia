@@ -8,7 +8,7 @@ public class RandomFloatTest
 	@Test
 	public void SameValuesSameSeed()
 	{
-		for (int i = 0; i < 10000; i++)
+		for (int i = 0; i < 10; i++)
 		{
 			RandomInteger random_seed_gen = new RandomInteger(0, 1000000);
 			RandomFloat random_float = new RandomFloat();
@@ -16,7 +16,7 @@ public class RandomFloatTest
 			int random_seed = random_seed_gen.pick();
 			random_float.setSeed(random_seed);
 			random_float1.setSeed(random_seed);
-			for (int j = 0; j < 10000; j++)
+			for (int j = 0; j < 100; j++)
 			{
 				Assertions.assertEquals(random_float.pick(), random_float1.pick());
 			}
@@ -27,7 +27,7 @@ public class RandomFloatTest
 	public void interval()
 	{
 		RandomFloat random_float = new RandomFloat();
-		for (int i = 0; i < 10000; i++)
+		for (int i = 0; i < 100; i++)
 		{
 			float random_val = random_float.pick();
 			Assertions.assertTrue(0 <= random_val && random_val <= 1);
@@ -37,7 +37,7 @@ public class RandomFloatTest
 	@Test
 	public void duplicateWithState()
 	{
-		for (int i = 0; i < 10000; i++)
+		for (int i = 0; i < 100; i++)
 		{
 			RandomFloat random_float = new RandomFloat();
 			for (int j = 0; j < 10; j++)
@@ -52,10 +52,10 @@ public class RandomFloatTest
 	@Test
 	public void duplicateWithoutState()
 	{
-		for (int i = 0; i < 10000; i++)
+		for (int i = 0; i < 100; i++)
 		{
 			RandomFloat random_float = new RandomFloat();
-			for (int j = 0; j < 10000; j++)
+			for (int j = 0; j < 10; j++)
 			{
 				random_float.pick();
 			}

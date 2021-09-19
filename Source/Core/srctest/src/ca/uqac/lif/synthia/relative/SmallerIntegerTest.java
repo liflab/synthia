@@ -21,7 +21,7 @@ public class SmallerIntegerTest
 		RandomInteger smaller_random_int = (RandomInteger) relative_picker;
 
 
-		for (int i = 0; i < 10000; i++)
+		for (int i = 0; i < 100; i++)
 		{
 			Assertions.assertTrue(smaller_random_int.pick() < max2);
 		}

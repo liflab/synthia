@@ -11,7 +11,7 @@ public class RandomTrimTest
 	{
 		String s = "foobarbaz";
 		RandomTrim random_trim = new RandomTrim(s);
-		for (int i = 0; i < 10000; i++)
+		for (int i = 0; i < 100; i++)
 		{
 			Assert.assertTrue(random_trim.pick().length() <= s.length());
 		}
@@ -22,13 +22,13 @@ public class RandomTrimTest
 	{
 		String s = "foobarbaz";
 		RandomTrim random_trim = new RandomTrim(s);
-		for (int i = 0; i < 10000; i++)
+		for (int i = 0; i < 100; i++)
 		{
 			random_trim.pick();
 		}
 		RandomTrim random_trim_copy = random_trim.duplicate(true);
 
-		for (int i = 0; i < 10000; i++)
+		for (int i = 0; i < 100; i++)
 		{
 			Assert.assertEquals(random_trim.pick(), random_trim_copy.pick());
 		}
@@ -38,7 +38,7 @@ public class RandomTrimTest
 	public void duplicateWithoutState()
 	{
 		RandomTrim random_trim = new RandomTrim("foobarbaz");
-		for (int i = 0; i < 1000; i++)
+		for (int i = 0; i < 100; i++)
 		{
 			random_trim.pick();
 		}
@@ -46,7 +46,7 @@ public class RandomTrimTest
 		RandomTrim random_trim_copy = random_trim.duplicate(false);
 		int counter = 0;
 
-		for (int i = 0; i < 100000; i++)
+		for (int i = 0; i < 100; i++)
 		{
 			if(random_trim.pick().equals(random_trim_copy.pick()))
 			{
@@ -54,12 +54,12 @@ public class RandomTrimTest
 			}
 		}
 
-		Assert.assertTrue(counter < 100000);
+		Assert.assertTrue(counter < 100);
 
 		random_trim.reset();
 		random_trim_copy.reset();
 
-		for (int i = 0; i < 100000; i++)
+		for (int i = 0; i < 100; i++)
 		{
 			Assert.assertEquals(random_trim.pick(), random_trim_copy.pick());
 		}
@@ -71,7 +71,7 @@ public class RandomTrimTest
 		String s = "foobarbaz";
 		RandomTrim random_trim = new RandomTrim(s);
 
-		for (int i = 0; i < 10000; i++)
+		for (int i = 0; i < 100; i++)
 		{
 			String picked_string = random_trim.pick();
 			RelativePicker relative_picker = random_trim.getPicker(picked_string);

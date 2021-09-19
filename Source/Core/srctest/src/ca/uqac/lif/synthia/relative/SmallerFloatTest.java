@@ -21,7 +21,7 @@ public class SmallerFloatTest
 		RandomFloat smaller_random_float = (RandomFloat) relative_picker;
 
 
-		for (int i = 0; i < 10000; i++)
+		for (int i = 0; i < 100; i++)
 		{
 			Assert.assertTrue(smaller_random_float.pick() < max2);
 		}
