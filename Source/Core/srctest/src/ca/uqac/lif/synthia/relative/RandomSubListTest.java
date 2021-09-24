@@ -3,6 +3,7 @@ package ca.uqac.lif.synthia.relative;
 import ca.uqac.lif.synthia.exception.NoMoreElementException;
 import ca.uqac.lif.synthia.random.RandomSubList;
 import ca.uqac.lif.synthia.random.RandomSubString;
+import ca.uqac.lif.synthia.random.SeedsForRandomGenerationTests;
 import org.junit.Assert;
 import org.junit.Test;
 
@@ -44,67 +45,74 @@ public class RandomSubListTest
 	}
 
 	@Test
-	public void subList()
-	{
-		RandomSubList random_sublist = new RandomSubList(getList(), new RandomSubString(null));
-		for (int i = 0; i < 10; i++)
-		{
-			System.out.println(random_sublist.pick());
-		}
-
-	}
-
-	@Test
 	public void duplicateWithState()
 	{
-		RandomSubList random_sublist = new RandomSubList(getList(), new RandomSubString(null));
-		RandomSubList random_sublist_copy = (RandomSubList) random_sublist.duplicate(true);
+		SeedsForRandomGenerationTests seeds = new SeedsForRandomGenerationTests();
+		List<Integer> int_list = seeds.getGeneralSeeds();
 
-		for (int i = 0; i < 100; i++)
+		for (int i = 0; i < 10; i++)
 		{
-			Assert.assertTrue(compareList(random_sublist.pick(), random_sublist_copy.pick()
-					, true));
+			RandomSubString s = new RandomSubString(null);
+			s.setSeed(int_list.get(i));
+
+			RandomSubList random_sublist = new RandomSubList(getList(), s);
+			RandomSubList random_sublist_copy = (RandomSubList) random_sublist.duplicate(true);
+
+			for (int j = 0; j < 100; j++)
+			{
+				Assert.assertTrue(compareList(random_sublist.pick(), random_sublist_copy.pick()
+						, true));
+			}
 		}
+
 	}
 
 	@Test
 	public void duplicateWithoutState()
 	{
-		RandomSubList random_sublist = new RandomSubList(getList(), new RandomSubString(null));
+		SeedsForRandomGenerationTests seeds = new SeedsForRandomGenerationTests();
+		List<Integer> int_list = seeds.getGeneralSeeds();
 
-
-		for (int i = 0; i < 100; i++)
+		for (int i = 0; i < 10; i++)
 		{
-			random_sublist.pick();
-		}
+			RandomSubString s = new RandomSubString(null);
+			s.setSeed(int_list.get(i));
 
-		RandomSubList random_sublist_copy = (RandomSubList) random_sublist.duplicate(false);
+			RandomSubList random_sublist = new RandomSubList(getList(), s);
 
-		int counter = 0;
-		for (int i = 0; i < 100; i++)
-		{
-			if (compareList(random_sublist.pick(), random_sublist_copy.pick(), false))
+			for (int j = 0; j < 100; j++)
 			{
-				counter++;
+				random_sublist.pick();
 			}
-		}
 
-		Assert.assertFalse(counter == 100);
-		counter = 0;
-		random_sublist.reset();
-		random_sublist_copy.reset();
+			RandomSubList random_sublist_copy = (RandomSubList) random_sublist.duplicate(false);
 
-		for (int i = 0; i < 100; i++)
-		{
-			if (compareList(random_sublist.pick(), random_sublist_copy.pick(), true))
+			int counter = 0;
+			for (int j = 0; j < 100; j++)
 			{
-				counter++;
+				if (compareList(random_sublist.pick(), random_sublist_copy.pick(), false))
+				{
+					counter++;
+				}
 			}
+
+			Assert.assertFalse(counter == 100);
+			counter = 0;
+			random_sublist.reset();
+			random_sublist_copy.reset();
+
+			for (int j = 0; j < 100; j++)
+			{
+				if (compareList(random_sublist.pick(), random_sublist_copy.pick(), true))
+				{
+					counter++;
+				}
+			}
+			Assert.assertTrue(counter == 100);
+
 		}
-		Assert.assertTrue(counter == 100);
 
 	}
-
 
 	public void getPickerFromARandomSublistGeneratedList()
 	{

@@ -3,18 +3,20 @@ package ca.uqac.lif.synthia.random;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
 
+import java.util.List;
+
 public class RandomIntegerTest
 {
 
 	@Test public void sameValuesSameSeed()
 	{
-
+		SeedsForRandomGenerationTests seeds = new SeedsForRandomGenerationTests();
+		List<Integer> int_list = seeds.getGeneralSeeds();
 		for (int i = 0; i < 10; i++)
 		{
-			RandomInteger random_seed_gen = new RandomInteger(0, 1000000);
 			RandomInteger random_integer1 = new RandomInteger(0, 1000);
 			RandomInteger random_integer2 = new RandomInteger(0, 1000);
-			int randomSeed = random_seed_gen.pick();
+			int randomSeed = int_list.get(i);
 			random_integer1.setSeed(randomSeed);
 			random_integer2.setSeed(randomSeed);
 			for (int j = 0; j < 100; j++)
@@ -30,20 +32,30 @@ public class RandomIntegerTest
 	{
 		int min = 0;
 		int max = 25;
-		RandomInteger random_integer = new RandomInteger(min, max);
-		for (int i = 0; i < 100; i++)
+		SeedsForRandomGenerationTests seeds = new SeedsForRandomGenerationTests();
+		List<Integer> int_list = seeds.getGeneralSeeds();
+		for (int i = 0; i < 10; i++)
 		{
-			int random_val = random_integer.pick();
-			Assertions.assertTrue(min <= random_val && random_val <= max);
+			RandomInteger random_integer = new RandomInteger(min, max);
+			random_integer.setSeed(int_list.get(i));
+			for (int j = 0; j < 100; j++)
+			{
+				int random_val = random_integer.pick();
+				Assertions.assertTrue(min <= random_val && random_val <= max);
+			}
 		}
+
 	}
 
 	@Test
 	public void duplicateWithState()
 	{
+		SeedsForRandomGenerationTests seeds = new SeedsForRandomGenerationTests();
+		List<Integer> int_list = seeds.getGeneralSeeds();
 		for (int i = 0; i < 10; i++)
 		{
 			RandomInteger random_integer = new RandomInteger(0, 1000);
+			random_integer.setSeed(int_list.get(i));
 			for (int j = 0; j < 100; j++)
 			{
 				random_integer.pick();
@@ -53,24 +65,43 @@ public class RandomIntegerTest
 		}
 	}
 
+
 	@Test
 	public void duplicateWithoutState()
 	{
+		SeedsForRandomGenerationTests seeds = new SeedsForRandomGenerationTests();
+		List<Integer> int_list = seeds.getGeneralSeeds();
 		for (int i = 0; i < 10; i++)
 		{
-			RandomInteger random_integer = new RandomInteger(0, 1000);
+			RandomInteger random_integer = new RandomInteger(0,25);
+			random_integer.setSeed(int_list.get(i));
 			for (int j = 0; j < 100; j++)
 			{
 				random_integer.pick();
 			}
 			RandomInteger random_integer_copy = random_integer.duplicate(false);
-			Assertions.assertNotEquals(random_integer.pick(), random_integer_copy.pick());
+
+
+			int counter =0;
+			for (int j = 0; j < 5; j++)
+			{
+				int x =random_integer.pick();
+				int y= random_integer_copy.pick();
+				if(x==y)
+				{
+					counter++;
+				}
+			}
+			Assertions.assertNotEquals(5, counter);
 			random_integer.reset();
 			random_integer_copy.reset();
-			Assertions.assertEquals(random_integer.pick(), random_integer_copy.pick());
+			for (int j = 0; j < 105; j++)
+			{
+				Assertions.assertEquals(random_integer.pick(), random_integer_copy.pick());
+			}
+
 		}
 	}
-
 
 
 }

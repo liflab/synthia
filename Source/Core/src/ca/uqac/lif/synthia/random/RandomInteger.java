@@ -40,6 +40,7 @@ public class RandomInteger extends RandomPicker<Integer> implements RelativePick
 	 */
 	protected int m_max;
 
+	//TODO: talk to sylvain about the default interval problem in test
 	/**
 	 * Default constructor
 	 */

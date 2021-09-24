@@ -1,6 +1,7 @@
 package ca.uqac.lif.synthia.relative;
 
 import ca.uqac.lif.synthia.random.RandomSubString;
+import ca.uqac.lif.synthia.random.SeedsForRandomGenerationTests;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
 
@@ -12,95 +13,122 @@ public class RandomSubStringTest
 	public void subString()
 	{
 		List<String> substrings = new SubStrings("abbc").getSubStrings();
-		RandomSubString random_substring = new RandomSubString("abbc");
-
-		for (int i = 0; i < 100; i++)
+		SeedsForRandomGenerationTests seeds = new SeedsForRandomGenerationTests();
+		List<Integer> int_list = seeds.getGeneralSeeds();
+		for (int i = 0; i < 10; i++)
 		{
-			String picked_string = random_substring.pick();
-			Assertions.assertEquals(true, substrings.contains(picked_string));
+			RandomSubString random_substring = new RandomSubString("abbc");
+			random_substring.setSeed(int_list.get(i));
+			for (int j = 0; j < 100; j++)
+			{
+				String picked_string = random_substring.pick();
+				Assertions.assertEquals(true, substrings.contains(picked_string));
+			}
 		}
+
+
 
 	}
 
 	@Test
 	public void duplicateWithState()
 	{
-		List<String> substrings = new SubStrings("abbc").getSubStrings();
-		RandomSubString random_substring = new RandomSubString("abbc");
 
-		for (int i = 0; i < 100; i++)
+		SeedsForRandomGenerationTests seeds = new SeedsForRandomGenerationTests();
+		List<Integer> int_list = seeds.getGeneralSeeds();
+		for (int i = 0; i < 10; i++)
 		{
-			random_substring.pick();
+			RandomSubString random_substring = new RandomSubString("abbc");
+			random_substring.setSeed(int_list.get(i));
+
+			for (int j = 0; j < 100; j++)
+			{
+				random_substring.pick();
+			}
+
+			RandomSubString random_substring_copy = (RandomSubString) random_substring
+					.duplicate(true);
+
+			for (int j = 0; j < 100; j++)
+			{
+				Assertions.assertEquals(random_substring.pick(),random_substring_copy.pick());
+			}
 		}
-
-		RandomSubString random_substring_copy = (RandomSubString) random_substring
-				.duplicate(true);
-
-		for (int i = 0; i < 100; i++)
-		{
-			Assertions.assertEquals(random_substring.pick(),random_substring_copy.pick());
-		}
-
 
 	}
 
 	@Test
 	public void duplicateWithoutState()
 	{
-		List<String> substrings = new SubStrings("abbc").getSubStrings();
-		RandomSubString random_substring = new RandomSubString("abbc");
 
-		for (int i = 0; i < 100; i++)
+		SeedsForRandomGenerationTests seeds = new SeedsForRandomGenerationTests();
+		List<Integer> int_list = seeds.getGeneralSeeds();
+		for (int i = 0; i < 10; i++)
 		{
-			random_substring.pick();
-		}
+			RandomSubString random_substring = new RandomSubString("abbc");
+			random_substring.setSeed(int_list.get(i));
 
-		RandomSubString random_substring_copy = (RandomSubString) random_substring
-				.duplicate(false);
-
-		int counter = 0;
-		for (int i = 0; i < 100; i++)
-		{
-			if (random_substring.pick() == random_substring_copy.pick())
+			for (int j = 0; j < 100; j++)
 			{
-				counter ++;
+				random_substring.pick();
 			}
 
-		}
-		Assertions.assertTrue(counter < 100);
+			RandomSubString random_substring_copy = (RandomSubString) random_substring
+					.duplicate(false);
 
-		random_substring.reset();
-		random_substring_copy.reset();
+			int counter = 0;
+			for (int j = 0; j < 100; j++)
+			{
+				if (random_substring.pick() == random_substring_copy.pick())
+				{
+					counter ++;
+				}
 
-		for (int i = 0; i < 100; i++)
-		{
-			Assertions.assertEquals(random_substring.pick(),random_substring_copy.pick());
+			}
+			Assertions.assertTrue(counter < 100);
+
+			random_substring.reset();
+			random_substring_copy.reset();
+
+			for (int j = 0; j < 100; j++)
+			{
+				Assertions.assertEquals(random_substring.pick(),random_substring_copy.pick());
+			}
 		}
+
+
 	}
 
 	@Test
 	public void getPicker()
 	{
-		List<String> substrings = new SubStrings("foobarbaz").getSubStrings();
-		RandomSubString random_substring = new RandomSubString("foobarbaz");
 
-		String smaller_string = random_substring.pick();
-
-		while(smaller_string.equals("foobarbaz") || (smaller_string.equals("")))
+		SeedsForRandomGenerationTests seeds = new SeedsForRandomGenerationTests();
+		List<Integer> int_list = seeds.getGeneralSeeds();
+		for (int i = 0; i < 10; i++)
 		{
-			smaller_string = random_substring.pick();
+			RandomSubString random_substring = new RandomSubString("abbc");
+			random_substring.setSeed(int_list.get(i));
+			String smaller_string = random_substring.pick();
+
+			while(smaller_string.equals("foobarbaz") || (smaller_string.equals("")))
+			{
+				smaller_string = random_substring.pick();
+			}
+
+			RelativePicker relative_substring = random_substring.getPicker(smaller_string);
+			Assertions.assertTrue(relative_substring.getClass().getSimpleName().equals("RandomSubString"));
+
+			RandomSubString smaller_substring = (RandomSubString) relative_substring;
+
+			for (int j = 0; j < 100; j++)
+			{
+				Assertions.assertTrue(((smaller_substring.pick().length() < "foobarbaz".length()) &&
+						(smaller_substring.pick().length() <= smaller_string.length())));
+			}
 		}
 
-		RelativePicker relative_substring = random_substring.getPicker(smaller_string);
-		Assertions.assertTrue(relative_substring.getClass().getSimpleName().equals("RandomSubString"));
 
-		RandomSubString smaller_substring = (RandomSubString) relative_substring;
-
-		for (int i = 0; i < 100; i++)
-		{
-			Assertions.assertTrue(((smaller_substring.pick().length() < "foobarbaz".length()) &&
-					(smaller_substring.pick().length() <= smaller_string.length())));
-		}
 
 	}
 

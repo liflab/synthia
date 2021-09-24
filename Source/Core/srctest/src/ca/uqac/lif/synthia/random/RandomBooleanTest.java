@@ -3,17 +3,21 @@ package ca.uqac.lif.synthia.random;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
 
+import java.util.List;
+
 public class RandomBooleanTest {
     @Test
     public void sameValuesSameSeed()
     {
+        SeedsForRandomGenerationTests seeds = new SeedsForRandomGenerationTests();
+        List<Integer> int_list = seeds.getGeneralSeeds();
         for (int i = 0; i < 10; i++) {
-            RandomInteger random_seed = new RandomInteger(0, 1000000);
+
+            int random_seed = int_list.get(i);
             RandomBoolean random_boolean = new RandomBoolean();
             RandomBoolean random_boolean1 = new RandomBoolean();
-            int randomSeed = random_seed.pick();
-            random_boolean.setSeed(randomSeed);
-            random_boolean1.setSeed(randomSeed);
+            random_boolean.setSeed(random_seed);
+            random_boolean1.setSeed(random_seed);
             for (int j = 0; j < 100; j++)
             {
                 Assertions.assertEquals(random_boolean.pick(), random_boolean1.pick());
@@ -24,9 +28,12 @@ public class RandomBooleanTest {
     @Test
     public void duplicateWithState()
     {
+        SeedsForRandomGenerationTests seeds = new SeedsForRandomGenerationTests();
+        List<Integer> int_list = seeds.getGeneralSeeds();
         for (int i = 0; i < 10; i++)
         {
             RandomBoolean random_boolean = new RandomBoolean();
+            random_boolean.setSeed(int_list.get(i));
             for (int j = 0; j < 100; j++)
             {
                 random_boolean.pick();
@@ -39,9 +46,12 @@ public class RandomBooleanTest {
     @Test
     public void duplicateWithoutState()
     {
+        SeedsForRandomGenerationTests seeds = new SeedsForRandomGenerationTests();
+        List<Integer> int_list = seeds.getGeneralSeeds();
         for (int i = 0; i < 10; i++)
         {
             RandomBoolean random_boolean = new RandomBoolean();
+            random_boolean.setSeed(int_list.get(i));
             for (int j = 0; j < 100; j++)
             {
                 random_boolean.pick();

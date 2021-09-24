@@ -3,26 +3,26 @@ package ca.uqac.lif.synthia.random;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
 
+import java.util.List;
 
 public class PoissonIntegerTest
 {
 	@Test
 	public void sameValuesSameSeed()
 	{
-
+		SeedsForRandomGenerationTests seeds = new SeedsForRandomGenerationTests();
+		List<Integer> int_list = seeds.getGeneralSeeds();
 		for (int i = 0; i < 10; i++)
 		{
-			RandomInteger random_integer = new RandomInteger(0, 1000000);
-			int randomSeed = random_integer.pick();
-			int randomSeed1 = random_integer.pick();
+			int randomSeed = int_list.get(i);
 			PoissonInteger small_poisson_integer = new PoissonInteger(25);
 			PoissonInteger small_poisson_integer1 = new PoissonInteger(25);
 			PoissonInteger big_poisson_integer = new PoissonInteger(1000);
 			PoissonInteger big_poisson_integer1 = new PoissonInteger(1000);
 			small_poisson_integer.setSeed(randomSeed);
 			small_poisson_integer1.setSeed(randomSeed);
-			big_poisson_integer.setSeed(randomSeed1);
-			big_poisson_integer1.setSeed(randomSeed1);
+			big_poisson_integer.setSeed(randomSeed);
+			big_poisson_integer1.setSeed(randomSeed);
 			for (int j = 0; j < 100; j++)
 			{
 				Assertions.assertEquals(small_poisson_integer.pick(), small_poisson_integer1.pick());
@@ -34,10 +34,15 @@ public class PoissonIntegerTest
 	@Test
 	public void duplicateWithState()
 	{
+		SeedsForRandomGenerationTests seeds = new SeedsForRandomGenerationTests();
+		List<Integer> int_list = seeds.getGeneralSeeds();
 		for (int i = 0; i < 10; i++)
 		{
+			int randomSeed = int_list.get(i);
 			PoissonInteger small_poisson_integer = new PoissonInteger(25);
 			PoissonInteger big_poisson_integer = new PoissonInteger(1000);
+			small_poisson_integer.setSeed(randomSeed);
+			big_poisson_integer.setSeed(randomSeed);
 			for (int j = 0; j < 100; j++)
 			{
 				small_poisson_integer.pick();
@@ -53,10 +58,15 @@ public class PoissonIntegerTest
 	@Test
 	public void duplicateWithoutState()
 	{
+		SeedsForRandomGenerationTests seeds = new SeedsForRandomGenerationTests();
+		List<Integer> int_list = seeds.getGeneralSeeds();
 		for (int i = 0; i < 10; i++)
 		{
+			int randomSeed = int_list.get(i);
 			PoissonInteger small_poisson_integer = new PoissonInteger(25);
 			PoissonInteger big_poisson_integer = new PoissonInteger(1000);
+			small_poisson_integer.setSeed(randomSeed);
+			big_poisson_integer.setSeed(randomSeed);
 			for (int j = 0; j < 100; j++)
 			{
 				small_poisson_integer.pick();

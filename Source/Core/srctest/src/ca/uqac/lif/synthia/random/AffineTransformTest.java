@@ -4,14 +4,19 @@ import ca.uqac.lif.synthia.replay.Playback;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
 
+import java.util.List;
+
 public class AffineTransformTest
 {
 	@ Test
   public void sameValuesSameSeedInteger()
 	{
+		SeedsForRandomGenerationTests seeds = new SeedsForRandomGenerationTests();
+		List<Integer> int_list = seeds.getGeneralSeeds();
 		for (int i = 0; i < 10; i++)
 		{
 			RandomInteger random_integer = new RandomInteger(0, 1000000);
+			random_integer.setSeed(int_list.get(i));
 			int random_seed = random_integer.pick();
 			int random_val = random_integer.pick();
 			RandomInteger random_integer1 = new RandomInteger(0, 1000);
@@ -32,27 +37,36 @@ public class AffineTransformTest
 	@ Test
   public void integerInterval()
 	{
-		int min = 0;
-		int max = 25;
-		RandomInteger random_integer = new RandomInteger(min, max);
-		RandomInteger random_integer2 = new RandomInteger(0, 100000);
-		random_integer.setSeed(random_integer2.pick());
-		AffineTransform.AffineTransformInteger affine_transform_integer = new AffineTransform
-        .AffineTransformInteger(random_integer, 2, 0);
-		for (int i = 0; i < 100; i++)
+		SeedsForRandomGenerationTests seeds = new SeedsForRandomGenerationTests();
+		List<Integer> int_list = seeds.getGeneralSeeds();
+		for (int j=0; j<10;j++)
 		{
-			int random_val = affine_transform_integer.pick();
-			Assertions.assertTrue(min <= random_val && random_val <= (2 * max));
+			int min = 0;
+			int max = 25;
+			RandomInteger random_integer = new RandomInteger(min, max);
+			random_integer.setSeed(int_list.get(j));
+			AffineTransform.AffineTransformInteger affine_transform_integer = new AffineTransform
+					.AffineTransformInteger(random_integer, 2, 0);
+			for (int i = 0; i < 100; i++)
+			{
+				int random_val = affine_transform_integer.pick();
+				Assertions.assertTrue(min <= random_val && random_val <= (2 * max));
+			}
 		}
+
 	}
 
 	@ Test
   public void sameValuesSameSeedFloat()
 	{
+		SeedsForRandomGenerationTests seeds = new SeedsForRandomGenerationTests();
+		List<Integer> int_list = seeds.getGeneralSeeds();
 		for (int i = 0; i < 10; i++)
 		{
+			int random_seed = int_list.get(i);
 			RandomInteger random_integer = new RandomInteger(0, 1000000);
-			int random_seed = random_integer.pick();
+			random_integer.setSeed(random_seed);
+
 			int random_val = random_integer.pick();
 			RandomFloat random_float = new RandomFloat();
 			RandomFloat random_float1 = new RandomFloat();
@@ -76,18 +90,24 @@ public class AffineTransformTest
     @ Test
     public void floatInterval()
     {
-        int min = 0;
-        int max = 25;
-        RandomFloat random_float = new RandomFloat(min, max);
-        RandomInteger random_integer = new RandomInteger(0, 100000);
-        random_float.setSeed(random_integer.pick());
-        AffineTransform.AffineTransformFloat affine_transform_float = new AffineTransform
-            .AffineTransformFloat(random_float, 2, 0);
-        for (int i = 0; i < 100; i++)
-        {
-            float random_val = affine_transform_float.pick();
-            Assertions.assertTrue(min <= random_val && random_val <= (2 * max));
-        }
+			SeedsForRandomGenerationTests seeds = new SeedsForRandomGenerationTests();
+			List<Integer> int_list = seeds.getGeneralSeeds();
+			for(int j=0; j<10; j++)
+			{
+				int min = 0;
+				int max = 25;
+				int random_seed = int_list.get(j);
+				RandomFloat random_float = new RandomFloat(min, max);
+				random_float.setSeed(random_seed);
+				AffineTransform.AffineTransformFloat affine_transform_float = new AffineTransform
+						.AffineTransformFloat(random_float, 2, 0);
+				for (int i = 0; i < 100; i++)
+				{
+					float random_val = affine_transform_float.pick();
+					Assertions.assertTrue(min <= random_val && random_val <= (2 * max));
+				}
+			}
+
     }
 
 	@Test
@@ -119,11 +139,16 @@ public class AffineTransformTest
 	@Test
 	public void duplicateWithStateFloat()
 	{
+		SeedsForRandomGenerationTests seeds = new SeedsForRandomGenerationTests();
+		List<Integer> int_list = seeds.getGeneralSeeds();
 		for (int i = 0; i < 10; i++)
 		{
+			int random_seed = int_list.get(i);
 			RandomInteger random_integer = new RandomInteger(0, 1000000);
+			random_integer.setSeed(random_seed);
 			int random_val = random_integer.pick();
 			RandomFloat random_float = new RandomFloat();
+			random_float.setSeed(random_seed);
 			AffineTransform.AffineTransformFloat affine_transform_float = new AffineTransform
 					.AffineTransformFloat(random_float, random_val, 0);
 			AffineTransform.AffineTransformFloat affine_transform_float_copy = affine_transform_float
@@ -139,11 +164,16 @@ public class AffineTransformTest
 	@Test
 	public void duplicateWithoutStateFloat()
 	{
+		SeedsForRandomGenerationTests seeds = new SeedsForRandomGenerationTests();
+		List<Integer> int_list = seeds.getGeneralSeeds();
 		for (int i = 0; i < 10; i++)
 		{
+			int random_seed = int_list.get(i);
 			RandomInteger random_integer = new RandomInteger(0, 1000000);
+			random_integer.setSeed(random_seed);
 			int random_val = random_integer.pick();
 			RandomFloat random_float = new RandomFloat();
+			random_float.setSeed(random_seed);
 			AffineTransform.AffineTransformFloat affine_transform_float = new AffineTransform
 					.AffineTransformFloat(random_float, random_val, 0);
 			for (int j = 0; j < 100; j++)
@@ -164,11 +194,16 @@ public class AffineTransformTest
 	@Test
 	public void duplicateWithStateInteger()
 	{
+		SeedsForRandomGenerationTests seeds = new SeedsForRandomGenerationTests();
+		List<Integer> int_list = seeds.getGeneralSeeds();
 		for (int i = 0; i < 10; i++)
 		{
-			RandomInteger random_integer = new RandomInteger(0, 1000);
+			int random_seed = int_list.get(i);
+			RandomInteger random_integer = new RandomInteger(0, 1000000);
+			random_integer.setSeed(random_seed);
 			int random_val = random_integer.pick();
 			RandomInteger random_integer1 = new RandomInteger(0, 1000);
+			random_integer1.setSeed(random_seed);
 			AffineTransform.AffineTransformInteger affine_transform_integer = new AffineTransform
 					.AffineTransformInteger(random_integer1, random_val, 0);
 			for (int j = 0; j < 100; j++)
@@ -185,11 +220,15 @@ public class AffineTransformTest
 	@Test
 	public void duplicateWithoutStateInteger()
 	{
+		SeedsForRandomGenerationTests seeds = new SeedsForRandomGenerationTests();
+		List<Integer> int_list = seeds.getGeneralSeeds();
 		for (int i = 0; i < 10; i++)
 		{
-			RandomInteger random_integer = new RandomInteger(0, 1000);
-			int random_val = random_integer.pick();
+			int random_seed = int_list.get(i);
+			RandomInteger random_integer = new RandomInteger(0, 1000000);
+			random_integer.setSeed(random_seed);
 			RandomInteger random_integer1 = new RandomInteger(0, 1000);
+			random_integer1.setSeed(random_seed);
 
 			AffineTransform.AffineTransformInteger affine_transform_integer = new AffineTransform
 					.AffineTransformInteger(random_integer1, 1, 0);

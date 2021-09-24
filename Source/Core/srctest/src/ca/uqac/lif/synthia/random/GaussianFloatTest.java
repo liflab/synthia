@@ -3,18 +3,22 @@ package ca.uqac.lif.synthia.random;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
 
+import java.util.List;
+
 public class GaussianFloatTest {
 
         @Test
         public void sameValuesSameSeed(){
+          SeedsForRandomGenerationTests seeds = new SeedsForRandomGenerationTests();
+          List<Integer> int_list = seeds.getGeneralSeeds();
             for (int i = 0; i < 10; i++) {
-                RandomInteger random_integer=new RandomInteger(0, 1000000);
-                int random_seed=random_integer.pick();
+                int random_seed=int_list.get(i);
                 GaussianFloat gaussian_float=new GaussianFloat();
                 GaussianFloat gaussian_float1=new GaussianFloat();
                 gaussian_float.setSeed(random_seed);
                 gaussian_float1.setSeed(random_seed);
-                for (int j = 0; j < 100; j++) {
+                for (int j = 0; j < 100; j++)
+                {
                     Assertions.assertEquals(gaussian_float.pick(), gaussian_float1.pick());
                 }
             }
@@ -23,9 +27,12 @@ public class GaussianFloatTest {
   @Test
   public void duplicateWithState()
   {
-    for (int i = 0; i < 10; i++)
-    {
+    SeedsForRandomGenerationTests seeds = new SeedsForRandomGenerationTests();
+    List<Integer> int_list = seeds.getGeneralSeeds();
+    for (int i = 0; i < 10; i++) {
+      int random_seed=int_list.get(i);
       GaussianFloat gaussian_float=new GaussianFloat();
+      gaussian_float.setSeed(random_seed);
       for (int j = 0; j < 100; j++)
       {
         gaussian_float.pick();
@@ -38,9 +45,12 @@ public class GaussianFloatTest {
   @Test
   public void duplicateWithoutState()
   {
-    for (int i = 0; i < 10; i++)
-    {
+    SeedsForRandomGenerationTests seeds = new SeedsForRandomGenerationTests();
+    List<Integer> int_list = seeds.getGeneralSeeds();
+    for (int i = 0; i < 10; i++) {
+      int random_seed=int_list.get(i);
       GaussianFloat gaussian_float=new GaussianFloat();
+      gaussian_float.setSeed(random_seed);
       for (int j = 0; j < 100; j++)
       {
         gaussian_float.pick();

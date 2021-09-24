@@ -1,8 +1,11 @@
 package ca.uqac.lif.synthia.relative;
 
 import ca.uqac.lif.synthia.random.RandomTrim;
+import ca.uqac.lif.synthia.random.SeedsForRandomGenerationTests;
 import org.junit.Assert;
 import org.junit.Test;
+
+import java.util.List;
 
 public class RandomTrimTest
 {
@@ -10,81 +13,113 @@ public class RandomTrimTest
 	public void property()
 	{
 		String s = "foobarbaz";
-		RandomTrim random_trim = new RandomTrim(s);
-		for (int i = 0; i < 100; i++)
+		SeedsForRandomGenerationTests seeds = new SeedsForRandomGenerationTests();
+		List<Integer> int_list = seeds.getGeneralSeeds();
+		for (int i = 0; i < 10; i++)
 		{
-			Assert.assertTrue(random_trim.pick().length() <= s.length());
+			RandomTrim random_trim = new RandomTrim(s);
+			random_trim.setSeed(int_list.get(i));
+
+			for (int j = 0; j < 100; j++)
+			{
+				Assert.assertTrue(random_trim.pick().length() <= s.length());
+			}
 		}
+
 	}
 
 	@Test
 	public void duplicateWithState()
 	{
 		String s = "foobarbaz";
-		RandomTrim random_trim = new RandomTrim(s);
-		for (int i = 0; i < 100; i++)
+		SeedsForRandomGenerationTests seeds = new SeedsForRandomGenerationTests();
+		List<Integer> int_list = seeds.getGeneralSeeds();
+		for (int i = 0; i < 10; i++)
 		{
-			random_trim.pick();
-		}
-		RandomTrim random_trim_copy = random_trim.duplicate(true);
+			RandomTrim random_trim = new RandomTrim(s);
+			random_trim.setSeed(int_list.get(i));
 
-		for (int i = 0; i < 100; i++)
-		{
-			Assert.assertEquals(random_trim.pick(), random_trim_copy.pick());
+			for (int j = 0; j < 100; j++)
+			{
+				random_trim.pick();
+			}
+			RandomTrim random_trim_copy = random_trim.duplicate(true);
+
+			for (int j = 0; j < 100; j++)
+			{
+				Assert.assertEquals(random_trim.pick(), random_trim_copy.pick());
+			}
 		}
+
 	}
 
 	@Test
 	public void duplicateWithoutState()
 	{
-		RandomTrim random_trim = new RandomTrim("foobarbaz");
-		for (int i = 0; i < 100; i++)
+		String s = "foobarbaz";
+		SeedsForRandomGenerationTests seeds = new SeedsForRandomGenerationTests();
+		List<Integer> int_list = seeds.getGeneralSeeds();
+		for (int i = 0; i < 10; i++)
 		{
-			random_trim.pick();
-		}
+			RandomTrim random_trim = new RandomTrim(s);
+			random_trim.setSeed(int_list.get(i));
 
-		RandomTrim random_trim_copy = random_trim.duplicate(false);
-		int counter = 0;
-
-		for (int i = 0; i < 100; i++)
-		{
-			if(random_trim.pick().equals(random_trim_copy.pick()))
+			for (int j = 0; j < 100; j++)
 			{
-				counter ++;
+				random_trim.pick();
+			}
+
+			RandomTrim random_trim_copy = random_trim.duplicate(false);
+			int counter = 0;
+
+			for (int j = 0; j < 100; j++)
+			{
+				if(random_trim.pick().equals(random_trim_copy.pick()))
+				{
+					counter ++;
+				}
+			}
+
+			Assert.assertTrue(counter < 100);
+
+			random_trim.reset();
+			random_trim_copy.reset();
+
+			for (int j = 0; j < 100; j++)
+			{
+				Assert.assertEquals(random_trim.pick(), random_trim_copy.pick());
 			}
 		}
 
-		Assert.assertTrue(counter < 100);
-
-		random_trim.reset();
-		random_trim_copy.reset();
-
-		for (int i = 0; i < 100; i++)
-		{
-			Assert.assertEquals(random_trim.pick(), random_trim_copy.pick());
-		}
 	}
 
 	@Test
 	public void getPicker()
 	{
 		String s = "foobarbaz";
-		RandomTrim random_trim = new RandomTrim(s);
-
-		for (int i = 0; i < 100; i++)
+		SeedsForRandomGenerationTests seeds = new SeedsForRandomGenerationTests();
+		List<Integer> int_list = seeds.getGeneralSeeds();
+		for (int i = 0; i < 10; i++)
 		{
-			String picked_string = random_trim.pick();
-			RelativePicker relative_picker = random_trim.getPicker(picked_string);
+			RandomTrim random_trim = new RandomTrim(s);
+			random_trim.setSeed(int_list.get(i));
 
-			if(picked_string.isEmpty())
+			for (int j = 0; j < 100; j++)
 			{
-				Assert.assertTrue(relative_picker.getClass().getSimpleName().equals("NothingPicker"));
-			}
-			else
-			{
-				Assert.assertTrue(relative_picker.getClass().getSimpleName().equals("RandomTrim"));
-			}
+				String picked_string = random_trim.pick();
+				RelativePicker relative_picker = random_trim.getPicker(picked_string);
 
+				if(picked_string.isEmpty())
+				{
+					Assert.assertTrue(relative_picker.getClass().getSimpleName().equals("NothingPicker"));
+				}
+				else
+				{
+					Assert.assertTrue(relative_picker.getClass().getSimpleName().equals("RandomTrim"));
+				}
+
+			}
 		}
+
 	}
 }
