@@ -53,9 +53,9 @@ public class ComparableList<T> extends ArrayList<T> implements Comparable<ArrayL
 	 *
 	 * @return
 	 * 	  <ul>
-	 * 	  	<li>-1 if the reference list is considered smaller than the second one.</li>
+	 * 	  	<li>a negative integer if the reference list is considered smaller than the second one.</li>
 	 * 	  	<li>0 if the reference list is considered equal to the second one.</li>
-	 * 	  	<li>1 if the reference list is considered greater than the second one..</li>
+	 * 	  	<li>A posisitive integer supperior to 0 if the reference list is considered greater than the second one..</li>
 	 * 	  <ul/>
 	 */
 	@Override
@@ -83,14 +83,9 @@ public class ComparableList<T> extends ArrayList<T> implements Comparable<ArrayL
 					if(((o.get(i)).getClass().isAssignableFrom((this.get(i)).getClass()))
 					|| ((this.get(i)).getClass().isAssignableFrom((o.get(i)).getClass())))
 					{
-						if ((this.get(i) instanceof String) && (o.get(i) instanceof String))
-						{
-							answer = Integer.compare(((String) this.get(i)).length(),((String) o.get(i)).length());
-						}
-						else
-						{
+
 							answer = ((Comparable<T>) this.get(i)).compareTo( o.get(i));
-						}
+
 					}
 
 				}
@@ -108,20 +103,5 @@ public class ComparableList<T> extends ArrayList<T> implements Comparable<ArrayL
 
 	}
 
-	/**
-	 * Private method used by {@link ComparableList#compareTo(ArrayList)} to compare two strings.
-	 *
-	 * @param s1 Reference string.
-	 * @param s2 Second string.
-	 * @return
-	 * <ul>
-	 * 	<li>-1 if <code>s1.length</code> is smaller than <code>s2.length</code>.</li>
-	 * 	<li>0 if <code>s1.length</code> is equal to <code>s2.length</code>.</li>
-	 * 	<li>1 if <code>s1.length</code> is greater than <code>s2.length</code>.</li>
-	 * <ul/>
-	 */
-	private int compareStrings(String s1, String s2)
-	{
-		return Integer.compare(s1.length(), s2.length());
-	}
+
 }

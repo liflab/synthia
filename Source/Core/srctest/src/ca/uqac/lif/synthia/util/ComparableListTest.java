@@ -41,7 +41,7 @@ public class ComparableListTest
 
 		int anwser = reference_string_list.compareTo((ArrayList<String>) gl.getShorterStringList());
 
-		Assertions.assertEquals(1, anwser);
+		Assertions.assertTrue(anwser>0);
 	}
 
 	// reference contains an element shorter than the second one
@@ -54,7 +54,7 @@ public class ComparableListTest
 		int anwser = reference_string_list
 				.compareTo((ArrayList<String>) gl.getStringListLongerElement());
 
-		Assertions.assertEquals(-1, anwser);
+		Assertions.assertTrue( anwser>0);
 	}
 
 	// reference contains an element longer than the second one
@@ -67,7 +67,7 @@ public class ComparableListTest
 		int anwser = reference_string_list
 				.compareTo((ArrayList<String>) gl.getStringListShorterElement());
 
-		Assertions.assertEquals(1, anwser);
+		Assertions.assertTrue(0< anwser);
 	}
 
 	// one list contains only uncomparable elements
@@ -102,7 +102,7 @@ public class ComparableListTest
 
 		int anwser = reference_list.compareTo((ArrayList<Object>) gl.getListWithUncomparalbeObjects()) ;
 
-		Assertions.assertEquals(-1, anwser);
+		Assertions.assertTrue(0>anwser);
 	}
 
 	@Test
@@ -113,7 +113,7 @@ public class ComparableListTest
 
 		int anwser = reference_list.compareTo((ArrayList<Object>) gl.getListWithUncomparalbeObjects2()) ;
 
-		Assertions.assertEquals(1, anwser);
+		Assertions.assertTrue(anwser>0);
 	}
 
 	@Test
@@ -138,7 +138,7 @@ public class ComparableListTest
 		int anwser = reference_list.compareTo((ArrayList<List<String>>)
 				gl.getLongerMultiLevelStringList()) ;
 
-		Assertions.assertEquals(-1, anwser);
+		Assertions.assertTrue(0> anwser);
 	}
 
 	@Test
@@ -151,7 +151,7 @@ public class ComparableListTest
 		int anwser = reference_list.compareTo((ArrayList<List<String>>)
 				gl.getLongerMultiLevelStringList2()) ;
 
-		Assertions.assertEquals(-1, anwser);
+		Assertions.assertTrue(0> anwser);
 	}
 
 	@Test
@@ -164,7 +164,7 @@ public class ComparableListTest
 		int anwser = reference_list.compareTo((ArrayList<List<String>>)
 				gl.getShorterMultiLevelStringList()) ;
 
-		Assertions.assertEquals(1, anwser);
+		Assertions.assertTrue(anwser>0);
 	}
 
 	@Test
@@ -177,7 +177,7 @@ public class ComparableListTest
 		int anwser = reference_list.compareTo((ArrayList<List<String>>)
 				gl.getShorterMultiLevelStringList2()) ;
 
-		Assertions.assertEquals(1, anwser);
+		Assertions.assertTrue(anwser>0);
 	}
 
 	@Test
@@ -190,9 +190,10 @@ public class ComparableListTest
 		int anwser = reference_list.compareTo((ArrayList<List<String>>)
 				gl.getMultiLevelStringListShorterElement()) ;
 
-		Assertions.assertEquals(1, anwser);
+		Assertions.assertTrue(anwser>0);
 	}
 
+	//shorter string element but greater value
 	@Test
 	public void multilevelStringShorterElement()
 	{
@@ -203,6 +204,6 @@ public class ComparableListTest
 		int anwser = reference_list.compareTo((ArrayList<List<String>>)
 				gl.getMultiLevelStringListLongerElement()) ;
 
-		Assertions.assertEquals(-1, anwser);
+		Assertions.assertTrue(anwser>0);
 	}
 }
