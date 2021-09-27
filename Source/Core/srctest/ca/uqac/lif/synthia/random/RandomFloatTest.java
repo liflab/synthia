@@ -1,6 +1,12 @@
 package ca.uqac.lif.synthia.random;
 
-import org.junit.jupiter.api.Assertions;
+import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.assertNotEquals;
+import static org.junit.Assert.assertTrue;
+
+import java.util.ArrayList;
+import java.util.List;
+
 import org.junit.jupiter.api.Test;
 
 public class RandomFloatTest
@@ -18,7 +24,7 @@ public class RandomFloatTest
 			random_float1.setSeed(random_seed);
 			for (int j = 0; j < 10000; j++)
 			{
-				Assertions.assertEquals(random_float.pick(), random_float1.pick());
+				assertEquals(random_float.pick(), random_float1.pick());
 			}
 		}
 	}
@@ -30,7 +36,7 @@ public class RandomFloatTest
 		for (int i = 0; i < 10000; i++)
 		{
 			float random_val = random_float.pick();
-			Assertions.assertTrue(0 <= random_val && random_val <= 1);
+			assertTrue(0 <= random_val && random_val <= 1);
 		}
 	}
 
@@ -45,7 +51,7 @@ public class RandomFloatTest
 				random_float.pick();
 			}
 			RandomFloat random_float_copy = random_float.duplicate(true);
-			Assertions.assertEquals(random_float.pick(), random_float_copy.pick());
+			assertEquals(random_float.pick(), random_float_copy.pick());
 		}
 	}
 
@@ -60,10 +66,27 @@ public class RandomFloatTest
 				random_float.pick();
 			}
 			RandomFloat random_float_copy = random_float.duplicate(false);
-			Assertions.assertNotEquals(random_float.pick(), random_float_copy.pick());
+			assertNotEquals(random_float.pick(), random_float_copy.pick());
 			random_float.reset();
 			random_float_copy.reset();
-			Assertions.assertEquals(random_float.pick(), random_float_copy.pick());
+			assertEquals(random_float.pick(), random_float_copy.pick());
+		}
+	}
+	
+	@Test
+	public void testReset()
+	{
+		List<Float> values = new ArrayList<Float>(20);
+		RandomFloat rf = new RandomFloat();
+		rf.setSeed(0);
+		for (int i = 0; i < 20; i++)
+		{
+			values.add(rf.pick());
+		}
+		rf.reset();
+		for (int i = 0; i < 20; i++)
+		{
+			assertEquals(values.get(i), rf.pick());
 		}
 	}
 }
