@@ -1,4 +1,4 @@
-package ca.uqac.lif.synthia;
+package logs;
 
 import java.util.Random;
 

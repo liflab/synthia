@@ -1,6 +1,7 @@
-package ca.uqac.lif.synthia;
+package logs;
 
 import basic.IpAddressProvider;
+import ca.uqac.lif.synthia.Picker;
 import ca.uqac.lif.synthia.random.BoundedPicker;
 import ca.uqac.lif.synthia.random.RandomString;
 import ca.uqac.lif.synthia.random.RandomFloat;
