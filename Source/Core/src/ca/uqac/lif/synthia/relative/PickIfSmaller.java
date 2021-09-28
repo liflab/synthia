@@ -97,7 +97,7 @@ public class PickIfSmaller<T> extends PickIf<T>
 		}
 		else
 		{
-			anwser = m_picker.compare(m_previousElement, element) == -1;
+			anwser = m_picker.compare(m_previousElement, element) < 0;
 		}
 
 		m_previousElement = element;
