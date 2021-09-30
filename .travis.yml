@@ -6,6 +6,7 @@ notifications:
 before_install:
 - sudo apt-get install ant-optional
 script:
+- cd Source
 - ant download-deps
 - ant
 - ant test
