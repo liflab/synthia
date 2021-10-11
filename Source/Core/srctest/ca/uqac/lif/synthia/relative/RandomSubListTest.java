@@ -106,11 +106,11 @@ public class RandomSubListTest
 	}
 
 	@Test
-	public void getPickerFromARandomSublistGeneratedList()
+	public void shrinkFromARandomSublistGeneratedList()
 	{
 		RandomSubList random_sublist = new RandomSubList(getList(), new RandomSubString(null));
 
-		int cast_exception_counter = 0; // getpicker returns a NothingPicker
+		int cast_exception_counter = 0; // shrink returns a NothingPicker
 		int no_more_element_counter = 0;
 		int no_error_counter = 0; // iteration ran without error
 		for (int i = 0; i < 10000; i++)
@@ -119,7 +119,7 @@ public class RandomSubListTest
 			try
 			{
 				RandomSubList random_sublist2 = (RandomSubList) random_sublist
-						.getPicker(random_sublist.pick());
+						.shrink(random_sublist.pick());
 				random_sublist2.pick();
 				no_error_counter ++;
 			}

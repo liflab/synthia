@@ -22,6 +22,8 @@ import java.util.ArrayList;
 import java.util.List;
 
 import ca.uqac.lif.synthia.Picker;
+import ca.uqac.lif.synthia.Shrinkable;
+import ca.uqac.lif.synthia.relative.PickSmallerComparable;
 
 /**
  * Picks an element from a collection, where the probability of picking
@@ -37,7 +39,7 @@ import ca.uqac.lif.synthia.Picker;
  * is equal to 1.
  * @param <T> The type of the object to pick
  */
-public class ElementPicker<T> implements Picker<T>
+public class ElementPicker<T> implements Shrinkable<T>
 {
 	/**
 	 * A list storing each element with its associated probability
@@ -218,5 +220,11 @@ public class ElementPicker<T> implements Picker<T>
 		{
 			return new ProbabilityChoice<T>(m_object, m_probability);
 		}
+	}
+	
+	@Override
+	public Shrinkable<T> shrink(T o)
+	{
+		return new PickSmallerComparable<T>(this, o);
 	}
 }

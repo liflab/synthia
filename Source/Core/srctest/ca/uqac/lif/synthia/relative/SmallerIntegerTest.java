@@ -1,5 +1,6 @@
 package ca.uqac.lif.synthia.relative;
 
+import ca.uqac.lif.synthia.Shrinkable;
 import ca.uqac.lif.synthia.random.RandomInteger;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
@@ -13,7 +14,7 @@ public class SmallerIntegerTest
 		int max = 101;
 		int max2 = 51;
 		RandomInteger random_int = new RandomInteger(min, max);
-		RelativePicker relative_picker = random_int.getPicker(max2);
+		Shrinkable<Integer> relative_picker = random_int.shrink(max2);
 
 		Assertions.assertEquals(true,relative_picker.getClass().getSimpleName()
 				.equals("RandomInteger"));
@@ -36,10 +37,10 @@ public class SmallerIntegerTest
 		int max2 = 12;
 		RandomInteger random_int = new RandomInteger(min, max);
 
-		Assertions.assertEquals(true, random_int.getPicker(max2).getClass().getSimpleName()
+		Assertions.assertEquals(true, random_int.shrink(max2).getClass().getSimpleName()
 				.equals("NothingPicker"));
 
-		Assertions.assertEquals(true, random_int.getPicker(min).getClass().getSimpleName()
+		Assertions.assertEquals(true, random_int.shrink(min).getClass().getSimpleName()
 				.equals("NothingPicker"));
 	}
 }

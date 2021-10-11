@@ -39,7 +39,6 @@ public class GaussianFloat extends RandomPicker<Float>
 		{
 			gf.reset();
 		}
-
 		return gf;
 	}
 

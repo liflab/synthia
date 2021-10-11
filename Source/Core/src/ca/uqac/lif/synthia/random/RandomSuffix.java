@@ -1,7 +1,7 @@
 package ca.uqac.lif.synthia.random;
 
+import ca.uqac.lif.synthia.Shrinkable;
 import ca.uqac.lif.synthia.relative.NothingPicker;
-import ca.uqac.lif.synthia.relative.RelativePicker;
 
 /**
  * Just like {@link RandomPrefix} but for suffixes.
@@ -20,7 +20,7 @@ public class RandomSuffix extends RandomPrefix
 	}
 
 	@Override
-	public RelativePicker<String> getPicker(String element)
+	public Shrinkable<String> shrink(String element)
 	{
 		if(element.isEmpty())
 		{

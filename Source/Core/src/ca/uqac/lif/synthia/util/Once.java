@@ -19,6 +19,7 @@
 package ca.uqac.lif.synthia.util;
 
 import ca.uqac.lif.synthia.exception.NoMoreElementException;
+
 import ca.uqac.lif.synthia.Picker;
 
 /**

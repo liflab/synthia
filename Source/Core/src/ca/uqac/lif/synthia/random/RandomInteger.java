@@ -18,16 +18,14 @@
  */
 package ca.uqac.lif.synthia.random;
 
+import ca.uqac.lif.synthia.Shrinkable;
 import ca.uqac.lif.synthia.random.generators.Random;
 import ca.uqac.lif.synthia.relative.NothingPicker;
-import ca.uqac.lif.synthia.relative.RelativePicker;
-
-
 
 /**
  * Picks an integer uniformly in an interval
  */
-public class RandomInteger extends RandomPicker<Integer> implements RelativePicker<Integer>
+public class RandomInteger extends RandomPicker<Integer> implements Shrinkable<Integer>
 {
 	/**
 	 * The lower bound of the interval
@@ -125,46 +123,17 @@ public class RandomInteger extends RandomPicker<Integer> implements RelativePick
 
 		return copy;
 	}
-
-	/**
-	 * Create a new {@link RandomInteger} picker guaranteeing to produce lower values than the one
-	 * taken as input. If the input is lower or equal to the {@link #m_min} attribute value, the
-	 * method will return a {@link ca.uqac.lif.synthia.relative.NothingPicker}.
-	 *
-	 * @param element The value to which those which will be produced by the new instance of the class
-	 *                must be lower.
-	 *
-	 * @return The new instance of the class or a {@link ca.uqac.lif.synthia.relative.NothingPicker}.
-	 */
+	
 	@Override
-	public RelativePicker<Integer> getPicker(Integer element)
+	public Shrinkable<Integer> shrink(Integer element)
 	{
 		if(element <= m_min)
 		{
-			return new NothingPicker();
+			return new NothingPicker<Integer>();
 		}
 		else
 		{
 			return new RandomInteger(m_min, element, m_seed, m_random.Duplicate());
 		}
 	}
-
-	@Override
-	public int compare(Object old_value, Object new_value)
-	{
-		if ((Integer)new_value < (Integer)old_value)
-		{
-			return -1;
-		}
-		else if ((Integer)new_value == (Integer)old_value)
-		{
-			return 0;
-		}
-		else
-		{
-			return 1;
-		}
-	}
-
-
 }

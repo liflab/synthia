@@ -1,5 +1,6 @@
 package ca.uqac.lif.synthia.relative;
 
+import ca.uqac.lif.synthia.Shrinkable;
 import ca.uqac.lif.synthia.random.RandomFloat;
 import ca.uqac.lif.synthia.random.RandomInteger;
 import org.junit.jupiter.api.Assertions;
@@ -14,7 +15,7 @@ public class SmallerFloatTest
 		float max = 101;
 		float max2 = 51;
 		RandomFloat random_float = new RandomFloat(min, max);
-		RelativePicker relative_picker = random_float.getPicker(max2);
+		Shrinkable<Float> relative_picker = random_float.shrink(max2);
 
 		Assertions.assertEquals(true,relative_picker.getClass().getSimpleName()
 				.equals("RandomFloat"));
@@ -37,13 +38,13 @@ public class SmallerFloatTest
 		float max2 = 12;
 		RandomFloat random_float = new RandomFloat(min, max);
 
-		Assertions.assertEquals(true, random_float.getPicker(max2).getClass().getSimpleName()
+		Assertions.assertEquals(true, random_float.shrink(max2).getClass().getSimpleName()
 				.equals("NothingPicker"));
 
-		Assertions.assertEquals(true, random_float.getPicker(min).getClass().getSimpleName()
+		Assertions.assertEquals(true, random_float.shrink(min).getClass().getSimpleName()
 				.equals("NothingPicker"));
 
-		Assertions.assertEquals(true, random_float.getPicker(Float.NaN).getClass()
+		Assertions.assertEquals(true, random_float.shrink(Float.NaN).getClass()
 				.getSimpleName().equals("NothingPicker"));
 	}
 }

@@ -37,7 +37,7 @@ import ca.uqac.lif.synthia.Picker;
  * </pre>
  * @param <T> The type of objects to pick
  */
-public class Record<T> implements Picker<Object>
+public class Record<T> implements Picker<T>
 {
 	/**
 	 * The picker that generates the values
@@ -88,7 +88,7 @@ public class Record<T> implements Picker<Object>
 	 * @return The value recorded from another picker.
 	 */
 	@Override
-	public Object pick()
+	public T pick()
 	{
 		T value = m_picker.pick();
 		m_values.add(value);
@@ -105,9 +105,9 @@ public class Record<T> implements Picker<Object>
 	 * @return The copy of the Record picker
 	 */
 	@Override
-	/*@ pure non_null @*/ public Record duplicate(boolean with_state)
+	/*@ pure non_null @*/ public Record<T> duplicate(boolean with_state)
 	{
-		Record copy = new Record<T>(m_picker.duplicate(with_state), new ArrayList<T>(m_values));
+		Record<T> copy = new Record<T>(m_picker.duplicate(with_state), new ArrayList<T>(m_values));
 		if (!with_state)
 		{
 			copy.m_values.clear();
@@ -131,5 +131,5 @@ public class Record<T> implements Picker<Object>
 	/*@ pure non_null @*/ public List<T> getValues()
 	{
 		return m_values;
-	}
+	}	
 }

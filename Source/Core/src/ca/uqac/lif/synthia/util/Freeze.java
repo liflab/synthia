@@ -19,6 +19,8 @@
 package ca.uqac.lif.synthia.util;
 
 import ca.uqac.lif.synthia.Picker;
+import ca.uqac.lif.synthia.Shrinkable;
+import ca.uqac.lif.synthia.relative.PickSmallerComparable;
 
 /**
  * Picker that returns the first object fetched from another picker and repeats
@@ -36,7 +38,7 @@ import ca.uqac.lif.synthia.Picker;
  * </pre>
  * @param <T> The type of object to pick
  */
-public class Freeze<T> implements Picker<T>
+public class Freeze<T> implements Shrinkable<T>
 {
 	/**
 	 * The internal picker that is to be called
@@ -100,6 +102,12 @@ public class Freeze<T> implements Picker<T>
 			fp.m_value = m_value;
 		}
 		return fp;
+	}
+	
+	@Override
+	public Shrinkable<T> shrink(T o)
+	{
+		return new PickSmallerComparable<T>(this, o);
 	}
 
 }

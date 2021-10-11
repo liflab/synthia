@@ -18,14 +18,17 @@
  */
 package ca.uqac.lif.synthia.random;
 
+import ca.uqac.lif.synthia.Shrinkable;
 import ca.uqac.lif.synthia.random.generators.Random;
+import ca.uqac.lif.synthia.relative.NothingPicker;
+import ca.uqac.lif.synthia.util.Constant;
 
 /**
  * Picks a Boolean value. This class actually implements a Bernoulli
  * trial, with the possibility of setting the probability of success
  * <i>p</i>.
  */
-public class RandomBoolean extends RandomPicker<Boolean>
+public class RandomBoolean extends RandomPicker<Boolean> implements Shrinkable<Boolean>
 {
 	/**
 	 * The probability of picking <tt>true</tt>
@@ -100,5 +103,16 @@ public class RandomBoolean extends RandomPicker<Boolean>
 		}
 
 		return copy;
+	}
+
+	@Override
+	public Shrinkable<Boolean> shrink(Boolean o)
+	{
+		// We assume an ordering of Booleans where false < true
+		if (o)
+		{
+			return new Constant<Boolean>(false);
+		}
+		return new NothingPicker<Boolean>();
 	}
 }

@@ -119,7 +119,6 @@ public abstract class BehaviorTree<T> implements Picker<T>
 			m_index = 0;
 		}
 
-
 		/**
 		 * Picks a value from a child of the BehaviorTree. Typically, this method is expected
 		 * to return non-null objects; a <tt>null</tt> return value is used to signal that no more
@@ -258,7 +257,6 @@ public abstract class BehaviorTree<T> implements Picker<T>
 			}
 			return m_choices.get(m_chosenIndex).getObject().pick();
 		}
-
 
 		/**
 		 * Creates a copy of the Selector.
@@ -409,7 +407,7 @@ public abstract class BehaviorTree<T> implements Picker<T>
 		{
 			m_picker.reset();
 		}
-
+		
 		/**
 		 * Picks the value from the leaf node. Typically, this method is expected to return non-null
 		 * objects; a <tt>null</tt> return value is used to signal that no more
@@ -439,11 +437,6 @@ public abstract class BehaviorTree<T> implements Picker<T>
 			return new Leaf<T>(m_picker.duplicate(with_state));
 		}
 
-
-		/**
-		 * Returns the Leaf Node as a string.
-		 * @return The string representing the Leaf Node.
-		 */
 		@Override
 		public String toString()
 		{

@@ -59,5 +59,5 @@ public class SetPicker extends CompositePicker<Set<Object>>
 			set.add(v);
 		}
 		return set;
-	}
+	}	
 }

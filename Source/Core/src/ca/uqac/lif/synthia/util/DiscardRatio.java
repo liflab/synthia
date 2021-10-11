@@ -92,5 +92,4 @@ public class DiscardRatio implements Picker<Float>
 		}
 		return copy;
 	}
-	
 }

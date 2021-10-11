@@ -19,6 +19,8 @@
 package ca.uqac.lif.synthia.util;
 
 import ca.uqac.lif.synthia.Picker;
+import ca.uqac.lif.synthia.Shrinkable;
+import ca.uqac.lif.synthia.relative.PickSmallerComparable;
 
 /**
  * Generates a string according to a predefined pattern. The picker is
@@ -33,7 +35,7 @@ import ca.uqac.lif.synthia.Picker;
  * String s2 = pat.pick(); // "aGhRe is equal to true"
  * ...</pre>
  */
-public class StringPattern extends CompositePicker<String>
+public class StringPattern extends CompositePicker<String> implements Shrinkable<String>
 {	
 	/**
 	 * The string pattern
@@ -83,5 +85,11 @@ public class StringPattern extends CompositePicker<String>
 	public StringPattern newPicker(Picker<?> ... pickers)
 	{
 		return new StringPattern(m_pattern, pickers);
+	}
+	
+	@Override
+	public Shrinkable<String> shrink(String o)
+	{
+		return new PickSmallerComparable<String>(this, o);
 	}
 }

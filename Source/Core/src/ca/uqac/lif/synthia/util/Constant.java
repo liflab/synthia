@@ -18,7 +18,8 @@
  */
 package ca.uqac.lif.synthia.util;
 
-import ca.uqac.lif.synthia.Picker;
+import ca.uqac.lif.synthia.Shrinkable;
+import ca.uqac.lif.synthia.relative.NothingPicker;
 
 /**
  * Picker that returns the same object every time. For example, the following
@@ -31,7 +32,7 @@ import ca.uqac.lif.synthia.Picker;
  * ...
  * </pre>
  */
-public class Constant<T> implements Picker<T>
+public class Constant<T> implements Shrinkable<T>
 {
 	/**
 	 * The value to return
@@ -95,5 +96,11 @@ public class Constant<T> implements Picker<T>
 	public String toString()
 	{
 		return m_value.toString();
+	}
+
+	@Override
+	public Shrinkable<T> shrink(T o)
+	{
+		return new NothingPicker<T>();
 	}
 }

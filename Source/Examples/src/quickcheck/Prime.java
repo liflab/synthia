@@ -1,27 +1,29 @@
 package quickcheck;
 
+import ca.uqac.lif.synthia.Shrinkable;
 import ca.uqac.lif.synthia.exception.NoMoreElementException;
 import ca.uqac.lif.synthia.random.RandomInteger;
-import ca.uqac.lif.synthia.relative.PickIfSmaller;
 
 public class Prime
 {
 	public static void main(String[] args)
 	{
-		RandomInteger r_int = new RandomInteger(0, Integer.MAX_VALUE);
+		Shrinkable<Integer> r_int = new RandomInteger(0, Integer.MAX_VALUE);
 		int i;
 		do {
 			i = r_int.pick();
 		} while (!isPrime(i));
 		System.out.println(i + " is prime");
-		PickIfSmaller<Integer> p_int = new PickIfSmaller<Integer>(r_int);
+		Shrinkable<Integer> p_int = r_int.shrink(i);
 		try
 		{
 			do {
 				do {
 					i = p_int.pick();
 				} while (!isPrime(i));
+				p_int = p_int.shrink(i);
 				System.out.println(i + " is also prime");
+				
 			} while (true);
 		}
 		catch (NoMoreElementException e)

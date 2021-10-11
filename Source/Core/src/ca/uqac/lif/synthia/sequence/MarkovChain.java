@@ -49,29 +49,29 @@ public class MarkovChain<T> implements Picker<T>
 	 * The index of the current state of the machine
 	 */
 	protected int m_currentState;
-	
+
 	/**
 	 * The pickers associated to each state
 	 */
 	protected Map<Integer,Picker<? extends T>> m_pickers;
-	
+
 	/**
 	 * A map associating state numbers with the list of their outgoing
 	 * transitions
 	 */
 	protected Map<Integer,List<Transition>> m_transitions;
-	
+
 	/**
 	 * A source of numbers between 0 and 1. This source is used to pick the
 	 * next transition to take. 
 	 */
 	protected Picker<Float> m_floatSource;
-	
+
 	/**
 	 * Whether to exhaust each state before moving to another
 	 */
 	protected boolean m_exhaust;
-	
+
 	/**
 	 * Creates a new empty Markov chain.
 	 * @param float_source A source of numbers between 0 and 1. This source is
@@ -85,7 +85,7 @@ public class MarkovChain<T> implements Picker<T>
 		m_floatSource = float_source;
 		m_exhaust = false;
 	}
-		
+
 	/**
 	 * Adds a new transition to the machine
 	 * @param source The source state
@@ -105,7 +105,7 @@ public class MarkovChain<T> implements Picker<T>
 		trans.add(t);
 		return this;
 	}
-	
+
 	/**
 	 * Associates a picker to a state 
 	 * @param state The state
@@ -117,7 +117,7 @@ public class MarkovChain<T> implements Picker<T>
 		m_pickers.put(state, p);
 		return this;
 	}
-	
+
 	/**
 	 * Sets whether to exhaust the picker associated to a state before
 	 * transitioning to another state
@@ -130,7 +130,7 @@ public class MarkovChain<T> implements Picker<T>
 		m_exhaust = b;
 		return this;
 	}
-	
+
 	@Override
 	public T pick()
 	{
@@ -160,7 +160,7 @@ public class MarkovChain<T> implements Picker<T>
 		}
 		return lp.pick();
 	}
-	
+
 	/**
 	 * From the current state, randomly selects a destination state based on
 	 * the probabilities associated to each outgoing transition
@@ -204,7 +204,7 @@ public class MarkovChain<T> implements Picker<T>
 	{
 		m_currentState = 0;
 	}
-	
+
 	/**
 	 * Produces a rendition of the machine as Graphviz input file.
 	 * @param out The print stream to which the graph is written
@@ -236,16 +236,16 @@ public class MarkovChain<T> implements Picker<T>
 		}
 		out.println("}");
 	}
-	
+
 	/**
 	 * Representation of a probabilistic transition in the state machine
 	 */
 	public static class Transition
 	{
 		protected int m_destination;
-		
+
 		protected float m_probability;
-		
+
 		/**
 		 * Creates a new transition
 		 * @param destination The destination state
@@ -257,21 +257,21 @@ public class MarkovChain<T> implements Picker<T>
 			m_destination = destination;
 			m_probability = probability;
 		}
-		
+
 		public int getDestination()
 		{
 			return m_destination;
 		}
-		
+
 		public float getProbability()
 		{
 			return m_probability;
 		}
-		
+
 		@Override
 		public String toString()
 		{
 			return "-> " + m_destination + " (" + m_probability + ")";
 		}
-	}	
+	}
 }

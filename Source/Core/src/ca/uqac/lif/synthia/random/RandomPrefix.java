@@ -2,17 +2,15 @@ package ca.uqac.lif.synthia.random;
 
 import ca.uqac.lif.synthia.Picker;
 import ca.uqac.lif.synthia.Seedable;
+import ca.uqac.lif.synthia.Shrinkable;
 import ca.uqac.lif.synthia.relative.NothingPicker;
-import ca.uqac.lif.synthia.relative.RelativePicker;
-
-
 
 /**
  * Like {@link RandomSubString}, but this time, the {@link Picker} returns a prefix of the original
  * strings of randomly selected length. The {@link RandomSubString#m_charSelect} is replaced by a
  * {@link RandomInteger}.
  */
-public class RandomPrefix implements Picker<String>, Seedable, RelativePicker<String>
+public class RandomPrefix implements Shrinkable<String>, Seedable
 {
 
 	/**
@@ -58,7 +56,7 @@ public class RandomPrefix implements Picker<String>, Seedable, RelativePicker<St
 	 * @return The new instance of the class or a {@link NothingPicker}.
 	 */
 	@Override
-	public RelativePicker<String> getPicker(String element)
+	public Shrinkable<String> shrink(String element)
 	{
 		if(element.isEmpty())
 		{
@@ -89,22 +87,5 @@ public class RandomPrefix implements Picker<String>, Seedable, RelativePicker<St
 	public void setSeed(int seed)
 	{
 		m_prefixSize.setSeed(seed);
-	}
-
-	@Override
-	public int compare(Object old_value, Object new_value)
-	{
-		if (((String)new_value).length() < ((String)old_value).length())
-		{
-			return -1;
-		}
-		else if (((String)new_value).length() == ((String)old_value).length())
-		{
-			return 0;
-		}
-		else
-		{
-			return 1;
-		}
 	}
 }

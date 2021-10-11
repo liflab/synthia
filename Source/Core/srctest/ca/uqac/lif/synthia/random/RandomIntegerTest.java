@@ -5,6 +5,35 @@ import org.junit.jupiter.api.Test;
 
 public class RandomIntegerTest
 {
+	@Test
+	public void differentSeedsDifferentValues()
+	{
+		RandomInteger r1 = new RandomInteger(2, 6);
+		RandomInteger r2 = new RandomInteger(2, 6);
+		r1.setSeed(0);
+		r2.setSeed(100);
+		boolean different = false;
+		for (int i = 0; i < 10000; i++)
+		{
+			if (r1.pick() != r2.pick())
+			{
+				different = true;
+			}
+		}
+		Assertions.assertTrue(different);
+	}
+	
+	@Test
+	public void differentSeedsDifferentFirstValues()
+	{
+		
+		for (int i = 0; i < 100; i+= 1)
+		{
+			RandomInteger r1 = new RandomInteger(2, 6);
+			r1.setSeed(i);
+			System.out.println(r1.pick());
+		}
+	}
 
 	@Test public void sameValuesSameSeed()
 	{

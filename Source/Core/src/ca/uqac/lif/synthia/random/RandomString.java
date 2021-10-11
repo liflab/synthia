@@ -20,6 +20,8 @@ package ca.uqac.lif.synthia.random;
 
 import ca.uqac.lif.synthia.Picker;
 import ca.uqac.lif.synthia.Seedable;
+import ca.uqac.lif.synthia.Shrinkable;
+import ca.uqac.lif.synthia.relative.PickSmallerComparable;
 import ca.uqac.lif.synthia.util.Constant;
 
 import java.util.ArrayList;
@@ -28,7 +30,7 @@ import java.util.List;
 /**
  * Generates a random characters string.
  */
-public class RandomString implements Picker<String>, Seedable
+public class RandomString implements Shrinkable<String>, Seedable
 {
 	/**
 	 * A picker used to determine the string's length
@@ -206,6 +208,12 @@ public class RandomString implements Picker<String>, Seedable
 	public void setSeed(int seed)
 	{
 		m_charIndexPicker.setSeed(seed);
+	}
+	
+	@Override
+	public Shrinkable<String> shrink(String o)
+	{
+		return new PickSmallerComparable<String>(this, o);
 	}
 
 	//can only be used if m_lenghtPicker is a RandomInteger or RandomIndex

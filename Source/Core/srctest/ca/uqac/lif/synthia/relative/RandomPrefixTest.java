@@ -1,5 +1,6 @@
 package ca.uqac.lif.synthia.relative;
 
+import ca.uqac.lif.synthia.Shrinkable;
 import ca.uqac.lif.synthia.random.RandomPrefix;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
@@ -67,7 +68,7 @@ public class RandomPrefixTest
 	}
 
 	@Test
-	public void getPicker()
+	public void shrink()
 	{
 		String s = "foobarbaz";
 		RandomPrefix random_prefix = new RandomPrefix(s);
@@ -75,7 +76,7 @@ public class RandomPrefixTest
 		for (int i = 0; i < 10000; i++)
 		{
 			String picked_string = random_prefix.pick();
-			RelativePicker relative_picker = random_prefix.getPicker(picked_string);
+			Shrinkable<String> relative_picker = random_prefix.shrink(picked_string);
 
 			if(picked_string.isEmpty())
 			{

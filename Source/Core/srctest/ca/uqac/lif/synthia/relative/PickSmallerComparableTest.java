@@ -4,14 +4,14 @@ import ca.uqac.lif.synthia.random.RandomInteger;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
 
-public class PickIfSmallerTest
+public class PickSmallerComparableTest
 {
 	//could fail or not
 	@Test
 	public void property()
 	{
 		RandomInteger random_int = new RandomInteger(0, 100000);
-		PickIfSmaller pi_small = new PickIfSmaller(random_int, 2);
+		PickSmallerComparable pi_small = new PickSmallerComparable(random_int, 2);
 
 		int old_value;
 		int new_value;
@@ -29,14 +29,14 @@ public class PickIfSmallerTest
 	public void duplicateWithState()
  {
 	 RandomInteger random_int = new RandomInteger(0, 100000);
-	 PickIfSmaller pi_small = new PickIfSmaller(random_int, 2);
+	 PickSmallerComparable pi_small = new PickSmallerComparable(random_int, 2);
 
 	 for (int i = 0; i < 2; i++)
 	 {
 		 pi_small.pick();
 	 }
 
-	 PickIfSmaller pi_small_copy = pi_small.duplicate(true);
+	 PickSmallerComparable pi_small_copy = pi_small.duplicate(true);
 
 	 for (int i = 0; i < 2; i++)
 	 {
@@ -48,14 +48,14 @@ public class PickIfSmallerTest
 	public void duplicateWithoutState()
 	{
 		RandomInteger random_int = new RandomInteger(0, 100000);
-		PickIfSmaller pi_small = new PickIfSmaller(random_int, 2);
+		PickSmallerComparable pi_small = new PickSmallerComparable(random_int, 2);
 
 		for (int i = 0; i < 2; i++)
 		{
 			pi_small.pick();
 		}
 
-		PickIfSmaller pi_small_copy = pi_small.duplicate(false);
+		PickSmallerComparable pi_small_copy = pi_small.duplicate(false);
 
 		for (int i = 0; i < 2; i++)
 		{

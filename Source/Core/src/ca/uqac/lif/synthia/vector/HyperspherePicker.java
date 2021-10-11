@@ -130,8 +130,7 @@ public class HyperspherePicker implements VectorPicker
 		}
 		return new HyperspherePicker(dimensions);
 	}
-
-
+	
 	@Override
 	public int getDimension()
 	{

@@ -1,5 +1,6 @@
 package ca.uqac.lif.synthia.relative;
 
+import ca.uqac.lif.synthia.Shrinkable;
 import ca.uqac.lif.synthia.random.RandomTrim;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
@@ -66,7 +67,7 @@ public class RandomTrimTest
 	}
 
 	@Test
-	public void getPicker()
+	public void shrink()
 	{
 		String s = "foobarbaz";
 		RandomTrim random_trim = new RandomTrim(s);
@@ -74,7 +75,7 @@ public class RandomTrimTest
 		for (int i = 0; i < 10000; i++)
 		{
 			String picked_string = random_trim.pick();
-			RelativePicker relative_picker = random_trim.getPicker(picked_string);
+			Shrinkable<String> relative_picker = random_trim.shrink(picked_string);
 
 			if(picked_string.isEmpty())
 			{

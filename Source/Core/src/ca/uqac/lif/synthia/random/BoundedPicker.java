@@ -18,19 +18,25 @@
  */
 package ca.uqac.lif.synthia.random;
 
+import ca.uqac.lif.synthia.exception.CannotShrinkException;
 import ca.uqac.lif.synthia.exception.NoMoreElementException;
 import ca.uqac.lif.synthia.Picker;
-import ca.uqac.lif.synthia.util.Tick;
+import ca.uqac.lif.synthia.Shrinkable;
 
 /**
  * Return the value picked by a picker a defined number of times.
  */
-public class BoundedPicker<T> implements Picker<T>
+public class BoundedPicker<T> implements Shrinkable<T>
 {
 	/**
-	 * A tick picker user to count the number of remaining objects the picker can produce.
+	 * A tick picker user to remember the length of the output to produce.
 	 */
-	protected Tick m_outputsLeft;
+	protected int m_length;
+
+	/**
+	 * The number of objects produced so far.
+	 */
+	protected int m_outputCount;
 
 	/**
 	 * The source of values.
@@ -38,26 +44,17 @@ public class BoundedPicker<T> implements Picker<T>
 	/*@ non_null @*/ protected Picker<T> m_provider;
 
 	/**
-	 * A flag to check if the picker can still produce at least an another object.
-	 */
-	protected boolean m_isDone;
-
-	/**
 	 * Private constructor used for the duplication of the picker.
 	 * @param provider The source of values.
 	 * @param outputs_left The picker used to determine the number of remaining objects to produce.
-	 * @param is_done A flag to check if the picker has finished to produce objects.
 	 */
-	private BoundedPicker(/*@ non_null @*/ Picker<T> provider, Tick outputs_left, boolean is_done)
+	public BoundedPicker(/*@ non_null @*/ Picker<T> provider, Picker<Integer> length)
 	{
-		super();
-		m_provider = provider;
-		m_outputsLeft = outputs_left;
-		m_isDone = is_done;
+		this(provider, length.pick());
 	}
 
 	/**
-	 * Constructor using an integer to define the number of ouputs to produce.
+	 * Constructor using an integer to define the number of outputs to produce.
 	 * @param provider The picker used to pick the values returned by the bounded picker.
 	 * @param length A defined number of outputs to produce
 	 */
@@ -65,28 +62,15 @@ public class BoundedPicker<T> implements Picker<T>
 	{
 		super();
 		m_provider = provider;
-		m_outputsLeft = new Tick(length, -1);
-		m_isDone = false;
-	}
-
-	/**
-	 * Constructor using a picker to define the number of ouputs to produce.
-	 * @param provider The picker used to pick the values returned by the bounded picker.
-	 * @param int_source The picker used to select the number of outputs to produce.
-	 */
-	public BoundedPicker(/*@ non_null @*/ Picker<T> provider, Picker<Integer> int_source)
-	{
-		m_provider = provider;
-		m_outputsLeft = new Tick(int_source.pick(), -1);
-		m_isDone = false;
+		m_length = length;
+		m_outputCount = 0;
 	}
 
 	@Override
 	public void reset()
 	{
 		m_provider.reset();
-		m_outputsLeft.reset();
-		m_isDone = false;
+		m_outputCount = 0;
 	}
 
 	/**
@@ -96,22 +80,17 @@ public class BoundedPicker<T> implements Picker<T>
 	 */
 	public boolean isDone()
 	{
-		return m_isDone;
+		return m_outputCount >= m_length;
 	}
 
 	@Override
 	public T pick()
 	{
-		int outputs_left = m_outputsLeft.pick().intValue();
-		if (outputs_left >= 0)
+		if (m_outputCount < m_length)
 		{
-			if (outputs_left == 0)
-			{
-				m_isDone = true;
-			}
+			m_outputCount++;
 			return m_provider.pick();
 		}
-
 		throw new NoMoreElementException();
 	}
 
@@ -126,14 +105,21 @@ public class BoundedPicker<T> implements Picker<T>
 	@Override
 	/*@ non_null @*/ public BoundedPicker<T> duplicate(boolean with_state)
 	{
-		BoundedPicker<T> copy = new BoundedPicker<T>(m_provider.duplicate(with_state),
-				m_outputsLeft.duplicate(with_state), m_isDone);
-
-		if (!with_state)
+		BoundedPicker<T> copy = new BoundedPicker<T>(m_provider.duplicate(with_state), m_length);
+		if (with_state)
 		{
-			copy.reset();
+			copy.m_outputCount =  m_outputCount;
 		}
-
 		return copy;
+	}
+
+	@Override
+	public Shrinkable<T> shrink(T o)
+	{
+		if (!(m_provider instanceof Shrinkable))
+		{
+			throw new CannotShrinkException(m_provider);
+		}
+		return new BoundedPicker<T>(((Shrinkable<T>) m_provider).shrink(o), m_length);
 	}
 }

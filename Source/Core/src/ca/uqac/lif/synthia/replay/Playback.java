@@ -22,7 +22,8 @@ import java.util.List;
 
 import ca.uqac.lif.synthia.enumerative.EnumerativePicker;
 import ca.uqac.lif.synthia.exception.NoMoreElementException;
-import ca.uqac.lif.synthia.Picker;
+import ca.uqac.lif.synthia.relative.PickSmallerComparable;
+import ca.uqac.lif.synthia.Shrinkable;
 
 //TODO check constructors whit a list as parameter for m_values
 /**
@@ -43,7 +44,7 @@ import ca.uqac.lif.synthia.Picker;
  * set to false.
  * @param <T> The type of objects to return
  */
-public class Playback<T> implements EnumerativePicker<T>, Picker<T>
+public class Playback<T> implements EnumerativePicker<T>, Shrinkable<T>
 {
 	/**
 	 * The values to play back
@@ -195,5 +196,11 @@ public class Playback<T> implements EnumerativePicker<T>, Picker<T>
 	public boolean isDone()
 	{
 		return (m_index >= (m_values.length)) && !m_loop;
+	}
+	
+	@Override
+	public Shrinkable<T> shrink(T o)
+	{
+		return new PickSmallerComparable<T>(this, o);
 	}
 }

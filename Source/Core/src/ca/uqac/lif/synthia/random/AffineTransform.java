@@ -19,6 +19,8 @@
 package ca.uqac.lif.synthia.random;
 
 import ca.uqac.lif.synthia.Picker;
+import ca.uqac.lif.synthia.Shrinkable;
+import ca.uqac.lif.synthia.exception.CannotShrinkException;
 
 /**
  * Applies an affine transform to a value produced by another picker.
@@ -31,7 +33,7 @@ import ca.uqac.lif.synthia.Picker;
  * @param <T> The type of number produced (i.e. <tt>Float</tt>,
  * <tt>Integer</tt>, etc.)
  */
-public abstract class AffineTransform<T extends Number> implements Picker<T>
+public abstract class AffineTransform<T extends Number> implements Shrinkable<T>
 {
 	/**
 	 * The slope of the affine transform
@@ -106,6 +108,17 @@ public abstract class AffineTransform<T extends Number> implements Picker<T>
 			AffineTransformInteger ati = new AffineTransformInteger(m_picker.duplicate(with_state), m_m, m_b);
 			return ati;
 		}
+		
+		@Override
+		public AffineTransformInteger shrink(Integer o)
+		{
+			if (!(m_picker instanceof Shrinkable))
+			{
+				throw new CannotShrinkException(m_picker);
+			}
+			int source_value = (int) Math.floor((o - m_b) / m_m);
+			return new AffineTransformInteger(((Shrinkable<Integer>) m_picker).shrink(source_value), m_m, m_b);
+		}
 	}
 	
 	/**
@@ -135,6 +148,17 @@ public abstract class AffineTransform<T extends Number> implements Picker<T>
 		{
 			AffineTransformFloat atf = new AffineTransformFloat(m_picker.duplicate(with_state), m_m, m_b);
 			return atf;
+		}
+		
+		@Override
+		public AffineTransformFloat shrink(Float o)
+		{
+			if (!(m_picker instanceof Shrinkable))
+			{
+				throw new CannotShrinkException(m_picker);
+			}
+			float source_value = (o - m_b) / m_m;
+			return new AffineTransformFloat(((Shrinkable<Float>) m_picker).shrink(source_value), m_m, m_b);
 		}
 	}
 }

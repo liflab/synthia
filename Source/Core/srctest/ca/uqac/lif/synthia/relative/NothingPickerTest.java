@@ -19,7 +19,7 @@ public class NothingPickerTest
 		});
 	}
 
-	@Test
+	@Test                                                                                              
 	public void pick()
 	{
 		NothingPicker picker = new NothingPicker();
@@ -27,10 +27,10 @@ public class NothingPickerTest
 	}
 
 	@Test
-	public void getPicker()
+	public void shrink()
 	{
 		int element = 2;
 		NothingPicker picker = new NothingPicker();
-		noMoreElementThrow((NothingPicker) picker.getPicker(element));
+		noMoreElementThrow((NothingPicker) picker.shrink(element));
 	}
 }

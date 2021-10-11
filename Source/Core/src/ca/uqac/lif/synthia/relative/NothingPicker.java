@@ -1,6 +1,7 @@
 package ca.uqac.lif.synthia.relative;
 
 import ca.uqac.lif.synthia.Picker;
+import ca.uqac.lif.synthia.Shrinkable;
 import ca.uqac.lif.synthia.exception.NoMoreElementException;
 
 /**
@@ -10,34 +11,17 @@ import ca.uqac.lif.synthia.exception.NoMoreElementException;
  *
  * @param <T> The type of the picker(but not really important here).
  */
-public class NothingPicker<T> implements Picker, RelativePicker
+public class NothingPicker<T> implements Shrinkable<T>
 {
-	public NothingPicker(){};
-
-	/**
-	 * Because this picker only return throws a
-	 * {@link ca.uqac.lif.synthia.exception.NoMoreElementException}, the following method only returns
-	 * a new instance of the class.
-	 */
-	@Override
-	public RelativePicker getPicker(Object element)
+	public NothingPicker()
 	{
-		return duplicate(true);
+		super();
 	}
-
-	/**
-	 *
-	 * @warning ALWAYS RETURN 0.
-	 * @param old_value
-	 * @param new_value
-	 *
-	 *
-	 * @return
-	 */
+	
 	@Override
-	public int compare(Object old_value, Object new_value)
+	public NothingPicker<T> shrink(T o)
 	{
-		return 0;
+		return new NothingPicker<T>();
 	}
 
 	@Override
@@ -47,14 +31,14 @@ public class NothingPicker<T> implements Picker, RelativePicker
 	}
 
 	@Override
-	public Object pick()
+	public T pick()
 	{
 		throw  new NoMoreElementException();
 	}
 
 	@Override
-	public RelativePicker duplicate(boolean with_state)
+	public Picker<T> duplicate(boolean with_state)
 	{
-		return new NothingPicker();
+		return new NothingPicker<T>();
 	}
 }

@@ -18,8 +18,6 @@
  */
 package ca.uqac.lif.synthia;
 
-import java.util.Comparator;
-
 /**
  * Picks an object. This is the interface that most classes in this library
  * implement.
@@ -51,7 +49,7 @@ public interface Picker<T>
 	 * calls.
 	 * @return The object
 	 */
-	/*@ nullable @*/ public T pick();
+	/*@ null @*/ public T pick();
 	
 	/**
 	 * Creates a copy of the picker.
@@ -61,6 +59,5 @@ public interface Picker<T>
 	 * same internal state as the object it is copied from.
 	 * @return The copy of the picker
 	 */
-	/*@ non_null @*/ public Picker<T> duplicate(boolean with_state);
-
+	/*@ non_null @*/ public Picker<T> duplicate(boolean with_state);	
 }

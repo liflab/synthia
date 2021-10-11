@@ -1,7 +1,7 @@
 package ca.uqac.lif.synthia.random;
 
+import ca.uqac.lif.synthia.Shrinkable;
 import ca.uqac.lif.synthia.relative.NothingPicker;
-import ca.uqac.lif.synthia.relative.RelativePicker;
 
 /**
  * A combination of {@link RandomPrefix} and {@link RandomSuffix}. This
@@ -21,7 +21,7 @@ public class RandomTrim extends RandomPrefix
 	}
 
 	@Override
-	public RelativePicker<String> getPicker(String element)
+	public Shrinkable<String> shrink(String element)
 	{
 		if(element.isEmpty())
 		{

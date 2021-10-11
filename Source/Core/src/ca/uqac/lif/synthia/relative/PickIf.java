@@ -8,31 +8,29 @@ import ca.uqac.lif.synthia.exception.GiveUpException;
  *
  * @param <T> The object type returned by the picker.
  */
-public abstract class PickIf<T> implements Picker
+public abstract class PickIf<T> implements Picker<T>
 {
 
 	/**
 	 * The picker used for the evaluations.
 	 */
-	protected RelativePicker<T> m_picker;
+	protected Picker<T> m_picker;
 
 	/**
 	 * The maximal number of iteration that the while loop of the {@link #pick()} method can do.
 	 * If the value is negative, there will be no maximum number of iterations.
 	 */
-	protected final int m_maxIteration;
+	protected int m_maxIteration;
 
 	/**
 	 * Constructor with default {@link #m_maxIteration} value.
 	 *
 	 * @param picker The picker used to generate objects.
 	 */
-	public PickIf(RelativePicker<T> picker)
-
+	public PickIf(Picker<T> picker)
 	{
 		m_picker = picker;
-		m_maxIteration = 100;
-
+		m_maxIteration = 10000;
 	}
 
 	/**
@@ -42,7 +40,7 @@ public abstract class PickIf<T> implements Picker
 	 * @param max_iteration The maximum number of iterations the {@link #pick()} will try to generate
 	 *                      an object before giving up.
 	 */
-	public PickIf(RelativePicker picker, int max_iteration)
+	public PickIf(Picker<T> picker, int max_iteration)
 
 	{
 		m_picker = picker;
@@ -115,7 +113,4 @@ public abstract class PickIf<T> implements Picker
 	{
 		m_picker.reset();
 	}
-
-	public abstract Picker duplicate(boolean with_state);
-
 }
