@@ -1,37 +1,23 @@
 package quickcheck;
 
-import ca.uqac.lif.synthia.Shrinkable;
-import ca.uqac.lif.synthia.exception.NoMoreElementException;
 import ca.uqac.lif.synthia.random.RandomInteger;
 
 public class Prime
 {
 	public static void main(String[] args)
 	{
-		Shrinkable<Integer> r_int = new RandomInteger(0, Integer.MAX_VALUE);
-		int i;
-		do {
-			i = r_int.pick();
-		} while (!isPrime(i));
-		System.out.println(i + " is prime");
-		Shrinkable<Integer> p_int = r_int.shrink(i);
-		try
+		Assert<Integer> a = new Assert<Integer>(new RandomInteger(0, Integer.MAX_VALUE)) {
+			protected boolean evaluate(Integer x) {
+				return !isPrime(x);
+			}
+		};
+		if (!a.check())
 		{
-			do {
-				do {
-					i = p_int.pick();
-				} while (!isPrime(i));
-				p_int = p_int.shrink(i);
-				System.out.println(i + " is also prime");
-				
-			} while (true);
+			System.out.println("Assertion is false");
+			System.out.println(a.getInitial() + " is prime");
+			System.out.println(a.getIterations().size() + " shrinking steps");
+			System.out.println(a.getShrunk() + " is also prime");
 		}
-		catch (NoMoreElementException e)
-		{
-			// Nothing to do
-		}
-		System.out.println("Done");
-
 	}
 
 	/**

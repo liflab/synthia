@@ -8,7 +8,7 @@ import ca.uqac.lif.synthia.replay.Playback;
 import java.util.ArrayList;
 import java.util.List;
 
-public class AllElements<T> extends Playback implements EnumerativePicker, Seedable
+public class AllElements<T> extends Playback<T> implements EnumerativePicker<T>, Seedable
 {
 
 	protected List<Integer> m_indexes;
@@ -17,6 +17,7 @@ public class AllElements<T> extends Playback implements EnumerativePicker, Seeda
 
 	protected RandomInteger m_indexPicker;
 
+	@SuppressWarnings("unchecked")
 	private AllElements(T[] values, boolean scramble, RandomInteger index_picker
 			, List<Integer> indexes, boolean loop, int index, int start_index)
 	{
@@ -138,10 +139,10 @@ public class AllElements<T> extends Playback implements EnumerativePicker, Seeda
 	}
 
 	@Override
-	public AllElements duplicate(boolean with_state)
+	public AllElements<T> duplicate(boolean with_state)
 	{
 
-		AllElements copy = new AllElements(m_values, m_scramble, m_indexPicker.duplicate(with_state)
+		AllElements<T> copy = new AllElements<T>(m_values, m_scramble, m_indexPicker.duplicate(with_state)
 				, new ArrayList<Integer>(m_indexes), m_loop, m_index, m_startIndex);
 
 		if(!with_state)
