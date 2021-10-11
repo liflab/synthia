@@ -11,17 +11,14 @@ public class PickSmallerComparableTest
 	public void property()
 	{
 		RandomInteger random_int = new RandomInteger(0, 100000);
-		PickSmallerComparable pi_small = new PickSmallerComparable(random_int, 2);
+		int old_value = 1000;
+		PickSmallerComparable<Integer> pi_small = new PickSmallerComparable<Integer>(random_int, old_value);
 
-		int old_value;
 		int new_value;
-		old_value = (int) pi_small.pick();
-
 		for (int i = 0; i < 9; i++)
 		{
 			new_value = (int) pi_small.pick();
 			Assertions.assertTrue(old_value > new_value);
-			old_value = new_value;
 		}
 	}
 
@@ -29,14 +26,14 @@ public class PickSmallerComparableTest
 	public void duplicateWithState()
  {
 	 RandomInteger random_int = new RandomInteger(0, 100000);
-	 PickSmallerComparable pi_small = new PickSmallerComparable(random_int, 2);
+	 PickSmallerComparable<Integer> pi_small = new PickSmallerComparable<Integer>(random_int, 2);
 
 	 for (int i = 0; i < 2; i++)
 	 {
 		 pi_small.pick();
 	 }
 
-	 PickSmallerComparable pi_small_copy = pi_small.duplicate(true);
+	 PickSmallerComparable<Integer> pi_small_copy = pi_small.duplicate(true);
 
 	 for (int i = 0; i < 2; i++)
 	 {
@@ -48,14 +45,14 @@ public class PickSmallerComparableTest
 	public void duplicateWithoutState()
 	{
 		RandomInteger random_int = new RandomInteger(0, 100000);
-		PickSmallerComparable pi_small = new PickSmallerComparable(random_int, 2);
+		PickSmallerComparable<Integer> pi_small = new PickSmallerComparable<Integer>(random_int, 2);
 
 		for (int i = 0; i < 2; i++)
 		{
 			pi_small.pick();
 		}
 
-		PickSmallerComparable pi_small_copy = pi_small.duplicate(false);
+		PickSmallerComparable<Integer> pi_small_copy = pi_small.duplicate(false);
 
 		for (int i = 0; i < 2; i++)
 		{
