@@ -84,8 +84,9 @@ public class RandomPrefix implements Shrinkable<String>, Seedable
 	}
 
 	@Override
-	public void setSeed(int seed)
+	public RandomPrefix setSeed(int seed)
 	{
 		m_prefixSize.setSeed(seed);
+		return this;
 	}
 }

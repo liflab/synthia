@@ -205,9 +205,10 @@ public class RandomString implements Shrinkable<String>, Seedable
 	}
 
 	@Override
-	public void setSeed(int seed)
+	public RandomString setSeed(int seed)
 	{
 		m_charIndexPicker.setSeed(seed);
+		return this;
 	}
 	
 	@Override

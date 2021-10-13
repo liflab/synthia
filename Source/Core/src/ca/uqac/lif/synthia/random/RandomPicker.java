@@ -53,10 +53,11 @@ public abstract class RandomPicker<T> implements Picker<T>, Seedable
 	public RandomPicker() { this(s_random.nextInt()); }
 
 	@Override
-	public void setSeed(int seed)
+	public RandomPicker<T> setSeed(int seed)
 	{
 		m_seed = seed;
 		m_random = new Random(seed);
+		return this;
 	}
 
 	@Override

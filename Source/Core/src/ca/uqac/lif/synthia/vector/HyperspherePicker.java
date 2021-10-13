@@ -1,6 +1,6 @@
 /*
     Synthia, a data structure generator
-    Copyright (C) 2019-2020 Laboratoire d'informatique formelle
+    Copyright (C) 2019-2021 Laboratoire d'informatique formelle
     Université du Québec à Chicoutimi, Canada
 
     This program is free software: you can redistribute it and/or modify
@@ -43,7 +43,7 @@ public class HyperspherePicker implements VectorPicker
 	/**
 	 * The pickers for the radius and each polar angle
 	 */
-	protected Picker<Float>[] m_dimensions;
+	protected Picker<? extends Number>[] m_dimensions;
 	
 	/**
 	 * Creates a new hypersphere picker.
@@ -52,7 +52,7 @@ public class HyperspherePicker implements VectorPicker
 	 * to the radius, and the others to each polar angle.
 	 */
 	@SuppressWarnings("unchecked")
-	public HyperspherePicker(Picker<Float> ... dimensions)
+	public HyperspherePicker(Picker<? extends Number> ... dimensions)
 	{
 		super();
 		m_dimensions = dimensions;
@@ -65,11 +65,11 @@ public class HyperspherePicker implements VectorPicker
 	 * each polar angle.
 	 */
 	@SuppressWarnings("unchecked")
-	public HyperspherePicker(float modulus, Picker<Float> ... dimensions)
+	public HyperspherePicker(float modulus, Picker<? extends Number> ... dimensions)
 	{
 		super();
 		m_dimensions = new Picker[dimensions.length + 1];
-		m_dimensions[0] = new Constant<Float>(modulus);
+		m_dimensions[0] = new Constant<Number>(modulus);
 		for (int i = 0; i < dimensions.length; i++)
 		{
 			m_dimensions[i + 1] = dimensions[i];
@@ -94,19 +94,19 @@ public class HyperspherePicker implements VectorPicker
 	@Override
 	public float[] pick()
 	{
-		float r = m_dimensions[0].pick();
+		float r = m_dimensions[0].pick().floatValue();
 		int n = m_dimensions.length;
 		float[] v = new float[n];
 		float sin_prod = 1;
-		float last_theta = m_dimensions[n - 1].pick();
+		float last_theta = m_dimensions[n - 1].pick().floatValue();
 		v[n - 1] = r * (float) Math.cos(last_theta);
 		for (int i = n - 2; i > 1; i--)
 		{
 			sin_prod *= Math.sin(last_theta);
-			last_theta = m_dimensions[i].pick();
+			last_theta = m_dimensions[i].pick().floatValue();
 			v[i] = r * (float) Math.cos(last_theta);
 		}
-		last_theta = m_dimensions[1].pick();
+		last_theta = m_dimensions[1].pick().floatValue();
 		v[0] = r * (float) Math.sin(last_theta) * sin_prod;
 		return v;
 	}
@@ -123,7 +123,7 @@ public class HyperspherePicker implements VectorPicker
 	@Override
 	public HyperspherePicker duplicate(boolean with_state)
 	{
-		Picker<Float>[] dimensions = new Picker[m_dimensions.length];
+		Picker<? extends Number>[] dimensions = new Picker[m_dimensions.length];
 		for (int i = 0; i < m_dimensions.length; i++)
 		{
 			dimensions[i] = m_dimensions[i].duplicate(with_state);

@@ -47,7 +47,6 @@ public class RandomFloat extends RandomPicker<Float> implements Shrinkable<Float
 		m_max = 1;
 	}
 
-
 	/**
 	 * Creates a new instance of the picker.
 	 * @param min The lower bound of the interval
@@ -73,6 +72,13 @@ public class RandomFloat extends RandomPicker<Float> implements Shrinkable<Float
 		m_max = max.floatValue();
 		m_seed = seed;
 		m_random = random;
+	}
+	
+	@Override
+	public RandomFloat setSeed(int seed)
+	{
+		super.setSeed(seed);
+		return this;
 	}
 
 	/**

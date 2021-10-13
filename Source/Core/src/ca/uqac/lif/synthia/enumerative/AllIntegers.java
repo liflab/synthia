@@ -187,11 +187,12 @@ public class AllIntegers implements EnumerativePicker<Integer>, Seedable
 	}
 
 	@Override
-	public void setSeed(int seed)
+	public AllIntegers setSeed(int seed)
 	{
 		if (m_scramble)
 		{
 			m_indexGenerator.setSeed(seed);
 		}
+		return this;
 	}
 }

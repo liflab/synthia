@@ -30,5 +30,5 @@ public interface Seedable
 	 * Set the seed of the random generator.
 	 * @param seed The seed for the random generator.
 	 */
-	public void setSeed(int seed);
+	public Seedable setSeed(int seed);
 }

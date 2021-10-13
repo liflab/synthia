@@ -131,9 +131,10 @@ public class AllElements<T> extends Playback implements EnumerativePicker, Seeda
 	}
 
 	@Override
-	public void setSeed(int seed)
+	public AllElements<T> setSeed(int seed)
 	{
 		m_indexPicker.setSeed(seed);
+		return this;
 	}
 
 	@Override

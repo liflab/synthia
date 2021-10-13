@@ -111,8 +111,9 @@ public class RandomSubString implements Shrinkable<String>, Seedable
 	}
 
 	@Override
-	public void setSeed(int seed)
+	public RandomSubString setSeed(int seed)
 	{
 		m_charSelect.setSeed(seed);
+		return this;
 	}
 }
