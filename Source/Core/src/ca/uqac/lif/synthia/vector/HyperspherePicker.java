@@ -106,7 +106,7 @@ public class HyperspherePicker implements VectorPicker
 			last_theta = m_dimensions[i].pick().floatValue();
 			v[i] = r * (float) Math.cos(last_theta);
 		}
-		last_theta = m_dimensions[1].pick().floatValue();
+		//last_theta = m_dimensions[1].pick().floatValue();
 		v[0] = r * (float) Math.sin(last_theta) * sin_prod;
 		return v;
 	}

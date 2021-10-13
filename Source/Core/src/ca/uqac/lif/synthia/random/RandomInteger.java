@@ -85,7 +85,12 @@ public class RandomInteger extends RandomPicker<Integer> implements Shrinkable<I
 		return this;
 	}
 
-
+	@Override
+	public RandomInteger setSeed(int seed)
+	{
+		super.setSeed(seed);
+		return this;
+	}
 
 
 	/**
