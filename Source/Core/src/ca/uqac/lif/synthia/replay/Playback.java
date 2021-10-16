@@ -20,9 +20,9 @@ package ca.uqac.lif.synthia.replay;
 
 import java.util.List;
 
-import ca.uqac.lif.synthia.enumerative.EnumerativePicker;
 import ca.uqac.lif.synthia.exception.NoMoreElementException;
 import ca.uqac.lif.synthia.relative.PickSmallerComparable;
+import ca.uqac.lif.synthia.Bounded;
 import ca.uqac.lif.synthia.Shrinkable;
 
 //TODO check constructors whit a list as parameter for m_values
@@ -44,7 +44,7 @@ import ca.uqac.lif.synthia.Shrinkable;
  * set to false.
  * @param <T> The type of objects to return
  */
-public class Playback<T> implements EnumerativePicker<T>, Shrinkable<T>
+public class Playback<T> implements Bounded<T>, Shrinkable<T>
 {
 	/**
 	 * The values to play back

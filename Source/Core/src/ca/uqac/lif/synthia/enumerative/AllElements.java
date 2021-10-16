@@ -1,6 +1,7 @@
 package ca.uqac.lif.synthia.enumerative;
 
 import ca.uqac.lif.synthia.exception.NoMoreElementException;
+import ca.uqac.lif.synthia.Bounded;
 import ca.uqac.lif.synthia.Seedable;
 import ca.uqac.lif.synthia.random.RandomInteger;
 import ca.uqac.lif.synthia.replay.Playback;
@@ -8,7 +9,7 @@ import ca.uqac.lif.synthia.replay.Playback;
 import java.util.ArrayList;
 import java.util.List;
 
-public class AllElements<T> extends Playback<T> implements EnumerativePicker<T>, Seedable
+public class AllElements<T> extends Playback<T> implements Bounded<T>, Seedable
 {
 
 	protected List<Integer> m_indexes;
