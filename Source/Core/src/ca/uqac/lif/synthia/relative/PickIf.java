@@ -1,5 +1,6 @@
 package ca.uqac.lif.synthia.relative;
 
+import ca.uqac.lif.synthia.Mutator;
 import ca.uqac.lif.synthia.Picker;
 import ca.uqac.lif.synthia.exception.GiveUpException;
 
@@ -8,14 +9,8 @@ import ca.uqac.lif.synthia.exception.GiveUpException;
  *
  * @param <T> The object type returned by the picker.
  */
-public abstract class PickIf<T> implements Picker<T>
+public abstract class PickIf<T> extends Mutator<T>
 {
-
-	/**
-	 * The picker used for the evaluations.
-	 */
-	protected Picker<T> m_picker;
-
 	/**
 	 * The maximal number of iteration that the while loop of the {@link #pick()} method can do.
 	 * If the value is negative, there will be no maximum number of iterations.
@@ -29,7 +24,7 @@ public abstract class PickIf<T> implements Picker<T>
 	 */
 	public PickIf(Picker<T> picker)
 	{
-		m_picker = picker;
+		super(picker);
 		m_maxIteration = 10000;
 	}
 
@@ -41,11 +36,9 @@ public abstract class PickIf<T> implements Picker<T>
 	 *                      an object before giving up.
 	 */
 	public PickIf(Picker<T> picker, int max_iteration)
-
 	{
-		m_picker = picker;
+		super(picker);
 		m_maxIteration = max_iteration;
-
 	}
 
 	/**

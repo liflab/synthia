@@ -18,6 +18,7 @@
  */
 package ca.uqac.lif.synthia.random;
 
+import ca.uqac.lif.synthia.Mutator;
 import ca.uqac.lif.synthia.Picker;
 import ca.uqac.lif.synthia.Shrinkable;
 import ca.uqac.lif.synthia.exception.CannotShrinkException;
@@ -33,7 +34,7 @@ import ca.uqac.lif.synthia.exception.CannotShrinkException;
  * @param <T> The type of number produced (i.e. <tt>Float</tt>,
  * <tt>Integer</tt>, etc.)
  */
-public abstract class AffineTransform<T extends Number> implements Shrinkable<T>
+public abstract class AffineTransform<T extends Number> extends Mutator<T> implements Shrinkable<T>
 {
 	/**
 	 * The slope of the affine transform
@@ -46,11 +47,6 @@ public abstract class AffineTransform<T extends Number> implements Shrinkable<T>
 	protected float m_b;
 	
 	/**
-	 * The underlying number picker
-	 */
-	/*@ non_null @*/ protected Picker<T> m_picker;
-	
-	/**
 	 * Creates a new instance of affine transform
 	 * @param picker The underlying number picker
 	 * @param m The slope of the affine transform
@@ -58,8 +54,7 @@ public abstract class AffineTransform<T extends Number> implements Shrinkable<T>
 	 */
 	public AffineTransform(/*@ non_null @*/ Picker<T> picker, /*@ non_null @*/ Number m, /*@ non_null @*/ Number b)
 	{
-		super();
-		m_picker = picker;
+		super(picker);
 		m_m = m.floatValue();
 		m_b = b.floatValue();
 	}

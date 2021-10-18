@@ -1,6 +1,6 @@
 /*
     Synthia, a data structure generator
-    Copyright (C) 2019-2020 Laboratoire d'informatique formelle
+    Copyright (C) 2019-2021 Laboratoire d'informatique formelle
     Université du Québec à Chicoutimi, Canada
 
     This program is free software: you can redistribute it and/or modify
@@ -19,11 +19,13 @@
 package ca.uqac.lif.synthia.util;
 
 import ca.uqac.lif.synthia.Picker;
+import ca.uqac.lif.synthia.Shrinkable;
+import ca.uqac.lif.synthia.exception.CannotShrinkException;
 
 /**
  * Picker that merges the result of other pickers into an array.
  */
-public class ArrayPicker extends CompositePicker<Object[]>
+public class ArrayPicker extends CompositePicker<Object[]> implements Shrinkable<Object[]>
 {
 	/**
 	 * Creates a new array picker 
@@ -55,5 +57,21 @@ public class ArrayPicker extends CompositePicker<Object[]>
 	public Object[] getOutput(Object ... values)
 	{
 		return values;
+	}
+
+	@SuppressWarnings({ "rawtypes", "unchecked" })
+	@Override
+	public ArrayPicker shrink(Object[] o)
+	{
+		Picker[] shrunk_pickers = new Picker[m_pickers.length];
+		for (int i = 0; i < m_pickers.length; i++)
+		{
+			if (!(m_pickers[i] instanceof Shrinkable))
+			{
+				throw new CannotShrinkException(m_pickers[i]);
+			}
+			shrunk_pickers[i] = ((Shrinkable<Object>) m_pickers[i]).shrink(o[i]);
+		}
+		return new ArrayPicker(shrunk_pickers);
 	}
 }
