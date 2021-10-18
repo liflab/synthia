@@ -20,7 +20,7 @@ package hypersphere;
 
 import ca.uqac.lif.synthia.random.AffineTransform.AffineTransformFloat;
 import ca.uqac.lif.synthia.random.RandomFloat;
-import ca.uqac.lif.synthia.util.ElementPicker;
+import ca.uqac.lif.synthia.util.Choice;
 import ca.uqac.lif.synthia.util.Freeze;
 import ca.uqac.lif.synthia.vector.HyperspherePicker;
 
@@ -46,7 +46,7 @@ public class Variation3
 		RandomFloat r_float2 = new RandomFloat().setSeed(40);
 		AffineTransformFloat af = new AffineTransformFloat(r_float1, 2, 1);
 		Freeze<Float> radius = new Freeze<Float>(af);
-		ElementPicker<Double> angle = new ElementPicker<Double>(r_float2)
+		Choice<Double> angle = new Choice<Double>(r_float2)
 				.add(0d, 0.25).add(Math.PI / 2, 0.25).add(Math.PI, 0.25).add(3 * Math.PI / 2, 0.25);
 		HyperspherePicker hp = new HyperspherePicker(radius, angle);
 		for (int i = 0; i < 100; i++)

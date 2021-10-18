@@ -21,7 +21,7 @@ package hypersphere;
 import ca.uqac.lif.synthia.random.RandomFloat;
 import ca.uqac.lif.synthia.random.RandomInteger;
 import ca.uqac.lif.synthia.util.Constant;
-import ca.uqac.lif.synthia.util.ElementPicker;
+import ca.uqac.lif.synthia.util.Choice;
 import ca.uqac.lif.synthia.util.Tick;
 import ca.uqac.lif.synthia.vector.HyperspherePicker;
 
@@ -44,7 +44,7 @@ public class Variation4
 		Constant<Float> c1 = new Constant<Float>(1 / 6f);
 		Tick radius = new Tick(ri, c1);
 		RandomFloat rf = new RandomFloat().setSeed(42);
-		ElementPicker<Double> start = new ElementPicker<Double>(rf)
+		Choice<Double> start = new Choice<Double>(rf)
 				.add(0d, 0.25).add(Math.PI / 2, 0.25).add(Math.PI, 0.25).add(3 * Math.PI / 2, 0.25);
 		Constant<Float> c2 = new Constant<Float>(1 / 6f);
 		Tick angle = new Tick(start, c2);

@@ -2,7 +2,7 @@ package apache;
 
 import ca.uqac.lif.synthia.IndexPicker;
 import ca.uqac.lif.synthia.Picker;
-import ca.uqac.lif.synthia.util.ElementPicker;
+import ca.uqac.lif.synthia.util.Choice;
 
 /**
  * A picker that generates IP addresses, with different probabilities
@@ -18,18 +18,18 @@ import ca.uqac.lif.synthia.util.ElementPicker;
  */
 public class RegionalIpPicker implements Picker<String>
 {
-	/*@ non_null @*/ ElementPicker<IpRegion> m_regionPicker;
+	/*@ non_null @*/ Choice<IpRegion> m_regionPicker;
 	
 	public RegionalIpPicker(/*@ non_null @*/ Picker<Float> picker, /*@ non_null @*/ IndexPicker i_picker)
 	{
 		super();
-		m_regionPicker = new ElementPicker<IpRegion>(picker);
+		m_regionPicker = new Choice<IpRegion>(picker);
 		m_regionPicker.add(new CanadaRegion(i_picker), 1/3);
 		m_regionPicker.add(new UsRegion(i_picker), 1/2);
 		m_regionPicker.add(new EuropeRegion(i_picker), 1/6);
 	}
 	
-	protected RegionalIpPicker(/*@ non_null @*/ ElementPicker<IpRegion> r_picker)
+	protected RegionalIpPicker(/*@ non_null @*/ Choice<IpRegion> r_picker)
 	{
 		super();
 		m_regionPicker = r_picker;
