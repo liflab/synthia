@@ -74,6 +74,7 @@ public class HyperspherePicker implements VectorPicker
 		{
 			m_dimensions[i + 1] = dimensions[i];
 		}
+
 	}
 
 

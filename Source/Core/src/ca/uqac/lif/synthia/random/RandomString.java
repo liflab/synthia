@@ -92,7 +92,7 @@ public class RandomString implements Shrinkable<String>, Seedable
 	{
 		super();
 		defaultCharArrayInitialize();
-		m_lengthPicker = new Constant<Integer>(length);
+		m_lengthPicker = new Constant<>(length);
 		m_charIndexPicker = new RandomInteger(0, m_chars.length);
 	}
 
@@ -105,7 +105,7 @@ public class RandomString implements Shrinkable<String>, Seedable
 	public RandomString(int length, char[] char_array)
 	{
 		super();
-		m_lengthPicker = new Constant<Integer>(length);
+		m_lengthPicker = new Constant<>(length);
 		m_chars = char_array;
 		m_charIndexPicker = new RandomInteger(0, m_chars.length);
 	}
@@ -116,7 +116,7 @@ public class RandomString implements Shrinkable<String>, Seedable
 	private void defaultCharArrayInitialize()
 	{
 		m_chars = new char[62];
-		int i = 0;
+		int i;
 
 		// 0 to 9
 		for (i = 0; i < 10; i++)
@@ -157,7 +157,7 @@ public class RandomString implements Shrinkable<String>, Seedable
 	public String pick()
 	{
 		int len = m_lengthPicker.pick();
-		List<Integer> char_index_list = new ArrayList<Integer>();
+		List<Integer> char_index_list = new ArrayList<>();
 		int char_index;
 		for (int i = 0; i < len; i++)
 		{

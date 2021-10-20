@@ -8,6 +8,8 @@ import java.util.ArrayList;
 import java.util.List;
 
 
+
+
 /**
  * An equivalent of {@link RandomSubString} but for lists.
  *
@@ -24,14 +26,14 @@ public class RandomSubList<T> implements Shrinkable<List<T>>
 
 	/**
 	 * If the element will be added in the sublist, this {@link RandomBoolean} is used to determine if
-	 * the element will be added as is or be first passed to the {@link RelativePicker}
+	 * the element will be added as is or be first passed to the {@link Shrinkable}
 	 * {@link #m_listReducer}.
 	 */
 	protected RandomBoolean m_asIs;
 
 	/**
-	 * {@link RelativePicker} to reduce elements when {@link #m_asIs} decides that the curent element
-	 * will be reduced. If it's the case, this picker uses the  {@link #getPicker(Object)} method,
+	 * {@link Shrinkable} to reduce elements when {@link #m_asIs} decides that the curent element
+	 * will be reduced. If it's the case, this picker uses the  {@link #shrink(List)} method,
 	 * passes the element as parameter and uses the {@link Picker#pick()} method of the created
 	 * picker to generated the element to add in the sublist.
 	 */
@@ -63,7 +65,7 @@ public class RandomSubList<T> implements Shrinkable<List<T>>
 	 * Public method to create a new instance of the class.
 	 *
 	 * @param elements     The list of elements used to generate sublists.
-	 * @param list_reducer The {@link RelativePicker} used to reduce elements of the original list.
+	 * @param list_reducer The {@link Shrinkable} used to reduce elements of the original list.
 	 */
 	public RandomSubList(List<T> elements, Shrinkable<T> list_reducer)
 	{
@@ -84,7 +86,7 @@ public class RandomSubList<T> implements Shrinkable<List<T>>
 	@Override
 	public List<T> pick()
 	{
-		List<T> output_list = new ArrayList<T>();
+		List<T> output_list = new ArrayList<>();
 		for (T m_element : m_elements)
 		{
 			if (m_pick.pick())
@@ -108,6 +110,7 @@ public class RandomSubList<T> implements Shrinkable<List<T>>
 	{
 		return new RandomSubList<T>(m_pick.duplicate(with_state), m_asIs.duplicate(with_state),
 				new ArrayList<T>(m_elements), (Shrinkable<T>) m_listReducer.duplicate(with_state));
+
 	}
 
 	/**

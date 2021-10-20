@@ -24,7 +24,7 @@ public class RandomSuffix extends RandomPrefix
 	{
 		if(element.isEmpty())
 		{
-			return new NothingPicker<String>();
+			return new NothingPicker<>();
 		}
 		return new RandomSuffix(element, m_prefixSize.duplicate(true));
 	}

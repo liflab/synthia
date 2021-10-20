@@ -3,6 +3,8 @@ package ca.uqac.lif.synthia.enumerative;
 import ca.uqac.lif.synthia.exception.NoMoreElementException;
 import ca.uqac.lif.synthia.Picker;
 
+
+//TODO
 /**
  * Picker who implements {@link EnumerativePicker}. This picker enumerates all the possibility of
  * of combinaisons of picked value from an array of Enumerative pickers. For example, an
@@ -17,12 +19,12 @@ import ca.uqac.lif.synthia.Picker;
  * After that, the picker will throw a {@link NoMoreElementException} if the pick method is called
  * one more time.
  */
-public class AllPickers implements EnumerativePicker
+public class AllPickers implements EnumerativePicker<Object[]>
 {
 	/**
 	 * The array of pickers used to generate all the possible combinations.
 	 */
-	protected EnumerativePicker[] m_enumPickers;
+	protected EnumerativePicker<Object>[] m_enumPickers;
 
 	/**
 	 * Flag to check if it's the first pick.
@@ -48,6 +50,7 @@ public class AllPickers implements EnumerativePicker
 	 */
 	private AllPickers(EnumerativePicker[] enum_pickers, boolean first_pick, Object[] values
 			, boolean done)
+
 	{
 		m_enumPickers = enum_pickers;
 		m_firstPick = first_pick;
@@ -55,11 +58,11 @@ public class AllPickers implements EnumerativePicker
 		m_done = done;
 	}
 
-	public AllPickers(EnumerativePicker[] enum_pickers)
+	public AllPickers(EnumerativePicker<Object>[] enum_pickers)
 	{
 		m_enumPickers = enum_pickers;
 		m_firstPick = true;
-		m_values = new Object[m_enumPickers.length];
+		m_values =  new Object[m_enumPickers.length];
 		m_done = false;
 	}
 
@@ -76,11 +79,12 @@ public class AllPickers implements EnumerativePicker
 		m_values = new Object[m_enumPickers.length];
 		m_done = false;
 
-		for (EnumerativePicker m_enumPicker : m_enumPickers)
+		for (EnumerativePicker<Object> m_enumPicker : m_enumPickers)
 		{
 			m_enumPicker.reset();
 		}
 	}
+
 
 	@Override
 	public Object[] pick()
@@ -149,9 +153,9 @@ public class AllPickers implements EnumerativePicker
 	private boolean internalIsDone()
 	{
 		int counter = 0;
-		for (int i = 0; i < m_enumPickers.length; i++)
+		for (EnumerativePicker<Object> m_enumPicker : m_enumPickers)
 		{
-			if (m_enumPickers[i].isDone())
+			if (m_enumPicker.isDone())
 			{
 				counter++;
 			}
@@ -175,16 +179,16 @@ public class AllPickers implements EnumerativePicker
 	@Override
 	public AllPickers duplicate(boolean with_state)
 	{
-		EnumerativePicker[] enum_picker_copy = new EnumerativePicker[m_enumPickers.length];
+		EnumerativePicker<Object>[] enum_picker_copy = new EnumerativePicker[m_enumPickers.length];
 		Object[] values_copy = new Object[m_enumPickers.length];
 
 		for (int i = 0; i < m_enumPickers.length; i++)
 		{
-			enum_picker_copy[i] = (EnumerativePicker) m_enumPickers[i].duplicate(with_state);
+			enum_picker_copy[i] = (EnumerativePicker<Object>) m_enumPickers[i].duplicate(with_state);
 			values_copy[i] = m_values[i];
 		}
 
-		AllPickers copy = new AllPickers(enum_picker_copy, m_firstPick, values_copy, m_done);
+		AllPickers copy = new AllPickers (enum_picker_copy, m_firstPick,  values_copy, m_done);
 
 		if (!with_state)
 		{

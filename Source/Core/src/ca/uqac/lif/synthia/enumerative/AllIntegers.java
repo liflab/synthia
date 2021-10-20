@@ -96,7 +96,7 @@ public class AllIntegers implements EnumerativePicker<Integer>, Seedable
 		m_max = max;
 		m_actualValue = min;
 		m_scramble = scramble;
-		m_valuesToScramble = new ArrayList<Integer>();
+		m_valuesToScramble = new ArrayList<>();
 		m_indexGenerator = new RandomInteger(0, 1);
 
 		if(scramble)
@@ -141,7 +141,7 @@ public class AllIntegers implements EnumerativePicker<Integer>, Seedable
 			throw new NoMoreElementException();
 		}
 
-		int picked_value = 0;
+		int picked_value;
 
 		if (!m_scramble)
 		{
@@ -175,8 +175,13 @@ public class AllIntegers implements EnumerativePicker<Integer>, Seedable
 	@Override
 	public AllIntegers duplicate(boolean with_state)
 	{
+<<<<<<< Updated upstream
 		AllIntegers copy = new AllIntegers(m_min, m_max, m_actualValue, m_scramble
 				, new ArrayList<Integer> (m_valuesToScramble), m_indexGenerator.duplicate(with_state));
+=======
+		AllIntegers copy = new AllIntegers(m_min, m_max, m_actualValue, m_scramble,
+				new ArrayList<>(m_valuesToScramble), m_indexGenerator.duplicate(with_state));
+>>>>>>> Stashed changes
 
 		if (!with_state)
 		{

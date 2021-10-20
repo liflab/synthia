@@ -121,7 +121,9 @@ public class RandomFloat extends RandomPicker<Float> implements Shrinkable<Float
 	{
 		if((element <= m_min) || (element.isNaN()))
 		{
+
 			return new NothingPicker<Float>();
+
 		}
 		else
 		{

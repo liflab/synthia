@@ -60,7 +60,7 @@ public class RandomPrefix implements Shrinkable<String>, Seedable
 	{
 		if(element.isEmpty())
 		{
-			return new NothingPicker<String>();
+			return new NothingPicker<>();
 		}
 		return new RandomPrefix(element, m_prefixSize.duplicate(true));
 	}

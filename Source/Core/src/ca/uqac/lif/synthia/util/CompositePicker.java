@@ -109,9 +109,9 @@ public abstract class CompositePicker<T> implements Picker<T>
 	@Override
 	public void reset()
 	{
-		for (int i = 0; i < m_pickers.length; i++)
+		for (Picker<?> m_picker : m_pickers)
 		{
-			m_pickers[i].reset();
+			m_picker.reset();
 		}
 	}
 	

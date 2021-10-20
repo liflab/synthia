@@ -18,6 +18,10 @@
  */
 package ca.uqac.lif.synthia.util;
 
+
+import ca.uqac.lif.synthia.Picker;
+
+import java.util.Collections;
 import java.util.HashSet;
 import java.util.Set;
 
@@ -53,11 +57,8 @@ public class SetPicker extends CompositePicker<Set<Object>>
 	@Override
 	public Set<Object> getOutput(Object ... values)
 	{
-		Set<Object> set = new HashSet<Object>(values.length);
-		for (Object v : values)
-		{
-			set.add(v);
-		}
+		Set<Object> set = new HashSet<>(values.length);
+		Collections.addAll(set, values);
 		return set;
 	}	
 }

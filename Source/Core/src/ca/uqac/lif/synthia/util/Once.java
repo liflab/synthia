@@ -112,7 +112,7 @@ public class Once<T> implements Picker<T>
 	@Override
 	public Once<T> duplicate(boolean with_state)
 	{
-		Once<T> o = new Once<T>(m_picker.duplicate(with_state));
+		Once<T> o = new Once<>(m_picker.duplicate(with_state));
 		if (with_state)
 		{
 			o.m_picked = m_picked;

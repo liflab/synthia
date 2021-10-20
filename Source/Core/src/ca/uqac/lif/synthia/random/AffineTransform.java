@@ -105,8 +105,10 @@ public abstract class AffineTransform<T extends Number> implements Shrinkable<T>
 		@Override
 		public AffineTransformInteger duplicate(boolean with_state) 
 		{
+
 			AffineTransformInteger ati = new AffineTransformInteger(m_picker.duplicate(with_state), m_m, m_b);
 			return ati;
+
 		}
 		
 		@Override
@@ -146,8 +148,7 @@ public abstract class AffineTransform<T extends Number> implements Shrinkable<T>
 		@Override
 		public AffineTransformFloat duplicate(boolean with_state) 
 		{
-			AffineTransformFloat atf = new AffineTransformFloat(m_picker.duplicate(with_state), m_m, m_b);
-			return atf;
+			 return new AffineTransformFloat(m_picker.duplicate(with_state), m_m, m_b);
 		}
 		
 		@Override

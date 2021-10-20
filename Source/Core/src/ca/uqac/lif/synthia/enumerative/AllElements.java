@@ -8,7 +8,15 @@ import ca.uqac.lif.synthia.replay.Playback;
 import java.util.ArrayList;
 import java.util.List;
 
+<<<<<<< Updated upstream
 public class AllElements<T> extends Playback implements EnumerativePicker, Seedable
+=======
+/**
+ * @param <T> The type of the {@link AllElements} {@link ca.uqac.lif.synthia.Picker}.
+ * @author Marc-Antoine Plourde
+ */
+public class AllElements<T> extends Playback<T> implements EnumerativePicker<T>, Seedable
+>>>>>>> Stashed changes
 {
 
 	protected List<Integer> m_indexes;
@@ -33,7 +41,7 @@ public class AllElements<T> extends Playback implements EnumerativePicker, Seeda
 	{
 		super(values);
 		m_scramble = scramble;
-		m_indexes = new ArrayList<Integer>();
+		m_indexes = new ArrayList<>();
 		m_indexPicker = new RandomInteger(0, 1);
 		setLoop(loop);
 
@@ -58,7 +66,7 @@ public class AllElements<T> extends Playback implements EnumerativePicker, Seeda
 	{
 		if(!m_scramble)
 		{
-			return (T) super.pick();
+			return  super.pick();
 		}
 		else
 		{
@@ -81,7 +89,7 @@ public class AllElements<T> extends Playback implements EnumerativePicker, Seeda
 		}
 
 		int picked_index = m_indexPicker.pick();
-		T picked_value = (T) m_values[m_indexes.get(picked_index)];
+		T picked_value =  m_values[m_indexes.get(picked_index)];
 
 		m_indexes.remove(picked_index);
 
@@ -137,12 +145,20 @@ public class AllElements<T> extends Playback implements EnumerativePicker, Seeda
 		return this;
 	}
 
+<<<<<<< Updated upstream
 	@Override
 	public AllElements duplicate(boolean with_state)
 	{
 
 		AllElements copy = new AllElements(m_values, m_scramble, m_indexPicker.duplicate(with_state)
 				, new ArrayList<Integer>(m_indexes), m_loop, m_index, m_startIndex);
+=======
+	@Override public AllElements<T> duplicate(boolean with_state)
+	{
+
+		AllElements<T> copy = new AllElements<>(m_values, m_scramble, m_indexPicker.duplicate(with_state),
+				new ArrayList<>(m_indexes), m_loop, m_index, m_startIndex);
+>>>>>>> Stashed changes
 
 		if(!with_state)
 		{

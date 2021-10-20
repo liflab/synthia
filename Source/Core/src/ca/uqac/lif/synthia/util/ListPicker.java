@@ -19,6 +19,7 @@
 package ca.uqac.lif.synthia.util;
 
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.List;
 
 import ca.uqac.lif.synthia.Picker;
@@ -38,7 +39,7 @@ public class ListPicker extends CompositePicker<List<Object>>
 	public ListPicker(Picker<?> ... pickers)
 	{
 		super(pickers);
-		m_sizePicker = new Constant<Integer>(pickers.length);
+		m_sizePicker = new Constant<>(pickers.length);
 	}
 
 	/**
@@ -91,18 +92,15 @@ public class ListPicker extends CompositePicker<List<Object>>
 	@Override
 	public List<Object> getOutput(Object ... values)
 	{
-		List<Object> list = new ArrayList<Object>(values.length);
-		for (Object v : values)
-		{
-			list.add(v);
-		}
+		List<Object> list = new ArrayList<>(values.length);
+		Collections.addAll(list, values);
 		return list;
 	}
 
 	@Override
 	public List<Object> pick ()
 	{
-		List<Object> picked_elements = new ArrayList<Object>();
+		List<Object> picked_elements = new ArrayList<>();
 		int size = m_sizePicker.pick();
 		int index =0;
 

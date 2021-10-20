@@ -40,8 +40,8 @@ public abstract class PickIf<T> implements Picker<T>
 	 * @param max_iteration The maximum number of iterations the {@link #pick()} will try to generate
 	 *                      an object before giving up.
 	 */
-	public PickIf(Picker<T> picker, int max_iteration)
 
+	public PickIf(Picker<T> picker, int max_iteration)
 	{
 		m_picker = picker;
 		m_maxIteration = max_iteration;
@@ -113,4 +113,9 @@ public abstract class PickIf<T> implements Picker<T>
 	{
 		m_picker.reset();
 	}
+
+
+	public abstract Picker<T> duplicate(boolean with_state);
+
+
 }

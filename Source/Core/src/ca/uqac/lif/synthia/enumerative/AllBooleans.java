@@ -64,7 +64,7 @@ public class AllBooleans implements EnumerativePicker<Boolean>
 	@Override
 	public AllBooleans duplicate(boolean with_state)
 	{
-		return new AllBooleans((AllIntegers) m_picker.duplicate(with_state));
+		return new AllBooleans( m_picker.duplicate(with_state));
 	}
 
 	/**

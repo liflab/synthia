@@ -96,7 +96,7 @@ public class Freeze<T> implements Shrinkable<T>
 	@Override
 	/*@ non_null @*/ public Freeze<T> duplicate(boolean with_state) 
 	{
-		Freeze<T> fp = new Freeze<T>(m_innerPicker.duplicate(with_state));
+		Freeze<T> fp = new Freeze<>(m_innerPicker.duplicate(with_state));
 		if (with_state)
 		{
 			fp.m_value = m_value;

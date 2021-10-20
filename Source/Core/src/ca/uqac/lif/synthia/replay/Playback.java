@@ -162,7 +162,7 @@ public class Playback<T> implements EnumerativePicker<T>, Shrinkable<T>
 	@Override
 	public Playback<T> duplicate(boolean with_state)
 	{
-		Playback<T> lp = new Playback<T>(m_startIndex, m_values);
+		Playback<T> lp = new Playback<>(m_startIndex, m_values);
 		if (with_state)
 		{
 			lp.m_index = m_index;

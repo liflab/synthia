@@ -80,7 +80,7 @@ public class Tick implements Picker<Number>
 	 */
 	public Tick(Number start, Number increment)
 	{
-		this(new Constant<Number>(start), new Constant<Number>(increment));
+		this(new Constant<>(start), new Constant<>(increment));
 	}
 	
 	/**
@@ -91,7 +91,7 @@ public class Tick implements Picker<Number>
 	 */
 	public Tick(Number start, Picker<? extends Number> increment)
 	{
-		this(new Constant<Number>(start), increment);
+		this(new Constant<>(start), increment);
 	}
 	
 	/**
@@ -176,7 +176,7 @@ public class Tick implements Picker<Number>
 	/*@ non_null @*/ public Tick setValue(float value)
 	{
 		m_currentValue = value;
-		m_startValue = new Constant<Float>(value);
+		m_startValue = new Constant<>(value);
 		return this;
 	}
 }

@@ -84,7 +84,7 @@ public class Constant<T> implements Shrinkable<T>
 	@Override
 	public Constant<T> duplicate(boolean with_state)
 	{
-		return new Constant<T>(m_value);
+		return new Constant<>(m_value);
 	}
 
 

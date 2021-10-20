@@ -105,6 +105,7 @@ public class BoundedPicker<T> implements Shrinkable<T>
 	@Override
 	/*@ non_null @*/ public BoundedPicker<T> duplicate(boolean with_state)
 	{
+
 		BoundedPicker<T> copy = new BoundedPicker<T>(m_provider.duplicate(with_state), m_length);
 		if (with_state)
 		{

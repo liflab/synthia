@@ -57,7 +57,7 @@ public class Record<T> implements Picker<T>
 	{
 		super();
 		m_picker = picker;
-		m_values = new ArrayList<T>();
+		m_values = new ArrayList<>();
 	}
 
 	private Record(Picker<T> picker, List<T> values)
@@ -107,6 +107,7 @@ public class Record<T> implements Picker<T>
 	@Override
 	/*@ pure non_null @*/ public Record<T> duplicate(boolean with_state)
 	{
+
 		Record<T> copy = new Record<T>(m_picker.duplicate(with_state), new ArrayList<T>(m_values));
 		if (!with_state)
 		{

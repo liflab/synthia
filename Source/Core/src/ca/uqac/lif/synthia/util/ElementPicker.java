@@ -81,7 +81,7 @@ public class ElementPicker<T> implements Shrinkable<T>
 	 */
 	/*@ non_null @*/ public ElementPicker<T> add(/*@ non_null @*/ T t, /*@ non_null @*/ Number p)
 	{
-		ProbabilityChoice<T> pc = new ProbabilityChoice<T>(t, p);
+		ProbabilityChoice<T> pc = new ProbabilityChoice<>(t, p);
 		return add(pc);
 	}
 
@@ -144,7 +144,7 @@ public class ElementPicker<T> implements Shrinkable<T>
 	@Override
 	/*@ pure non_null @*/ public ElementPicker<T> duplicate(boolean with_state)
 	{
-		ElementPicker<T> ep = new ElementPicker<T>(m_floatPicker.duplicate(with_state));
+		ElementPicker<T> ep = new ElementPicker<>(m_floatPicker.duplicate(with_state));
 		for (ProbabilityChoice<T> pc : m_choices)
 		{
 			ep.m_choices.add(pc.duplicate(with_state));
@@ -218,7 +218,7 @@ public class ElementPicker<T> implements Shrinkable<T>
 		 */
 		/*@ pure non_null @*/ public ProbabilityChoice<T> duplicate(boolean with_state)
 		{
-			return new ProbabilityChoice<T>(m_object, m_probability);
+			return new ProbabilityChoice<>(m_object, m_probability);
 		}
 	}
 	
