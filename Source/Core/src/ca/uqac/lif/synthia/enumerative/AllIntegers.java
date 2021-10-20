@@ -2,7 +2,6 @@ package ca.uqac.lif.synthia.enumerative;
 
 import ca.uqac.lif.synthia.exception.NoMoreElementException;
 import ca.uqac.lif.synthia.Bounded;
-import ca.uqac.lif.synthia.Picker;
 import ca.uqac.lif.synthia.Seedable;
 import ca.uqac.lif.synthia.random.RandomInteger;
 
