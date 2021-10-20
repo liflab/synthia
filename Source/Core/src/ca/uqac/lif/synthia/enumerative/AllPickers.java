@@ -2,7 +2,6 @@ package ca.uqac.lif.synthia.enumerative;
 
 import ca.uqac.lif.synthia.exception.NoMoreElementException;
 import ca.uqac.lif.synthia.Bounded;
-import ca.uqac.lif.synthia.Picker;
 
 /**
  * Picker who implements {@link Bounded}. This picker enumerates all the possibility of
@@ -18,12 +17,12 @@ import ca.uqac.lif.synthia.Picker;
  * After that, the picker will throw a {@link NoMoreElementException} if the pick method is called
  * one more time.
  */
-public class AllPickers implements Bounded
+public class AllPickers implements Bounded<Object[]>
 {
 	/**
 	 * The array of pickers used to generate all the possible combinations.
 	 */
-	protected Bounded[] m_enumPickers;
+	protected Bounded<?>[] m_enumPickers;
 
 	/**
 	 * Flag to check if it's the first pick.
@@ -47,7 +46,7 @@ public class AllPickers implements Bounded
 	 * @param values The m_values attribute of the AllPickers instance to duplicate.
 	 * @param done The m_done attribute of the AllPickers instance to duplicate.
 	 */
-	private AllPickers(Bounded[] enum_pickers, boolean first_pick, Object[] values
+	private AllPickers(Bounded<?>[] enum_pickers, boolean first_pick, Object[] values
 			, boolean done)
 	{
 		m_enumPickers = enum_pickers;
@@ -56,7 +55,7 @@ public class AllPickers implements Bounded
 		m_done = done;
 	}
 
-	public AllPickers(Bounded[] enum_pickers)
+	public AllPickers(Bounded<?>[] enum_pickers)
 	{
 		m_enumPickers = enum_pickers;
 		m_firstPick = true;
@@ -77,7 +76,7 @@ public class AllPickers implements Bounded
 		m_values = new Object[m_enumPickers.length];
 		m_done = false;
 
-		for (Bounded m_enumPicker : m_enumPickers)
+		for (Bounded<?> m_enumPicker : m_enumPickers)
 		{
 			m_enumPicker.reset();
 		}
@@ -173,6 +172,7 @@ public class AllPickers implements Bounded
 		m_firstPick = false;
 	}
 
+	@SuppressWarnings("rawtypes")
 	@Override
 	public AllPickers duplicate(boolean with_state)
 	{
@@ -181,7 +181,7 @@ public class AllPickers implements Bounded
 
 		for (int i = 0; i < m_enumPickers.length; i++)
 		{
-			enum_picker_copy[i] = (Bounded) m_enumPickers[i].duplicate(with_state);
+			enum_picker_copy[i] = (Bounded<?>) m_enumPickers[i].duplicate(with_state);
 			values_copy[i] = m_values[i];
 		}
 

@@ -1,6 +1,6 @@
 /*
     Synthia, a data structure generator
-    Copyright (C) 2019-2020 Laboratoire d'informatique formelle
+    Copyright (C) 2019-2021 Laboratoire d'informatique formelle
     Université du Québec à Chicoutimi, Canada
     This program is free software: you can redistribute it and/or modify
     it under the terms of the GNU Lesser General Public License as published
@@ -16,7 +16,10 @@
 package ca.uqac.lif.synthia.random;
 
 import ca.uqac.lif.synthia.random.generators.Random;
-
+import ca.uqac.lif.petitpoucet.NodeFactory;
+import ca.uqac.lif.petitpoucet.Part;
+import ca.uqac.lif.petitpoucet.PartNode;
+import ca.uqac.lif.petitpoucet.function.ExplanationQueryable;
 import ca.uqac.lif.synthia.Picker;
 import ca.uqac.lif.synthia.Seedable;
 
@@ -32,7 +35,7 @@ import ca.uqac.lif.synthia.Seedable;
  *
  * @param <T> The type of object to pick
  */
-public abstract class RandomPicker<T> implements Picker<T>, Seedable
+public abstract class RandomPicker<T> implements Picker<T>, Seedable, ExplanationQueryable
 {
 	/**
 	 * A random number generator used to set the seed when none is
@@ -64,5 +67,17 @@ public abstract class RandomPicker<T> implements Picker<T>, Seedable
 	public void reset()
 	{
 		m_random = new Random(m_seed);
+	}
+	
+	@Override
+	public PartNode getExplanation(Part p)
+	{
+		return getExplanation(p, NodeFactory.getFactory());
+	}
+
+	@Override
+	public PartNode getExplanation(Part p, NodeFactory f)
+	{
+		return f.getPartNode(p, this);
 	}
 }

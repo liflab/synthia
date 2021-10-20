@@ -18,6 +18,10 @@
  */
 package ca.uqac.lif.synthia;
 
+import ca.uqac.lif.petitpoucet.NodeFactory;
+import ca.uqac.lif.petitpoucet.Part;
+import ca.uqac.lif.petitpoucet.PartNode;
+
 /**
  * A picker that applies a transformation ("mutation") on the value produced by
  * another picker.
@@ -55,6 +59,32 @@ public abstract class Mutator<T> implements Picker<T>
 	public void reset()
 	{
 		m_picker.reset();
+	}
+	
+	public PartNode getExplanation(Part p)
+	{
+		return getExplanation(p, NodeFactory.getFactory());
+	}
+	
+	public PartNode getExplanation(Part p, NodeFactory f)
+	{
+		int index = -1;
+		Part head = p.head();
+		if (head != null && head instanceof NthSuccessiveOutput)
+		{
+			index = ((NthSuccessiveOutput) head).getIndex();
+		}
+		if (index < 0)
+		{
+			// Not a valid part, end there
+			return null;
+		}
+		return getExplanationForOutput(index, p, f);
+	}
+	
+	protected PartNode getExplanationForOutput(int output_index, Part p, NodeFactory f)
+	{
+		return f.getPartNode(p, this);
 	}
 	
 	protected void copyInto(/*@ non_null @*/ Mutator<T> m, boolean with_state)

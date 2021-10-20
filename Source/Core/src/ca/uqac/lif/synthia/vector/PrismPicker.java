@@ -1,6 +1,6 @@
 /*
     Synthia, a data structure generator
-    Copyright (C) 2019-2020 Laboratoire d'informatique formelle
+    Copyright (C) 2019-2021 Laboratoire d'informatique formelle
     Université du Québec à Chicoutimi, Canada
 
     This program is free software: you can redistribute it and/or modify
@@ -18,6 +18,14 @@
  */
 package ca.uqac.lif.synthia.vector;
 
+import ca.uqac.lif.petitpoucet.AndNode;
+import ca.uqac.lif.petitpoucet.ComposedPart;
+import ca.uqac.lif.petitpoucet.NodeFactory;
+import ca.uqac.lif.petitpoucet.Part;
+import ca.uqac.lif.petitpoucet.PartNode;
+import ca.uqac.lif.petitpoucet.function.ExplanationQueryable;
+import ca.uqac.lif.petitpoucet.function.vector.NthElement;
+import ca.uqac.lif.synthia.NthSuccessiveOutput;
 import ca.uqac.lif.synthia.Picker;
 
 /**
@@ -26,7 +34,7 @@ import ca.uqac.lif.synthia.Picker;
  * values, this picker amounts to generating points inside a
  * multi-dimensional "prism" --hence its name.
  */
-public class PrismPicker implements VectorPicker
+public class PrismPicker implements VectorPicker, ExplanationQueryable
 {
 	/**
 	 * The pickers for each dimension of the vector
@@ -83,5 +91,55 @@ public class PrismPicker implements VectorPicker
 	public int getDimension()
 	{
 		return m_dimensions.length;
+	}
+
+	@Override
+	public PartNode getExplanation(Part p)
+	{
+		return getExplanation(p, NodeFactory.getFactory());
+	}
+
+	@Override
+	public PartNode getExplanation(Part p, NodeFactory f)
+	{
+		PartNode root = f.getPartNode(p, this);
+		int index = -1, part_index = -1;
+		Part head = p.head();
+		if (head instanceof NthElement)
+		{
+			part_index = ((NthElement) head).getIndex();
+			Part tail = p.tail();
+			if (tail == null)
+			{
+				return null; // Invalid part
+			}
+			head = tail.head();
+		}
+		if (!(head instanceof NthSuccessiveOutput))
+		{
+			return null; // Invalid part
+		}
+		index = ((NthSuccessiveOutput) head).getIndex();
+		if (index < 0)
+		{
+			return null; // Invalid part
+		}
+		if (part_index < 0)
+		{
+			// p points at the whole vector
+			AndNode and = f.getAndNode();
+			NthSuccessiveOutput in_out = new NthSuccessiveOutput(index);
+			for (int i = 0; i < m_dimensions.length; i++)
+			{
+				PartNode pn = f.getPartNode(in_out, m_dimensions[i]);
+				and.addChild(pn);
+			}
+			root.addChild(and);
+			return root;
+		}
+		// p points at a number inside the vector
+		Part new_p = ComposedPart.compose(new NthElement(part_index), new NthSuccessiveOutput(index));
+		root.addChild(f.getPartNode(new_p, m_dimensions[part_index]));
+		return root;
 	}
 }

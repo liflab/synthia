@@ -1,6 +1,32 @@
+/*
+    Synthia, a data structure generator
+    Copyright (C) 2019-2021 Laboratoire d'informatique formelle
+    Université du Québec à Chicoutimi, Canada
+
+    This program is free software: you can redistribute it and/or modify
+    it under the terms of the GNU Lesser General Public License as published
+    by the Free Software Foundation, either version 3 of the License, or
+    (at your option) any later version.
+
+    This program is distributed in the hope that it will be useful,
+    but WITHOUT ANY WARRANTY; without even the implied warranty of
+    MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+    GNU Lesser General Public License for more details.
+
+    You should have received a copy of the GNU Lesser General Public License
+    along with this program.  If not, see <http://www.gnu.org/licenses/>.
+ */
 package ca.uqac.lif.synthia.relative;
 
+import java.util.ArrayList;
+import java.util.List;
+
+import ca.uqac.lif.petitpoucet.NodeFactory;
+import ca.uqac.lif.petitpoucet.Part;
+import ca.uqac.lif.petitpoucet.PartNode;
+import ca.uqac.lif.petitpoucet.function.ExplanationQueryable;
 import ca.uqac.lif.synthia.Mutator;
+import ca.uqac.lif.synthia.NthSuccessiveOutput;
 import ca.uqac.lif.synthia.Picker;
 import ca.uqac.lif.synthia.exception.GiveUpException;
 
@@ -9,13 +35,19 @@ import ca.uqac.lif.synthia.exception.GiveUpException;
  *
  * @param <T> The object type returned by the picker.
  */
-public abstract class PickIf<T> extends Mutator<T>
+public abstract class PickIf<T> extends Mutator<T> implements ExplanationQueryable
 {
 	/**
 	 * The maximal number of iteration that the while loop of the {@link #pick()} method can do.
 	 * If the value is negative, there will be no maximum number of iterations.
 	 */
 	protected int m_maxIteration;
+	
+	/**
+	 * A list keeping track of the number of rejected elements between each
+	 * output element. This list is only used to answer calls to {@link #query()}.
+	 */
+	/*@ non_null @*/ protected List<Integer> m_rejected;
 
 	/**
 	 * Constructor with default {@link #m_maxIteration} value.
@@ -26,6 +58,7 @@ public abstract class PickIf<T> extends Mutator<T>
 	{
 		super(picker);
 		m_maxIteration = 10000;
+		m_rejected = new ArrayList<Integer>();
 	}
 
 	/**
@@ -105,5 +138,23 @@ public abstract class PickIf<T> extends Mutator<T>
 	public void reset()
 	{
 		m_picker.reset();
+	}
+
+	@Override
+	public PartNode getExplanationForOutput(int index, Part p, NodeFactory f)
+	{
+		PartNode root = f.getPartNode(p, this);
+		if (index >= m_rejected.size())
+		{
+			// Not a valid part, end there
+			return root;
+		}
+		int current_index = 0;
+		for (int i = 0; i < index; i++)
+		{
+			current_index += m_rejected.get(i);
+		}
+		root.addChild(f.getPartNode(new NthSuccessiveOutput(current_index), m_picker));
+		return root;
 	}
 }
