@@ -33,7 +33,7 @@ import ca.uqac.lif.synthia.relative.PickSmallerComparable;
  * has twice the odds of being picked compared to <tt>"B"</tt> and <tt>"C"</tt>:
  * <pre>
  * RandomFloat r = new RandomFloat();
- * ElementPicker&lt;String&gt; ep = new ElementPicker&lt;String&gt;(r);
+ * Choice&lt;String&gt; ep = new Choice&lt;String&gt;(r);
  * ep.add("A", 0.5).add("B", 0.25).add("C", 0.25);</pre>
  * When adding elements, one must make sure that the sum of probabilities
  * is equal to 1.
