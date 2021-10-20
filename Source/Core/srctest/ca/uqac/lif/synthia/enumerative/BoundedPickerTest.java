@@ -1,6 +1,9 @@
-package ca.uqac.lif.synthia.random;
+package ca.uqac.lif.synthia.enumerative;
 
 import ca.uqac.lif.synthia.exception.NoMoreElementException;
+import ca.uqac.lif.synthia.random.RandomFloat;
+import ca.uqac.lif.synthia.random.RandomInteger;
+
 import org.junit.Test;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.function.Executable;
@@ -23,8 +26,8 @@ public class BoundedPickerTest
 			random_integer2.setSeed(randomSeed);
 			random_float.setSeed(randomSeed);
 			random_float1.setSeed(randomSeed);
-			BoundedPicker bounded_picker = new BoundedPicker(random_float, random_integer1.pick());
-			BoundedPicker bounded_picker1 = new BoundedPicker(random_float1, random_integer2.pick());
+			Bound bounded_picker = new Bound(random_float, random_integer1.pick());
+			Bound bounded_picker1 = new Bound(random_float1, random_integer2.pick());
 			while (!bounded_picker.isDone())
 			{
 				Assertions.assertEquals(bounded_picker.pick(), bounded_picker1.pick());
@@ -41,14 +44,14 @@ public class BoundedPickerTest
 		{
 			RandomInteger random_integer = new RandomInteger(min, max);
 			RandomFloat random_float = new RandomFloat();
-			BoundedPicker bounded_picker = new BoundedPicker(random_float, random_integer.pick());
+			Bound bounded_picker = new Bound(random_float, random_integer.pick());
 
 			for (int j = 0; j < (min - 1) ; j++)
 			{
 				bounded_picker.pick();
 			}
 
-			BoundedPicker bounded_picker_copy = bounded_picker.duplicate(true);
+			Bound bounded_picker_copy = bounded_picker.duplicate(true);
 
 			while (!bounded_picker.isDone())
 			{
@@ -67,14 +70,14 @@ public class BoundedPickerTest
 		{
 			RandomInteger random_integer = new RandomInteger(min, max);
 			RandomFloat random_float = new RandomFloat();
-			BoundedPicker bounded_picker = new BoundedPicker(random_float, random_integer.pick());
+			Bound bounded_picker = new Bound(random_float, random_integer.pick());
 
 			for (int j = 0; j < (min - 1); j++)
 			{
 				bounded_picker.pick();
 			}
 
-			BoundedPicker bounded_picker_copy = bounded_picker.duplicate(false);
+			Bound bounded_picker_copy = bounded_picker.duplicate(false);
 
 			while (bounded_picker.isDone())
 			{
@@ -95,7 +98,7 @@ public class BoundedPickerTest
 	@Test
 	public void isDone()
 	{
-		BoundedPicker bounded_picker = new BoundedPicker(new RandomInteger(0, 100), 100);
+		Bound bounded_picker = new Bound(new RandomInteger(0, 100), 100);
 
 		for (int i = 0; i < 100; i++)
 		{
@@ -110,7 +113,7 @@ public class BoundedPickerTest
 	@Test
 	public void noMoreElementException()
 	{
-		BoundedPicker bounded_picker = new BoundedPicker(new RandomInteger(0, 100), 100);
+		Bound bounded_picker = new Bound(new RandomInteger(0, 100), 100);
 
 		for (int i = 0; i < 100; i++)
 		{

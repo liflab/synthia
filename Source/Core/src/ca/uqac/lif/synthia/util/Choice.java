@@ -33,13 +33,13 @@ import ca.uqac.lif.synthia.relative.PickSmallerComparable;
  * has twice the odds of being picked compared to <tt>"B"</tt> and <tt>"C"</tt>:
  * <pre>
  * RandomFloat r = new RandomFloat();
- * ElementPicker&lt;String&gt; ep = new ElementPicker&lt;String&gt;(r);
+ * Choice&lt;String&gt; ep = new Choice&lt;String&gt;(r);
  * ep.add("A", 0.5).add("B", 0.25).add("C", 0.25);</pre>
  * When adding elements, one must make sure that the sum of probabilities
  * is equal to 1.
  * @param <T> The type of the object to pick
  */
-public class ElementPicker<T> implements Shrinkable<T>
+public class Choice<T> implements Shrinkable<T>
 {
 	/**
 	 * A list storing each element with its associated probability
@@ -55,7 +55,7 @@ public class ElementPicker<T> implements Shrinkable<T>
 	 * Creates a new element picker
 	 * @param picker A picker used to choose the element
 	 */
-	public ElementPicker(/*@ non_null @*/ Picker<Float> picker)
+	public Choice(/*@ non_null @*/ Picker<Float> picker)
 	{
 		super();
 		m_choices = new ArrayList<ProbabilityChoice<T>>();
@@ -67,7 +67,7 @@ public class ElementPicker<T> implements Shrinkable<T>
 	 * @param pc The association
 	 * @return This element picker
 	 */
-	/*@ non_null @*/ public ElementPicker<T> add(/*@ non_null @*/ ProbabilityChoice<T> pc)
+	/*@ non_null @*/ public Choice<T> add(/*@ non_null @*/ ProbabilityChoice<T> pc)
 	{
 		m_choices.add(pc);
 		return this;
@@ -79,9 +79,9 @@ public class ElementPicker<T> implements Shrinkable<T>
 	 * @param p The probability, must be between 0 and 1
 	 * @return This element picker
 	 */
-	/*@ non_null @*/ public ElementPicker<T> add(/*@ non_null @*/ T t, /*@ non_null @*/ Number p)
+	/*@ non_null @*/ public Choice<T> add(/*@ non_null @*/ T t, /*@ non_null @*/ Number p)
 	{
-		ProbabilityChoice<T> pc = new ProbabilityChoice<>(t, p);
+		ProbabilityChoice<T> pc = new ProbabilityChoice<T>(t, p);
 		return add(pc);
 	}
 
@@ -142,9 +142,9 @@ public class ElementPicker<T> implements Shrinkable<T>
 	 * @return The copy of the element picker
 	 */
 	@Override
-	/*@ pure non_null @*/ public ElementPicker<T> duplicate(boolean with_state)
+	/*@ pure non_null @*/ public Choice<T> duplicate(boolean with_state)
 	{
-		ElementPicker<T> ep = new ElementPicker<>(m_floatPicker.duplicate(with_state));
+		Choice<T> ep = new Choice<T>(m_floatPicker.duplicate(with_state));
 		for (ProbabilityChoice<T> pc : m_choices)
 		{
 			ep.m_choices.add(pc.duplicate(with_state));
@@ -218,7 +218,7 @@ public class ElementPicker<T> implements Shrinkable<T>
 		 */
 		/*@ pure non_null @*/ public ProbabilityChoice<T> duplicate(boolean with_state)
 		{
-			return new ProbabilityChoice<>(m_object, m_probability);
+			return new ProbabilityChoice<T>(m_object, m_probability);
 		}
 	}
 	

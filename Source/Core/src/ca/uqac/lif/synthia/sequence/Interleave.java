@@ -24,7 +24,7 @@ import java.util.List;
 import java.util.Map;
 
 import ca.uqac.lif.synthia.Picker;
-import ca.uqac.lif.synthia.util.ElementPicker.ProbabilityChoice;
+import ca.uqac.lif.synthia.util.Choice.ProbabilityChoice;
 
 public class Interleave<T> implements Picker<T>
 {

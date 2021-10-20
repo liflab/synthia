@@ -2,7 +2,7 @@ package logs;
 
 import basic.IpAddressProvider;
 import ca.uqac.lif.synthia.Picker;
-import ca.uqac.lif.synthia.random.BoundedPicker;
+import ca.uqac.lif.synthia.enumerative.Bound;
 import ca.uqac.lif.synthia.random.RandomString;
 import ca.uqac.lif.synthia.random.RandomFloat;
 import ca.uqac.lif.synthia.random.RandomInteger;
@@ -24,11 +24,11 @@ public class Inter {
 		StringPattern rsp1 = new StringPattern("{$0} - {$1}", 
 				new Freeze<String>(new RandomString(length_1)), 
 				new IpAddressProvider(new RandomInteger(0, 256)));
-		BoundedPicker<String> bp1 = new BoundedPicker<String>(new TickLineProvider(ticker, rsp1), new RandomInteger(2, 10));
+		Bound<String> bp1 = new Bound<String>(new TickLineProvider(ticker, rsp1), new RandomInteger(2, 10));
 		StringPattern rsp2 = new StringPattern("FOO [{$0};{$1}]", 
 				new Freeze<String>(new RandomString(length_1)), 
 				new RandomString(length_2));
-		BoundedPicker<String> bp2 = new BoundedPicker<String>(new TickLineProvider(ticker, rsp2), new RandomInteger(5, 6));
+		Bound<String> bp2 = new Bound<String>(new TickLineProvider(ticker, rsp2), new RandomInteger(5, 6));
 		Interleave<String> ip = new Interleave<String>(new RandomFloat(), 0.5, 0.85);
 		ip.add(bp1, 0.55);
 		ip.add(bp2, 0.45);

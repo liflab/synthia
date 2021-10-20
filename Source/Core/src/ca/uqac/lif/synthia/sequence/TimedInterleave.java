@@ -4,7 +4,7 @@ import java.util.HashMap;
 import java.util.Map;
 
 import ca.uqac.lif.synthia.Picker;
-import ca.uqac.lif.synthia.util.ElementPicker.ProbabilityChoice;
+import ca.uqac.lif.synthia.util.Choice.ProbabilityChoice;
 
 public class TimedInterleave<T> extends Interleave<T>
 {

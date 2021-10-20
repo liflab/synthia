@@ -56,5 +56,27 @@
     Write JAR dependencies here.
   -->
   <dependencies>
+  <dependency>
+      <!--
+      Petit Poucet. Used to store provenance information.
+      -->
+      <name>Petit Poucet Core</name>
+      <classname>ca.uqac.lif.petitpoucet.Part</classname>
+      <files>
+        <jar>https://github.com/liflab/petitpoucet/releases/download/v2.0/petitpoucet-core.jar</jar>
+      </files>
+      <bundle>true</bundle>
+    </dependency>
+    <dependency>
+      <!--
+      Petit Poucet. Used to store provenance information.
+      -->
+      <name>Petit Poucet Functions</name>
+      <classname>ca.uqac.lif.petitpoucet.function.Function</classname>
+      <files>
+        <jar>https://github.com/liflab/petitpoucet/releases/download/v2.0/petitpoucet-functions.jar</jar>
+      </files>
+      <bundle>true</bundle>
+    </dependency>
   </dependencies>
 </build>

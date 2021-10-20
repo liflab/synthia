@@ -1,5 +1,6 @@
 package ca.uqac.lif.synthia.enumerative;
 
+import ca.uqac.lif.synthia.Bounded;
 import ca.uqac.lif.synthia.exception.NoMoreElementException;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
@@ -33,10 +34,11 @@ public class AllPickersTest
 
 
 
+	@SuppressWarnings("rawtypes")
 	@Test
 	public void property()
 	{
-		EnumerativePicker[] enum_picks = new EnumerativePicker[]{new AllBooleans(), new AllBooleans()
+		Bounded[] enum_picks = new Bounded[]{new AllBooleans(), new AllBooleans()
 		, new AllBooleans()};
 		AllPickers all_picks = new AllPickers(enum_picks);
 		Object[] results = getResultsArray();
@@ -57,7 +59,7 @@ public class AllPickersTest
 	@Test
 	public void DuplicateWithState()
 	{
-		EnumerativePicker[] enum_picks = new EnumerativePicker[]{new AllBooleans(), new AllBooleans()
+		Bounded[] enum_picks = new Bounded[]{new AllBooleans(), new AllBooleans()
 				, new AllBooleans()};
 		AllPickers all_picks = new AllPickers(enum_picks);
 
@@ -84,7 +86,7 @@ public class AllPickersTest
 	@Test
 	public void DuplicateWithoutState()
 	{
-		EnumerativePicker[] enum_picks = new EnumerativePicker[]{new AllBooleans(), new AllBooleans()
+		Bounded[] enum_picks = new Bounded[]{new AllBooleans(), new AllBooleans()
 				, new AllBooleans()};
 		AllPickers all_picks = new AllPickers(enum_picks);
 
@@ -115,7 +117,7 @@ public class AllPickersTest
 	@Test
 	public void isDone()
 	{
-		EnumerativePicker[] enum_picks = new EnumerativePicker[]{new AllBooleans(), new AllBooleans()
+		Bounded[] enum_picks = new Bounded[]{new AllBooleans(), new AllBooleans()
 				, new AllBooleans()};
 		AllPickers all_picks = new AllPickers(enum_picks);
 
@@ -131,7 +133,7 @@ public class AllPickersTest
 	@Test
 	public void NoMoreException()
 	{
-		EnumerativePicker[] enum_picks = new EnumerativePicker[]{new AllBooleans(), new AllBooleans()
+		Bounded[] enum_picks = new Bounded[]{new AllBooleans(), new AllBooleans()
 				, new AllBooleans()};
 		AllPickers all_picks = new AllPickers(enum_picks);
 

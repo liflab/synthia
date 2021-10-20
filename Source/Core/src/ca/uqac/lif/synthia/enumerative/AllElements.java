@@ -1,6 +1,7 @@
 package ca.uqac.lif.synthia.enumerative;
 
 import ca.uqac.lif.synthia.exception.NoMoreElementException;
+import ca.uqac.lif.synthia.Bounded;
 import ca.uqac.lif.synthia.Seedable;
 import ca.uqac.lif.synthia.random.RandomInteger;
 import ca.uqac.lif.synthia.replay.Playback;
@@ -8,15 +9,7 @@ import ca.uqac.lif.synthia.replay.Playback;
 import java.util.ArrayList;
 import java.util.List;
 
-<<<<<<< Updated upstream
-public class AllElements<T> extends Playback implements EnumerativePicker, Seedable
-=======
-/**
- * @param <T> The type of the {@link AllElements} {@link ca.uqac.lif.synthia.Picker}.
- * @author Marc-Antoine Plourde
- */
-public class AllElements<T> extends Playback<T> implements EnumerativePicker<T>, Seedable
->>>>>>> Stashed changes
+public class AllElements<T> extends Playback<T> implements Bounded<T>, Seedable
 {
 
 	protected List<Integer> m_indexes;
@@ -25,6 +18,7 @@ public class AllElements<T> extends Playback<T> implements EnumerativePicker<T>,
 
 	protected RandomInteger m_indexPicker;
 
+	@SuppressWarnings("unchecked")
 	private AllElements(T[] values, boolean scramble, RandomInteger index_picker
 			, List<Integer> indexes, boolean loop, int index, int start_index)
 	{
@@ -41,7 +35,7 @@ public class AllElements<T> extends Playback<T> implements EnumerativePicker<T>,
 	{
 		super(values);
 		m_scramble = scramble;
-		m_indexes = new ArrayList<>();
+		m_indexes = new ArrayList<Integer>();
 		m_indexPicker = new RandomInteger(0, 1);
 		setLoop(loop);
 
@@ -66,7 +60,7 @@ public class AllElements<T> extends Playback<T> implements EnumerativePicker<T>,
 	{
 		if(!m_scramble)
 		{
-			return  super.pick();
+			return (T) super.pick();
 		}
 		else
 		{
@@ -89,7 +83,7 @@ public class AllElements<T> extends Playback<T> implements EnumerativePicker<T>,
 		}
 
 		int picked_index = m_indexPicker.pick();
-		T picked_value =  m_values[m_indexes.get(picked_index)];
+		T picked_value = (T) m_values[m_indexes.get(picked_index)];
 
 		m_indexes.remove(picked_index);
 
@@ -145,20 +139,12 @@ public class AllElements<T> extends Playback<T> implements EnumerativePicker<T>,
 		return this;
 	}
 
-<<<<<<< Updated upstream
 	@Override
-	public AllElements duplicate(boolean with_state)
+	public AllElements<T> duplicate(boolean with_state)
 	{
 
-		AllElements copy = new AllElements(m_values, m_scramble, m_indexPicker.duplicate(with_state)
+		AllElements<T> copy = new AllElements<T>(m_values, m_scramble, m_indexPicker.duplicate(with_state)
 				, new ArrayList<Integer>(m_indexes), m_loop, m_index, m_startIndex);
-=======
-	@Override public AllElements<T> duplicate(boolean with_state)
-	{
-
-		AllElements<T> copy = new AllElements<>(m_values, m_scramble, m_indexPicker.duplicate(with_state),
-				new ArrayList<>(m_indexes), m_loop, m_index, m_startIndex);
->>>>>>> Stashed changes
 
 		if(!with_state)
 		{

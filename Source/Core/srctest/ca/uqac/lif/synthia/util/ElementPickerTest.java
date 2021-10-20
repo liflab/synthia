@@ -11,7 +11,7 @@ public class ElementPickerTest
 	//Partially test
 	@Test
 	public void pickProbability() {
-		ElementPicker element_picker = new ElementPicker(new RandomFloat());
+		Choice element_picker = new Choice(new RandomFloat());
 		element_picker.add("A", 0);
 		element_picker.add("B", 0);
 		element_picker.add("C", 0);
@@ -26,7 +26,7 @@ public class ElementPickerTest
 
 	@Test
 	public void duplicateWithState() {
-		ElementPicker element_picker = new ElementPicker(new RandomFloat());
+		Choice element_picker = new Choice(new RandomFloat());
 		element_picker.add("A", 0);
 		element_picker.add("B", 0);
 		element_picker.add("C", 0);
@@ -37,13 +37,13 @@ public class ElementPickerTest
 		{
 			element_picker.pick();
 		}
-		ElementPicker element_picker_copy = element_picker.duplicate(true);
+		Choice element_picker_copy = element_picker.duplicate(true);
 		Assertions.assertEquals(element_picker.pick(), element_picker_copy.pick());
 	}
 
 	@Test
 	public void duplicateWithoutState() {
-		ElementPicker element_picker = new ElementPicker(new RandomFloat());
+		Choice element_picker = new Choice(new RandomFloat());
 		element_picker.add("A", 0);
 		element_picker.add("B", 0);
 		element_picker.add("C", 0);
@@ -54,7 +54,7 @@ public class ElementPickerTest
 		{
 			element_picker.pick();
 		}
-		ElementPicker element_picker_copy = element_picker.duplicate(false);
+		Choice element_picker_copy = element_picker.duplicate(false);
 		element_picker.reset();
 		element_picker_copy.reset();
 		for (int i = 0; i < element_picker.m_choices.size(); i++)

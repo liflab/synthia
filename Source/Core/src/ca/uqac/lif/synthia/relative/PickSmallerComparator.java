@@ -34,7 +34,6 @@ public class PickSmallerComparator<T> extends PickIf<T>
 		}
 		return ps;
 	}
-
 	public PickSmallerComparator<T> getSmaller(T o, Comparator<T> c)
 	{
 		PickSmallerComparator<T> ps = new PickSmallerComparator<T>(m_picker, o, c);

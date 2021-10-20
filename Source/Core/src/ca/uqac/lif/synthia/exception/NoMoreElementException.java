@@ -3,18 +3,24 @@ package ca.uqac.lif.synthia.exception;
 /**
  * An exception to throw when a picker can't pick an other element.
  */
-public class NoMoreElementException extends PickerException{
-    private static final String m_message = "No more element can be picked.";
+public class NoMoreElementException extends PickerException
+{
+	/**
+	 * Dummy UID.
+	 */
+	private static final long serialVersionUID = 1L;
 
-    public NoMoreElementException() {
-        super(m_message);
-    }
+	private static final String m_message = "No more element can be picked.";
 
-    public NoMoreElementException(String message) {
-        super(message);
-    }
+	public NoMoreElementException() {
+		super(m_message);
+	}
 
-    public NoMoreElementException(Throwable t) {
-        super(t);
-    }
+	public NoMoreElementException(String message) {
+		super(message);
+	}
+
+	public NoMoreElementException(Throwable t) {
+		super(t);
+	}
 }

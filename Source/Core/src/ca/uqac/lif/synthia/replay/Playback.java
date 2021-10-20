@@ -1,6 +1,6 @@
 /*
     Synthia, a data structure generator
-    Copyright (C) 2019-2020 Laboratoire d'informatique formelle
+    Copyright (C) 2019-2021 Laboratoire d'informatique formelle
     Université du Québec à Chicoutimi, Canada
 
     This program is free software: you can redistribute it and/or modify
@@ -20,9 +20,16 @@ package ca.uqac.lif.synthia.replay;
 
 import java.util.List;
 
-import ca.uqac.lif.synthia.enumerative.EnumerativePicker;
 import ca.uqac.lif.synthia.exception.NoMoreElementException;
 import ca.uqac.lif.synthia.relative.PickSmallerComparable;
+import ca.uqac.lif.petitpoucet.ComposedPart;
+import ca.uqac.lif.petitpoucet.NodeFactory;
+import ca.uqac.lif.petitpoucet.Part;
+import ca.uqac.lif.petitpoucet.PartNode;
+import ca.uqac.lif.petitpoucet.function.ExplanationQueryable;
+import ca.uqac.lif.petitpoucet.function.vector.NthElement;
+import ca.uqac.lif.synthia.Bounded;
+import ca.uqac.lif.synthia.NthSuccessiveOutput;
 import ca.uqac.lif.synthia.Shrinkable;
 
 //TODO check constructors whit a list as parameter for m_values
@@ -44,7 +51,7 @@ import ca.uqac.lif.synthia.Shrinkable;
  * set to false.
  * @param <T> The type of objects to return
  */
-public class Playback<T> implements EnumerativePicker<T>, Shrinkable<T>
+public class Playback<T> implements Bounded<T>, Shrinkable<T>, ExplanationQueryable
 {
 	/**
 	 * The values to play back
@@ -202,5 +209,32 @@ public class Playback<T> implements EnumerativePicker<T>, Shrinkable<T>
 	public Shrinkable<T> shrink(T o)
 	{
 		return new PickSmallerComparable<T>(this, o);
+	}
+
+	@Override
+	public PartNode getExplanation(Part p)
+	{
+		return getExplanation(p, NodeFactory.getFactory());
+	}
+
+	@Override
+	public PartNode getExplanation(Part p, NodeFactory f)
+	{
+		PartNode root = f.getPartNode(p, this);
+		int index = -1;
+		Part head = p.head();
+		if (head != null && head instanceof NthSuccessiveOutput)
+		{
+			index = ((NthSuccessiveOutput) head).getIndex();
+		}
+		if (index < 0 || (!m_loop && index > m_values.length))
+		{
+			// Not a valid part, end there
+			return root;
+		}
+		int actual_index = index % m_values.length;
+		Part new_p = ComposedPart.compose(new NthElement(actual_index), new NthSuccessiveOutput(index));
+		root.addChild(f.getPartNode(new_p, m_values));
+		return root;
 	}
 }

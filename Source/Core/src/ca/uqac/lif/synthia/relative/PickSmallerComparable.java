@@ -45,6 +45,6 @@ public class PickSmallerComparable<T> extends PickIf<T> implements Shrinkable<T>
 	@Override
 	protected boolean select(T element)
 	{
-		return m_reference.compareTo(element) < 0;
+		return m_reference.compareTo(element) > 0;
 	}
 }

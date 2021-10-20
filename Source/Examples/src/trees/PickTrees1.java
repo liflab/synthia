@@ -8,7 +8,7 @@ import ca.uqac.lif.synthia.tree.Node;
 import ca.uqac.lif.synthia.tree.TreePicker;
 import ca.uqac.lif.synthia.tree.TreeRenderer;
 import ca.uqac.lif.synthia.util.Constant;
-import ca.uqac.lif.synthia.util.ElementPicker;
+import ca.uqac.lif.synthia.util.Choice;
 
 public class PickTrees1 
 {
@@ -21,7 +21,7 @@ public class PickTrees1
 		System.out.println(height.pick());
 		RandomFloat color_float = new RandomFloat();
 		color_float.setSeed(seed);
-		ElementPicker<String> color = new ElementPicker<String>(color_float);
+		Choice<String> color = new Choice<String>(color_float);
 		color.add("blue", 0.33).add("red", 0.33).add("yellow", 0.34);
 		ColoredNodePicker node = new ColoredNodePicker(color);
 		//RandomInteger degree = new RandomInteger(0, 4);

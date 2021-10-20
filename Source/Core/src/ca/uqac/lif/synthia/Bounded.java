@@ -1,12 +1,10 @@
-package ca.uqac.lif.synthia.enumerative;
-
-import ca.uqac.lif.synthia.Picker;
+package ca.uqac.lif.synthia;
 
 /**
  * Interface who extends Picker. This interface will be used to signal
  * that the picker enumerates all values from a set.
  */
-public interface EnumerativePicker<T> extends Picker<T>
+public interface Bounded<T> extends Picker<T>
 {
 	/**
 	 * Signals if the picker enumerates all values from a set.

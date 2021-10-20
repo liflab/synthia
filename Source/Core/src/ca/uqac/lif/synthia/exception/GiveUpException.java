@@ -8,8 +8,13 @@ import ca.uqac.lif.synthia.relative.PickIf;
  */
 public class GiveUpException extends PickerException
 {
+	/**
+	 * Dummy UID.
+	 */
+	private static final long serialVersionUID = 1L;
+	
 	private static final String m_message = "Maximum number of iterations reached. This exception was"
-			+ " throwed to prevent a PickIf picker from falling into an infinite loop.";
+			+ " thrown to prevent a PickIf picker from falling into an infinite loop.";
 
 	public GiveUpException() { super(m_message); }
 
