@@ -100,11 +100,12 @@ public class ExplanationList
 		/* Step 2: ask for a first list out of ComposeList and display it */
 		List<float[]> l = list.pick();
 		list.pick();
+		list.pick();
 		Utilities.println(System.out, l);
 		
 		/* Step 3: request the explanation graph for the first element of
 		 * the first list produced by ComposeList. */
-		PartNode tree = Explanation.explain(ComposedPart.compose(new NthElement(0), new NthElement(1), NthSuccessiveOutput.FIRST), list);
+		PartNode tree = Explanation.explain(ComposedPart.compose(new NthElement(0), new NthElement(2), NthSuccessiveOutput.FIRST), list);
 		LineageDotRenderer renderer = new LineageDotRenderer(tree);
 		renderer.render(System.out);
 	}

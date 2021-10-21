@@ -129,18 +129,14 @@ public class PickIf<T> extends Mutator<T> implements ExplanationQueryable
 	{
 		int iteration_counter = 0;
 		T picked_value = m_picker.pick();
-
-
 		while (!canChoose(picked_value))
 		{
 			if (checkIfInfiniteLoop(iteration_counter))
 			{
 				throw new GiveUpException();
 			}
-
 			picked_value = m_picker.pick();
 			iteration_counter++;
-
 		}
 		return picked_value;
 	}
@@ -150,7 +146,7 @@ public class PickIf<T> extends Mutator<T> implements ExplanationQueryable
 	 * the {@link #pick()} method fell into an infinite loop by supposing that if the loop exceed
 	 * a maximal number of iteration, it will cause an infinite loop.
 	 *
-	 * @warning If {@link #m_maxIteration} is negative, the {@link #pick} method will dont check if
+	 * @warning If {@link #m_maxIteration} is negative, the {@link #pick} method will not check if
 	 * the iteration counter has exceeded the value of {@link #m_maxIteration} and this
 	 * method will always return false. This means that it's possible that calling {@link #pick}
 	 * causes an infinite loop. Only use a negative value for {@link #m_maxIteration} if you assume
@@ -200,7 +196,7 @@ public class PickIf<T> extends Mutator<T> implements ExplanationQueryable
 		{
 			current_index += m_rejected.get(i);
 		}
-		Part new_p = NthSuccessiveOutput.replaceOutIndexBy(p, current_index);
+		Part new_p = NthSuccessiveOutput.replaceOutIndexBy(p, current_index + index);
 		root.addChild(f.getPartNode(new_p, m_picker));
 		return root;
 	}
