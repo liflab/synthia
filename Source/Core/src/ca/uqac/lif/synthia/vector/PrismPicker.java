@@ -19,7 +19,6 @@
 package ca.uqac.lif.synthia.vector;
 
 import ca.uqac.lif.petitpoucet.AndNode;
-import ca.uqac.lif.petitpoucet.ComposedPart;
 import ca.uqac.lif.petitpoucet.NodeFactory;
 import ca.uqac.lif.petitpoucet.Part;
 import ca.uqac.lif.petitpoucet.PartNode;
@@ -102,24 +101,8 @@ public class PrismPicker implements VectorPicker, ExplanationQueryable
 	@Override
 	public PartNode getExplanation(Part p, NodeFactory f)
 	{
+		int index = NthSuccessiveOutput.mentionedOutput(p), part_index = NthElement.mentionedElement(p);
 		PartNode root = f.getPartNode(p, this);
-		int index = -1, part_index = -1;
-		Part head = p.head();
-		if (head instanceof NthElement)
-		{
-			part_index = ((NthElement) head).getIndex();
-			Part tail = p.tail();
-			if (tail == null)
-			{
-				return null; // Invalid part
-			}
-			head = tail.head();
-		}
-		if (!(head instanceof NthSuccessiveOutput))
-		{
-			return null; // Invalid part
-		}
-		index = ((NthSuccessiveOutput) head).getIndex();
 		if (index < 0)
 		{
 			return null; // Invalid part
@@ -138,7 +121,7 @@ public class PrismPicker implements VectorPicker, ExplanationQueryable
 			return root;
 		}
 		// p points at a number inside the vector
-		Part new_p = ComposedPart.compose(new NthElement(part_index), new NthSuccessiveOutput(index));
+		Part new_p = NthSuccessiveOutput.removeNthElement(p);
 		root.addChild(f.getPartNode(new_p, m_dimensions[part_index]));
 		return root;
 	}

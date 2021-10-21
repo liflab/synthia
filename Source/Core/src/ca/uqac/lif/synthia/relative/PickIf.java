@@ -200,7 +200,8 @@ public class PickIf<T> extends Mutator<T> implements ExplanationQueryable
 		{
 			current_index += m_rejected.get(i);
 		}
-		root.addChild(f.getPartNode(new NthSuccessiveOutput(current_index), m_picker));
+		Part new_p = NthSuccessiveOutput.replaceOutIndexBy(p, current_index);
+		root.addChild(f.getPartNode(new_p, m_picker));
 		return root;
 	}
 	

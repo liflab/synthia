@@ -22,7 +22,6 @@ import java.util.ArrayList;
 import java.util.List;
 
 import ca.uqac.lif.petitpoucet.AndNode;
-import ca.uqac.lif.petitpoucet.ComposedPart;
 import ca.uqac.lif.petitpoucet.NodeFactory;
 import ca.uqac.lif.petitpoucet.Part;
 import ca.uqac.lif.petitpoucet.PartNode;
@@ -138,39 +137,9 @@ public class ComposeList<T> implements Picker<List<T>>, ExplanationQueryable
 			// Nonexistent element
 			return root;
 		}
-		Part new_p = removeNthElement(p);
-		new_p = NthSuccessiveOutput.replaceOutIndexBy(p, offset + part_index);
+		Part new_p = NthSuccessiveOutput.removeNthElement(p);
+		new_p = NthSuccessiveOutput.replaceOutIndexBy(new_p, offset + part_index);
 		and.addChild(f.getPartNode(new_p, m_elements));
 		return root;
-	}
-	
-	protected static Part removeNthElement(Part from)
-	{
-		if (from instanceof NthElement || !(from instanceof ComposedPart))
-		{
-			return Part.nothing;
-		}
-		ComposedPart cd = (ComposedPart) from;
-		List<Part> desigs = new ArrayList<Part>();
-		boolean replaced = false;
-		for (int i = 0 ; i < cd.size(); i++)
-		{
-			Part in_d = cd.get(i);
-			if (in_d instanceof NthElement && !replaced)
-			{
-				// We skip this designator, which deletes in the output part
-				replaced = true;
-			}
-			else
-			{
-				desigs.add(in_d);
-			}
-		}
-		if (!replaced)
-		{
-			// Return input object if no replacement was done
-			return from;
-		}
-		return new ComposedPart(desigs);
 	}
 }

@@ -25,6 +25,7 @@ import ca.uqac.lif.petitpoucet.ComposedPart;
 import ca.uqac.lif.petitpoucet.Part;
 import ca.uqac.lif.petitpoucet.function.NthInput;
 import ca.uqac.lif.petitpoucet.function.NthOutput;
+import ca.uqac.lif.petitpoucet.function.vector.NthElement;
 
 /**
  * A {@link Part} pointing to the n-th output produced by a picker since its
@@ -157,5 +158,41 @@ public class NthSuccessiveOutput implements Part
 			}
 		}
 		return -1;
+	}
+	
+	/**
+	 * Removes the instance of NthElement that stands just before the first
+	 * instance of NthSuccessiveOutput in a composed designator.
+	 * @param from The original composed designator
+	 * @return The transformed designator
+	 */
+	public static Part removeNthElement(Part from)
+	{
+		if (from instanceof NthElement || !(from instanceof ComposedPart))
+		{
+			return Part.nothing;
+		}
+		ComposedPart cd = (ComposedPart) from;
+		List<Part> desigs = new ArrayList<Part>();
+		boolean replaced = false;
+		for (int i = 0 ; i < cd.size(); i++)
+		{
+			Part in_d = cd.get(i);
+			if (in_d instanceof NthElement && !replaced && i < cd.size() - 1 && cd.get(i + 1) instanceof NthSuccessiveOutput)
+			{
+				// We skip this designator, which deletes in the output part
+				replaced = true;
+			}
+			else
+			{
+				desigs.add(in_d);
+			}
+		}
+		if (!replaced)
+		{
+			// Return input object if no replacement was done
+			return from;
+		}
+		return new ComposedPart(desigs);
 	}
 }
