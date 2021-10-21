@@ -77,7 +77,7 @@ import util.Utilities;
  * {@link RandomInteger} <tt>r_int</tt> until this alternate graph is obtained
  * instead of the first one.
  */
-public class ExplanationList
+public class ExplanationList1
 {
 	@SuppressWarnings("unchecked")
 	public static void main(String[] args)
@@ -105,7 +105,7 @@ public class ExplanationList
 		
 		/* Step 3: request the explanation graph for the first element of
 		 * the first list produced by ComposeList. */
-		PartNode tree = Explanation.explain(ComposedPart.compose(new NthElement(0), new NthElement(2), NthSuccessiveOutput.FIRST), list);
+		PartNode tree = Explanation.explain(ComposedPart.compose(new NthElement(0), NthSuccessiveOutput.FIRST), list);
 		LineageDotRenderer renderer = new LineageDotRenderer(tree);
 		renderer.render(System.out);
 	}

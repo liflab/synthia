@@ -52,7 +52,7 @@ public class ComposeList<T> implements Picker<List<T>>, ExplanationQueryable
 	/**
 	 * Creates a new instance of the picker.
 	 * @param elements The picker providing elements for the list
-	 * @param length  The picker deciding on the length of the list
+	 * @param length The picker deciding on the length of the list
 	 */
 	public ComposeList(Picker<T> elements, Picker<Integer> length)
 	{
@@ -60,6 +60,16 @@ public class ComposeList<T> implements Picker<List<T>>, ExplanationQueryable
 		m_elements = elements;
 		m_length = length;
 		m_lengths = new ArrayList<Integer>();
+	}
+	
+	/**
+	 * Creates a new instance of the picker.
+	 * @param elements The picker providing elements for the list
+	 * @param length The fixed length of each list
+	 */
+	public ComposeList(Picker<T> elements, int length)
+	{
+		this(elements, new Constant<Integer>(length));
 	}
 
 	@Override
