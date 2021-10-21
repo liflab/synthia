@@ -27,6 +27,7 @@ public class PickSmallerComparable<T> extends PickIf<T> implements Shrinkable<T>
 	public PickSmallerComparable<T> duplicate(boolean with_state)
 	{
 		PickSmallerComparable<T> ps = new PickSmallerComparable<T>(m_picker.duplicate(with_state), (T) m_reference);
+		super.copyInto(this, with_state);
 		if (with_state)
 		{
 			ps.m_maxIteration = m_maxIteration;

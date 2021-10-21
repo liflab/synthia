@@ -143,4 +143,10 @@ public class RandomInteger extends RandomPicker<Integer> implements Shrinkable<I
 			return new RandomInteger(m_min, element, m_seed, m_random.Duplicate());
 		}
 	}
+	
+	@Override
+	public String toString()
+	{
+		return "RandomInteger [" + m_min + "," + m_max + "]";
+	}
 }

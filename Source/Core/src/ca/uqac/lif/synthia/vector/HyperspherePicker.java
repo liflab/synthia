@@ -137,4 +137,10 @@ public class HyperspherePicker implements VectorPicker
 	{
 		return m_dimensions.length;
 	}
+	
+	@Override
+	public String toString()
+	{
+		return "HyperspherePicker";
+	}
 }

@@ -1,14 +1,15 @@
 package ca.uqac.lif.synthia.enumerative;
 
+import ca.uqac.lif.synthia.exception.GiveUpException;
 import ca.uqac.lif.synthia.exception.NoMoreElementException;
-import org.junit.jupiter.api.Assertions;
-import org.junit.jupiter.api.Test;
-import org.junit.jupiter.api.function.Executable;
+import org.junit.Assert;
+import org.junit.Test;
+
 
 import java.util.ArrayList;
 import java.util.List;
 
-import static org.junit.jupiter.api.Assertions.assertThrows;
+
 
 public class AllElementsTest
 {
@@ -33,21 +34,9 @@ public class AllElementsTest
 
 			for (int j = 0; j < list1.size(); j++)
 			{
-				Assertions.assertEquals(list1.get(j), list2.get(j));
+				Assert.assertEquals(list1.get(j), list2.get(j));
 			}
 		}
-	}
-
-	private void noMoreExceptionThrow(AllElements picker)
-	{
-		assertThrows(NoMoreElementException.class, new Executable()
-		{
-			@Override
-			public void execute() throws Throwable
-			{
-				picker.pick();
-			}
-		});
 	}
 
 	@Test
@@ -59,7 +48,7 @@ public class AllElementsTest
 		{
 			for (int j = 0; j <= 10; j++)
 			{
-				Assertions.assertEquals(j, all_elements.pick());
+				Assert.assertEquals(j, (int) all_elements.pick());
 			}
 		}
 	}
@@ -85,7 +74,7 @@ public class AllElementsTest
 
 	}
 
-	@Test
+	@Test(expected = NoMoreElementException.class)
 	public void noLoopNoScramble()
 	{
 		AllElements<Integer> all_elements = new AllElements<Integer>(getList(),false,false);
@@ -95,7 +84,7 @@ public class AllElementsTest
 			all_elements.pick();
 		}
 
-		noMoreExceptionThrow(all_elements);
+		all_elements.pick();
 
 	}
 
@@ -103,7 +92,7 @@ public class AllElementsTest
 	public void duplicateWithtState()
 	{
 		AllElements<Integer> all_elements = new AllElements<Integer>(getList(),false,false);
-		for (int i = 0; i < 10; i++)
+		for (int i = 0; i <= 10; i++)
 		{
 			all_elements.pick();
 		}
@@ -111,10 +100,10 @@ public class AllElementsTest
 		AllElements<Integer> all_elements_copy = (AllElements<Integer>)
 				all_elements.duplicate(true);
 
-		Assertions.assertEquals(all_elements.pick(), all_elements_copy.pick());
+		Assert.assertEquals(all_elements.pick(), all_elements_copy.pick());
 
-		Assertions.assertEquals(true, all_elements.isDone());
-		Assertions.assertEquals(all_elements.isDone(), all_elements_copy.isDone());
+		Assert.assertEquals(true, all_elements.isDone());
+		Assert.assertEquals(all_elements.isDone(), all_elements_copy.isDone());
 	}
 
 	@Test
@@ -129,18 +118,18 @@ public class AllElementsTest
 		AllElements<Integer> all_elements_copy = (AllElements<Integer>)
 				all_elements.duplicate(false);
 
-		Assertions.assertEquals(true, all_elements.isDone());
-		Assertions.assertEquals(false, all_elements_copy.isDone());
+		Assert.assertEquals(true, all_elements.isDone());
+		Assert.assertEquals(false, all_elements_copy.isDone());
 
 		all_elements.reset();
 
-		for (int i = 0; i <= 10 ; i++)
+		for (int i = 0; i <= 100 ; i++)
 		{
-			Assertions.assertEquals(all_elements.pick(), all_elements_copy.pick());
+			Assert.assertEquals(all_elements.pick(), all_elements_copy.pick());
 		}
 	}
 
-	@Test
+	@Test(expected = NoMoreElementException.class)
 	public void loopMethod()
 	{
 		AllElements<Integer> all_elements = new AllElements<Integer>(getList(),true,true);
@@ -151,6 +140,6 @@ public class AllElementsTest
 
 		all_elements.setLoop(false);
 
-		noMoreExceptionThrow(all_elements);
+		all_elements.pick();
 	}
 }

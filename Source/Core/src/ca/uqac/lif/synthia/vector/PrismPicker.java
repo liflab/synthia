@@ -39,7 +39,7 @@ public class PrismPicker implements VectorPicker, ExplanationQueryable
 	/**
 	 * The pickers for each dimension of the vector
 	 */
-	protected Picker<Float>[] m_dimensions;
+	protected Picker<? extends Number>[] m_dimensions;
 	
 	/**
 	 * Creates a new prism picker.
@@ -49,7 +49,7 @@ public class PrismPicker implements VectorPicker, ExplanationQueryable
 	 * vectors.
 	 */
 	@SuppressWarnings("unchecked")
-	public PrismPicker(Picker<Float> ... dimensions)
+	public PrismPicker(Picker<? extends Number> ... dimensions)
 	{
 		super();
 		m_dimensions = dimensions;
@@ -58,7 +58,7 @@ public class PrismPicker implements VectorPicker, ExplanationQueryable
 	@Override
 	public void reset()
 	{
-		for (Picker<Float> p : m_dimensions)
+		for (Picker<? extends Number> p : m_dimensions)
 		{
 			p.reset();
 		}
@@ -70,7 +70,7 @@ public class PrismPicker implements VectorPicker, ExplanationQueryable
 		float[] v = new float[m_dimensions.length];
 		for (int i = 0; i < m_dimensions.length; i++)
 		{
-			v[i] = m_dimensions[i].pick();
+			v[i] = m_dimensions[i].pick().floatValue();
 		}
 		return v;
 	}
@@ -79,7 +79,7 @@ public class PrismPicker implements VectorPicker, ExplanationQueryable
 	@Override
 	public PrismPicker duplicate(boolean with_state)
 	{
-		Picker<Float>[] dimensions = new Picker[m_dimensions.length];
+		Picker<? extends Number>[] dimensions = new Picker[m_dimensions.length];
 		for (int i = 0; i < m_dimensions.length; i++)
 		{
 			dimensions[i] = m_dimensions[i].duplicate(with_state);
@@ -141,5 +141,11 @@ public class PrismPicker implements VectorPicker, ExplanationQueryable
 		Part new_p = ComposedPart.compose(new NthElement(part_index), new NthSuccessiveOutput(index));
 		root.addChild(f.getPartNode(new_p, m_dimensions[part_index]));
 		return root;
+	}
+	
+	@Override
+	public String toString()
+	{
+		return "PrismPicker";
 	}
 }

@@ -237,4 +237,21 @@ public class Playback<T> implements Bounded<T>, Shrinkable<T>, ExplanationQuerya
 		root.addChild(f.getPartNode(new_p, m_values));
 		return root;
 	}
+	
+	@Override
+	public String toString()
+	{
+		StringBuilder out = new StringBuilder();
+		out.append("Playback [");
+		for (int i = 0; i < m_values.length; i++)
+		{
+			if (i > 0)
+			{
+				out.append(",");
+			}
+			out.append(m_values[i]);
+		}
+		out.append("]");
+		return out.toString();
+	} 
 }

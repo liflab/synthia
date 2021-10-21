@@ -175,13 +175,8 @@ public class AllIntegers implements Bounded<Integer>, Seedable
 	@Override
 	public AllIntegers duplicate(boolean with_state)
 	{
-<<<<<<< Updated upstream
-		AllIntegers copy = new AllIntegers(m_min, m_max, m_actualValue, m_scramble
-				, new ArrayList<Integer> (m_valuesToScramble), m_indexGenerator.duplicate(with_state));
-=======
 		AllIntegers copy = new AllIntegers(m_min, m_max, m_actualValue, m_scramble,
 				new ArrayList<>(m_valuesToScramble), m_indexGenerator.duplicate(with_state));
->>>>>>> Stashed changes
 
 		if (!with_state)
 		{

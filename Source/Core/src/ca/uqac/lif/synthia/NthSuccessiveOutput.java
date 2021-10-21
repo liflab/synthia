@@ -18,7 +18,13 @@
  */
 package ca.uqac.lif.synthia;
 
+import java.util.ArrayList;
+import java.util.List;
+
+import ca.uqac.lif.petitpoucet.ComposedPart;
 import ca.uqac.lif.petitpoucet.Part;
+import ca.uqac.lif.petitpoucet.function.NthInput;
+import ca.uqac.lif.petitpoucet.function.NthOutput;
 
 /**
  * A {@link Part} pointing to the n-th output produced by a picker since its
@@ -26,6 +32,12 @@ import ca.uqac.lif.petitpoucet.Part;
  */
 public class NthSuccessiveOutput implements Part
 {
+	/**
+	 * A static reference to an instance of the class with index = 0, thereby
+	 * referring to the first output produced by a picker.
+	 */
+	public static final NthSuccessiveOutput FIRST = new NthSuccessiveOutput(0);
+	
 	/**
 	 * The index in the sequence of the output since the last reset.
 	 */
@@ -72,5 +84,78 @@ public class NthSuccessiveOutput implements Part
 	public Part tail()
 	{
 		return null;
+	}
+	
+	/**
+	 * Given an arbitrary designator, replaces the first occurrence of
+	 * {@link NthOutput} by an instance of {@link NthInput} with given index.
+	 * @param from The original part
+	 * @param to The part to replace it with
+	 * @return The new designator. The input object is not modified if it does
+	 * not contain {@code d}
+	 */
+	/*@ non_null @*/ public static Part replaceOutIndexBy(/*@ non_null @*/ Part from, int index)
+	{
+		Part to = FIRST;
+		if (index > 0)
+		{
+			to = new NthSuccessiveOutput(index);
+		}
+		if (from instanceof NthSuccessiveOutput)
+		{
+			return to;
+		}
+		if (from instanceof ComposedPart)
+		{
+			ComposedPart cd = (ComposedPart) from;
+			List<Part> desigs = new ArrayList<Part>();
+			boolean replaced = false;
+			for (int i = 0 ; i < cd.size(); i++)
+			{
+				Part in_d = cd.get(i);
+				if (in_d instanceof NthSuccessiveOutput && !replaced)
+				{
+					desigs.add(to);
+					replaced = true;
+				}
+				else
+				{
+					desigs.add(in_d);
+				}
+			}
+			if (!replaced)
+			{
+				// Return input object if no replacement was done
+				return from;
+			}
+			return new ComposedPart(desigs);
+		}
+		return from;
+	}
+	
+	/**
+	 * Retrieves the output sequence index mentioned in a designator.
+	 * @param d The designator
+	 * @return The output sequence index, or -1 if no output index is mentioned
+	 */
+	public static int mentionedOutput(Part d)
+	{
+		if (d instanceof NthSuccessiveOutput)
+		{
+			return ((NthSuccessiveOutput) d).getIndex();
+		}
+		if (d instanceof ComposedPart)
+		{
+			ComposedPart cd = (ComposedPart) d;
+			for (int i = 0; i < cd.size(); i++)
+			{
+				Part p = cd.get(i);
+				if (p instanceof NthSuccessiveOutput)
+				{
+					return ((NthSuccessiveOutput) p).getIndex();
+				}
+			}
+		}
+		return -1;
 	}
 }

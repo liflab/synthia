@@ -18,6 +18,12 @@
  */
 package ca.uqac.lif.synthia.util;
 
+import ca.uqac.lif.petitpoucet.AndNode;
+import ca.uqac.lif.petitpoucet.NodeFactory;
+import ca.uqac.lif.petitpoucet.Part;
+import ca.uqac.lif.petitpoucet.PartNode;
+import ca.uqac.lif.petitpoucet.function.ExplanationQueryable;
+import ca.uqac.lif.synthia.NthSuccessiveOutput;
 import ca.uqac.lif.synthia.Picker;
 import ca.uqac.lif.synthia.random.RandomFloat;
 
@@ -41,13 +47,13 @@ import ca.uqac.lif.synthia.random.RandomFloat;
  * the interval [8,12), and where each subsequent value is incremented by a
  * number randomly chosen between 0.5 and 1.5.
  */
-public class Tick implements Picker<Number>
+public class Tick implements Picker<Number>, ExplanationQueryable
 {
 	/**
 	 * Picker that determines the start value
 	 */
 	protected Picker<? extends Number> m_startValue;
-	
+
 	/**
 	 * Variable holding the current value of the tick
 	 */
@@ -60,6 +66,11 @@ public class Tick implements Picker<Number>
 	protected Picker<? extends Number> m_increment;
 	
 	/**
+	 * A flag indicating whether the tick has been asked for a value yet.
+	 */
+	boolean m_first;
+
+	/**
 	 * Creates a new Tick picker.
 	 * @param start A picker that determines the start value
 	 * @param increment A picker that determines the increment for each
@@ -71,8 +82,9 @@ public class Tick implements Picker<Number>
 		m_startValue = start;
 		m_increment = increment;
 		m_currentValue = m_startValue.pick().floatValue();
+		m_first = true;
 	}
-	
+
 	/**
 	 * Creates a new Tick picker.
 	 * @param start The start value
@@ -82,7 +94,7 @@ public class Tick implements Picker<Number>
 	{
 		this(new Constant<>(start), new Constant<>(increment));
 	}
-	
+
 	/**
 	 * Creates a new Tick picker.
 	 * @param start The start value
@@ -93,7 +105,7 @@ public class Tick implements Picker<Number>
 	{
 		this(new Constant<>(start), increment);
 	}
-	
+
 	/**
 	 * Creates a new Tick picker starting at value 0.
 	 * @param increment A picker that determines the increment for each
@@ -103,7 +115,7 @@ public class Tick implements Picker<Number>
 	{
 		this(new Constant<Number>(0), increment);
 	}
-	
+
 	/**
 	 * Creates a new Tick picker starting at value 0, and where each subsequent
 	 * value is incremented by a number uniformly chosen in the interval [0,1].
@@ -112,7 +124,6 @@ public class Tick implements Picker<Number>
 	{
 		this(new Constant<Number>(0), new RandomFloat());
 	}
-
 
 	/**
 	 * Puts the tick back into its initial state. This means that the
@@ -125,6 +136,7 @@ public class Tick implements Picker<Number>
 		m_startValue.reset();
 		m_increment.reset();
 		m_currentValue = m_startValue.pick().floatValue();
+		m_first = true;
 	}
 
 
@@ -139,6 +151,11 @@ public class Tick implements Picker<Number>
 	@Override
 	public Number pick() 
 	{
+		if (m_first)
+		{
+			m_first = false;
+			return m_currentValue;
+		}
 		m_currentValue += m_increment.pick().floatValue();
 		return m_currentValue;
 	}
@@ -159,6 +176,7 @@ public class Tick implements Picker<Number>
 		if (with_state)
 		{
 			tp.m_currentValue = m_currentValue;
+			tp.m_first = m_first;
 		}
 		return tp;
 	}
@@ -178,5 +196,45 @@ public class Tick implements Picker<Number>
 		m_currentValue = value;
 		m_startValue = new Constant<>(value);
 		return this;
+	}
+
+	@Override
+	public String toString()
+	{
+		return "Tick(" + m_startValue + "," + m_increment + ")";
+	}
+
+	@Override
+	public PartNode getExplanation(Part p)
+	{
+		return getExplanation(p, NodeFactory.getFactory());
+	}
+
+	@Override
+	public PartNode getExplanation(Part p, NodeFactory f)
+	{
+		PartNode root = f.getPartNode(p, this);
+		int index = NthSuccessiveOutput.mentionedOutput(p);
+		if (index < 0)
+		{
+			return root;
+		}
+		if (index == 0)
+		{
+			Part new_p = NthSuccessiveOutput.replaceOutIndexBy(p, 0);
+			root.addChild(f.getPartNode(new_p, m_startValue));
+			return root;
+		}
+		AndNode and = f.getAndNode();
+		{
+			Part new_p = NthSuccessiveOutput.replaceOutIndexBy(p, index - 1);
+			and.addChild(f.getPartNode(new_p, this));
+		}
+		{
+			Part new_p = NthSuccessiveOutput.replaceOutIndexBy(p, index - 1);
+			and.addChild(f.getPartNode(new_p, m_increment));
+		}
+		root.addChild(and);
+		return root;
 	}
 }

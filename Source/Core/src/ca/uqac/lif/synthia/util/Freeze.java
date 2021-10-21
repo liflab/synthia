@@ -18,6 +18,11 @@
  */
 package ca.uqac.lif.synthia.util;
 
+import ca.uqac.lif.petitpoucet.NodeFactory;
+import ca.uqac.lif.petitpoucet.Part;
+import ca.uqac.lif.petitpoucet.PartNode;
+import ca.uqac.lif.petitpoucet.function.ExplanationQueryable;
+import ca.uqac.lif.synthia.NthSuccessiveOutput;
 import ca.uqac.lif.synthia.Picker;
 import ca.uqac.lif.synthia.Shrinkable;
 import ca.uqac.lif.synthia.relative.PickSmallerComparable;
@@ -38,18 +43,18 @@ import ca.uqac.lif.synthia.relative.PickSmallerComparable;
  * </pre>
  * @param <T> The type of object to pick
  */
-public class Freeze<T> implements Shrinkable<T>
+public class Freeze<T> implements Shrinkable<T>, ExplanationQueryable
 {
 	/**
 	 * The internal picker that is to be called
 	 */
 	/*@ non_null @*/ protected Picker<T> m_innerPicker;
-	
+
 	/**
 	 * The "frozen" value
 	 */
 	protected T m_value = null;
-	
+
 	/**
 	 * Creates a new freeze picker
 	 * @param picker The underlying picker used to get the first
@@ -103,11 +108,31 @@ public class Freeze<T> implements Shrinkable<T>
 		}
 		return fp;
 	}
-	
+
 	@Override
 	public Shrinkable<T> shrink(T o)
 	{
 		return new PickSmallerComparable<T>(this, o);
 	}
 
+	@Override
+	public PartNode getExplanation(Part p)
+	{
+		return getExplanation(p, NodeFactory.getFactory());
+	}
+
+	@Override
+	public PartNode getExplanation(Part p, NodeFactory f)
+	{
+		PartNode root = f.getPartNode(p, this);
+		PartNode child = f.getPartNode(NthSuccessiveOutput.replaceOutIndexBy(p, 0), m_innerPicker);
+		root.addChild(child);
+		return root;
+	}
+	
+	@Override
+	public String toString()
+	{
+		return "Freeze(" + m_innerPicker + ")";
+	}
 }

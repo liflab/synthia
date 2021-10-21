@@ -68,12 +68,7 @@ public abstract class Mutator<T> implements Picker<T>
 	
 	public PartNode getExplanation(Part p, NodeFactory f)
 	{
-		int index = -1;
-		Part head = p.head();
-		if (head != null && head instanceof NthSuccessiveOutput)
-		{
-			index = ((NthSuccessiveOutput) head).getIndex();
-		}
+		int index = NthSuccessiveOutput.mentionedOutput(p);
 		if (index < 0)
 		{
 			// Not a valid part, end there
