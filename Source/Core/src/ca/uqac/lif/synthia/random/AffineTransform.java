@@ -52,7 +52,7 @@ public abstract class AffineTransform<T extends Number> extends Mutator<T> imple
 	 * @param m The slope of the affine transform
 	 * @param b The intercept of the affine transform
 	 */
-	public AffineTransform(/*@ non_null @*/ Picker<T> picker, /*@ non_null @*/ Number m, /*@ non_null @*/ Number b)
+	public AffineTransform(/*@ non_null @*/ Picker<? extends T> picker, /*@ non_null @*/ Number m, /*@ non_null @*/ Number b)
 	{
 		super(picker);
 		m_m = m.floatValue();
@@ -86,7 +86,7 @@ public abstract class AffineTransform<T extends Number> extends Mutator<T> imple
 		 * @param m The slope of the affine transform
 		 * @param b The intercept of the affine transform
 		 */
-		public AffineTransformInteger(/*@ non_null @*/ Picker<Integer> picker, /*@ non_null @*/ Number m, /*@ non_null @*/ Number b)
+		public AffineTransformInteger(/*@ non_null @*/ Picker<? extends Integer> picker, /*@ non_null @*/ Number m, /*@ non_null @*/ Number b)
 		{
 			super(picker, m, b);
 		}
@@ -106,6 +106,7 @@ public abstract class AffineTransform<T extends Number> extends Mutator<T> imple
 
 		}
 		
+		@SuppressWarnings("unchecked")
 		@Override
 		public AffineTransformInteger shrink(Integer o)
 		{
@@ -129,7 +130,7 @@ public abstract class AffineTransform<T extends Number> extends Mutator<T> imple
 		 * @param m The slope of the affine transform
 		 * @param b The intercept of the affine transform
 		 */
-		public AffineTransformFloat(/*@ non_null @*/ Picker<Float> picker, /*@ non_null @*/ Number m, /*@ non_null @*/ Number b)
+		public AffineTransformFloat(/*@ non_null @*/ Picker<? extends Float> picker, /*@ non_null @*/ Number m, /*@ non_null @*/ Number b)
 		{
 			super(picker, m, b);
 		}
@@ -146,6 +147,7 @@ public abstract class AffineTransform<T extends Number> extends Mutator<T> imple
 			 return new AffineTransformFloat(m_picker.duplicate(with_state), m_m, m_b);
 		}
 		
+		@SuppressWarnings("unchecked")
 		@Override
 		public AffineTransformFloat shrink(Float o)
 		{

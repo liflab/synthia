@@ -54,7 +54,7 @@ public class PickIf<T> extends Mutator<T> implements ExplanationQueryable
 	 *
 	 * @param picker The picker used to generate objects.
 	 */
-	public PickIf(Picker<T> picker)
+	public PickIf(Picker<? extends T> picker)
 	{
 		super(picker);
 		m_maxIteration = 10000;
@@ -69,7 +69,7 @@ public class PickIf<T> extends Mutator<T> implements ExplanationQueryable
 	 * @param max_iteration The maximum number of iterations the {@link #pick()} will try to generate
 	 *                      an object before giving up.
 	 */
-	public PickIf(Picker<T> picker, int max_iteration)
+	public PickIf(Picker<? extends T> picker, int max_iteration)
 	{
 		super(picker);
 		m_maxIteration = max_iteration;

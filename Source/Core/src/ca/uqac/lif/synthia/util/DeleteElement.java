@@ -41,7 +41,7 @@ public class DeleteElement<T> extends Mutator<List<T>>
 	 * @param picker The underlying picker producing the lists to transform
 	 * @param position A picker used to select the position of the first element
 	 */
-	public DeleteElement(Picker<List<T>> picker, Picker<Float> position)
+	public DeleteElement(Picker<? extends List<T>> picker, Picker<Float> position)
 	{
 		super(picker);
 		m_position = position;

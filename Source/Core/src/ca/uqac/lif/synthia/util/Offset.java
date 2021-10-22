@@ -25,19 +25,19 @@ import ca.uqac.lif.synthia.Picker;
  * Takes the numerical value of a picker, and offsets it by an amount
  * determined by another picker.
  */
-public class Offset extends Mutator<Float>
+public class Offset extends Mutator<Number>
 {
 	/**
 	 * The picker determining the offset of each value.
 	 */
-	/*@ non_null @*/ protected Picker<Float> m_offset;
+	/*@ non_null @*/ protected Picker<? extends Number> m_offset;
 	
 	/**
 	 * Creates a new offset instance.
 	 * @param picker The underlying picker producing the values to transform
 	 * @param offset The picker determining the offset of each output value
 	 */
-	public Offset(/*@ non_null @*/ Picker<Float> picker, /*@ non_null @*/ Picker<Float> offset)
+	public Offset(/*@ non_null @*/ Picker<? extends Number> picker, /*@ non_null @*/ Picker<? extends Number> offset)
 	{
 		super(picker);
 		m_offset = offset;

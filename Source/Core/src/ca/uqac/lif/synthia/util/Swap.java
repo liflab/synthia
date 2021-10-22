@@ -48,7 +48,7 @@ public class Swap<T> extends Mutator<List<T>>
 	 * @param position1 A picker used to select the position of the first element
 	 * @param position2 A picker used to select the position of the second element
 	 */
-	public Swap(Picker<List<T>> picker, Picker<Float> position1, Picker<Float> position2)
+	public Swap(Picker<? extends List<T>> picker, Picker<Float> position1, Picker<Float> position2)
 	{
 		super(picker);
 		m_position1 = position1;

@@ -48,7 +48,7 @@ public class Mutate<T> extends Mutator<T>
 	 */
 	/*@ non_null @*/ protected Picker<Mutator<T>> m_mutations;
 
-	public Mutate(/*@ non_null @*/ Picker<T> picker, /*@ non_null @*/ Picker<Mutator<T>> mutations)
+	public Mutate(/*@ non_null @*/ Picker<? extends T> picker, /*@ non_null @*/ Picker<Mutator<T>> mutations)
 	{
 		super(picker);
 		m_mutations = mutations;

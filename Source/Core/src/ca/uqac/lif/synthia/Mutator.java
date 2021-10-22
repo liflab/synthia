@@ -32,13 +32,13 @@ public abstract class Mutator<T> implements Picker<T>
 	/**
 	 * The underlying picker producing the values to transform.
 	 */
-	/*@ non_null @*/ protected Picker<T> m_picker;
+	/*@ non_null @*/ protected Picker<? extends T> m_picker;
 	
 	/**
 	 * Creates a new instance of mutator.
 	 * @param picker The underlying picker producing the values to transform
 	 */
-	public Mutator(/*@ non_null @*/ Picker<T> picker)
+	public Mutator(/*@ non_null @*/ Picker<? extends T> picker)
 	{
 		super();
 		m_picker = picker;
@@ -49,7 +49,7 @@ public abstract class Mutator<T> implements Picker<T>
 	 * @param picker The underlying picker producing the values to transform
 	 * @return This picker
 	 */
-	/*@ non_null @*/ public Mutator<T> setPicker(/*@ non_null @*/ Picker<T> picker)
+	/*@ non_null @*/ public Mutator<T> setPicker(/*@ non_null @*/ Picker<? extends T> picker)
 	{
 		m_picker = picker;
 		return this;

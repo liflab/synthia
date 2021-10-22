@@ -37,7 +37,7 @@ public class Bound<T> extends Mutator<T> implements Bounded<T>, Shrinkable<T>
 	
 	protected int m_currentLength;
 	
-	public Bound(Picker<T> source, Picker<Integer> length)
+	public Bound(Picker<? extends T> source, Picker<Integer> length)
 	{
 		super(source);
 		m_length = length;
@@ -87,6 +87,7 @@ public class Bound<T> extends Mutator<T> implements Bounded<T>, Shrinkable<T>
 		return m_chosenLength == m_currentLength;
 	}
 	
+	@SuppressWarnings("unchecked")
 	@Override
 	public Shrinkable<T> shrink(T o)
 	{
