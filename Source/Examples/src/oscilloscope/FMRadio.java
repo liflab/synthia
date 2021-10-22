@@ -22,27 +22,54 @@ import ca.uqac.lif.synthia.Picker;
 import ca.uqac.lif.synthia.signal.SineWave;
 import ca.uqac.lif.synthia.util.ComposeList;
 import ca.uqac.lif.synthia.util.Constant;
+import ca.uqac.lif.synthia.util.Offset;
 import ca.uqac.lif.synthia.util.Tick;
 import ca.uqac.lif.synthia.vector.PrismPicker;
 
+/**
+ * Illustrates the principle of
+ * <a href="https://en.wikipedia.org/wiki/Frequency_modulation">frequency
+ * modulation</a> using sine wave and prism pickers. In this example,
+ * the signal to modulate and the carrier wave can be shown on the
+ * {@link Oscilloscope} respectively as:
+ * <p>
+ * <img src="{@docRoot}/doc-files/oscilloscope/Signal.png" alt="Signal" />
+ * <img src="{@docRoot}/doc-files/oscilloscope/FM_Carrier.png" alt="Carrier" />
+ * <p>
+ * The wiring diagram of pickers corresponding to frequency modulation is
+ * as follows:
+ * <p>
+ * When running the program, the resulting modulated signal is shown on
+ * the oscilloscope:
+ * <p>
+ * <img src="{@docRoot}/doc-files/oscilloscope/FM_Modulated.png" alt="Modulated signal" />
+ * <p>
+ * As one can see, the amplitude of the signal does not change, but its
+ * frequency does; this corresponds to the varying width of each cycle of the
+ * carrier.
+ */
 public class FMRadio
 {
 	@SuppressWarnings("unchecked")
 	public static void main(String[] args)
 	{
 		// Generator for x-coordinate
-		Picker<Number> x = new Tick(-1, 0.01);
+		Picker<Number> x = new Tick(-1, 0.0001);
 		// The signal to modulate
-		Picker<Number> signal = new Tick(0, 0.001);
+		SineWave signal = new SineWave(
+				new Constant<Number>(1),
+				new Tick(0, 0.00075),
+				new Constant<Number>(0)
+				);
 		// Generator for y-coordinate
 		SineWave y = new SineWave(
 				new Constant<Number>(1), // amplitude 
-				signal, // frequency
+				new Offset(new Tick(0, 0.002), signal), // frequency
 				new Constant<Number>(0) // phase
-		);
+				);
 		// Create a list of 500 points out of x and y values
 		PrismPicker points = new PrismPicker(x, y);
-		ComposeList<float[]> set = new ComposeList<float[]>(points, 500);
+		ComposeList<float[]> set = new ComposeList<float[]>(points, 20000);
 		// Display these points in our "oscilloscope"
 		Oscilloscope o = new Oscilloscope().addPoints(set.pick());
 		o.setVisible(true);

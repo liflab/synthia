@@ -18,8 +18,9 @@
  */
 package oscilloscope;
 
+import java.awt.BorderLayout;
 import java.awt.Color;
-import java.awt.FlowLayout;
+import java.awt.Dimension;
 import java.awt.Graphics;
 import java.awt.Graphics2D;
 import java.awt.event.ActionEvent;
@@ -35,7 +36,10 @@ import javax.swing.JPanel;
  * A simple {@link JFrame} that simulates the operation of an oscilloscope.
  * This class produces a window, showing a square grid on which two-dimensional
  * points can be added and displayed. The class is used to display the
- * patterns produced by the various pickers showcased in this package.
+ * patterns produced by the various pickers showcased in this package. An
+ * example of the display produced by the oscilloscope is:
+ * <p>
+ * <img src="{@docRoot}/doc-files/oscilloscope/Lissajous_r_6_5_p_pi_4.png" alt="Oscilloscope window" />
  */
 public class Oscilloscope extends JFrame
 {
@@ -46,11 +50,13 @@ public class Oscilloscope extends JFrame
 	
 	protected final Screen m_screen;
 	
+	protected static final Color s_darkGreen = new Color(0, 192, 0);
+	
 	public Oscilloscope()
 	{
 		super();
 		m_screen = new Screen();
-		add(m_screen);
+		add(m_screen, BorderLayout.CENTER);
 		setTitle("Oscilloscope");
     setSize(300, 300);
     setLocationRelativeTo(null);
@@ -78,8 +84,9 @@ public class Oscilloscope extends JFrame
 
 		public Screen()
 		{
-			super(new FlowLayout(FlowLayout.CENTER));
+			super();
 			m_points = new HashSet<Point>();
+			this.setPreferredSize(new Dimension(300, 300));
 		}
 		
 		protected void addPoint(float x, float y)
@@ -95,19 +102,28 @@ public class Oscilloscope extends JFrame
 			Graphics2D g2d = (Graphics2D) g;
 			g2d.setPaint(Color.black);
 			g2d.fillRect(0, 0, (int) width, (int) height);
-			g2d.setPaint(Color.green);
-			for (Point p : m_points)
-			{
-				g2d.drawLine((int) (width * p.getX()), (int) (height * p.getY()), (int) (width * p.getX()), (int) (height * p.getY()));
-			}
 			g2d.setPaint(Color.darkGray);
-			for (int i = 0; i < height; i += height / 4)
+			for (int i = 0; i <= height; i += height / 6)
 			{
 				g2d.drawLine(0, i, (int) width, i);
 			}
-			for (int i = 0; i < height; i += height / 4)
+			for (int i = 0; i <= width; i += width / 6)
 			{
 				g2d.drawLine(i, 0, i, (int) height);
+			}
+			for (Point p : m_points)
+			{
+				int x = (int) (width * p.getX());
+				int y = (int) (height * p.getY());
+				if (x % ((int) (width / 6)) == 0 || y % ((int) (height / 6)) == 0)
+				{
+					g2d.setPaint(s_darkGreen);
+				}
+				else
+				{
+					g2d.setPaint(Color.green);
+				}
+				g2d.drawLine(x, y, x, y);
 			}
 		}
 
