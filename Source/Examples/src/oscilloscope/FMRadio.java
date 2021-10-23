@@ -39,6 +39,8 @@ import ca.uqac.lif.synthia.vector.PrismPicker;
  * The wiring diagram of pickers corresponding to frequency modulation is
  * as follows:
  * <p>
+ * <img src="{@docRoot}/doc-files/oscilloscope/FMRadio.png" alt="Picker wiring diagram" />
+ * <p>
  * When running the program, the resulting modulated signal is shown on
  * the oscilloscope:
  * <p>

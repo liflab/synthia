@@ -31,7 +31,7 @@ import ca.uqac.lif.synthia.vector.PrismPicker;
  * <p>
  * The wiring diagram of pickers in this program is given below:
  * <p>
- * TODO
+ * <img src="{@docRoot}/doc-files/oscilloscope/Lissajous.png" alt="Wiring diagram" />
  * <p>
  * We recall that a {@link SineWave} picker produces an output that corresponds
  * to the equation <i>A</i> sin(&omega;<i>t</i>+&phi;), where <i>A</i>, &omega;
