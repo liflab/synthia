@@ -12,6 +12,11 @@ import java.util.List;
 public class ComparableList<T> extends ArrayList<T> implements Comparable<ArrayList<T>>
 {
 	/**
+	 * Dummy UID.
+	 */
+	private static final long serialVersionUID = 1L;
+
+	/**
 	 * Default constructor.
 	 */
 	public ComparableList()

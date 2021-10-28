@@ -19,126 +19,146 @@
 package ca.uqac.lif.synthia.sequence;
 
 import java.util.ArrayList;
-import java.util.HashMap;
 import java.util.List;
-import java.util.Map;
 
 import ca.uqac.lif.synthia.Picker;
-import ca.uqac.lif.synthia.util.Choice.ProbabilityChoice;
+import ca.uqac.lif.synthia.exception.NoMoreElementException;
 
+/**
+ * Picker producing an "interleaved" sequence of objects from calls to multiple
+ * other pickers. The <tt>Knit</tt> picker must be instantiated by passing to
+ * it a picker of pickers <tt>p</tt> (that is, a
+ * <tt>Picker&lt;Picker&lt;T&gt;&gt;</tt>). Upon every call to {@link #pick()},
+ * <tt>Knit</tt> proceeds as follows:
+ * <ol>
+ * <li>It flips a coin to decide whether to create a new instance of
+ * <tt>Picker&lt;T&gt;</tt>; if so, it calls <tt>p.pick()</tt> and adds the
+ * resulting picker instance to its set of "living" pickers.</li>
+ * <li>It selects one of the living pickers, and returns the object resulting
+ * from a call to {@link #pick()} on that picker.</li>
+ * <li>If this picker cannot produce a new value (e.g. it throws a
+ * {@link NoMoreElementException}), it is considered "dead" and is removed from
+ * the set of living pickers. In such a case, <tt>Knit</tt> flips a coin to
+ * to decide whether to create a new instance of <tt>Picker&lt;T&gt;</tt> to
+ * replace it; if so, it calls <tt>p.pick()</tt> and adds the
+ * resulting picker instance to its set of "living" pickers.</li>
+ * </ol>
+ * @author Sylvain Hallé
+ *
+ * @param <T> The type of the objects to produce
+ */
 public class Knit<T> implements Picker<T>
 {
-	protected Map<Integer,Picker<T>> m_sessions;
-
-	protected List<ProbabilityChoice<Picker<T>>> m_choices;
-
-	protected int m_idCount;
+	/**
+	 * Maximum number of tries to get a new element from an instance before
+	 * giving up.
+	 */
+	protected static final transient int s_maxTries = 1000;
 
 	/**
-	 * The probability to start a new session at any moment
+	 * A picker producing pickers.
 	 */
-	protected float m_midProbability;
+	/*@ non_null @*/ protected Picker<? extends Picker<T>> m_instancePicker;
 
 	/**
-	 * The probability to start a new session when one has just finished
+	 * A picker deciding whether to start a new instance at any moment.
 	 */
-	protected float m_endProbability;
-	
-	/**
-	 * A source of floating point numbers
-	 */
-	protected Picker<Float> m_floatSource;
-	
-	/**
-	 * Maximum number of tries to get a new element from a session before
-	 * giving up
-	 */
-	protected static final transient int MAX_TRIES = 1000;
+	/*@ non_null @*/ protected Picker<Boolean> m_newInstance;
 
-	public Knit(Picker<Float> float_source, Number mid_probability, Number end_probability)
+	/**
+	 * A picker deciding whether to start a new instance when one has just
+	 * finished.
+	 */
+	/*@ non_null @*/ protected Picker<Boolean> m_renewInstance;
+
+	/**
+	 * A picker used to pick a living instance.
+	 */
+	/*@ non_null @*/ protected Picker<Float> m_floatSource;
+
+	/**
+	 * The picker instances that are currently "alive".
+	 */
+	/*@ non_null @*/ protected List<Picker<T>> m_instances;
+
+	/**
+	 * Creates a new instance of the picker.
+	 * @param instance_picker A picker producing picker instances
+	 * @param new_instance A picker deciding whether to start a new instance at
+	 * any moment
+	 * @param renew_instance A picker deciding whether to start a new instance
+	 * when one has just finished
+	 * @param float_source A picker used to pick a living instance
+	 */
+	public Knit(Picker<? extends Picker<T>> instance_picker, Picker<Boolean> new_instance,
+			Picker<Boolean> renew_instance, Picker<Float> float_source)
 	{
 		super();
-		m_sessions = new HashMap<Integer,Picker<T>>();
+		m_instancePicker = instance_picker;
+		m_newInstance = new_instance;
+		m_renewInstance = renew_instance;
 		m_floatSource = float_source;
-		m_choices = new ArrayList<ProbabilityChoice<Picker<T>>>();
-		m_midProbability = mid_probability.floatValue();
-		m_endProbability = end_probability.floatValue();
-		m_idCount = 0;
-	}
-
-	public Knit<T> add(Picker<T> provider, Number probability)
-	{
-		m_choices.add(new ProbabilityChoice<Picker<T>>(provider, probability.floatValue()));
-		return this;
+		m_instances = new ArrayList<Picker<T>>();
 	}
 
 	@Override
 	public void reset()
 	{
-		m_sessions.clear();
-		m_idCount = 0;
+		m_instancePicker.reset();
+		m_newInstance.reset();
+		m_renewInstance.reset();
+		m_floatSource.reset();
+		m_instances.clear();
 	}
 
 	@Override
-	public T pick() 
+	public T pick()
 	{
-		float p = m_floatSource.pick();
-		if (m_sessions.isEmpty() || p < m_midProbability)
+		if (m_instances.isEmpty() || m_newInstance.pick())
 		{
-			int new_sess_id = ++m_idCount;
-			m_sessions.put(new_sess_id, startNewSession());
+			// Spawn a new instance
+			Picker<T> new_instance = m_instancePicker.pick().duplicate(false);
+			m_instances.add(new_instance);
 		}
-		// Pick a session
-		T next = null;
-		for (int i = 0; i < MAX_TRIES && next == null; i++)
+		for (int i = 0; i < s_maxTries; i++)
 		{
-			List<Integer> ids = new ArrayList<Integer>(m_sessions.size());
-			ids.addAll(m_sessions.keySet());
-			int pos = (int) (m_floatSource.pick() * ids.size());
-			int sess_id = ids.get(pos);
-			Picker<T> prov = m_sessions.get(sess_id);
-			next = prov.pick();
-			if (next == null)
+			int index = (int) Math.floor(((float) m_instances.size()) * m_floatSource.pick());
+			Picker<T> current_instance = m_instances.get(index);
+			try
 			{
-				m_sessions.remove(sess_id);
-				if (p < m_endProbability)
+				return current_instance.pick();
+			}
+			catch (NoMoreElementException e)
+			{
+				m_instances.remove(index);
+				if (m_instances.isEmpty() || m_renewInstance.pick())
 				{
-					int new_sess_id = ++m_idCount;
-					m_sessions.put(new_sess_id, startNewSession());
+					// Spawn a new instance
+					Picker<T> new_instance = m_instancePicker.pick().duplicate(false);
+					m_instances.add(new_instance);
 				}
 			}
 		}
-		return next;
+		throw new NoMoreElementException();
 	}
 
 	@Override
 	public Knit<T> duplicate(boolean with_state)
 	{
-		Knit<T> ilp = new Knit<T>(m_floatSource, m_midProbability, m_endProbability);
-		ilp.m_choices.addAll(m_choices);
+		Knit<T> k = new Knit<T>(m_instancePicker.duplicate(with_state), m_newInstance.duplicate(with_state), m_renewInstance.duplicate(with_state), m_floatSource.duplicate(with_state));
 		if (with_state)
 		{
-			ilp.m_idCount = m_idCount;
-			for (Map.Entry<Integer,Picker<T>> e : m_sessions.entrySet())
+			for (Picker<T> p : m_instances)
 			{
-				ilp.m_sessions.put(e.getKey(), e.getValue().duplicate(with_state));
+				k.m_instances.add(p.duplicate(with_state));
 			}
 		}
-		return ilp;
+		return k;
 	}
-
-	protected Picker<T> startNewSession()
+	
+	@Override
+	public String toString()
 	{
-		float f = m_floatSource.pick();
-		float sum_prob = 0;
-		for (ProbabilityChoice<Picker<T>> pc : m_choices)
-		{
-			sum_prob += pc.getProbability();
-			if (f <= sum_prob)
-			{
-				return pc.getObject().duplicate(false);
-			}
-		}
-		return null;
+		return "Knit";
 	}
 }
