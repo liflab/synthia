@@ -18,14 +18,10 @@
  */
 package ca.uqac.lif.synthia.util;
 
-
 import ca.uqac.lif.synthia.Picker;
-
 import java.util.Collections;
 import java.util.HashSet;
 import java.util.Set;
-
-import ca.uqac.lif.synthia.Picker;
 
 /**
  * Picker that merges the result of other pickers into a set.
