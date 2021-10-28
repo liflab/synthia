@@ -1,6 +1,6 @@
 /*
     Synthia, a data structure generator
-    Copyright (C) 2019-2020 Laboratoire d'informatique formelle
+    Copyright (C) 2019-2021 Laboratoire d'informatique formelle
     Université du Québec à Chicoutimi, Canada
 
     This program is free software: you can redistribute it and/or modify
@@ -26,7 +26,7 @@ import java.util.Map;
 import ca.uqac.lif.synthia.Picker;
 import ca.uqac.lif.synthia.util.Choice.ProbabilityChoice;
 
-public class Interleave<T> implements Picker<T>
+public class Knit<T> implements Picker<T>
 {
 	protected Map<Integer,Picker<T>> m_sessions;
 
@@ -55,7 +55,7 @@ public class Interleave<T> implements Picker<T>
 	 */
 	protected static final transient int MAX_TRIES = 1000;
 
-	public Interleave(Picker<Float> float_source, Number mid_probability, Number end_probability)
+	public Knit(Picker<Float> float_source, Number mid_probability, Number end_probability)
 	{
 		super();
 		m_sessions = new HashMap<Integer,Picker<T>>();
@@ -66,7 +66,7 @@ public class Interleave<T> implements Picker<T>
 		m_idCount = 0;
 	}
 
-	public Interleave<T> add(Picker<T> provider, Number probability)
+	public Knit<T> add(Picker<T> provider, Number probability)
 	{
 		m_choices.add(new ProbabilityChoice<Picker<T>>(provider, probability.floatValue()));
 		return this;
@@ -112,9 +112,9 @@ public class Interleave<T> implements Picker<T>
 	}
 
 	@Override
-	public Interleave<T> duplicate(boolean with_state)
+	public Knit<T> duplicate(boolean with_state)
 	{
-		Interleave<T> ilp = new Interleave<T>(m_floatSource, m_midProbability, m_endProbability);
+		Knit<T> ilp = new Knit<T>(m_floatSource, m_midProbability, m_endProbability);
 		ilp.m_choices.addAll(m_choices);
 		if (with_state)
 		{

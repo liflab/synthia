@@ -6,7 +6,7 @@ import ca.uqac.lif.synthia.random.RandomString;
 import ca.uqac.lif.synthia.random.RandomFloat;
 import ca.uqac.lif.synthia.random.RandomInteger;
 import ca.uqac.lif.synthia.replay.Playback;
-import ca.uqac.lif.synthia.sequence.Interleave;
+import ca.uqac.lif.synthia.sequence.Knit;
 import ca.uqac.lif.synthia.util.Freeze;
 import ca.uqac.lif.synthia.util.StringPattern;
 import ca.uqac.lif.synthia.util.Tick;
@@ -29,7 +29,7 @@ public class Inter {
 				new Freeze<String>(new RandomString(length_1)), 
 				new RandomString(length_2));
 		Bound<String> bp2 = new Bound<String>(new TickLineProvider(ticker, rsp2), new RandomInteger(5, 6));
-		Interleave<String> ip = new Interleave<String>(new RandomFloat(), 0.5, 0.85);
+		Knit<String> ip = new Knit<String>(new RandomFloat(), 0.5, 0.85);
 		ip.add(bp1, 0.55);
 		ip.add(bp2, 0.45);
 		for (int i = 0; i < 25; i++)

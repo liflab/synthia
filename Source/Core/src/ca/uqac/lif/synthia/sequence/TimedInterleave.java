@@ -6,7 +6,7 @@ import java.util.Map;
 import ca.uqac.lif.synthia.Picker;
 import ca.uqac.lif.synthia.util.Choice.ProbabilityChoice;
 
-public class TimedInterleave<T> extends Interleave<T>
+public class TimedInterleave<T> extends Knit<T>
 {
 	protected Map<Integer,Float> m_timestamps;
 	
