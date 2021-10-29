@@ -44,26 +44,6 @@ public class ComparableList<T> extends ArrayList<T> implements Comparable<List<T
 	}
 
 	/**
-	 * Constructor who takes a {@link ComparableList} as parameter.
-	 *
-	 * @param cl The reference list used to compare to an other list.
-	 */
-	public ComparableList(ComparableList<T> cl)
-	{
-		super((List<T>) cl);
-	}
-
-	/**
-	 * Constructor who takes an <code>ArrayList&lt;T&gt;</code> as parameter.
-	 *
-	 * @param al The reference list used to compare to an other list.
-	 */
-	public ComparableList(ArrayList<T> al)
-	{
-		super((List<T>) al);
-	}
-
-	/**
 	 * Constructor who takes a <code>List&lt;T&gt;</code> as parameter.
 	 *
 	 * @param l The reference list used to compare to an other list.

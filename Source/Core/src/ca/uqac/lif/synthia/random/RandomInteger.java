@@ -122,12 +122,10 @@ public class RandomInteger extends RandomPicker<Integer> implements Shrinkable<I
 	public RandomInteger duplicate(boolean with_state)
 	{
 		RandomInteger copy = new RandomInteger(m_min, m_max, m_seed, m_random.Duplicate());
-
 		if (!with_state)
 		{
 			copy.reset();
 		}
-
 		return copy;
 	}
 	
@@ -136,9 +134,7 @@ public class RandomInteger extends RandomPicker<Integer> implements Shrinkable<I
 	{
 		if(element <= m_min)
 		{
-
 			return new NothingPicker<Integer>();
-
 		}
 		else
 		{

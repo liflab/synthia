@@ -1,3 +1,21 @@
+/*
+    Synthia, a data structure generator
+    Copyright (C) 2019-2021 Laboratoire d'informatique formelle
+    Université du Québec à Chicoutimi, Canada
+
+    This program is free software: you can redistribute it and/or modify
+    it under the terms of the GNU Lesser General Public License as published
+    by the Free Software Foundation, either version 3 of the License, or
+    (at your option) any later version.
+
+    This program is distributed in the hope that it will be useful,
+    but WITHOUT ANY WARRANTY; without even the implied warranty of
+    MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+    GNU Lesser General Public License for more details.
+
+    You should have received a copy of the GNU Lesser General Public License
+    along with this program.  If not, see <http://www.gnu.org/licenses/>.
+ */
 package examples.quickcheck;
 
 import java.util.ArrayList;
@@ -7,6 +25,7 @@ import ca.uqac.lif.synthia.GiveUpException;
 import ca.uqac.lif.synthia.NoMoreElementException;
 import ca.uqac.lif.synthia.Picker;
 import ca.uqac.lif.synthia.Shrinkable;
+import ca.uqac.lif.synthia.random.RandomFloat;
 
 /**
  * @ingroup Examples
@@ -16,7 +35,9 @@ import ca.uqac.lif.synthia.Shrinkable;
  */
 public class Assert<T>
 {
-	protected static final int MAX_TRIES = 1000;
+	protected static final int MAX_CYCLES = 1000;
+	
+	protected static final int MAX_TRIES = 1000000;
 	
 	protected Shrinkable<T> m_input;
 
@@ -30,6 +51,11 @@ public class Assert<T>
 		m_input = input;
 		m_shrunk = new ArrayList<T>();
 		m_decision = decision;
+	}
+	
+	public Assert(Shrinkable<T> input)
+	{
+		this(input, RandomFloat.instance);
 	}
 	
 	public List<T> getIterations()
@@ -87,7 +113,7 @@ public class Assert<T>
 		Shrinkable<T> p = m_input.shrink(o, m_decision);
 		try
 		{
-			for (int i = 0; i < MAX_TRIES; i++)
+			for (int i = 0; i < MAX_CYCLES; i++)
 			{
 				for (int j = 0; j < MAX_TRIES; j++)
 				{

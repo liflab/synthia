@@ -1,4 +1,4 @@
-package ca.uqac.lif.synthia.util;
+package ca.uqac.lif.synthia.collection;
 
 import ca.uqac.lif.synthia.Picker;
 import ca.uqac.lif.synthia.collection.ListPicker;

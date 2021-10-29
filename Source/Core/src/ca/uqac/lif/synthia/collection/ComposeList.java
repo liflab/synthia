@@ -165,7 +165,7 @@ public class ComposeList<T> implements Picker<List<T>>, Shrinkable<List<T>>, Exp
 	}
 
 	@Override
-	public ComposeShrunkList<T> shrink(List<T> o, Picker<Float> decision)
+	public Shrinkable<List<T>> shrink(List<T> o, Picker<Float> decision)
 	{
 		if (!(m_elements instanceof Shrinkable) || !(m_length instanceof Shrinkable))
 		{
