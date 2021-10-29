@@ -18,8 +18,8 @@
  */
 
 /**
- * Examples illustrating the explainability functionalities of Synthia.
+ * Examples illustrating the shrinking functionalities of Synthia.
  * 
  * @ingroup Examples
  */
-package examples.provenance;
+package examples.quickcheck;

@@ -21,6 +21,7 @@ package ca.uqac.lif.synthia.collection;
 import java.util.ArrayList;
 import java.util.List;
 
+import ca.uqac.lif.synthia.NoMoreElementException;
 import ca.uqac.lif.synthia.Picker;
 import ca.uqac.lif.synthia.Shrinkable;
 import ca.uqac.lif.synthia.random.RandomFloat;
@@ -102,7 +103,16 @@ public class ComposeShrunkList<T> implements Picker<List<T>>, Shrinkable<List<T>
 			}
 			else if (i == prefix_length)
 			{
-				new_list.add(m_originalPicker.shrink(m_reference.get(i), m_decision).pick());
+				Picker<T> shrunk = m_originalPicker.shrink(m_reference.get(i), m_decision);
+				try
+				{
+					new_list.add(shrunk.pick());
+				}
+				catch (NoMoreElementException e)
+				{
+					// This element can no longer be shrunk, leave it alone
+					new_list.add(m_reference.get(i));
+				}
 			}
 			else
 			{

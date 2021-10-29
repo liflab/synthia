@@ -35,9 +35,9 @@ import ca.uqac.lif.synthia.random.RandomFloat;
  */
 public class Assert<T>
 {
-	protected static final int MAX_CYCLES = 1000;
+	protected static final int MAX_CYCLES = 1000000;
 	
-	protected static final int MAX_TRIES = 1000000;
+	protected static final int MAX_TRIES = 100000;
 	
 	protected Shrinkable<T> m_input;
 
@@ -115,7 +115,8 @@ public class Assert<T>
 		{
 			for (int i = 0; i < MAX_CYCLES; i++)
 			{
-				for (int j = 0; j < MAX_TRIES; j++)
+				int j;
+				for (j = 0; j < MAX_TRIES; j++)
 				{
 					o = p.pick();
 					if (!evaluate(o))
@@ -124,12 +125,14 @@ public class Assert<T>
 						break;
 					}
 				}
+				//System.out.print(j + " ");
 				p = p.shrink(o, m_decision);
 			}
 		}
 		catch (NoMoreElementException e)
 		{
 			// Nothing to do
+			System.out.println("\nEND");
 		}
 		return false;
 	}
