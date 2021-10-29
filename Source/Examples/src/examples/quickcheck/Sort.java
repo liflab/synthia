@@ -39,8 +39,9 @@ import ca.uqac.lif.synthia.random.RandomInteger;
  * {@link Assert} object will ask for a shrunk picker and repeat the process,
  * eventually finding shorter lists with smaller values that also reveal the
  * fault. You can try running the program multiple times; this will produce
- * different inputs. One can observe that the number of shrinking steps and
- * length of the final list depend on the starting seed.
+ * different inputs. One can observe that the number of shrinking steps depends
+ * on the starting seed. However, most of the time, the list that is found is
+ * of minimal length (i.e. 5).
  * <p>
  * A typical output of the program looks like this:
  * <pre>
