@@ -17,7 +17,7 @@ while (false !== ($entry = readdir($handle)))
 }
 closedir($handle);
 
-/* Copy all contents of */src/doc-files into docs/javadoc/doc-files */
+/* Copy all contents of src/doc-files into docs/javadoc/doc-files */
 xcopy("Source/Core/src/doc-files", "docs/javadoc/doc-files");
 xcopy("Source/Examples/src/doc-files", "docs/javadoc/doc-files");
 
