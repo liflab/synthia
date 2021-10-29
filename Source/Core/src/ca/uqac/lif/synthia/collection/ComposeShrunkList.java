@@ -50,24 +50,27 @@ public class ComposeShrunkList<T> implements Picker<List<T>>, Shrinkable<List<T>
 	
 	protected Picker<Float> m_decision;
 	
-	public ComposeShrunkList(Shrinkable<T> element_picker, Shrinkable<Integer> length, List<T> reference, Picker<Float> decision)
+	protected float m_magnitude;
+	
+	public ComposeShrunkList(Shrinkable<T> element_picker, Shrinkable<Integer> length, List<T> reference, Picker<Float> decision, float magnitude)
 	{
 		super();
 		m_originalPicker = element_picker;
 		m_reference = reference;
 		m_decision = decision;
 		m_length = length;
+		m_magnitude = magnitude;
 	}
 	
 	public ComposeShrunkList(Shrinkable<T> element_picker, Shrinkable<Integer> length, List<T> reference)
 	{
-		this(element_picker, length, reference, RandomFloat.instance);
+		this(element_picker, length, reference, RandomFloat.instance, 1);
 	}
 	
 	@Override
-	public Shrinkable<List<T>> shrink(List<T> list, Picker<Float> d)
+	public Shrinkable<List<T>> shrink(List<T> list, Picker<Float> d, float magnitude)
 	{
-		return new ComposeShrunkList<T>(m_originalPicker, m_length, list, m_decision);
+		return new ComposeShrunkList<T>(m_originalPicker, m_length, list, d, magnitude);
 	}
 
 	@Override
@@ -81,11 +84,11 @@ public class ComposeShrunkList<T> implements Picker<List<T>>, Shrinkable<List<T>
 	public List<T> pick()
 	{
 		int ref_size = m_reference.size();
-		if (m_decision.pick() < 0.5)
+		if (m_decision.pick() < (1 - m_magnitude))
 		{
 			// Generate a shorter list
-			int new_length = m_length.shrink(ref_size, m_decision).pick();
-			List<T> new_list = new ArrayList<T>(new_length);
+			int new_length = m_length.shrink(ref_size, m_decision, m_magnitude).pick();
+			List<T> new_list = new ComparableList<T>();
 			for (int i = 0; i < new_length; i++)
 			{
 				new_list.add(m_originalPicker.pick());
@@ -93,17 +96,33 @@ public class ComposeShrunkList<T> implements Picker<List<T>>, Shrinkable<List<T>
 			return new_list;
 		}
 		// Generate a list with smaller elements
-		int prefix_length = (int) (ref_size * m_decision.pick());
-		List<T> new_list = new ArrayList<T>(ref_size);
+		int prefix_length = (int) (ref_size * m_decision.pick() * (1 - m_magnitude));
+		List<T> new_list = new ComparableList<T>();
 		for (int i = 0; i < ref_size; i++)
 		{
 			if (i < prefix_length)
 			{
-				new_list.add(m_reference.get(i));
+				if (m_decision.pick() < m_magnitude)
+				{
+					new_list.add(m_reference.get(i));
+				}
+				else
+				{
+					Picker<T> shrunk = m_originalPicker.shrink(m_reference.get(i), m_decision, m_magnitude);
+					try
+					{
+						new_list.add(shrunk.pick());
+					}
+					catch (NoMoreElementException e)
+					{
+						// This element can no longer be shrunk, leave it alone
+						new_list.add(m_reference.get(i));
+					}
+				}
 			}
 			else if (i == prefix_length)
 			{
-				Picker<T> shrunk = m_originalPicker.shrink(m_reference.get(i), m_decision);
+				Picker<T> shrunk = m_originalPicker.shrink(m_reference.get(i), m_decision, m_magnitude);
 				try
 				{
 					new_list.add(shrunk.pick());
@@ -132,6 +151,6 @@ public class ComposeShrunkList<T> implements Picker<List<T>>, Shrinkable<List<T>
 	@Override
 	public Shrinkable<List<T>> shrink(List<T> o)
 	{
-		return shrink(o, RandomFloat.instance);
+		return shrink(o, RandomFloat.instance, 1);
 	}
 }

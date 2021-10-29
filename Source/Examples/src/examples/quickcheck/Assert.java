@@ -35,14 +35,16 @@ import ca.uqac.lif.synthia.random.RandomFloat;
  */
 public class Assert<T>
 {
-	protected static final int MAX_CYCLES = 1000000;
-	
-	protected static final int MAX_TRIES = 100000;
-	
+	protected static final int MAX_STARTS = 100;
+
+	protected static final int MAX_CYCLES = 100;
+
+	protected static final int MAX_TRIES = 10;
+
 	protected Shrinkable<T> m_input;
 
 	protected List<T> m_shrunk;
-	
+
 	protected Picker<Float> m_decision;
 
 	public Assert(Shrinkable<T> input, Picker<Float> decision)
@@ -52,17 +54,17 @@ public class Assert<T>
 		m_shrunk = new ArrayList<T>();
 		m_decision = decision;
 	}
-	
+
 	public Assert(Shrinkable<T> input)
 	{
 		this(input, RandomFloat.instance);
 	}
-	
+
 	public List<T> getIterations()
 	{
 		return m_shrunk;
 	}
-	
+
 	public T getInitial()
 	{
 		if (m_shrunk.isEmpty())
@@ -71,7 +73,7 @@ public class Assert<T>
 		}
 		return m_shrunk.get(0);
 	}
-	
+
 	public T getShrunk()
 	{
 		if (m_shrunk.isEmpty())
@@ -81,60 +83,85 @@ public class Assert<T>
 		return m_shrunk.get(m_shrunk.size() - 1);
 	}
 
+	@SuppressWarnings("unchecked")
 	public boolean check()
 	{
-		T o = null;
-		boolean found = false;
-		try
+		T best = null;
+		for (int start_cnt = 0; start_cnt < MAX_STARTS; start_cnt++)
 		{
-			for (int i = 0; i < MAX_TRIES; i++)
+			List<T> shrunk = new ArrayList<T>();
+			T o = null;
+			boolean found = false;
+			try
 			{
-				o = m_input.pick();
-				if (!evaluate(o))
+				for (int i = 0; i < MAX_TRIES; i++)
 				{
-					found = true;
-					break;
-				}
-			}
-			m_shrunk.add(o);
-		}
-		catch (GiveUpException e)
-		{
-			return true;
-		}
-		catch (NoMoreElementException e)
-		{
-			return true;
-		}
-		if (!found)
-		{
-			return true;
-		}
-		Shrinkable<T> p = m_input.shrink(o, m_decision);
-		try
-		{
-			for (int i = 0; i < MAX_CYCLES; i++)
-			{
-				int j;
-				for (j = 0; j < MAX_TRIES; j++)
-				{
-					o = p.pick();
+					o = m_input.pick();
 					if (!evaluate(o))
 					{
-						m_shrunk.add(o);
+						found = true;
 						break;
 					}
 				}
-				//System.out.print(j + " ");
-				p = p.shrink(o, m_decision);
+				shrunk.add(o);
+			}
+			catch (GiveUpException e)
+			{
+				continue;
+			}
+			catch (NoMoreElementException e)
+			{
+				continue;
+			}
+			if (!found)
+			{
+				continue;
+			}
+			Shrinkable<T> p = m_input.shrink(o, m_decision, 1);
+			try
+			{
+				for (int i = 0; i < MAX_CYCLES; i++)
+				{
+					boolean new_found = false;
+					for (float magnitude = 0.25f; !new_found && magnitude <= 1; magnitude += 0.25f)
+					{
+						p = p.shrink(o, m_decision, magnitude);
+						int j;
+						for (j = 0; j < MAX_TRIES; j++)
+						{
+							o = p.pick();
+							if (!evaluate(o))
+							{
+								shrunk.add(o);
+								new_found = true;
+								break;
+							}
+						}
+					}
+				}
+			}
+			catch (NoMoreElementException e)
+			{
+				// Nothing to do
+			}
+			if (!(o instanceof Comparable))
+			{
+				// No point in trying to find "best" input
+				m_shrunk = shrunk;
+				break;
+			}
+			if (!shrunk.isEmpty())
+			{
+				Comparable<T> new_o = (Comparable<T>) shrunk.get(shrunk.size() - 1);
+				if (best == null || new_o.compareTo(best) < 0)
+				{
+					// Found a "smaller" input
+					m_shrunk = shrunk;
+					best = shrunk.get(shrunk.size() - 1);
+				}				
 			}
 		}
-		catch (NoMoreElementException e)
-		{
-			// Nothing to do
-			System.out.println("\nEND");
-		}
-		return false;
+		return m_shrunk.isEmpty();
 	}
 
 	protected boolean evaluate(T o)

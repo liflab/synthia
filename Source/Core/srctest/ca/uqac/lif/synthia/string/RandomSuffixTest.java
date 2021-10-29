@@ -77,7 +77,7 @@ public class RandomSuffixTest
 		for (int i = 0; i < 10000; i++)
 		{
 			String picked_string = random_suffix.pick();
-			Shrinkable<String> relative_picker = random_suffix.shrink(picked_string, new RandomFloat());
+			Shrinkable<String> relative_picker = random_suffix.shrink(picked_string);
 
 			if(picked_string.isEmpty())
 			{

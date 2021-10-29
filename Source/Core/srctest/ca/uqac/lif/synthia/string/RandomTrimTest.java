@@ -76,7 +76,7 @@ public class RandomTrimTest
 		for (int i = 0; i < 10000; i++)
 		{
 			String picked_string = random_trim.pick();
-			Shrinkable<String> relative_picker = random_trim.shrink(picked_string, new RandomFloat());
+			Shrinkable<String> relative_picker = random_trim.shrink(picked_string);
 
 			if(picked_string.isEmpty())
 			{

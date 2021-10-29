@@ -216,7 +216,7 @@ public class RandomString implements Shrinkable<String>, Seedable
 	}
 	
 	@Override
-	public Shrinkable<String> shrink(String o, Picker<Float> decision)
+	public Shrinkable<String> shrink(String o, Picker<Float> decision, float magnitude)
 	{
 		return new PickSmallerComparable<String>(this, o);
 	}
@@ -242,7 +242,7 @@ public class RandomString implements Shrinkable<String>, Seedable
 	@Override
 	public Shrinkable<String> shrink(String o)
 	{
-		return shrink(o, RandomFloat.instance);
+		return shrink(o, RandomFloat.instance, 1);
 	}
 
 }

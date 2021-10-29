@@ -109,20 +109,20 @@ public abstract class AffineTransform<T extends Number> extends Mutator<T> imple
 		
 		@SuppressWarnings("unchecked")
 		@Override
-		public AffineTransformInteger shrink(Integer o, Picker<Float> decision)
+		public AffineTransformInteger shrink(Integer o, Picker<Float> decision, float magnitude)
 		{
 			if (!(m_picker instanceof Shrinkable))
 			{
 				throw new CannotShrinkException(m_picker);
 			}
 			int source_value = (int) Math.floor((o - m_b) / m_m);
-			return new AffineTransformInteger(((Shrinkable<Integer>) m_picker).shrink(source_value, decision), m_m, m_b);
+			return new AffineTransformInteger(((Shrinkable<Integer>) m_picker).shrink(source_value, decision, 1), m_m, m_b);
 		}
 
 		@Override
 		public Shrinkable<Integer> shrink(Integer o)
 		{
-			return shrink(o, RandomFloat.instance);
+			return shrink(o, RandomFloat.instance, 1);
 		}
 	}
 	
@@ -156,20 +156,20 @@ public abstract class AffineTransform<T extends Number> extends Mutator<T> imple
 		
 		@SuppressWarnings("unchecked")
 		@Override
-		public AffineTransformFloat shrink(Float o, Picker<Float> decision)
+		public AffineTransformFloat shrink(Float o, Picker<Float> decision, float magnitude)
 		{
 			if (!(m_picker instanceof Shrinkable))
 			{
 				throw new CannotShrinkException(m_picker);
 			}
 			float source_value = (o - m_b) / m_m;
-			return new AffineTransformFloat(((Shrinkable<Float>) m_picker).shrink(source_value, decision), m_m, m_b);
+			return new AffineTransformFloat(((Shrinkable<Float>) m_picker).shrink(source_value, decision, 1), m_m, m_b);
 		}
 
 		@Override
 		public Shrinkable<Float> shrink(Float o)
 		{
-			return shrink(o, RandomFloat.instance);
+			return shrink(o, RandomFloat.instance, 1);
 		}
 	}
 }

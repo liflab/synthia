@@ -71,7 +71,7 @@ public class PickSmallerComparable<T> extends PickIf<T> implements Shrinkable<T>
 	}
 
 	@Override
-	public PickSmallerComparable<T> shrink(T o, Picker<Float> decision)
+	public PickSmallerComparable<T> shrink(T o, Picker<Float> decision, float m)
 	{
 		PickSmallerComparable<T> ps = new PickSmallerComparable<T>(m_picker, (T) o);
 		ps.m_maxIteration = m_maxIteration;
@@ -87,6 +87,6 @@ public class PickSmallerComparable<T> extends PickIf<T> implements Shrinkable<T>
 	@Override
 	public Shrinkable<T> shrink(T o)
 	{
-		return shrink(o, RandomFloat.instance);
+		return shrink(o, RandomFloat.instance, 1);
 	}
 }

@@ -126,11 +126,11 @@ public class RandomFloat extends RandomPicker<Float> implements Shrinkable<Float
 	@Override
 	public Shrinkable<Float> shrink(Float element)
 	{
-		return shrink(element, instance);
+		return shrink(element, instance, 1);
 	}
 	
 	@Override
-	public Shrinkable<Float> shrink(Float element, Picker<Float> decision)
+	public Shrinkable<Float> shrink(Float element, Picker<Float> decision, float magnitude)
 	{
 		if((element <= m_min) || (element.isNaN()))
 		{

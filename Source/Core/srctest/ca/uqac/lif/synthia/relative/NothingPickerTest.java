@@ -34,6 +34,6 @@ public class NothingPickerTest
 	{
 		int element = 2;
 		NothingPicker picker = new NothingPicker();
-		noMoreElementThrow((NothingPicker) picker.shrink(element, new RandomFloat()));
+		noMoreElementThrow((NothingPicker) picker.shrink(element, new RandomFloat(), 1));
 	}
 }

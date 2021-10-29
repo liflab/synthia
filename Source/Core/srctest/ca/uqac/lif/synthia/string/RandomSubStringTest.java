@@ -94,7 +94,7 @@ public class RandomSubStringTest
 			smaller_string = random_substring.pick();
 		}
 
-		Shrinkable<String> relative_substring = random_substring.shrink(smaller_string, new RandomFloat());
+		Shrinkable<String> relative_substring = random_substring.shrink(smaller_string);
 		Assertions.assertTrue(relative_substring.getClass().getSimpleName().equals("RandomSubString"));
 
 		RandomSubString smaller_substring = (RandomSubString) relative_substring;
@@ -111,7 +111,7 @@ public class RandomSubStringTest
 	public void getNothingPicker()
 	{
 		RandomSubString random_substring = new RandomSubString("");
-		Shrinkable<String> relative_picker = random_substring.shrink(random_substring.pick(), new RandomFloat());
+		Shrinkable<String> relative_picker = random_substring.shrink(random_substring.pick());
 
 		Assertions.assertTrue(relative_picker.getClass().getSimpleName().equals("NothingPicker"));
 	}

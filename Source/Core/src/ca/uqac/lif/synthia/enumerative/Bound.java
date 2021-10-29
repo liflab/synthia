@@ -91,18 +91,18 @@ public class Bound<T> extends Mutator<T> implements Bounded<T>, Shrinkable<T>
 	
 	@SuppressWarnings("unchecked")
 	@Override
-	public Shrinkable<T> shrink(T o, Picker<Float> decision)
+	public Shrinkable<T> shrink(T o, Picker<Float> decision, float m)
 	{
 		if (!(m_picker instanceof Shrinkable))
 		{
 			throw new CannotShrinkException(m_picker);
 		}
-		return new Bound<T>(((Shrinkable<T>) m_picker).shrink(o, decision), m_length);
+		return new Bound<T>(((Shrinkable<T>) m_picker).shrink(o, decision, 1), m_length);
 	}
 
 	@Override
 	public Shrinkable<T> shrink(T o)
 	{
-		return shrink(o, RandomFloat.instance);
+		return shrink(o, RandomFloat.instance, 1);
 	}
 }

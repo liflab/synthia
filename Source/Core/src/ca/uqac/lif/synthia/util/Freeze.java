@@ -112,7 +112,7 @@ public class Freeze<T> implements Shrinkable<T>, ExplanationQueryable
 	}
 
 	@Override
-	public Shrinkable<T> shrink(T o, Picker<Float> decision)
+	public Shrinkable<T> shrink(T o, Picker<Float> decision, float m)
 	{
 		return new PickSmallerComparable<T>(this, o);
 	}
@@ -142,6 +142,6 @@ public class Freeze<T> implements Shrinkable<T>, ExplanationQueryable
 	@Override
 	public Shrinkable<T> shrink(T o)
 	{
-		return shrink(o, RandomFloat.instance);
+		return shrink(o, RandomFloat.instance, 1);
 	}
 }

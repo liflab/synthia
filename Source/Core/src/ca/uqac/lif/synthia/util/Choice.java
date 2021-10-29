@@ -234,7 +234,7 @@ public class Choice<T> implements Shrinkable<T>
 	}
 	
 	@Override
-	public Shrinkable<T> shrink(T o, Picker<Float> decision)
+	public Shrinkable<T> shrink(T o, Picker<Float> decision, float m)
 	{
 		return new PickSmallerComparable<T>(this, o);
 	}
@@ -242,6 +242,6 @@ public class Choice<T> implements Shrinkable<T>
 	@Override
 	public Shrinkable<T> shrink(T o)
 	{
-		return shrink(o, RandomFloat.instance);
+		return shrink(o, RandomFloat.instance, 1);
 	}
 }

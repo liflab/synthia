@@ -108,7 +108,7 @@ public class RandomBoolean extends RandomPicker<Boolean> implements Shrinkable<B
 	}
 
 	@Override
-	public Shrinkable<Boolean> shrink(Boolean o, Picker<Float> decision)
+	public Shrinkable<Boolean> shrink(Boolean o, Picker<Float> decision, float magnitude)
 	{
 		// We assume an ordering of Booleans where false < true
 		if (o)
@@ -121,6 +121,6 @@ public class RandomBoolean extends RandomPicker<Boolean> implements Shrinkable<B
 	@Override
 	public Shrinkable<Boolean> shrink(Boolean o)
 	{
-		return shrink(o, RandomFloat.instance);
+		return shrink(o, RandomFloat.instance, 1);
 	}
 }

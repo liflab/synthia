@@ -44,7 +44,7 @@ public class NothingPicker<T> implements Shrinkable<T>, ExplanationQueryable
 	}
 	
 	@Override
-	public NothingPicker<T> shrink(T o, Picker<Float> decision)
+	public NothingPicker<T> shrink(T o, Picker<Float> decision, float m)
 	{
 		return new NothingPicker<T>();
 	}
@@ -83,6 +83,6 @@ public class NothingPicker<T> implements Shrinkable<T>, ExplanationQueryable
 	@Override
 	public Shrinkable<T> shrink(T o)
 	{
-		return shrink(o, null);
+		return shrink(o, null, 1);
 	}
 }

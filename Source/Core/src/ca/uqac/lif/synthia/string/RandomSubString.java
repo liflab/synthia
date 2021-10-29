@@ -59,7 +59,7 @@ public class RandomSubString implements Shrinkable<String>, Seedable
 	 * @return The new instance of the class or a {@link NothingPicker}.
 	 */
 	@Override
-	public Shrinkable<String> shrink(String element, Picker<Float> decision)
+	public Shrinkable<String> shrink(String element, Picker<Float> decision, float magnitude)
 	{
 		if (element.isEmpty())
 		{
@@ -123,6 +123,6 @@ public class RandomSubString implements Shrinkable<String>, Seedable
 	@Override
 	public Shrinkable<String> shrink(String o)
 	{
-		return shrink(o, RandomFloat.instance);
+		return shrink(o, RandomFloat.instance, 1);
 	}
 }

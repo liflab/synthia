@@ -42,7 +42,7 @@ public class RandomSuffix extends RandomPrefix
 	}
 
 	@Override
-	public Shrinkable<String> shrink(String element, Picker<Float> decision)
+	public Shrinkable<String> shrink(String element, Picker<Float> decision, float magnitude)
 	{
 		if(element.isEmpty())
 		{

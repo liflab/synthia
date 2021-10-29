@@ -95,7 +95,7 @@ public class ComposeList<T> implements Picker<List<T>>, Shrinkable<List<T>>, Exp
 	{
 		int len = m_length.pick();
 		m_lengths.add(len);
-		List<T> list = new ArrayList<T>(len);
+		List<T> list = new ComparableList<T>();
 		for (int i = 0; i < len; i++)
 		{
 			list.add(m_elements.pick());
@@ -165,18 +165,18 @@ public class ComposeList<T> implements Picker<List<T>>, Shrinkable<List<T>>, Exp
 	}
 
 	@Override
-	public Shrinkable<List<T>> shrink(List<T> o, Picker<Float> decision)
+	public Shrinkable<List<T>> shrink(List<T> o, Picker<Float> decision, float magnitude)
 	{
 		if (!(m_elements instanceof Shrinkable) || !(m_length instanceof Shrinkable))
 		{
 			throw new CannotShrinkException("Inner pickers are not shrinkable");
 		}
-		return new ComposeShrunkList<T>((Shrinkable<T>) m_elements, (Shrinkable<Integer>) m_length, o, decision);
+		return new ComposeShrunkList<T>((Shrinkable<T>) m_elements, (Shrinkable<Integer>) m_length, o, decision, 1);
 	}
 
 	@Override
 	public Shrinkable<List<T>> shrink(List<T> o)
 	{
-		return shrink(o, RandomFloat.instance);
+		return shrink(o, RandomFloat.instance, 1);
 	}
 }

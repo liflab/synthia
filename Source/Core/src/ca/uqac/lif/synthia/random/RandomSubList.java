@@ -96,7 +96,7 @@ public class RandomSubList<T> implements Shrinkable<List<T>>
 				}
 				else
 				{
-					output_list.add(m_listReducer.shrink(m_element, new RandomFloat()).pick());
+					output_list.add(m_listReducer.shrink(m_element, new RandomFloat(), 1).pick());
 				}
 			}
 		}
@@ -126,7 +126,7 @@ public class RandomSubList<T> implements Shrinkable<List<T>>
 	 * {@link ca.uqac.lif.synthia.NoMoreElementException}'s.
 	 */
 	@Override 
-	public Shrinkable<List<T>> shrink(List<T> element, Picker<Float> decision)
+	public Shrinkable<List<T>> shrink(List<T> element, Picker<Float> decision, float magnitude)
 	{
 		if (!element.getClass().getSimpleName().equals("ArrayList"))
 		{
@@ -149,6 +149,6 @@ public class RandomSubList<T> implements Shrinkable<List<T>>
 	@Override
 	public Shrinkable<List<T>> shrink(List<T> o)
 	{
-		return shrink(o, RandomFloat.instance);
+		return shrink(o, RandomFloat.instance, 1);
 	}
 }

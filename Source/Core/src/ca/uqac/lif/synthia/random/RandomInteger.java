@@ -130,7 +130,7 @@ public class RandomInteger extends RandomPicker<Integer> implements Shrinkable<I
 	}
 	
 	@Override
-	public Shrinkable<Integer> shrink(Integer element, Picker<Float> decision)
+	public Shrinkable<Integer> shrink(Integer element, Picker<Float> decision, float magnitude)
 	{
 		if(element <= m_min)
 		{
@@ -138,7 +138,13 @@ public class RandomInteger extends RandomPicker<Integer> implements Shrinkable<I
 		}
 		else
 		{
-			return new RandomInteger(m_min, element, m_seed, m_random.Duplicate());
+			
+			int new_bound = (int) (element * magnitude);
+			if (new_bound <= m_min)
+			{
+				new_bound = m_min + 1;				
+			}
+			return new RandomInteger(m_min, new_bound, m_seed, m_random.Duplicate());
 		}
 	}
 	
@@ -152,6 +158,6 @@ public class RandomInteger extends RandomPicker<Integer> implements Shrinkable<I
 	@Override
 	public Shrinkable<Integer> shrink(Integer o)
 	{
-		return shrink(o, RandomFloat.instance);
+		return shrink(o, RandomFloat.instance, 1);
 	}
 }

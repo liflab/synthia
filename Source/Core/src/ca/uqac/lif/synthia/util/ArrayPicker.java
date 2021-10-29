@@ -64,7 +64,7 @@ public class ArrayPicker extends CompositePicker<Object[]> implements Shrinkable
 
 	@SuppressWarnings({ "rawtypes", "unchecked" })
 	@Override
-	public ArrayPicker shrink(Object[] o, Picker<Float> decision)
+	public ArrayPicker shrink(Object[] o, Picker<Float> decision, float magnitude)
 	{
 		Picker[] shrunk_pickers = new Picker[m_pickers.length];
 		for (int i = 0; i < m_pickers.length; i++)
@@ -73,7 +73,7 @@ public class ArrayPicker extends CompositePicker<Object[]> implements Shrinkable
 			{
 				throw new CannotShrinkException(m_pickers[i]);
 			}
-			shrunk_pickers[i] = ((Shrinkable<Object>) m_pickers[i]).shrink(o[i], decision);
+			shrunk_pickers[i] = ((Shrinkable<Object>) m_pickers[i]).shrink(o[i], decision, 1);
 		}
 		return new ArrayPicker(shrunk_pickers);
 	}
@@ -81,6 +81,6 @@ public class ArrayPicker extends CompositePicker<Object[]> implements Shrinkable
 	@Override
 	public ArrayPicker shrink(Object[] o)
 	{
-		return shrink(o, RandomFloat.instance);
+		return shrink(o, RandomFloat.instance, 1);
 	}
 }
