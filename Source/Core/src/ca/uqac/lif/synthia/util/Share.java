@@ -31,6 +31,7 @@ import ca.uqac.lif.synthia.exception.NoMoreElementException;
  * picker instance.
  *
  * @param <T> The type of the elements to pick
+ * @ingroup API
  */
 public class Share<T>
 {

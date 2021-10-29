@@ -22,6 +22,17 @@ import ca.uqac.lif.synthia.Picker;
 import ca.uqac.lif.synthia.Shrinkable;
 import ca.uqac.lif.synthia.exception.PickerException;
 
+/**
+ * A variant of {@link PickIf} that selects an element if it is smaller than
+ * a reference object. In order for the "smaller" condition to be evaluated,
+ * the objects that are manipulated must implement the {@link Comparable}
+ * interface.
+ *   
+ * @author Sylvain Hallé
+ *
+ * @param <T> The type of objects manipulated by this picker
+ * @ingroup API
+ */
 public class PickSmallerComparable<T> extends PickIf<T> implements Shrinkable<T>
 {
 	/**
@@ -29,6 +40,11 @@ public class PickSmallerComparable<T> extends PickIf<T> implements Shrinkable<T>
 	 */
 	protected Comparable<T> m_reference;
 	
+	/**
+	 * Creates a new instance of the picker.
+	 * @param source The source of objects
+	 * @param o The reference object that candidate values are compared to
+	 */
 	@SuppressWarnings("unchecked")
 	public PickSmallerComparable(Picker<? extends T> source, T o)
 	{

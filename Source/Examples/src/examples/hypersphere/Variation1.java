@@ -35,6 +35,8 @@ import ca.uqac.lif.synthia.vector.HyperspherePicker;
  * point lies at any angle between 0 and 2&pi; on the circle of radius 1 or 2.
  * The two plots at the bottom represent the possible values one could
  * obtain by starting from a different random seed.
+ * 
+ * @ingroup Examples
  */
 public class Variation1 
 {

@@ -24,6 +24,7 @@ import ca.uqac.lif.synthia.exception.CannotShrinkException;
 
 /**
  * Picker that merges the result of other pickers into an array.
+ * @ingroup API
  */
 public class ArrayPicker extends CompositePicker<Object[]> implements Shrinkable<Object[]>
 {

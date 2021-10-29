@@ -9,6 +9,13 @@ import ca.uqac.lif.synthia.replay.Playback;
 import java.util.ArrayList;
 import java.util.List;
 
+/**
+ * 
+ * @author Marc-Antoine Plourde
+ *
+ * @param <T>
+ * @ingroup API
+ */
 public class AllElements<T> extends Playback<T> implements Bounded<T>, Seedable
 {
 

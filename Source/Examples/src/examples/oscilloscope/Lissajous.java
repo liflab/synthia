@@ -66,6 +66,8 @@ import ca.uqac.lif.synthia.vector.PrismPicker;
  * <p><strong>Caution:</strong> pay attention when entering ratios such as 4/3;
  * you must make sure they are interpreted as a {@link double}; hence you must
  * write <tt>4d/3</tt> (the <tt>d</tt> forces a cast to <tt>double</tt>).
+ * 
+ * @ingroup Examples
  */
 public class Lissajous
 {

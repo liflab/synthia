@@ -1,5 +1,8 @@
 package examples.hypersphere;
 
+/**
+ * @ingroup Examples
+ */
 public class Variations
 {
 	public static String printPoint(float[] p)

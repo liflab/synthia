@@ -48,6 +48,8 @@ import ca.uqac.lif.synthia.vector.PrismPicker;
  * As one can see, the frequency of the signal does not change, but its
  * amplitude does; this corresponds to the varying height of each cycle of the
  * carrier.
+ * 
+ * @ingroup Examples
  */
 public class AMRadio
 {

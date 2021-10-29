@@ -2,6 +2,7 @@ package ca.uqac.lif.synthia.exception;
 
 /**
  * An exception to throw when a picker can't pick an other element.
+ * @ingroup API
  */
 public class NoMoreElementException extends PickerException
 {

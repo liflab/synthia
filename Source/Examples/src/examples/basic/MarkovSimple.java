@@ -1,3 +1,6 @@
+/**
+ * @ingroup Examples
+ */
 package examples.basic;
 
 import ca.uqac.lif.synthia.random.RandomFloat;

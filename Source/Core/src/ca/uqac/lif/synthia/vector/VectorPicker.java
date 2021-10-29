@@ -23,6 +23,8 @@ import ca.uqac.lif.synthia.Picker;
 /**
  * Interface for pickers that generate arrays of floating-point
  * numbers.
+ * 
+ * @ingroup API
  */
 public interface VectorPicker extends Picker<float[]>
 {

@@ -36,6 +36,8 @@ package ca.uqac.lif.synthia.random;
  * algorithm described by
  * <a href="https://www.johndcook.com/blog/2010/06/14/generating-poisson-random-values/">John
  * D. Cook</a>.
+ * 
+ * @ingroup API
  */
 public class PoissonInteger extends RandomPicker<Integer>
 {

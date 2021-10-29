@@ -4,6 +4,7 @@ import ca.uqac.lif.synthia.Picker;
 
 /**
  * An exception to throw when a picker can't pick an other element.
+ * @ingroup API
  */
 public class CannotShrinkException extends PickerException
 {

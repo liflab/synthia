@@ -34,6 +34,8 @@ import ca.uqac.lif.synthia.vector.HyperspherePicker;
  * The angle for each point is fixed to 3&pi;/2, and the radius is picked
  * according to a normal distribution, resulting in points clustered close to
  * the origin.
+ * 
+ * @ingroup Examples
  */
 public class Variation4 
 {

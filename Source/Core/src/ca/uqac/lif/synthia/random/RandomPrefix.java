@@ -9,6 +9,8 @@ import ca.uqac.lif.synthia.relative.NothingPicker;
  * Like {@link RandomSubString}, but this time, the {@link Picker} returns a prefix of the original
  * strings of randomly selected length. The {@link RandomSubString#m_charSelect} is replaced by a
  * {@link RandomInteger}.
+ * 
+ * @ingroup API
  */
 public class RandomPrefix implements Shrinkable<String>, Seedable
 {

@@ -40,6 +40,7 @@ import ca.uqac.lif.synthia.Picker;
  * from a set of choices to apply to each object.
  * 
  * @param <T> The type of the objects transformed by this picker
+ * @ingroup API
  */
 public class Mutate<T> extends Mutator<T>
 {

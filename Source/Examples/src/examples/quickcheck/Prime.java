@@ -2,6 +2,11 @@ package examples.quickcheck;
 
 import ca.uqac.lif.synthia.random.RandomInteger;
 
+/**
+ * @ingroup Examples
+ * @author sylvain
+ *
+ */
 public class Prime
 {
 	public static void main(String[] args)

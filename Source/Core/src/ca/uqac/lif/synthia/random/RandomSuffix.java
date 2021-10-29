@@ -23,6 +23,8 @@ import ca.uqac.lif.synthia.relative.NothingPicker;
 
 /**
  * Just like {@link RandomPrefix} but for suffixes.
+ * @author Marc-Antoine Plourde
+ * @ingroup API
  */
 public class RandomSuffix extends RandomPrefix
 {

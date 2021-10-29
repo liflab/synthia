@@ -28,6 +28,7 @@ import ca.uqac.lif.synthia.util.Constant;
 
 /**
  * Return the value picked by a picker a defined number of times.
+ * @ingroup API
  */
 public class Bound<T> extends Mutator<T> implements Bounded<T>, Shrinkable<T>
 {

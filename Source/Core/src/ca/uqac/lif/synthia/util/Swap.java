@@ -29,6 +29,7 @@ import ca.uqac.lif.synthia.Picker;
  * Mutator that receives a list and selects two elements to be swapped.
  *
  * @param <T> The type of elements in the list
+ * @ingroup API
  */
 public class Swap<T> extends Mutator<List<T>>
 {

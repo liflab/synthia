@@ -41,7 +41,8 @@ import ca.uqac.lif.synthia.relative.PickSmallerComparable;
  * float f3 = f.pick(); // 0.8104950 again
  * ...
  * </pre>
- * @param <T> The type of object to pick
+ * @param <T> The type of objects to pick
+ * @ingroup API
  */
 public class Freeze<T> implements Shrinkable<T>, ExplanationQueryable
 {

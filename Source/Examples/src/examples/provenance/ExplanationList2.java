@@ -48,6 +48,8 @@ import examples.util.Utilities;
  * {@link ComposeList}. Given that the picker produces the list
  * [[1,-1],[<b><u>2</u></b>,1],[3,0],[4,-1]], this corresponds to asking the
  * provenance of number 2 (in bold).
+ * 
+ * @ingroup Examples
  */
 public class ExplanationList2
 {

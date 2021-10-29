@@ -35,6 +35,8 @@ import ca.uqac.lif.synthia.vector.HyperspherePicker;
  * fixed amount of &pi;/6. On its side, the starting angle is randomly selected
  * between four values, and each successive angle is incremented by a fixed
  * amount of &pi;/6. This results in a spiral pattern with slight variations.
+ * 
+ * @ingroup Examples
  */
 public class Variation3 
 {

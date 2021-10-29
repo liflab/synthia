@@ -70,6 +70,7 @@ import java.util.stream.StreamSupport;
  *
  * @author  Frank Yellin
  * @since   1.0
+ * @ingroup API
  */
 public class Random {
 	/** use serialVersionUID from JDK 1.1 for interoperability */

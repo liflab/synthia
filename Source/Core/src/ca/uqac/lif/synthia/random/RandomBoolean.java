@@ -27,6 +27,8 @@ import ca.uqac.lif.synthia.util.Constant;
  * Picks a Boolean value. This class actually implements a Bernoulli
  * trial, with the possibility of setting the probability of success
  * <i>p</i>.
+ * 
+ * @ingroup API
  */
 public class RandomBoolean extends RandomPicker<Boolean> implements Shrinkable<Boolean>
 {

@@ -33,6 +33,7 @@ import ca.uqac.lif.synthia.exception.CannotShrinkException;
  * {@link AffineTransformInteger} and {@link AffineTransformFloat}.
  * @param <T> The type of number produced (i.e. <tt>Float</tt>,
  * <tt>Integer</tt>, etc.)
+ * @ingroup API
  */
 public abstract class AffineTransform<T extends Number> extends Mutator<T> implements Shrinkable<T>
 {

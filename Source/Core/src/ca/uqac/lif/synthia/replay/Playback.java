@@ -50,6 +50,7 @@ import ca.uqac.lif.synthia.Shrinkable;
  * sequence if more values are requested and the <tt>loop</tt> parameter is
  * set to false.
  * @param <T> The type of objects to return
+ * @ingroup API
  */
 public class Playback<T> implements Bounded<T>, Shrinkable<T>, ExplanationQueryable
 {

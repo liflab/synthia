@@ -21,5 +21,6 @@
  * A series of simple examples showing how the same {@link HyperspherePicker}
  * can produce points following different patterns depending on the composition
  * of pickers given as its input arguments.
+ * @ingroup Examples
  */
 package examples.hypersphere;

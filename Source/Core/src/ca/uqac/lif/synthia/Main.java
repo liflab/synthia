@@ -21,6 +21,7 @@ package ca.uqac.lif.synthia;
 /**
  * Dummy main file. This file, when run, only displays a message
  * on the console.
+ * @ingroup API
  */
 public class Main
 {

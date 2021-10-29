@@ -30,6 +30,7 @@ import ca.uqac.lif.petitpoucet.function.vector.NthElement;
 /**
  * A {@link Part} pointing to the n-th output produced by a picker since its
  * last call to {@link Picker#reset() reset()}.
+ * @ingroup API
  */
 public class NthSuccessiveOutput implements Part
 {

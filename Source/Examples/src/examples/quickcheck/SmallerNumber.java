@@ -2,6 +2,12 @@ package examples.quickcheck;
 
 import java.util.Comparator;
 
+/**
+ * @ingroup Examples
+ * @author sylvain
+ *
+ * @param <T>
+ */
 public class SmallerNumber<T extends Number> implements Comparator<T>
 {
 	public static final transient SmallerNumber<Integer> instance = new SmallerNumber<Integer>();

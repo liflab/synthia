@@ -43,6 +43,7 @@ import ca.uqac.lif.synthia.util.Once;
  * @param <T> The type of objects returned by the behavior tree. The pickers
  * associated to each leaf node must return objects of type <tt>T</tt> or its
  * descendants.
+ * @ingroup API
  */
 public abstract class BehaviorTree<T> implements Picker<T> 
 {

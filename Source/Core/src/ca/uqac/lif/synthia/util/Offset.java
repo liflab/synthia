@@ -24,6 +24,7 @@ import ca.uqac.lif.synthia.Picker;
 /**
  * Takes the numerical value of a picker, and offsets it by an amount
  * determined by another picker.
+ * @ingroup API
  */
 public class Offset extends Mutator<Number>
 {

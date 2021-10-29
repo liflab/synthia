@@ -8,6 +8,7 @@ import java.util.List;
  *
  * @param <T> The type of the elements of the list.
  * @author Marc-Antoine Plourde
+ * @ingroup API
  */
 public class ComparableList<T> extends ArrayList<T> implements Comparable<ArrayList<T>>
 {

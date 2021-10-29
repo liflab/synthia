@@ -76,6 +76,8 @@ import examples.util.Utilities;
  * In the source code, one can change the value of the seed given to the
  * {@link RandomInteger} <tt>r_int</tt> until this alternate graph is obtained
  * instead of the first one.
+ * 
+ * @ingroup Examples
  */
 public class ExplanationList1
 {

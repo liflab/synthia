@@ -40,6 +40,8 @@ import javax.swing.JPanel;
  * example of the display produced by the oscilloscope is:
  * <p>
  * <img src="{@docRoot}/doc-files/oscilloscope/Lissajous_r_6_5_p_pi_4.png" alt="Oscilloscope window" />
+ * 
+ * @ingroup Examples
  */
 public class Oscilloscope extends JFrame
 {

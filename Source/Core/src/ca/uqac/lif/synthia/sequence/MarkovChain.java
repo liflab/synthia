@@ -42,6 +42,7 @@ import ca.uqac.lif.synthia.exception.PickerException;
  * @param <T> The type of objects returned by the Markov chain. The pickers
  * associated to each state must return objects of type <tt>T</tt> or its
  * descendants.
+ * @ingroup API
  */
 public class MarkovChain<T> implements Picker<T> 
 {

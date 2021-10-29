@@ -38,6 +38,7 @@ import ca.uqac.lif.synthia.relative.PickSmallerComparable;
  * When adding elements, one must make sure that the sum of probabilities
  * is equal to 1.
  * @param <T> The type of the object to pick
+ * @ingroup API
  */
 public class Choice<T> implements Shrinkable<T>
 {

@@ -1,3 +1,6 @@
+/**
+ * @ingroup Examples
+ */
 package examples.apache;
 
 import ca.uqac.lif.synthia.replay.Playback;

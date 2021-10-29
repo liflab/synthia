@@ -1,3 +1,6 @@
+/**
+ * @ingroup Examples
+ */
 package examples.apache;
 
 import java.text.DateFormat;

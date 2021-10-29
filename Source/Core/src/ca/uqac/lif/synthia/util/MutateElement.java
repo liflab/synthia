@@ -29,6 +29,7 @@ import ca.uqac.lif.synthia.Picker;
  * on this element.
  *
  * @param <T> The type of the elements in the list
+ * @ingroup API
  */
 public class MutateElement<T> extends Mutator<List<T>>
 {

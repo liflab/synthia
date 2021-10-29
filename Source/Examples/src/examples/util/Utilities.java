@@ -25,6 +25,7 @@ import java.util.Collection;
 /**
  * Object providing a few utility methods to simplify the examples in this
  * project.
+ * @ingroup Examples
  */
 public class Utilities
 {

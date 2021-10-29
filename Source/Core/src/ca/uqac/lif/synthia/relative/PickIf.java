@@ -34,6 +34,7 @@ import ca.uqac.lif.synthia.exception.GiveUpException;
  * Returns object from a picker satisfying a condition.
  *
  * @param <T> The object type returned by the picker.
+ * @ingroup API
  */
 public class PickIf<T> extends Mutator<T> implements ExplanationQueryable
 {

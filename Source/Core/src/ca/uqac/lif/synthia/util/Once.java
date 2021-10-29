@@ -41,6 +41,7 @@ import ca.uqac.lif.synthia.Picker;
  * non-null object on its next call to {@link #pick()}.
  * 
  * @param <T> The type of object to pick
+ * @ingroup API
  */
 public class Once<T> implements Picker<T>
 {

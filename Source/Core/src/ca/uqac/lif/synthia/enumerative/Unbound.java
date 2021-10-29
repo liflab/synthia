@@ -6,6 +6,13 @@ import java.util.List;
 import ca.uqac.lif.synthia.Picker;
 import ca.uqac.lif.synthia.exception.NoMoreElementException;
 
+/**
+ * 
+ * @author Sylvain Hallé
+ *
+ * @param <T>
+ * @ingroup API
+ */
 public class Unbound<T> implements Picker<T>
 {
 	/*@ non_null @*/ protected Picker<T> m_source;

@@ -34,5 +34,7 @@
  * it is possible to demonstrate the principles of {@linkplain AMRadio
  * amplitude modulation} and {@linkplain FMRadio frequency modulation}.
  * </ul>
+ * 
+ * @ingroup Examples
  */
 package examples.oscilloscope;

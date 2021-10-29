@@ -16,6 +16,7 @@ import ca.uqac.lif.synthia.Bounded;
  * </ol>
  * After that, the picker will throw a {@link NoMoreElementException} if the pick method is called
  * one more time.
+ * @ingroup API
  */
 public class AllPickers implements Bounded<Object[]>
 {

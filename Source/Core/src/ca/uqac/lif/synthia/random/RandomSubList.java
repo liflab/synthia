@@ -7,13 +7,11 @@ import ca.uqac.lif.synthia.relative.NothingPicker;
 import java.util.ArrayList;
 import java.util.List;
 
-
-
-
 /**
  * An equivalent of {@link RandomSubString} but for lists.
  *
  * @param <T> The type of the list used by the {@link Picker}.
+ * @ingroup API
  */
 public class RandomSubList<T> implements Shrinkable<List<T>>
 {

@@ -7,6 +7,12 @@ import ca.uqac.lif.synthia.Shrinkable;
 import ca.uqac.lif.synthia.exception.GiveUpException;
 import ca.uqac.lif.synthia.exception.NoMoreElementException;
 
+/**
+ * @ingroup Examples
+ * @author sylvain
+ *
+ * @param <T>
+ */
 public class Assert<T>
 {
 	protected static final int MAX_TRIES = 1000;

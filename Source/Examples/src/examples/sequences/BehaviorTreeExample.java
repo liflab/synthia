@@ -12,8 +12,8 @@ import ca.uqac.lif.synthia.sequence.BehaviorTree.Sequence;
  * picture:
  * <p>
  * <img src="{@docRoot}/doc-files/Tree.png" alt="Tree">
- * @author sylvain
- *
+ * @author Sylvain Hallé
+ * @ingroup Examples
  */
 public class BehaviorTreeExample
 {

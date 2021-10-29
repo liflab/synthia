@@ -21,6 +21,7 @@ package ca.uqac.lif.synthia;
 /**
  * Picker for an integer from 0 to a fixed bound.
  * @author Sylvain Hallé
+ * @ingroup API
  */
 public interface IndexPicker extends Picker<Integer>
 {

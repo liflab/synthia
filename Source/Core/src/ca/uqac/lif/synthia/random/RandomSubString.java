@@ -5,10 +5,10 @@ import ca.uqac.lif.synthia.Seedable;
 import ca.uqac.lif.synthia.Shrinkable;
 import ca.uqac.lif.synthia.relative.NothingPicker;
 
-
-
 /**
- * {@link RandomPicker} who produces random substrings from an original one.
+ * {@link RandomPicker} that produces random substrings from an original one.
+ * @author Marc-Antoine Plourde
+ * @ingroup API
  */
 public class RandomSubString implements Shrinkable<String>, Seedable
 {

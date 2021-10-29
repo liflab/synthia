@@ -14,7 +14,11 @@ import ca.uqac.lif.synthia.util.StringPattern;
 import ca.uqac.lif.synthia.util.Tick;
 import examples.basic.IpAddressProvider;;
 
-public class Inter {
+/**
+ * @ingroup Examples
+ */
+public class Inter 
+{
 
 	public static void main(String[] args) 
 	{

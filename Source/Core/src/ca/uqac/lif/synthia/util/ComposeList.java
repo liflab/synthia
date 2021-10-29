@@ -30,6 +30,13 @@ import ca.uqac.lif.petitpoucet.function.vector.NthElement;
 import ca.uqac.lif.synthia.NthSuccessiveOutput;
 import ca.uqac.lif.synthia.Picker;
 
+/**
+ * 
+ * @author Sylvain Hallé
+ *
+ * @param <T>
+ * @ingroup API
+ */
 public class ComposeList<T> implements Picker<List<T>>, ExplanationQueryable
 {
 	/**

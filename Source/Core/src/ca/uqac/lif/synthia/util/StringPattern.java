@@ -34,6 +34,7 @@ import ca.uqac.lif.synthia.relative.PickSmallerComparable;
  * String s1 = pat.pick(); // "FhTuN is equal to false"
  * String s2 = pat.pick(); // "aGhRe is equal to true"
  * ...</pre>
+ * @ingroup API
  */
 public class StringPattern extends CompositePicker<String> implements Shrinkable<String>
 {	

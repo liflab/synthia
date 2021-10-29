@@ -22,6 +22,8 @@ import ca.uqac.lif.synthia.Picker;
 
 /**
  * A signal picker that is characterized by an amplitude and a phase.
+ * @author Sylvain Hallé
+ * @ingroup API
  */
 public abstract class PeriodicSignal implements Picker<Number>
 {

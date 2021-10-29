@@ -23,7 +23,9 @@ import ca.uqac.lif.synthia.random.generators.Random;
 import ca.uqac.lif.synthia.relative.NothingPicker;
 
 /**
- * Picks a floating point number uniformly in an interval
+ * Picks a floating point number uniformly in an interval.
+ * 
+ * @ingroup API
  */
 public class RandomFloat extends RandomPicker<Float> implements Shrinkable<Float>
 {

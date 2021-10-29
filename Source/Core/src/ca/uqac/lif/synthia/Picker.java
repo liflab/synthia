@@ -31,6 +31,7 @@ package ca.uqac.lif.synthia;
  * in the same state as the picker it is copied from.</li>
  * </ul>
  * @param <T> The type of object that the picker picks
+ * @ingroup API
  */
 public interface Picker<T>
 {

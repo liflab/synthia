@@ -6,6 +6,7 @@ import ca.uqac.lif.synthia.relative.PickIf;
 
 /**
  * A utility picker to calculate the discard ratio of a {@link PickIf} picker.
+ * @ingroup API
  */
 public class DiscardRatio implements Picker<Float>
 {

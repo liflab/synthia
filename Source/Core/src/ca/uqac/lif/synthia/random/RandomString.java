@@ -28,7 +28,9 @@ import java.util.ArrayList;
 import java.util.List;
 
 /**
- * Generates a random characters string.
+ * Generates a random character string.
+ * 
+ * @ingroup API
  */
 public class RandomString implements Shrinkable<String>, Seedable
 {

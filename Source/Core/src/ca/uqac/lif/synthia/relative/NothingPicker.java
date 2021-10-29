@@ -31,6 +31,7 @@ import ca.uqac.lif.synthia.exception.NoMoreElementException;
  * when the {@link #pick()} method is called.
  *
  * @param <T> The type of the picker (but not really important here).
+ * @ingroup API
  */
 public class NothingPicker<T> implements Shrinkable<T>, ExplanationQueryable
 {

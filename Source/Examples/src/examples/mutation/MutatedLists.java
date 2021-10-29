@@ -88,6 +88,8 @@ import ca.uqac.lif.synthia.util.Tick;
  * <p>
  * Note that although the diagram looks complex, the part of the program
  * that builds the wiring of pickers only contains 13 lines.
+ * 
+ * @ingroup Examples
  */
 public class MutatedLists
 {

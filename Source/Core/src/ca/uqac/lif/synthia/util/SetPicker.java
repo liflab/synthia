@@ -25,6 +25,7 @@ import java.util.Set;
 
 /**
  * Picker that merges the result of other pickers into a set.
+ * @ingroup API
  */
 public class SetPicker extends CompositePicker<Set<Object>>
 {

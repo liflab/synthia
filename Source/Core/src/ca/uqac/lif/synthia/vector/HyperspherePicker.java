@@ -21,7 +21,6 @@ package ca.uqac.lif.synthia.vector;
 import ca.uqac.lif.synthia.Picker;
 import ca.uqac.lif.synthia.util.Constant;
 
-//liste une vecteur avec un certain angle suivant une sphère de n dimensions
 /**
  * Generates <i>n</i>-dimensional vectors with a given modulus. This
  * picker does so by taking a positive value <i>r</i> and <i>n</i>-1 pickers
@@ -36,6 +35,8 @@ import ca.uqac.lif.synthia.util.Constant;
  * The end result is that this picker generates vectors corresponding
  * to points that lie on the surface of an <i>n</i>-dimensional
  * hypersphere of some radius <i>r</i>.
+ * 
+ * @ingroup API
  *
  */
 public class HyperspherePicker implements VectorPicker

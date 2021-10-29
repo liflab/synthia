@@ -26,6 +26,7 @@ import ca.uqac.lif.synthia.Picker;
 
 /**
  * Picker that merges the result of other pickers into a list.
+ * @ingroup API
  */
 public class ListPicker extends CompositePicker<List<Object>>
 {

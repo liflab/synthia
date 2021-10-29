@@ -26,6 +26,7 @@ import ca.uqac.lif.petitpoucet.PartNode;
  * A picker that applies a transformation ("mutation") on the value produced by
  * another picker.
  * @param <T> The type of the objects produced by the picker
+ * @ingroup API
  */
 public abstract class Mutator<T> implements Picker<T>
 {

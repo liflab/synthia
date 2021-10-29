@@ -1,5 +1,12 @@
 package ca.uqac.lif.synthia;
 
+/**
+ * 
+ * @author Sylvain Hallé
+ *
+ * @param <T>
+ * @ingroup API
+ */
 public class Replace<T> extends Mutator<T>
 {
 	protected Picker<? extends T> m_replacement;

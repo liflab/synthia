@@ -10,6 +10,11 @@ import ca.uqac.lif.synthia.tree.TreeRenderer;
 import ca.uqac.lif.synthia.util.Constant;
 import ca.uqac.lif.synthia.util.Choice;
 
+/**
+ * 
+ * @author Sylvain Hallé
+ * @ingroup Examples
+ */
 public class PickTrees1 
 {
 

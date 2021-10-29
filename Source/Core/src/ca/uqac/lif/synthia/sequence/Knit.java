@@ -46,6 +46,7 @@ import ca.uqac.lif.synthia.exception.NoMoreElementException;
  * @author Sylvain Hallé
  *
  * @param <T> The type of the objects to produce
+ * @ingroup API
  */
 public class Knit<T> implements Picker<T>
 {

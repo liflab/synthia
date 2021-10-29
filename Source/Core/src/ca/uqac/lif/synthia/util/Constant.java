@@ -31,6 +31,7 @@ import ca.uqac.lif.synthia.relative.NothingPicker;
  * String s2 = c.pick(); // "foo"
  * ...
  * </pre>
+ * @ingroup API
  */
 public class Constant<T> implements Shrinkable<T>
 {

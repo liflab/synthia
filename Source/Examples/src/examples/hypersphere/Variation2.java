@@ -35,6 +35,8 @@ import ca.uqac.lif.synthia.vector.HyperspherePicker;
  * randomly selected among four values lying at intervals of &pi;/2. As a
  * result, different seeds will produce sets of points lying at a different
  * distance from the origin, but the same distance for each picker instance.
+ * 
+ * @ingroup Examples
  */
 public class Variation2 
 {

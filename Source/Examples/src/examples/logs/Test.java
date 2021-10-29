@@ -1,7 +1,5 @@
 package examples.logs;
 
-import java.util.Random;
-
 import ca.uqac.lif.synthia.random.RandomFloat;
 import ca.uqac.lif.synthia.random.RandomInteger;
 import ca.uqac.lif.synthia.random.RandomString;
@@ -12,6 +10,9 @@ import ca.uqac.lif.synthia.util.StringPattern;
 import ca.uqac.lif.synthia.util.Tick;
 import examples.basic.IpAddressProvider;
 
+/**
+ * @ingroup Examples
+ */
 public class Test 
 {
 	public static void main(String[] args)

@@ -7,7 +7,8 @@ import ca.uqac.lif.synthia.exception.NoMoreElementException;
  * Picker who implements EnumerativePicker. This picker enumerates the boolean value
  * (<Boolean>false</Boolean>, <Boolean>true</Boolean>) and throws a
  * {@link NoMoreElementException} if the picker picks another value after
- * the picker has finished to enumerates the boolean values.
+ * the picker has finished to enumerate the Boolean values.
+ * @ingroup API
  */
 public class AllBooleans implements Bounded<Boolean>
 {

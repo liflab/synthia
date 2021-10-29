@@ -34,6 +34,8 @@ import ca.uqac.lif.synthia.Seedable;
  * of values as when it was first created.
  *
  * @param <T> The type of object to pick
+ * 
+ * @ingroup API
  */
 public abstract class RandomPicker<T> implements Picker<T>, Seedable, ExplanationQueryable
 {

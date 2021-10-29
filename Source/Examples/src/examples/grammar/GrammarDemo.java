@@ -1,3 +1,6 @@
+/**
+ * @ingroup Examples
+ */
 package examples.grammar;
 
 import ca.uqac.lif.bullwinkle.BnfParser;

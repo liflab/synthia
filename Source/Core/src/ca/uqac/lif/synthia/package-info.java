@@ -1,6 +1,6 @@
 /*
     Synthia, a data structure generator
-    Copyright (C) 2019-2020 Laboratoire d'informatique formelle
+    Copyright (C) 2019-2021 Laboratoire d'informatique formelle
     Université du Québec à Chicoutimi, Canada
 
     This program is free software: you can redistribute it and/or modify
@@ -16,35 +16,8 @@
     You should have received a copy of the GNU Lesser General Public License
     along with this program.  If not, see <http://www.gnu.org/licenses/>.
  */
-package ca.uqac.lif.synthia.random;
-
-import ca.uqac.lif.synthia.Picker;
 
 /**
- * Produces a {@link float} picked from a Gaussian probability distribution.
- * @author Sylvain Hallé
- * @ingroup API
+ * @defgroup API API Documentation
  */
-public class GaussianFloat extends RandomPicker<Float>
-{
-	@Override
-	public Float pick() 
-	{
-		return ((Double) m_random.nextGaussian()).floatValue();
-	}
-
-	@Override
-	public Picker<Float> duplicate(boolean with_state) 
-	{
-		GaussianFloat gf = new GaussianFloat();
-		gf.m_seed = m_seed;
-		gf.m_random = this.m_random.Duplicate();
-
-		if (!with_state)
-		{
-			gf.reset();
-		}
-		return gf;
-	}
-
-}
+package ca.uqac.lif.synthia;

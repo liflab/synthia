@@ -28,6 +28,7 @@ import ca.uqac.lif.synthia.Picker;
  * Mutator that receives a list and selects an element to delete from it.
  *
  * @param <T> The type of elements in the list
+ * @ingroup API
  */
 public class DeleteElement<T> extends Mutator<List<T>>
 {

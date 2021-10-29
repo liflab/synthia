@@ -22,6 +22,16 @@ import java.util.Comparator;
 
 import ca.uqac.lif.synthia.Picker;
 
+/**
+ * A variant of {@link PickIf} that selects an element if it is smaller than
+ * a reference object. In order for the "smaller" condition to be evaluated,
+ * the picker must be passed an instance of {@link Comparator}.
+ *   
+ * @author Sylvain Hallé
+ *
+ * @param <T> The type of objects manipulated by this picker
+ * @ingroup API
+ */
 public class PickSmallerComparator<T> extends PickIf<T>
 {
 	/**
@@ -34,6 +44,12 @@ public class PickSmallerComparator<T> extends PickIf<T>
 	 */
 	protected T m_reference;
 	
+	/**
+	 * Creates a new instance of the picker.
+	 * @param source The source of objects
+	 * @param o The reference object that candidate values are compared to
+	 * @param c The comparator used to compare the reference to candidate values
+	 */
 	public PickSmallerComparator(Picker<? extends T> source, T o, Comparator<T> c)
 	{
 		super(source);

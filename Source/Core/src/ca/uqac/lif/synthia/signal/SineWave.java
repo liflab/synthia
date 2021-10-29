@@ -20,6 +20,11 @@ package ca.uqac.lif.synthia.signal;
 
 import ca.uqac.lif.synthia.Picker;
 
+/**
+ * A periodic signal picker producing a sine wave.
+ * @author Sylvain Hallé
+ * @ingroup API
+ */
 public class SineWave extends PeriodicSignal
 {
 	public SineWave(/*@ non_null @*/ Picker<? extends Number> amplitude, /*@ non_null @*/ Picker<? extends Number> frequency, /*@ non_null @*/ Picker<? extends Number> phase)
