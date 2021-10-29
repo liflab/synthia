@@ -1,6 +1,8 @@
 package ca.uqac.lif.synthia.relative;
 
-import ca.uqac.lif.synthia.exception.NoMoreElementException;
+import ca.uqac.lif.synthia.NoMoreElementException;
+import ca.uqac.lif.synthia.util.NothingPicker;
+
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.function.Executable;
 

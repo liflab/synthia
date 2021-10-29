@@ -1,7 +1,7 @@
 package ca.uqac.lif.synthia.util;
 
-import ca.uqac.lif.synthia.exception.GiveUpException;
-import ca.uqac.lif.synthia.exception.NoMoreElementException;
+import ca.uqac.lif.synthia.GiveUpException;
+import ca.uqac.lif.synthia.NoMoreElementException;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.function.Executable;

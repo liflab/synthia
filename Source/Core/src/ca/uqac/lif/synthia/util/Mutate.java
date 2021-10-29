@@ -18,7 +18,6 @@
  */
 package ca.uqac.lif.synthia.util;
 
-import ca.uqac.lif.synthia.Mutator;
 import ca.uqac.lif.synthia.Picker;
 
 /**

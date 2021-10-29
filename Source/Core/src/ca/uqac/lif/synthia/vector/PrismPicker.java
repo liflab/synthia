@@ -24,8 +24,8 @@ import ca.uqac.lif.petitpoucet.Part;
 import ca.uqac.lif.petitpoucet.PartNode;
 import ca.uqac.lif.petitpoucet.function.ExplanationQueryable;
 import ca.uqac.lif.petitpoucet.function.vector.NthElement;
-import ca.uqac.lif.synthia.NthSuccessiveOutput;
 import ca.uqac.lif.synthia.Picker;
+import ca.uqac.lif.synthia.explanation.NthSuccessiveOutput;
 
 /**
  * Generates a vector by independently picking a value for each of

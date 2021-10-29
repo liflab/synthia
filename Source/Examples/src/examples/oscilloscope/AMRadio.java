@@ -19,8 +19,8 @@
 package examples.oscilloscope;
 
 import ca.uqac.lif.synthia.Picker;
+import ca.uqac.lif.synthia.collection.ComposeList;
 import ca.uqac.lif.synthia.signal.SineWave;
-import ca.uqac.lif.synthia.util.ComposeList;
 import ca.uqac.lif.synthia.util.Constant;
 import ca.uqac.lif.synthia.util.Tick;
 import ca.uqac.lif.synthia.vector.PrismPicker;

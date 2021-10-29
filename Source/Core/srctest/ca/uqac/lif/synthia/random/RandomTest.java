@@ -1,7 +1,7 @@
 package ca.uqac.lif.synthia.random;
 
 import java.util.concurrent.atomic.AtomicLong;
-import ca.uqac.lif.synthia.random.generators.Random;
+import ca.uqac.lif.synthia.random.Random;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
 

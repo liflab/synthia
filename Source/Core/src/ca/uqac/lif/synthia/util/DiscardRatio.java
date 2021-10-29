@@ -1,7 +1,7 @@
 package ca.uqac.lif.synthia.util;
 
+import ca.uqac.lif.synthia.GiveUpException;
 import ca.uqac.lif.synthia.Picker;
-import ca.uqac.lif.synthia.exception.GiveUpException;
 import ca.uqac.lif.synthia.relative.PickIf;
 
 /**

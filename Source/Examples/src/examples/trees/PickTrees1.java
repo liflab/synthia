@@ -2,13 +2,13 @@ package examples.trees;
 
 import ca.uqac.lif.synthia.random.RandomFloat;
 import ca.uqac.lif.synthia.random.RandomInteger;
-import ca.uqac.lif.synthia.replay.Playback;
+import ca.uqac.lif.synthia.sequence.Playback;
 import ca.uqac.lif.synthia.tree.ColoredNodePicker;
 import ca.uqac.lif.synthia.tree.Node;
 import ca.uqac.lif.synthia.tree.TreePicker;
 import ca.uqac.lif.synthia.tree.TreeRenderer;
-import ca.uqac.lif.synthia.util.Constant;
 import ca.uqac.lif.synthia.util.Choice;
+import ca.uqac.lif.synthia.util.Constant;
 
 /**
  * 

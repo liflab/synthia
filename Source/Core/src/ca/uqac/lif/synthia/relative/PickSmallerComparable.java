@@ -19,8 +19,8 @@
 package ca.uqac.lif.synthia.relative;
 
 import ca.uqac.lif.synthia.Picker;
+import ca.uqac.lif.synthia.PickerException;
 import ca.uqac.lif.synthia.Shrinkable;
-import ca.uqac.lif.synthia.exception.PickerException;
 
 /**
  * A variant of {@link PickIf} that selects an element if it is smaller than

@@ -19,7 +19,7 @@
 package ca.uqac.lif.synthia.random;
 
 import ca.uqac.lif.synthia.Shrinkable;
-import ca.uqac.lif.synthia.relative.NothingPicker;
+import ca.uqac.lif.synthia.util.NothingPicker;
 
 /**
  * Just like {@link RandomPrefix} but for suffixes.

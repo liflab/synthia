@@ -19,7 +19,11 @@
 package ca.uqac.lif.synthia;
 
 /**
- * Picker for an integer from 0 to a fixed bound.
+ * Picker for an integer from 0 to a fixed bound. This interface extends
+ * <tt>Picker&lt;Integer&gt;</tt> by allowing the bound to be specified
+ * and modified after the construction of the object, using
+ * {@link #setInterval(int) setInterval()}.
+ *  
  * @author Sylvain Hallé
  * @ingroup API
  */

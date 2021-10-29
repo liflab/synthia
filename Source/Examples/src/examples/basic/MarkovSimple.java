@@ -4,10 +4,10 @@
 package examples.basic;
 
 import ca.uqac.lif.synthia.random.RandomFloat;
-import ca.uqac.lif.synthia.replay.Playback;
 import ca.uqac.lif.synthia.sequence.MarkovChain;
+import ca.uqac.lif.synthia.sequence.Playback;
+import ca.uqac.lif.synthia.string.StringPattern;
 import ca.uqac.lif.synthia.util.Constant;
-import ca.uqac.lif.synthia.util.StringPattern;
 import ca.uqac.lif.synthia.util.Tick;
 
 public class MarkovSimple {

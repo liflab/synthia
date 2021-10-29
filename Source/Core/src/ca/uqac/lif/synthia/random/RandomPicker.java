@@ -15,7 +15,6 @@
  */
 package ca.uqac.lif.synthia.random;
 
-import ca.uqac.lif.synthia.random.generators.Random;
 import ca.uqac.lif.petitpoucet.NodeFactory;
 import ca.uqac.lif.petitpoucet.Part;
 import ca.uqac.lif.petitpoucet.PartNode;

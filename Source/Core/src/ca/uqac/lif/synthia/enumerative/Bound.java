@@ -19,12 +19,12 @@
 package ca.uqac.lif.synthia.enumerative;
 
 import ca.uqac.lif.synthia.Bounded;
-import ca.uqac.lif.synthia.Mutator;
+import ca.uqac.lif.synthia.CannotShrinkException;
+import ca.uqac.lif.synthia.NoMoreElementException;
 import ca.uqac.lif.synthia.Picker;
 import ca.uqac.lif.synthia.Shrinkable;
-import ca.uqac.lif.synthia.exception.CannotShrinkException;
-import ca.uqac.lif.synthia.exception.NoMoreElementException;
 import ca.uqac.lif.synthia.util.Constant;
+import ca.uqac.lif.synthia.util.Mutator;
 
 /**
  * Return the value picked by a picker a defined number of times.

@@ -1,7 +1,7 @@
 package ca.uqac.lif.synthia.enumerative;
 
-import ca.uqac.lif.synthia.exception.GiveUpException;
-import ca.uqac.lif.synthia.exception.NoMoreElementException;
+import ca.uqac.lif.synthia.GiveUpException;
+import ca.uqac.lif.synthia.NoMoreElementException;
 import org.junit.Assert;
 import org.junit.Test;
 

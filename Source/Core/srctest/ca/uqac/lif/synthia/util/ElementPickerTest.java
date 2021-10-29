@@ -18,7 +18,7 @@ public class ElementPickerTest
 		element_picker.add("D", 1);
 		element_picker.add("E", 0);
 		element_picker.add("F", 0);
-		for (int i = 0; i < element_picker.m_choices.size(); i++)
+		for (int i = 0; i < element_picker.getChoiceCount(); i++)
 		{
 			Assertions.assertEquals("D", element_picker.pick());
 		}
@@ -33,7 +33,7 @@ public class ElementPickerTest
 		element_picker.add("D", 0.5);
 		element_picker.add("E", 0.5);
 		element_picker.add("F", 0);
-		for (int i = 0; i < element_picker.m_choices.size(); i++)
+		for (int i = 0; i < element_picker.getChoiceCount(); i++)
 		{
 			element_picker.pick();
 		}
@@ -50,14 +50,14 @@ public class ElementPickerTest
 		element_picker.add("D", 0.5);
 		element_picker.add("E", 0.5);
 		element_picker.add("F", 0);
-		for (int i = 0; i < element_picker.m_choices.size(); i++)
+		for (int i = 0; i < element_picker.getChoiceCount(); i++)
 		{
 			element_picker.pick();
 		}
 		Choice element_picker_copy = element_picker.duplicate(false);
 		element_picker.reset();
 		element_picker_copy.reset();
-		for (int i = 0; i < element_picker.m_choices.size(); i++)
+		for (int i = 0; i < element_picker.getChoiceCount(); i++)
 		{
 			Assertions.assertEquals(element_picker.pick(), element_picker_copy.pick());
 		}

@@ -25,10 +25,10 @@ import ca.uqac.lif.petitpoucet.NodeFactory;
 import ca.uqac.lif.petitpoucet.Part;
 import ca.uqac.lif.petitpoucet.PartNode;
 import ca.uqac.lif.petitpoucet.function.ExplanationQueryable;
-import ca.uqac.lif.synthia.Mutator;
-import ca.uqac.lif.synthia.NthSuccessiveOutput;
+import ca.uqac.lif.synthia.GiveUpException;
 import ca.uqac.lif.synthia.Picker;
-import ca.uqac.lif.synthia.exception.GiveUpException;
+import ca.uqac.lif.synthia.explanation.NthSuccessiveOutput;
+import ca.uqac.lif.synthia.util.Mutator;
 
 /**
  * Returns object from a picker satisfying a condition.

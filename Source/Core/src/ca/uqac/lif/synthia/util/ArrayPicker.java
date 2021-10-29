@@ -18,9 +18,10 @@
  */
 package ca.uqac.lif.synthia.util;
 
+import ca.uqac.lif.synthia.CannotShrinkException;
 import ca.uqac.lif.synthia.Picker;
 import ca.uqac.lif.synthia.Shrinkable;
-import ca.uqac.lif.synthia.exception.CannotShrinkException;
+import ca.uqac.lif.synthia.collection.CompositePicker;
 
 /**
  * Picker that merges the result of other pickers into an array.

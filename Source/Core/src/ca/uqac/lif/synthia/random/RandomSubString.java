@@ -3,7 +3,7 @@ package ca.uqac.lif.synthia.random;
 import ca.uqac.lif.synthia.Picker;
 import ca.uqac.lif.synthia.Seedable;
 import ca.uqac.lif.synthia.Shrinkable;
-import ca.uqac.lif.synthia.relative.NothingPicker;
+import ca.uqac.lif.synthia.util.NothingPicker;
 
 /**
  * {@link RandomPicker} that produces random substrings from an original one.

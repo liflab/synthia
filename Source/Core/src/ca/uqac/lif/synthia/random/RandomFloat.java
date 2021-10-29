@@ -19,8 +19,7 @@
 package ca.uqac.lif.synthia.random;
 
 import ca.uqac.lif.synthia.Shrinkable;
-import ca.uqac.lif.synthia.random.generators.Random;
-import ca.uqac.lif.synthia.relative.NothingPicker;
+import ca.uqac.lif.synthia.util.NothingPicker;
 
 /**
  * Picks a floating point number uniformly in an interval.

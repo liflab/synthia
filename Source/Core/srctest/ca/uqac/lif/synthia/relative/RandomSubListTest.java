@@ -1,6 +1,6 @@
 package ca.uqac.lif.synthia.relative;
 
-import ca.uqac.lif.synthia.exception.NoMoreElementException;
+import ca.uqac.lif.synthia.NoMoreElementException;
 import ca.uqac.lif.synthia.random.RandomSubList;
 import ca.uqac.lif.synthia.random.RandomSubString;
 import org.junit.jupiter.api.Assertions;

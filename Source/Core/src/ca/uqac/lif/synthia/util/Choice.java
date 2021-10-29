@@ -223,6 +223,15 @@ public class Choice<T> implements Shrinkable<T>
 		}
 	}
 	
+	/**
+	 * Gets the total number of alternatives available in this picker.
+	 * @return The number of choices
+	 */
+	public int getChoiceCount()
+	{
+		return m_choices.size();
+	}
+	
 	@Override
 	public Shrinkable<T> shrink(T o)
 	{

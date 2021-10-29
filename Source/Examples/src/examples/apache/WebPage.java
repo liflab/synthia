@@ -3,7 +3,7 @@
  */
 package examples.apache;
 
-import ca.uqac.lif.synthia.replay.Playback;
+import ca.uqac.lif.synthia.sequence.Playback;
 import ca.uqac.lif.synthia.util.Tick;
 import examples.apache.LogLine.Request;
 import examples.apache.LogLine.StatusCode;

@@ -1,11 +1,12 @@
 package ca.uqac.lif.synthia.util;
 
 import ca.uqac.lif.synthia.Picker;
+import ca.uqac.lif.synthia.collection.ListPicker;
 import ca.uqac.lif.synthia.random.RandomBoolean;
 import ca.uqac.lif.synthia.random.RandomFloat;
 import ca.uqac.lif.synthia.random.RandomInteger;
 import ca.uqac.lif.synthia.random.RandomString;
-import ca.uqac.lif.synthia.replay.Playback;
+import ca.uqac.lif.synthia.sequence.Playback;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
 

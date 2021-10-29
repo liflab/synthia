@@ -3,7 +3,7 @@ package ca.uqac.lif.synthia.random;
 import ca.uqac.lif.synthia.Picker;
 import ca.uqac.lif.synthia.Seedable;
 import ca.uqac.lif.synthia.Shrinkable;
-import ca.uqac.lif.synthia.relative.NothingPicker;
+import ca.uqac.lif.synthia.util.NothingPicker;
 
 /**
  * Like {@link RandomSubString}, but this time, the {@link Picker} returns a prefix of the original

@@ -19,7 +19,6 @@
 package ca.uqac.lif.synthia.grammar;
 
 import ca.uqac.lif.bullwinkle.*;
-import ca.uqac.lif.synthia.IndexPicker;
 import ca.uqac.lif.synthia.Picker;
 import ca.uqac.lif.synthia.random.RandomInteger;
 
@@ -34,6 +33,8 @@ import java.util.List;
  * initial symbol of the grammar and randomly selects one of the rule's cases; it
  * recursively expands this case until the expression is only composed of terminal
  * symbols, and returns that expression.
+ * 
+ * @ingroup API
  */
 public class GrammarSentence implements Picker<String>
 {

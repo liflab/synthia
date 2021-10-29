@@ -20,19 +20,19 @@ package examples.mutation;
 
 import java.util.List;
 
-import ca.uqac.lif.synthia.Mutator;
-import ca.uqac.lif.synthia.Replace;
+import ca.uqac.lif.synthia.collection.ComposeList;
+import ca.uqac.lif.synthia.collection.DeleteElement;
+import ca.uqac.lif.synthia.collection.MutateElement;
+import ca.uqac.lif.synthia.collection.Swap;
 import ca.uqac.lif.synthia.random.RandomFloat;
 import ca.uqac.lif.synthia.random.RandomInteger;
 import ca.uqac.lif.synthia.util.Choice;
-import ca.uqac.lif.synthia.util.ComposeList;
 import ca.uqac.lif.synthia.util.Constant;
-import ca.uqac.lif.synthia.util.DeleteElement;
 import ca.uqac.lif.synthia.util.Freeze;
 import ca.uqac.lif.synthia.util.Mutate;
-import ca.uqac.lif.synthia.util.MutateElement;
+import ca.uqac.lif.synthia.util.Mutator;
 import ca.uqac.lif.synthia.util.Offset;
-import ca.uqac.lif.synthia.util.Swap;
+import ca.uqac.lif.synthia.util.Replace;
 import ca.uqac.lif.synthia.util.Tick;
 
 /**

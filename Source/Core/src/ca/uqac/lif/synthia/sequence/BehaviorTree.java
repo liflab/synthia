@@ -23,8 +23,8 @@ import java.util.List;
 
 import ca.uqac.lif.synthia.Picker;
 import ca.uqac.lif.synthia.util.Constant;
-import ca.uqac.lif.synthia.util.Choice.ProbabilityChoice;
 import ca.uqac.lif.synthia.util.Once;
+import ca.uqac.lif.synthia.util.Choice.ProbabilityChoice;
 
 /**
  * Generates a sequence of objects by following a behavior tree.

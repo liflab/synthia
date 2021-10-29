@@ -1,7 +1,7 @@
 package ca.uqac.lif.synthia.random;
 
 import ca.uqac.lif.synthia.Shrinkable;
-import ca.uqac.lif.synthia.relative.NothingPicker;
+import ca.uqac.lif.synthia.util.NothingPicker;
 
 /**
  * A combination of {@link RandomPrefix} and {@link RandomSuffix}. This

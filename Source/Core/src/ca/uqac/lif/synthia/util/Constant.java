@@ -19,7 +19,6 @@
 package ca.uqac.lif.synthia.util;
 
 import ca.uqac.lif.synthia.Shrinkable;
-import ca.uqac.lif.synthia.relative.NothingPicker;
 
 /**
  * Picker that returns the same object every time. For example, the following

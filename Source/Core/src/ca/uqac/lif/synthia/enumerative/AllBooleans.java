@@ -1,7 +1,7 @@
 package ca.uqac.lif.synthia.enumerative;
 
 import ca.uqac.lif.synthia.Bounded;
-import ca.uqac.lif.synthia.exception.NoMoreElementException;
+import ca.uqac.lif.synthia.NoMoreElementException;
 
 /**
  * Picker who implements EnumerativePicker. This picker enumerates the boolean value

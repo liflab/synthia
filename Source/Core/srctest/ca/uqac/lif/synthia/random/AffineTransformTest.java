@@ -1,6 +1,6 @@
 package ca.uqac.lif.synthia.random;
 
-import ca.uqac.lif.synthia.replay.Playback;
+import ca.uqac.lif.synthia.sequence.Playback;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
 

@@ -21,8 +21,8 @@ package ca.uqac.lif.synthia.sequence;
 import java.util.ArrayList;
 import java.util.List;
 
+import ca.uqac.lif.synthia.NoMoreElementException;
 import ca.uqac.lif.synthia.Picker;
-import ca.uqac.lif.synthia.exception.NoMoreElementException;
 
 /**
  * Picker producing an "interleaved" sequence of objects from calls to multiple

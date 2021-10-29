@@ -19,9 +19,8 @@
 package ca.uqac.lif.synthia.random;
 
 import ca.uqac.lif.synthia.Shrinkable;
-import ca.uqac.lif.synthia.random.generators.Random;
-import ca.uqac.lif.synthia.relative.NothingPicker;
 import ca.uqac.lif.synthia.util.Constant;
+import ca.uqac.lif.synthia.util.NothingPicker;
 
 /**
  * Picks a Boolean value. This class actually implements a Bernoulli

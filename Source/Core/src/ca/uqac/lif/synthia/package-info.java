@@ -18,6 +18,10 @@
  */
 
 /**
+ * Main package of the Synthia library. This package defines the core
+ * classes and interfaces which most of the other objects in the library
+ * descend from.
  * @defgroup API API Documentation
+ * @ingroup API
  */
 package ca.uqac.lif.synthia;

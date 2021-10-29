@@ -23,8 +23,8 @@ import java.util.HashSet;
 import java.util.Queue;
 import java.util.Set;
 
+import ca.uqac.lif.synthia.NoMoreElementException;
 import ca.uqac.lif.synthia.Picker;
-import ca.uqac.lif.synthia.exception.NoMoreElementException;
 
 /**
  * Allows values of a single picker to be shared among multiple copies of a

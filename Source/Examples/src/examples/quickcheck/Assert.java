@@ -3,9 +3,9 @@ package examples.quickcheck;
 import java.util.ArrayList;
 import java.util.List;
 
+import ca.uqac.lif.synthia.GiveUpException;
+import ca.uqac.lif.synthia.NoMoreElementException;
 import ca.uqac.lif.synthia.Shrinkable;
-import ca.uqac.lif.synthia.exception.GiveUpException;
-import ca.uqac.lif.synthia.exception.NoMoreElementException;
 
 /**
  * @ingroup Examples

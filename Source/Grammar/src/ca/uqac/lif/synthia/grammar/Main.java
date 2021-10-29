@@ -21,6 +21,8 @@ package ca.uqac.lif.synthia.grammar;
 /**
  * Dummy main file. This file, when run, only displays a message
  * on the console.
+ * 
+ * @ingroup API
  */
 public class Main
 {

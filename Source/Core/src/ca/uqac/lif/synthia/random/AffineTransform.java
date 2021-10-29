@@ -18,10 +18,10 @@
  */
 package ca.uqac.lif.synthia.random;
 
-import ca.uqac.lif.synthia.Mutator;
+import ca.uqac.lif.synthia.CannotShrinkException;
 import ca.uqac.lif.synthia.Picker;
 import ca.uqac.lif.synthia.Shrinkable;
-import ca.uqac.lif.synthia.exception.CannotShrinkException;
+import ca.uqac.lif.synthia.util.Mutator;
 
 /**
  * Applies an affine transform to a value produced by another picker.

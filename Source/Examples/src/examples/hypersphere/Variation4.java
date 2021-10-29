@@ -20,8 +20,8 @@ package examples.hypersphere;
 
 import ca.uqac.lif.synthia.random.RandomFloat;
 import ca.uqac.lif.synthia.random.RandomInteger;
-import ca.uqac.lif.synthia.util.Constant;
 import ca.uqac.lif.synthia.util.Choice;
+import ca.uqac.lif.synthia.util.Constant;
 import ca.uqac.lif.synthia.util.Tick;
 import ca.uqac.lif.synthia.vector.HyperspherePicker;
 
