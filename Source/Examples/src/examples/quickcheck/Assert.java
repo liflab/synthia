@@ -5,6 +5,7 @@ import java.util.List;
 
 import ca.uqac.lif.synthia.GiveUpException;
 import ca.uqac.lif.synthia.NoMoreElementException;
+import ca.uqac.lif.synthia.Picker;
 import ca.uqac.lif.synthia.Shrinkable;
 
 /**
@@ -20,12 +21,15 @@ public class Assert<T>
 	protected Shrinkable<T> m_input;
 
 	protected List<T> m_shrunk;
+	
+	protected Picker<Float> m_decision;
 
-	public Assert(Shrinkable<T> input)
+	public Assert(Shrinkable<T> input, Picker<Float> decision)
 	{
 		super();
 		m_input = input;
 		m_shrunk = new ArrayList<T>();
+		m_decision = decision;
 	}
 	
 	public List<T> getIterations()
@@ -80,7 +84,7 @@ public class Assert<T>
 		{
 			return true;
 		}
-		Shrinkable<T> p = m_input.shrink(o);
+		Shrinkable<T> p = m_input.shrink(o, m_decision);
 		try
 		{
 			for (int i = 0; i < MAX_TRIES; i++)
@@ -94,7 +98,7 @@ public class Assert<T>
 						break;
 					}
 				}
-				p = p.shrink(o);
+				p = p.shrink(o, m_decision);
 			}
 		}
 		catch (NoMoreElementException e)

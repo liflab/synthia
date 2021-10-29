@@ -21,6 +21,7 @@ package ca.uqac.lif.synthia.relative;
 import ca.uqac.lif.synthia.Picker;
 import ca.uqac.lif.synthia.PickerException;
 import ca.uqac.lif.synthia.Shrinkable;
+import ca.uqac.lif.synthia.random.RandomFloat;
 
 /**
  * A variant of {@link PickIf} that selects an element if it is smaller than
@@ -70,7 +71,7 @@ public class PickSmallerComparable<T> extends PickIf<T> implements Shrinkable<T>
 	}
 
 	@Override
-	public PickSmallerComparable<T> shrink(T o)
+	public PickSmallerComparable<T> shrink(T o, Picker<Float> decision)
 	{
 		PickSmallerComparable<T> ps = new PickSmallerComparable<T>(m_picker, (T) o);
 		ps.m_maxIteration = m_maxIteration;
@@ -81,5 +82,11 @@ public class PickSmallerComparable<T> extends PickIf<T> implements Shrinkable<T>
 	protected boolean select(T element)
 	{
 		return m_reference.compareTo(element) > 0;
+	}
+
+	@Override
+	public Shrinkable<T> shrink(T o)
+	{
+		return shrink(o, RandomFloat.instance);
 	}
 }

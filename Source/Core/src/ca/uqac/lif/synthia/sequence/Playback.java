@@ -29,8 +29,10 @@ import ca.uqac.lif.petitpoucet.function.ExplanationQueryable;
 import ca.uqac.lif.petitpoucet.function.vector.NthElement;
 import ca.uqac.lif.synthia.Bounded;
 import ca.uqac.lif.synthia.NoMoreElementException;
+import ca.uqac.lif.synthia.Picker;
 import ca.uqac.lif.synthia.Shrinkable;
 import ca.uqac.lif.synthia.explanation.NthSuccessiveOutput;
+import ca.uqac.lif.synthia.random.RandomFloat;
 
 //TODO check constructors whit a list as parameter for m_values
 /**
@@ -120,8 +122,6 @@ public class Playback<T> implements Bounded<T>, Shrinkable<T>, ExplanationQuerya
 		this(0, values);
 	}
 
-
-
 	/**
 	 * Picks the next value in the list of the Playback picker. Typically, this method is expected to return non-null
 	 * objects; a <tt>null</tt> return value is used to signal that no more
@@ -205,9 +205,9 @@ public class Playback<T> implements Bounded<T>, Shrinkable<T>, ExplanationQuerya
 	{
 		return (m_index >= (m_values.length)) && !m_loop;
 	}
-	
+
 	@Override
-	public Shrinkable<T> shrink(T o)
+	public Shrinkable<T> shrink(T o, Picker<Float> decision)
 	{
 		return new PickSmallerComparable<T>(this, o);
 	}
@@ -238,7 +238,7 @@ public class Playback<T> implements Bounded<T>, Shrinkable<T>, ExplanationQuerya
 		root.addChild(f.getPartNode(new_p, m_values));
 		return root;
 	}
-	
+
 	@Override
 	public String toString()
 	{
@@ -254,5 +254,11 @@ public class Playback<T> implements Bounded<T>, Shrinkable<T>, ExplanationQuerya
 		}
 		out.append("]");
 		return out.toString();
+	}
+
+	@Override
+	public Shrinkable<T> shrink(T o)
+	{
+		return shrink(o, RandomFloat.instance);
 	} 
 }

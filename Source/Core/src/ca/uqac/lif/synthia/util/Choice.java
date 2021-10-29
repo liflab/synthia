@@ -23,6 +23,7 @@ import java.util.List;
 
 import ca.uqac.lif.synthia.Picker;
 import ca.uqac.lif.synthia.Shrinkable;
+import ca.uqac.lif.synthia.random.RandomFloat;
 import ca.uqac.lif.synthia.relative.PickSmallerComparable;
 
 /**
@@ -233,8 +234,14 @@ public class Choice<T> implements Shrinkable<T>
 	}
 	
 	@Override
-	public Shrinkable<T> shrink(T o)
+	public Shrinkable<T> shrink(T o, Picker<Float> decision)
 	{
 		return new PickSmallerComparable<T>(this, o);
+	}
+
+	@Override
+	public Shrinkable<T> shrink(T o)
+	{
+		return shrink(o, RandomFloat.instance);
 	}
 }

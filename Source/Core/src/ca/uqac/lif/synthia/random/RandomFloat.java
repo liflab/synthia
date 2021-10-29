@@ -18,6 +18,7 @@
  */
 package ca.uqac.lif.synthia.random;
 
+import ca.uqac.lif.synthia.Picker;
 import ca.uqac.lif.synthia.Shrinkable;
 import ca.uqac.lif.synthia.util.NothingPicker;
 
@@ -37,6 +38,11 @@ public class RandomFloat extends RandomPicker<Float> implements Shrinkable<Float
 	 * The higher bound of the interval
 	 */
 	protected float m_max;
+	
+	/**
+	 * A public static instance of RandomFloat.
+	 */
+	public static final transient RandomFloat instance = new RandomFloat().setSeed(0);
 
 	/**
 	 * Default constructor.
@@ -119,6 +125,12 @@ public class RandomFloat extends RandomPicker<Float> implements Shrinkable<Float
 	
 	@Override
 	public Shrinkable<Float> shrink(Float element)
+	{
+		return shrink(element, instance);
+	}
+	
+	@Override
+	public Shrinkable<Float> shrink(Float element, Picker<Float> decision)
 	{
 		if((element <= m_min) || (element.isNaN()))
 		{

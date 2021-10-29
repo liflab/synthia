@@ -18,7 +18,9 @@
  */
 package ca.uqac.lif.synthia.util;
 
+import ca.uqac.lif.synthia.Picker;
 import ca.uqac.lif.synthia.Shrinkable;
+import ca.uqac.lif.synthia.random.RandomFloat;
 
 /**
  * Picker that returns the same object every time. For example, the following
@@ -99,8 +101,14 @@ public class Constant<T> implements Shrinkable<T>
 	}
 
 	@Override
-	public Shrinkable<T> shrink(T o)
+	public Shrinkable<T> shrink(T o, Picker<Float> decision)
 	{
 		return new NothingPicker<T>();
+	}
+
+	@Override
+	public Shrinkable<T> shrink(T o)
+	{
+		return shrink(o, RandomFloat.instance);
 	}
 }

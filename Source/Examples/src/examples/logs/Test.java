@@ -2,8 +2,8 @@ package examples.logs;
 
 import ca.uqac.lif.synthia.random.RandomFloat;
 import ca.uqac.lif.synthia.random.RandomInteger;
-import ca.uqac.lif.synthia.random.RandomString;
 import ca.uqac.lif.synthia.sequence.MarkovChain;
+import ca.uqac.lif.synthia.string.RandomString;
 import ca.uqac.lif.synthia.string.StringPattern;
 import ca.uqac.lif.synthia.util.Constant;
 import ca.uqac.lif.synthia.util.Freeze;

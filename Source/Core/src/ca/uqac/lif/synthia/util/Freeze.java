@@ -25,6 +25,7 @@ import ca.uqac.lif.petitpoucet.function.ExplanationQueryable;
 import ca.uqac.lif.synthia.Picker;
 import ca.uqac.lif.synthia.Shrinkable;
 import ca.uqac.lif.synthia.explanation.NthSuccessiveOutput;
+import ca.uqac.lif.synthia.random.RandomFloat;
 import ca.uqac.lif.synthia.relative.PickSmallerComparable;
 
 /**
@@ -111,7 +112,7 @@ public class Freeze<T> implements Shrinkable<T>, ExplanationQueryable
 	}
 
 	@Override
-	public Shrinkable<T> shrink(T o)
+	public Shrinkable<T> shrink(T o, Picker<Float> decision)
 	{
 		return new PickSmallerComparable<T>(this, o);
 	}
@@ -135,5 +136,12 @@ public class Freeze<T> implements Shrinkable<T>, ExplanationQueryable
 	public String toString()
 	{
 		return "Freeze(" + m_innerPicker + ")";
+	}
+
+
+	@Override
+	public Shrinkable<T> shrink(T o)
+	{
+		return shrink(o, RandomFloat.instance);
 	}
 }

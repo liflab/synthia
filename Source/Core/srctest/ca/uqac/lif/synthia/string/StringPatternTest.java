@@ -1,7 +1,6 @@
 package ca.uqac.lif.synthia.string;
 
 import ca.uqac.lif.synthia.random.RandomInteger;
-import ca.uqac.lif.synthia.random.RandomString;
 import ca.uqac.lif.synthia.sequence.Playback;
 import ca.uqac.lif.synthia.string.StringPattern;
 

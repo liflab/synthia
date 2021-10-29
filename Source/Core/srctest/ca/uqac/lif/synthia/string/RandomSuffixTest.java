@@ -1,8 +1,8 @@
-package ca.uqac.lif.synthia.relative;
+package ca.uqac.lif.synthia.string;
 
 
 import ca.uqac.lif.synthia.Shrinkable;
-import ca.uqac.lif.synthia.random.RandomSuffix;
+import ca.uqac.lif.synthia.random.RandomFloat;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
 
@@ -77,7 +77,7 @@ public class RandomSuffixTest
 		for (int i = 0; i < 10000; i++)
 		{
 			String picked_string = random_suffix.pick();
-			Shrinkable<String> relative_picker = random_suffix.shrink(picked_string);
+			Shrinkable<String> relative_picker = random_suffix.shrink(picked_string, new RandomFloat());
 
 			if(picked_string.isEmpty())
 			{

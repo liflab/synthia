@@ -1,6 +1,7 @@
 package ca.uqac.lif.synthia.relative;
 
 import ca.uqac.lif.synthia.NoMoreElementException;
+import ca.uqac.lif.synthia.random.RandomFloat;
 import ca.uqac.lif.synthia.util.NothingPicker;
 
 import org.junit.jupiter.api.Test;
@@ -33,6 +34,6 @@ public class NothingPickerTest
 	{
 		int element = 2;
 		NothingPicker picker = new NothingPicker();
-		noMoreElementThrow((NothingPicker) picker.shrink(element));
+		noMoreElementThrow((NothingPicker) picker.shrink(element, new RandomFloat()));
 	}
 }

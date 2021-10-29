@@ -1,7 +1,7 @@
 package ca.uqac.lif.synthia.relative;
 
 import ca.uqac.lif.synthia.Shrinkable;
-import ca.uqac.lif.synthia.random.RandomPrefix;
+import ca.uqac.lif.synthia.string.RandomPrefix;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
 

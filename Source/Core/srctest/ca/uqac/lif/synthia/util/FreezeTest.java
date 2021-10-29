@@ -3,8 +3,9 @@ package ca.uqac.lif.synthia.util;
 import ca.uqac.lif.synthia.random.RandomBoolean;
 import ca.uqac.lif.synthia.random.RandomFloat;
 import ca.uqac.lif.synthia.random.RandomInteger;
-import ca.uqac.lif.synthia.random.RandomString;
 import ca.uqac.lif.synthia.sequence.Playback;
+import ca.uqac.lif.synthia.string.RandomString;
+
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
 

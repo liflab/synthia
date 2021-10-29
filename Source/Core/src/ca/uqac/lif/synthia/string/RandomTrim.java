@@ -1,6 +1,8 @@
-package ca.uqac.lif.synthia.random;
+package ca.uqac.lif.synthia.string;
 
+import ca.uqac.lif.synthia.Picker;
 import ca.uqac.lif.synthia.Shrinkable;
+import ca.uqac.lif.synthia.random.RandomInteger;
 import ca.uqac.lif.synthia.util.NothingPicker;
 
 /**
@@ -23,7 +25,7 @@ public class RandomTrim extends RandomPrefix
 	}
 
 	@Override
-	public Shrinkable<String> shrink(String element)
+	public Shrinkable<String> shrink(String element, Picker<Float> decision)
 	{
 		if(element.isEmpty())
 		{

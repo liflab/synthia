@@ -1,7 +1,9 @@
-package ca.uqac.lif.synthia.relative;
+package ca.uqac.lif.synthia.string;
 
 import ca.uqac.lif.synthia.Shrinkable;
-import ca.uqac.lif.synthia.random.RandomSubString;
+import ca.uqac.lif.synthia.random.RandomFloat;
+import ca.uqac.lif.synthia.relative.SubStrings;
+
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
 
@@ -92,7 +94,7 @@ public class RandomSubStringTest
 			smaller_string = random_substring.pick();
 		}
 
-		Shrinkable<String> relative_substring = random_substring.shrink(smaller_string);
+		Shrinkable<String> relative_substring = random_substring.shrink(smaller_string, new RandomFloat());
 		Assertions.assertTrue(relative_substring.getClass().getSimpleName().equals("RandomSubString"));
 
 		RandomSubString smaller_substring = (RandomSubString) relative_substring;
@@ -109,7 +111,7 @@ public class RandomSubStringTest
 	public void getNothingPicker()
 	{
 		RandomSubString random_substring = new RandomSubString("");
-		Shrinkable<String> relative_picker = random_substring.shrink(random_substring.pick());
+		Shrinkable<String> relative_picker = random_substring.shrink(random_substring.pick(), new RandomFloat());
 
 		Assertions.assertTrue(relative_picker.getClass().getSimpleName().equals("NothingPicker"));
 	}

@@ -16,11 +16,13 @@
     You should have received a copy of the GNU Lesser General Public License
     along with this program.  If not, see <http://www.gnu.org/licenses/>.
  */
-package ca.uqac.lif.synthia.random;
+package ca.uqac.lif.synthia.string;
 
 import ca.uqac.lif.synthia.Picker;
 import ca.uqac.lif.synthia.Seedable;
 import ca.uqac.lif.synthia.Shrinkable;
+import ca.uqac.lif.synthia.random.RandomFloat;
+import ca.uqac.lif.synthia.random.RandomInteger;
 import ca.uqac.lif.synthia.relative.PickSmallerComparable;
 import ca.uqac.lif.synthia.util.Constant;
 
@@ -214,7 +216,7 @@ public class RandomString implements Shrinkable<String>, Seedable
 	}
 	
 	@Override
-	public Shrinkable<String> shrink(String o)
+	public Shrinkable<String> shrink(String o, Picker<Float> decision)
 	{
 		return new PickSmallerComparable<String>(this, o);
 	}
@@ -235,6 +237,12 @@ public class RandomString implements Shrinkable<String>, Seedable
 			random_integer_copy.setInterval(min, max);
 			m_lengthPicker = random_integer_copy;
 		}
+	}
+
+	@Override
+	public Shrinkable<String> shrink(String o)
+	{
+		return shrink(o, RandomFloat.instance);
 	}
 
 }

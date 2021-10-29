@@ -21,6 +21,7 @@ package ca.uqac.lif.synthia.string;
 import ca.uqac.lif.synthia.Picker;
 import ca.uqac.lif.synthia.Shrinkable;
 import ca.uqac.lif.synthia.collection.CompositePicker;
+import ca.uqac.lif.synthia.random.RandomFloat;
 import ca.uqac.lif.synthia.relative.PickSmallerComparable;
 
 /**
@@ -43,7 +44,7 @@ public class StringPattern extends CompositePicker<String> implements Shrinkable
 	 * The string pattern
 	 */
 	/*@ non_null @*/ protected String m_pattern;
-	
+
 	/**
 	 * Creates a new StringPattern picker
 	 * @param pattern The string pattern
@@ -77,7 +78,6 @@ public class StringPattern extends CompositePicker<String> implements Shrinkable
 		return out;
 	}
 
-
 	/**
 	 * Returns a new string pattern picker.
 	 * @param pickers The internal pickers, already duplicated
@@ -88,10 +88,16 @@ public class StringPattern extends CompositePicker<String> implements Shrinkable
 	{
 		return new StringPattern(m_pattern, pickers);
 	}
-	
+
+	@Override
+	public Shrinkable<String> shrink(String o, Picker<Float> decision)
+	{
+		return new PickSmallerComparable<String>(this, o);
+	}
+
 	@Override
 	public Shrinkable<String> shrink(String o)
 	{
-		return new PickSmallerComparable<String>(this, o);
+		return shrink(o, RandomFloat.instance);
 	}
 }

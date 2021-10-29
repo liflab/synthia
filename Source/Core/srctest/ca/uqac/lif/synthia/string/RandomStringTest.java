@@ -1,7 +1,9 @@
-package ca.uqac.lif.synthia.random;
+package ca.uqac.lif.synthia.string;
 
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
+
+import ca.uqac.lif.synthia.random.RandomInteger;
 
 
 public class RandomStringTest

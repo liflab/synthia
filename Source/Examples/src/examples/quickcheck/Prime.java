@@ -1,5 +1,6 @@
 package examples.quickcheck;
 
+import ca.uqac.lif.synthia.random.RandomFloat;
 import ca.uqac.lif.synthia.random.RandomInteger;
 
 /**
@@ -11,7 +12,7 @@ public class Prime
 {
 	public static void main(String[] args)
 	{
-		Assert<Integer> a = new Assert<Integer>(new RandomInteger(0, Integer.MAX_VALUE)) {
+		Assert<Integer> a = new Assert<Integer>(new RandomInteger(0, Integer.MAX_VALUE), new RandomFloat()) {
 			protected boolean evaluate(Integer x) {
 				return !isPrime(x);
 			}

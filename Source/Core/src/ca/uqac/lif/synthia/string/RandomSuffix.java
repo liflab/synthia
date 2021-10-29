@@ -16,9 +16,11 @@
     You should have received a copy of the GNU Lesser General Public License
     along with this program.  If not, see <http://www.gnu.org/licenses/>.
  */
-package ca.uqac.lif.synthia.random;
+package ca.uqac.lif.synthia.string;
 
+import ca.uqac.lif.synthia.Picker;
 import ca.uqac.lif.synthia.Shrinkable;
+import ca.uqac.lif.synthia.random.RandomInteger;
 import ca.uqac.lif.synthia.util.NothingPicker;
 
 /**
@@ -40,7 +42,7 @@ public class RandomSuffix extends RandomPrefix
 	}
 
 	@Override
-	public Shrinkable<String> shrink(String element)
+	public Shrinkable<String> shrink(String element, Picker<Float> decision)
 	{
 		if(element.isEmpty())
 		{

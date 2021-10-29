@@ -1,5 +1,5 @@
 package ca.uqac.lif.synthia.util;
-import ca.uqac.lif.synthia.random.RandomString;
+import ca.uqac.lif.synthia.string.RandomString;
 import ca.uqac.lif.synthia.random.RandomFloat;
 import ca.uqac.lif.synthia.random.RandomInteger;
 import ca.uqac.lif.synthia.util.Constant;
@@ -8,7 +8,6 @@ import java.util.Arrays;
 import java.util.Collection;
 
 import org.junit.Test;
-import org.junit.Before;
 
 import org.junit.jupiter.api.Assertions;
 import org.junit.runners.Parameterized;

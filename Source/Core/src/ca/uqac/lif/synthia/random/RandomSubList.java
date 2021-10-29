@@ -2,6 +2,7 @@ package ca.uqac.lif.synthia.random;
 
 import ca.uqac.lif.synthia.Picker;
 import ca.uqac.lif.synthia.Shrinkable;
+import ca.uqac.lif.synthia.string.RandomSubString;
 import ca.uqac.lif.synthia.util.NothingPicker;
 
 import java.util.ArrayList;
@@ -95,7 +96,7 @@ public class RandomSubList<T> implements Shrinkable<List<T>>
 				}
 				else
 				{
-					output_list.add(m_listReducer.shrink(m_element).pick());
+					output_list.add(m_listReducer.shrink(m_element, new RandomFloat()).pick());
 				}
 			}
 		}
@@ -125,7 +126,7 @@ public class RandomSubList<T> implements Shrinkable<List<T>>
 	 * {@link ca.uqac.lif.synthia.NoMoreElementException}'s.
 	 */
 	@Override 
-	public Shrinkable<List<T>> shrink(List<T> element)
+	public Shrinkable<List<T>> shrink(List<T> element, Picker<Float> decision)
 	{
 		if (!element.getClass().getSimpleName().equals("ArrayList"))
 		{
@@ -143,5 +144,11 @@ public class RandomSubList<T> implements Shrinkable<List<T>>
 			return new RandomSubList<T>(m_pick, m_asIs.duplicate(true), objects,
 					(Shrinkable<T>) m_listReducer.duplicate(true));
 		}
+	}
+
+	@Override
+	public Shrinkable<List<T>> shrink(List<T> o)
+	{
+		return shrink(o, RandomFloat.instance);
 	}
 }

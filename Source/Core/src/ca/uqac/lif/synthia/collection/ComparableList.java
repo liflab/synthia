@@ -1,4 +1,22 @@
-package ca.uqac.lif.synthia.util;
+/*
+    Synthia, a data structure generator
+    Copyright (C) 2019-2021 Laboratoire d'informatique formelle
+    Université du Québec à Chicoutimi, Canada
+
+    This program is free software: you can redistribute it and/or modify
+    it under the terms of the GNU Lesser General Public License as published
+    by the Free Software Foundation, either version 3 of the License, or
+    (at your option) any later version.
+
+    This program is distributed in the hope that it will be useful,
+    but WITHOUT ANY WARRANTY; without even the implied warranty of
+    MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+    GNU Lesser General Public License for more details.
+
+    You should have received a copy of the GNU Lesser General Public License
+    along with this program.  If not, see <http://www.gnu.org/licenses/>.
+ */
+package ca.uqac.lif.synthia.collection;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -10,7 +28,7 @@ import java.util.List;
  * @author Marc-Antoine Plourde
  * @ingroup API
  */
-public class ComparableList<T> extends ArrayList<T> implements Comparable<ArrayList<T>>
+public class ComparableList<T> extends ArrayList<T> implements Comparable<List<T>>
 {
 	/**
 	 * Dummy UID.
@@ -65,7 +83,8 @@ public class ComparableList<T> extends ArrayList<T> implements Comparable<ArrayL
 	 * 	  	<li>A posisitive integer supperior to 0 if the reference list is considered greater than the second one..</li>
 	 * 	  <ul/>
 	 */
-	@Override public int compareTo(ArrayList<T> o)
+	@SuppressWarnings("unchecked")
+	@Override public int compareTo(List<T> o)
 	{
 		if (this.size() < o.size())
 		{
@@ -85,30 +104,22 @@ public class ComparableList<T> extends ArrayList<T> implements Comparable<ArrayL
 
 				if (((this.get(i)) instanceof Comparable) && ((o.get(i)) instanceof Comparable))
 				{
-
 					try
 					{
-
 						answer = ((Comparable<T>) this.get(i)).compareTo(o.get(i));
-
 					}
 					catch (ClassCastException exception)
 					{
 						answer = 0;
 					}
-
 				}
 				else if (((this.get(i)) instanceof List) && ((o.get(i)) instanceof List))
 				{
-					answer = new ComparableList<T>((List<T>) this.get(i)).compareTo((ArrayList<T>) o.get(i));
+					answer = new ComparableList<T>((List<T>) this.get(i)).compareTo((ComparableList<T>) o.get(i));
 				}
-
 				i++;
 			}
-
 			return answer;
 		}
-
 	}
-
 }

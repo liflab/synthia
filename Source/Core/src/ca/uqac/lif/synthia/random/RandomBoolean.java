@@ -18,6 +18,7 @@
  */
 package ca.uqac.lif.synthia.random;
 
+import ca.uqac.lif.synthia.Picker;
 import ca.uqac.lif.synthia.Shrinkable;
 import ca.uqac.lif.synthia.util.Constant;
 import ca.uqac.lif.synthia.util.NothingPicker;
@@ -107,7 +108,7 @@ public class RandomBoolean extends RandomPicker<Boolean> implements Shrinkable<B
 	}
 
 	@Override
-	public Shrinkable<Boolean> shrink(Boolean o)
+	public Shrinkable<Boolean> shrink(Boolean o, Picker<Float> decision)
 	{
 		// We assume an ordering of Booleans where false < true
 		if (o)
@@ -115,5 +116,11 @@ public class RandomBoolean extends RandomPicker<Boolean> implements Shrinkable<B
 			return new Constant<Boolean>(false);
 		}
 		return new NothingPicker<Boolean>();
+	}
+
+	@Override
+	public Shrinkable<Boolean> shrink(Boolean o)
+	{
+		return shrink(o, RandomFloat.instance);
 	}
 }

@@ -23,6 +23,7 @@ import ca.uqac.lif.synthia.CannotShrinkException;
 import ca.uqac.lif.synthia.NoMoreElementException;
 import ca.uqac.lif.synthia.Picker;
 import ca.uqac.lif.synthia.Shrinkable;
+import ca.uqac.lif.synthia.random.RandomFloat;
 import ca.uqac.lif.synthia.util.Constant;
 import ca.uqac.lif.synthia.util.Mutator;
 
@@ -90,12 +91,18 @@ public class Bound<T> extends Mutator<T> implements Bounded<T>, Shrinkable<T>
 	
 	@SuppressWarnings("unchecked")
 	@Override
-	public Shrinkable<T> shrink(T o)
+	public Shrinkable<T> shrink(T o, Picker<Float> decision)
 	{
 		if (!(m_picker instanceof Shrinkable))
 		{
 			throw new CannotShrinkException(m_picker);
 		}
-		return new Bound<T>(((Shrinkable<T>) m_picker).shrink(o), m_length);
+		return new Bound<T>(((Shrinkable<T>) m_picker).shrink(o, decision), m_length);
+	}
+
+	@Override
+	public Shrinkable<T> shrink(T o)
+	{
+		return shrink(o, RandomFloat.instance);
 	}
 }

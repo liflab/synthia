@@ -2,12 +2,12 @@ package examples.logs;
 
 import ca.uqac.lif.synthia.Picker;
 import ca.uqac.lif.synthia.enumerative.Bound;
-import ca.uqac.lif.synthia.random.RandomString;
 import ca.uqac.lif.synthia.random.RandomBoolean;
 import ca.uqac.lif.synthia.random.RandomFloat;
 import ca.uqac.lif.synthia.random.RandomInteger;
 import ca.uqac.lif.synthia.sequence.Knit;
 import ca.uqac.lif.synthia.sequence.Playback;
+import ca.uqac.lif.synthia.string.RandomString;
 import ca.uqac.lif.synthia.string.StringPattern;
 import ca.uqac.lif.synthia.util.Choice;
 import ca.uqac.lif.synthia.util.Freeze;

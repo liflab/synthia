@@ -27,8 +27,11 @@ import ca.uqac.lif.petitpoucet.Part;
 import ca.uqac.lif.petitpoucet.PartNode;
 import ca.uqac.lif.petitpoucet.function.ExplanationQueryable;
 import ca.uqac.lif.petitpoucet.function.vector.NthElement;
+import ca.uqac.lif.synthia.CannotShrinkException;
 import ca.uqac.lif.synthia.Picker;
+import ca.uqac.lif.synthia.Shrinkable;
 import ca.uqac.lif.synthia.explanation.NthSuccessiveOutput;
+import ca.uqac.lif.synthia.random.RandomFloat;
 import ca.uqac.lif.synthia.util.Constant;
 
 /**
@@ -38,7 +41,7 @@ import ca.uqac.lif.synthia.util.Constant;
  * @param <T>
  * @ingroup API
  */
-public class ComposeList<T> implements Picker<List<T>>, ExplanationQueryable
+public class ComposeList<T> implements Picker<List<T>>, Shrinkable<List<T>>, ExplanationQueryable
 {
 	/**
 	 * The picker providing elements for the list.
@@ -159,5 +162,21 @@ public class ComposeList<T> implements Picker<List<T>>, ExplanationQueryable
 		new_p = NthSuccessiveOutput.replaceOutIndexBy(new_p, offset + part_index);
 		and.addChild(f.getPartNode(new_p, m_elements));
 		return root;
+	}
+
+	@Override
+	public ComposeShrunkList<T> shrink(List<T> o, Picker<Float> decision)
+	{
+		if (!(m_elements instanceof Shrinkable) || !(m_length instanceof Shrinkable))
+		{
+			throw new CannotShrinkException("Inner pickers are not shrinkable");
+		}
+		return new ComposeShrunkList<T>((Shrinkable<T>) m_elements, (Shrinkable<Integer>) m_length, o, decision);
+	}
+
+	@Override
+	public Shrinkable<List<T>> shrink(List<T> o)
+	{
+		return shrink(o, RandomFloat.instance);
 	}
 }

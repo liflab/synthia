@@ -1,8 +1,11 @@
-package ca.uqac.lif.synthia.random;
+package ca.uqac.lif.synthia.string;
 
 import ca.uqac.lif.synthia.Picker;
 import ca.uqac.lif.synthia.Seedable;
 import ca.uqac.lif.synthia.Shrinkable;
+import ca.uqac.lif.synthia.random.RandomBoolean;
+import ca.uqac.lif.synthia.random.RandomFloat;
+import ca.uqac.lif.synthia.random.RandomPicker;
 import ca.uqac.lif.synthia.util.NothingPicker;
 
 /**
@@ -56,7 +59,7 @@ public class RandomSubString implements Shrinkable<String>, Seedable
 	 * @return The new instance of the class or a {@link NothingPicker}.
 	 */
 	@Override
-	public Shrinkable<String> shrink(String element)
+	public Shrinkable<String> shrink(String element, Picker<Float> decision)
 	{
 		if (element.isEmpty())
 		{
@@ -115,5 +118,11 @@ public class RandomSubString implements Shrinkable<String>, Seedable
 	{
 		m_charSelect.setSeed(seed);
 		return this;
+	}
+
+	@Override
+	public Shrinkable<String> shrink(String o)
+	{
+		return shrink(o, RandomFloat.instance);
 	}
 }

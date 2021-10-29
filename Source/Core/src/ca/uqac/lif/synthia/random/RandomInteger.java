@@ -18,6 +18,7 @@
  */
 package ca.uqac.lif.synthia.random;
 
+import ca.uqac.lif.synthia.Picker;
 import ca.uqac.lif.synthia.Shrinkable;
 import ca.uqac.lif.synthia.util.NothingPicker;
 
@@ -131,7 +132,7 @@ public class RandomInteger extends RandomPicker<Integer> implements Shrinkable<I
 	}
 	
 	@Override
-	public Shrinkable<Integer> shrink(Integer element)
+	public Shrinkable<Integer> shrink(Integer element, Picker<Float> decision)
 	{
 		if(element <= m_min)
 		{
@@ -149,5 +150,12 @@ public class RandomInteger extends RandomPicker<Integer> implements Shrinkable<I
 	public String toString()
 	{
 		return "RandomInteger [" + m_min + "," + m_max + "]";
+	}
+
+
+	@Override
+	public Shrinkable<Integer> shrink(Integer o)
+	{
+		return shrink(o, RandomFloat.instance);
 	}
 }
