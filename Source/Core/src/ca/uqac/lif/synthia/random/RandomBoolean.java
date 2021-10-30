@@ -69,7 +69,17 @@ public class RandomBoolean extends RandomPicker<Boolean> implements Shrinkable<B
 	{
 		this(0.5);
 	}
-
+	
+	/**
+	 * Sets the probability for this picker to return <tt>true</tt>.
+	 * @param p The probability of picking <tt>true</tt>.
+	 * @return This generator
+	 */
+	public RandomBoolean setTrueProbability(float p)
+	{
+		m_trueProbability = p;
+		return this;
+	}
 
 	/**
 	 * Picks a random boolean. Typically, this method is expected to return non-null

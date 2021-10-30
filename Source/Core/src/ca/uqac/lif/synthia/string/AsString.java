@@ -16,40 +16,52 @@
     You should have received a copy of the GNU Lesser General Public License
     along with this program.  If not, see <http://www.gnu.org/licenses/>.
  */
-package ca.uqac.lif.synthia.tree;
+package ca.uqac.lif.synthia.string;
 
-import java.io.PrintStream;
+import ca.uqac.lif.synthia.Picker;
 
 /**
- * Renders a tree of labeled nodes as a <a href="https://graphviz.org">Graphviz</a>
- * input file.
+ * Utility picker that converts an input into a string.
  * @author Sylvain Hallé
  * @ingroup API
  */
-public class TreeRenderer 
+public class AsString implements Picker<String>
 {
-	public static void toDot(PrintStream ps, Node<?> n)
-	{
-		ps.println("digraph G {");
-		ps.println("node [style=\"filled\",shape=\"circle\",label=\"\"];");
-		int id_counter = 0;
-		ps.println(0 + "[color=\"" + n + "\"];");
-		for (Node<?> child : n.getChildren())
-		{
-			id_counter = toDot(ps, 0, child, id_counter);
-		}
-		ps.println("}");
-	}
+	/**
+	 * The picker from which to take the input objects.
+	 */
+	protected Picker<?> m_picker;
 	
-	protected static int toDot(PrintStream ps, int parent_id, Node<?> current, int id_counter)
+	/**
+	 * Creates a new instance of the picker.
+	 * @param picker The picker from which to take the input objects
+	 */
+	public AsString(Picker<?> picker)
 	{
-		int current_id = ++id_counter;
-		ps.println(current_id + "[color=\"" + current + "\"];");
-		ps.println(parent_id + " -> " + current_id);
-		for (Node<?> child : current.getChildren())
+		super();
+		m_picker = picker;
+	}
+
+	@Override
+	public String pick()
+	{
+		Object o = m_picker.pick();
+		if (o == null)
 		{
-			id_counter = toDot(ps, current_id, child, id_counter);
+			return "null";
 		}
-		return id_counter;
+		return o.toString();
+	}
+
+	@Override
+	public AsString duplicate(boolean with_state)
+	{
+		return new AsString(m_picker.duplicate(with_state));
+	}
+
+	@Override
+	public void reset()
+	{
+		m_picker.reset();
 	}
 }

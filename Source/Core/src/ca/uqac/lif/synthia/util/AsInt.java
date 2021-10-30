@@ -16,64 +16,56 @@
     You should have received a copy of the GNU Lesser General Public License
     along with this program.  If not, see <http://www.gnu.org/licenses/>.
  */
-package ca.uqac.lif.synthia.tree;
+package ca.uqac.lif.synthia.util;
 
-import java.util.ArrayList;
-import java.util.List;
+import ca.uqac.lif.synthia.Picker;
 
 /**
- * Simple implementation of a labeled nodel
+ * Utility picker that converts an input into an integer.
  * @author Sylvain Hallé
- *
- * @param <T> The type of the node's label
  * @ingroup API
  */
-public class Node<T> 
+public class AsInt implements Picker<Integer>
 {
 	/**
-	 * The node's label.
+	 * The picker from which to take the input objects.
 	 */
-	protected T m_label;
+	protected Picker<?> m_picker;
 	
 	/**
-	 * The children of this node.
+	 * Creates a new instance of the picker.
+	 * @param picker The picker from which to take the input objects
 	 */
-	protected List<Node<T>> m_children;
-	
-	/**
-	 * Creates a new node with given label.
-	 * @param label The label
-	 */
-	public Node(T label)
+	public AsInt(Picker<?> picker)
 	{
 		super();
-		m_label = label;
-		m_children = new ArrayList<Node<T>>();
+		m_picker = picker;
 	}
-	
-	/**
-	 * Adds a child to this node.
-	 * @param c The child to add
-	 * @return This node
-	 */
-	public Node<T> addChild(Node<T> c)
-	{
-		m_children.add(c);
-		return this;
-	}
-	
-	/**
-	 * Gets the children of this node.
-	 * @return The children
-	 */
-	public List<Node<T>> getChildren()
-	{
-		return m_children;
-	}
-	
+
 	@Override
-	public String toString()
+	public Integer pick()
 	{
-		return m_label.toString();
+		Object o = m_picker.pick();
+		if (o == null)
+		{
+			return 0;
+		}
+		if (o instanceof Number)
+		{
+			return ((Number) o).intValue();
+		}
+		return 0;
+	}
+
+	@Override
+	public AsInt duplicate(boolean with_state)
+	{
+		return new AsInt(m_picker.duplicate(with_state));
+	}
+
+	@Override
+	public void reset()
+	{
+		m_picker.reset();
 	}
 }

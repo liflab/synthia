@@ -1,12 +1,12 @@
-package examples.trees;
+package examples.graphs;
 
 import ca.uqac.lif.synthia.random.RandomFloat;
 import ca.uqac.lif.synthia.random.RandomInteger;
 import ca.uqac.lif.synthia.sequence.Playback;
 import ca.uqac.lif.synthia.tree.ColoredNodePicker;
+import ca.uqac.lif.synthia.tree.ColoredTreeRenderer;
 import ca.uqac.lif.synthia.tree.Node;
 import ca.uqac.lif.synthia.tree.TreePicker;
-import ca.uqac.lif.synthia.tree.TreeRenderer;
 import ca.uqac.lif.synthia.util.Choice;
 import ca.uqac.lif.synthia.util.Constant;
 
@@ -38,7 +38,7 @@ public class PickTrees1
 		//child.setSeed(seed);
 		TreePicker<String> tp = new TreePicker<String>(node, height, degree, child);
 		Node<String> root = tp.pick();
-		TreeRenderer.toDot(System.out, root);
+		ColoredTreeRenderer.treeToDot(System.out, root);
 	}
 
 }

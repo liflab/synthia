@@ -113,4 +113,31 @@ public class Utilities
 		print(ps, o);
 		ps.println();
 	}
+	
+	/**
+	 * Creates a simple 5-color gradient. 
+	 * @param x A fraction between 0 and 1
+	 * @return A color associated to the fraction, represented as an
+	 * RGB color in hexadecimal.
+	 */
+	public static String colorGradient(float fraction)
+	{
+		if (fraction < 0.2)
+		{
+			return "#0000FF";
+		}
+		if (fraction < 0.4)
+		{
+			return "#00FFFF";
+		}
+		if (fraction < 0.6)
+		{
+			return "#00FF00";
+		}
+		if (fraction < 0.8)
+		{
+			return "#FFFF00";
+		}
+		return "#FF0000";
+	}
 }
