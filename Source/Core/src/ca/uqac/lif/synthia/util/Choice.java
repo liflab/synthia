@@ -1,6 +1,6 @@
 /*
     Synthia, a data structure generator
-    Copyright (C) 2019-2020 Laboratoire d'informatique formelle
+    Copyright (C) 2019-2021 Laboratoire d'informatique formelle
     Université du Québec à Chicoutimi, Canada
 
     This program is free software: you can redistribute it and/or modify
@@ -83,6 +83,18 @@ public class Choice<T> implements Shrinkable<T>
 	 */
 	/*@ non_null @*/ public Choice<T> add(/*@ non_null @*/ T t, /*@ non_null @*/ Number p)
 	{
+		ProbabilityChoice<T> pc = new ProbabilityChoice<T>(new Constant<T>(t), p);
+		return add(pc);
+	}
+	
+	/**
+	 * Adds an object-probability association
+	 * @param t The picker for an object
+	 * @param p The probability, must be between 0 and 1
+	 * @return This element picker
+	 */
+	/*@ non_null @*/ public Choice<T> add(/*@ non_null @*/ Picker<T> t, /*@ non_null @*/ Number p)
+	{
 		ProbabilityChoice<T> pc = new ProbabilityChoice<T>(t, p);
 		return add(pc);
 	}
@@ -97,6 +109,10 @@ public class Choice<T> implements Shrinkable<T>
 	public void reset()
 	{
 		m_floatPicker.reset();
+		for (ProbabilityChoice<?> pc : m_choices)
+		{
+			pc.reset();
+		}
 	}
 
 
@@ -169,18 +185,26 @@ public class Choice<T> implements Shrinkable<T>
 		/**
 		 * The object corresponding to that object
 		 */
-		/*@ non_null @*/ protected T m_object;
+		/*@ non_null @*/ protected Picker<T> m_object;
 		
 		/**
 		 * Creates a new probability-object association
 		 * @param t The object
 		 * @param p The probability of picking this node
 		 */
-		public ProbabilityChoice(/*@ non_null @*/ T t, /*@ non_null @*/ Number p)
+		public ProbabilityChoice(/*@ non_null @*/ Picker<T> t, /*@ non_null @*/ Number p)
 		{
 			super();
 			m_object = t;
 			m_probability = p.floatValue();
+		}
+		
+		/**
+		 * Resets the underlying picker for this probability choice.
+		 */
+		public void reset()
+		{
+			m_object.reset();
 		}
 		
 		/**
@@ -198,7 +222,7 @@ public class Choice<T> implements Shrinkable<T>
 		 */
 		/*@ pure non_null @*/ public T getObject()
 		{
-			return m_object;
+			return m_object.pick();
 		}
 
 
