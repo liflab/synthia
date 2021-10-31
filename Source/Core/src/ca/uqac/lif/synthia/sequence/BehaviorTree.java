@@ -175,7 +175,7 @@ public abstract class BehaviorTree<T> implements Picker<T>
 	 */
 	public static class Selector<T> extends BehaviorTree<T>
 	{
-		/*@ non_null @*/ protected List<NodeProbabilityChoice<T>> m_choices;
+		/*@ non_null @*/ protected List<ProbabilityChoice<T>> m_choices;
 		
 		/**
 		 * The index of the child node that is being "executed"
@@ -198,7 +198,7 @@ public abstract class BehaviorTree<T> implements Picker<T>
 		public Selector(/*@ non_null @*/ Picker<Float> float_picker)
 		{
 			super();
-			m_choices = new ArrayList<NodeProbabilityChoice<T>>();
+			m_choices = new ArrayList<ProbabilityChoice<T>>();
 			m_chosenIndex = -1;
 			m_floatPicker = float_picker;
 		}
@@ -213,7 +213,7 @@ public abstract class BehaviorTree<T> implements Picker<T>
 		public void reset()
 		{
 			m_chosenIndex = -1;
-			for (NodeProbabilityChoice<T> pc : m_choices)
+			for (ProbabilityChoice<T> pc : m_choices)
 			{
 				pc.reset();
 			}
@@ -256,7 +256,7 @@ public abstract class BehaviorTree<T> implements Picker<T>
 			{
 				return null;
 			}
-			return m_choices.get(m_chosenIndex).getObject().pick();
+			return m_choices.get(m_chosenIndex).getObject();
 		}
 
 		/**
@@ -271,7 +271,7 @@ public abstract class BehaviorTree<T> implements Picker<T>
 		public Selector<T> duplicate(boolean with_state)
 		{
 			Selector<T> ch = new Selector<T>(m_floatPicker.duplicate(with_state));
-			for (NodeProbabilityChoice<T> pc : m_choices)
+			for (ProbabilityChoice<T> pc : m_choices)
 			{
 				ch.m_choices.add(pc.duplicate(with_state));
 			}
@@ -292,7 +292,7 @@ public abstract class BehaviorTree<T> implements Picker<T>
 		 */
 		public Selector<T> add(BehaviorTree<T> node, Number probability)
 		{
-			m_choices.add(new NodeProbabilityChoice<T>(node, probability));
+			m_choices.add(new ProbabilityChoice<T>(node, probability));
 			return this;
 		}
 
@@ -325,43 +325,6 @@ public abstract class BehaviorTree<T> implements Picker<T>
 			return out.toString();
 		}
 		
-		/**
-		 * Simple data structure asssociating a behavior tree node with
-		 * a probability. This is an object used internally by
-		 * {@link Selector} to handle child nodes with probabilities.
-		 * @param <T> The type of objects returned by the behavior tree
-		 */
-		protected static class NodeProbabilityChoice<T> extends ProbabilityChoice<BehaviorTree<T>>
-		{	
-			/**
-			 * Creates a new probability-node association
-			 * @param t The object
-			 * @param p The probability of picking this node
-			 */
-			public NodeProbabilityChoice(/*@ non_null @*/ BehaviorTree<T> t, /*@ non_null @*/ Number p)
-			{
-				super(t, p);
-			}
-			
-			/**
-			 * Resets the node
-			 */
-			public void reset()
-			{
-				m_object.reset();
-			}
-			
-			/**
-			 * Duplicates this probability-node association
-			 * @param with_state If set to <tt>true</tt>, the node is duplicated
-			 * with its state
-			 * @return A duplicate of this association
-			 */
-			/*@ pure non_null @*/ public NodeProbabilityChoice<T> duplicate(boolean with_state)
-			{
-				return new NodeProbabilityChoice<T>(m_object.duplicate(with_state), m_probability);
-			}
-		}
 	}
 	
 	/**
