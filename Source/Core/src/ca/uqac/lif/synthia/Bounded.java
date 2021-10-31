@@ -19,8 +19,7 @@
 package ca.uqac.lif.synthia;
 
 /**
- * Interface who extends Picker. This interface will be used to signal
- * that the picker enumerates all values from a set.
+ * Interface used to signal that a picker enumerates all values from a set.
  * 
  * @ingroup API
  */
