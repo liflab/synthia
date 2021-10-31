@@ -18,6 +18,8 @@
  */
 package ca.uqac.lif.synthia.random;
 
+import ca.uqac.lif.synthia.Reactive;
+
 /**
  * Generates integer numbers following a Poisson distribution.
  * The <a href="https://en.wikipedia.org/wiki/Poisson_distribution">Poisson
@@ -39,7 +41,7 @@ package ca.uqac.lif.synthia.random;
  * 
  * @ingroup API
  */
-public class PoissonInteger extends RandomPicker<Integer>
+public class PoissonInteger extends RandomPicker<Integer> implements Reactive<Number,Integer>
 {
 	/**
 	 * The &lambda; parameter of the underlying Poisson distribution
@@ -81,11 +83,7 @@ public class PoissonInteger extends RandomPicker<Integer>
 	public PoissonInteger(/*@ non_null @*/ Number lambda)
 	{
 		super();
-		m_lambda = lambda.floatValue();
-		m_c = 0.767 - 3.36/ m_lambda;
-		m_beta = Math.PI / Math.sqrt(3 * m_lambda);
-		m_alpha = m_beta * m_lambda;
-		m_k = Math.log(m_c) - m_lambda - Math.log(m_beta);
+		tell(lambda);
 	}
 	
 	/**
@@ -106,6 +104,20 @@ public class PoissonInteger extends RandomPicker<Integer>
 		m_alpha = alpha;
 		m_beta = beta;
 		m_k = k;
+	}
+	
+	/**
+	 * Modifies the parameter &lambda; associated to this picker.
+	 * @param lambda The new parameter &lambda;
+	 */
+	@Override
+	public void tell(Number lambda)
+	{
+		m_lambda = lambda.floatValue();
+		m_c = 0.767 - 3.36/ m_lambda;
+		m_beta = Math.PI / Math.sqrt(3 * m_lambda);
+		m_alpha = m_beta * m_lambda;
+		m_k = Math.log(m_c) - m_lambda - Math.log(m_beta);
 	}
 	
 	@Override

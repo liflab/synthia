@@ -19,6 +19,7 @@
 package ca.uqac.lif.synthia.random;
 
 import ca.uqac.lif.synthia.Picker;
+import ca.uqac.lif.synthia.Reactive;
 import ca.uqac.lif.synthia.Shrinkable;
 import ca.uqac.lif.synthia.util.Constant;
 import ca.uqac.lif.synthia.util.NothingPicker;
@@ -30,7 +31,7 @@ import ca.uqac.lif.synthia.util.NothingPicker;
  * 
  * @ingroup API
  */
-public class RandomBoolean extends RandomPicker<Boolean> implements Shrinkable<Boolean>
+public class RandomBoolean extends RandomPicker<Boolean> implements Shrinkable<Boolean>, Reactive<Float,Boolean>
 {
 	/**
 	 * The probability of picking <tt>true</tt>
@@ -73,12 +74,11 @@ public class RandomBoolean extends RandomPicker<Boolean> implements Shrinkable<B
 	/**
 	 * Sets the probability for this picker to return <tt>true</tt>.
 	 * @param p The probability of picking <tt>true</tt>.
-	 * @return This generator
 	 */
-	public RandomBoolean setTrueProbability(float p)
+	@Override
+	public void tell(Float p)
 	{
 		m_trueProbability = p;
-		return this;
 	}
 
 	/**

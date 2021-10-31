@@ -19,6 +19,7 @@
 package ca.uqac.lif.synthia.random;
 
 import ca.uqac.lif.synthia.Picker;
+import ca.uqac.lif.synthia.Reactive;
 import ca.uqac.lif.synthia.Shrinkable;
 import ca.uqac.lif.synthia.util.NothingPicker;
 
@@ -27,7 +28,7 @@ import ca.uqac.lif.synthia.util.NothingPicker;
  * 
  * @ingroup API
  */
-public class RandomInteger extends RandomPicker<Integer> implements Shrinkable<Integer>
+public class RandomInteger extends RandomPicker<Integer> implements Shrinkable<Integer>, Reactive<Integer,Integer>
 {
 	/**
 	 * The lower bound of the interval
@@ -85,6 +86,16 @@ public class RandomInteger extends RandomPicker<Integer> implements Shrinkable<I
 		m_min = min;
 		m_max = max;
 		return this;
+	}
+	
+	/**
+	 * Sets the maximum bound for values of this picker.
+	 * @param max The higher bound of the interval
+	 */
+	@Override
+	public void tell(Integer max)
+	{
+		m_max = max;
 	}
 
 	@Override
