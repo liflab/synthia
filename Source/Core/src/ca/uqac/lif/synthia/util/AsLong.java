@@ -16,73 +16,56 @@
     You should have received a copy of the GNU Lesser General Public License
     along with this program.  If not, see <http://www.gnu.org/licenses/>.
  */
-package ca.uqac.lif.synthia.tree;
+package ca.uqac.lif.synthia.util;
 
-import java.util.ArrayList;
-import java.util.List;
+import ca.uqac.lif.synthia.Picker;
 
 /**
- * Simple implementation of a labeled nodel
+ * Utility picker that converts an input into a long integer.
  * @author Sylvain Hallé
- *
- * @param <T> The type of the node's label
  * @ingroup API
  */
-public class Node<T> 
+public class AsLong implements Picker<Long>
 {
 	/**
-	 * The node's label.
+	 * The picker from which to take the input objects.
 	 */
-	protected T m_label;
+	protected Picker<?> m_picker;
 	
 	/**
-	 * The children of this node.
+	 * Creates a new instance of the picker.
+	 * @param picker The picker from which to take the input objects
 	 */
-	protected List<Node<T>> m_children;
-	
-	/**
-	 * Creates a new node with given label.
-	 * @param label The label
-	 */
-	public Node(T label)
+	public AsLong(Picker<?> picker)
 	{
 		super();
-		m_label = label;
-		m_children = new ArrayList<Node<T>>();
+		m_picker = picker;
 	}
-	
-	/**
-	 * Adds a child to this node.
-	 * @param c The child to add
-	 * @return This node
-	 */
-	public Node<T> addChild(Node<T> c)
-	{
-		m_children.add(c);
-		return this;
-	}
-	
-	/**
-	 * Gets the children of this node.
-	 * @return The children
-	 */
-	public List<Node<T>> getChildren()
-	{
-		return m_children;
-	}
-	
-	/**
-	 * Gets the label associated to this node.
-	 * @return The label
-	 */
-	public T getLabel()
-	{
-		return m_label;
-	}
-	
+
 	@Override
-	public String toString()
+	public Long pick()
 	{
-		return m_label.toString();
+		Object o = m_picker.pick();
+		if (o == null)
+		{
+			return 0L;
+		}
+		if (o instanceof Number)
+		{
+			return ((Number) o).longValue();
+		}
+		return 0L;
+	}
+
+	@Override
+	public AsLong duplicate(boolean with_state)
+	{
+		return new AsLong(m_picker.duplicate(with_state));
+	}
+
+	@Override
+	public void reset()
+	{
+		m_picker.reset();
 	}
 }

@@ -58,7 +58,7 @@ public class Tick implements Picker<Number>, ExplanationQueryable
 	/**
 	 * Variable holding the current value of the tick
 	 */
-	protected float m_currentValue;
+	protected double m_currentValue;
 
 	/**
 	 * Picker that determines the increment for each
@@ -157,7 +157,7 @@ public class Tick implements Picker<Number>, ExplanationQueryable
 			m_first = false;
 			return m_currentValue;
 		}
-		m_currentValue += m_increment.pick().floatValue();
+		m_currentValue += m_increment.pick().doubleValue();
 		return m_currentValue;
 	}
 

@@ -20,9 +20,7 @@ package ca.uqac.lif.synthia.tree;
 
 import java.io.PrintStream;
 import java.util.ArrayDeque;
-import java.util.HashMap;
 import java.util.HashSet;
-import java.util.Map;
 import java.util.Queue;
 import java.util.Set;
 
@@ -32,40 +30,24 @@ import java.util.Set;
  * @author Sylvain Hallé
  * @ingroup API
  */
-public class GraphRenderer<T>
+public class GraphRenderer<T> extends GraphCrawler<T>
 {
-	protected Map<Node<T>,Integer> m_nodes;
-	
-	protected int m_idCounter;
 	
 	protected boolean m_directed;
 	
 	protected String m_nodeString;
 	
-	protected GraphRenderer(boolean directed)
+	public GraphRenderer(boolean directed)
 	{
 		super();
-		m_nodes = new HashMap<Node<T>,Integer>();
-		m_idCounter = 0;
 		m_directed = directed;
-		m_nodeString = "node [style=\"filled\",shape=\"circle\",label=\"\"];";
+		m_nodeString = "[style=\"filled\",shape=\"circle\",label=\"\"]";
 	}
 	
 	public GraphRenderer<T> setNodeString(String s)
 	{
 		m_nodeString = s;
 		return this;
-	}
-	
-	protected int getId(Node<T> n)
-	{
-		if (m_nodes.containsKey(n))
-		{
-			return m_nodes.get(n);
-		}
-		int id = m_idCounter++;
-		m_nodes.put(n, id);
-		return id;
 	}
 	
 	public void printToDot(PrintStream ps, Node<T> n)

@@ -18,15 +18,15 @@
  */
 package examples.graphs;
 
-import java.util.HashSet;
-import java.util.Set;
-
+import ca.uqac.lif.synthia.Picker;
+import ca.uqac.lif.synthia.Reactive;
 import ca.uqac.lif.synthia.random.RandomBoolean;
 import ca.uqac.lif.synthia.random.RandomInteger;
+import ca.uqac.lif.synthia.tree.GraphPicker;
 import ca.uqac.lif.synthia.tree.GraphRenderer;
+import ca.uqac.lif.synthia.tree.IntegerNodePicker;
 import ca.uqac.lif.synthia.tree.Node;
 import ca.uqac.lif.synthia.util.AsInt;
-import ca.uqac.lif.synthia.util.Freeze;
 import ca.uqac.lif.synthia.util.Tick;
 import static examples.util.Utilities.colorGradient;
 
@@ -51,35 +51,53 @@ import static examples.util.Utilities.colorGradient;
  * @author Sylvain Hallé
  * @ingroup Examples
  */
-public class BarabasiAlbert
+public class BarabasiAlbert<T> extends GraphPicker<T>
 {
 	public static void main(String[] args)
 	{
-		/* The pickers and data structures we need. */
-		Set<Node<Integer>> nodes = new HashSet<Node<Integer>>();
-		Freeze<Integer> size = new Freeze<Integer>(new RandomInteger(15, 100));
-		RandomBoolean coin = new RandomBoolean();
-		AsInt node_id = new AsInt(new Tick(0, 1));
+		BarabasiAlbert<Integer> generator = new BarabasiAlbert<Integer>(
+				new IntegerNodePicker(new AsInt(new Tick(0, 1))), new RandomInteger(15, 100), new RandomBoolean());
+		Node<Integer> root = generator.pick();
 		
+		/* Draw. We cannot show the graph, but the following instructions render it as
+		   a Graphviz input file. We tweak the default settings for a better display. */
+		GraphRenderer<Integer> gr = new GraphRenderer<Integer>(false) {
+			public String getLabel(Node<Integer> n) { return ""; }
+			public String getColor(Node<Integer> n) { return colorGradient((float) n.getChildren().size() / generator.getMaxDegree()); }
+		}.setNodeString("[style=\"filled\",width=0.1,height=0.1,shape=\"circle\"]");
+		gr.printToDot(System.out, root);
+	}
+	
+	protected Reactive<Float,Boolean> m_coin;
+	
+	public BarabasiAlbert(Picker<Node<T>> node_picker, Picker<Integer> size, Reactive<Float,Boolean> coin)
+	{
+		super(node_picker, size);
+		m_coin = coin;
+	}
+	
+	@Override
+	public Node<T> pick()
+	{
 		/* The graph starts with two connected nodes. */
-		Node<Integer> start_node1 = new Node<Integer>(node_id.pick());
-		Node<Integer> start_node2 = new Node<Integer>(node_id.pick());
+		Node<T> start_node1 = m_nodePicker.pick();
+		Node<T> start_node2 = m_nodePicker.pick();
 		connect(start_node1, start_node2);
-		nodes.add(start_node1);
-		nodes.add(start_node2);
+		m_nodes.add(start_node1);
+		m_nodes.add(start_node2);
 		
 		/* Add nodes until the desired size is reached. */
-		int sum_kj = 2;
-		while (nodes.size() < size.pick())
+		int sum_kj = 2, size = m_size.pick();
+		while (m_nodes.size() < size)
 		{
-			Node<Integer> new_n = new Node<Integer>(node_id.pick());
-			nodes.add(new_n);
+			Node<T> new_n = m_nodePicker.pick();
+			m_nodes.add(new_n);
 			int added = 0;
-			for (Node<Integer> n : nodes)
+			for (Node<T> n : m_nodes)
 			{
 				int k_i = n.getChildren().size();
-				coin.setTrueProbability((float) k_i / (float) sum_kj);
-				if (coin.pick())
+				m_coin.tell((float) k_i / (float) sum_kj);
+				if (m_coin.pick())
 				{
 					connect(new_n, n);
 					added++;
@@ -87,40 +105,13 @@ public class BarabasiAlbert
 			}
 			sum_kj += 2 * added;
 		}
-		
-		/* Draw. We cannot show the graph, but the following instructions render it as
-		   a Graphviz input file. We tweak the default settings for a better display. */
-		float max_degree = getMaxDegree(nodes);
-		GraphRenderer<Integer> gr = new GraphRenderer<Integer>(false) {
-			public String getLabel(Node<Integer> n) { return ""; }
-			public String getColor(Node<Integer> n) { return colorGradient((float) n.getChildren().size() / max_degree); }
-		}.setNodeString("[style=\"filled\",width=0.1,height=0.1,shape=\"circle\"]");
-		gr.printToDot(System.out, start_node1);
+		return start_node1;
 	}
-	
-	/**
-	 * Connects two nodes in a graph.
-	 * @param n1 The first node
-	 * @param n2 The second node
-	 */
-	protected static void connect(Node<Integer> n1, Node<Integer> n2)
+
+	@Override
+	public Picker<Node<T>> duplicate(boolean with_state)
 	{
-		n1.addChild(n2);
-		n2.addChild(n1);
-	}
-	
-	/**
-	 * Gets the maximum out degree in a set of nodes.
-	 * @param nodes The set of nodes
-	 * @return The maximum out degree
-	 */
-	protected static int getMaxDegree(Set<Node<Integer>> nodes)
-	{
-		int max = 0;
-		for (Node<Integer> n : nodes)
-		{
-			max = Math.max(max, n.getChildren().size());
-		}
-		return max;
+		// Don't care for this example.
+		return null;
 	}
 }

@@ -118,7 +118,7 @@ public class Knit<T> implements Picker<T>
 		if (m_instances.isEmpty() || m_newInstance.pick())
 		{
 			// Spawn a new instance
-			Picker<T> new_instance = m_instancePicker.pick().duplicate(false);
+			Picker<T> new_instance = m_instancePicker.pick();
 			m_instances.add(new_instance);
 		}
 		for (int i = 0; i < s_maxTries; i++)
