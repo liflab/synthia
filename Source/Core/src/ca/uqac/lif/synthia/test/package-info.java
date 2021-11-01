@@ -16,44 +16,18 @@
     You should have received a copy of the GNU Lesser General Public License
     along with this program.  If not, see <http://www.gnu.org/licenses/>.
  */
-package ca.uqac.lif.synthia.widget;
 
-import java.awt.event.ActionEvent;
-import java.util.Set;
-
-import ca.uqac.lif.synthia.Picker;
-import ca.uqac.lif.synthia.Reactive;
-
-public class ChooseAction implements Reactive<Set<Object>,ActionEvent>
-{
-	/**
-	 * The set of objects on which actions can be made.
-	 */
-	Set<Object> m_contents;
-	
-	@Override
-	public void reset()
-	{
-		// TODO Auto-generated method stub
-		
-	}
-
-	@Override
-	public ActionEvent pick()
-	{
-		// TODO Auto-generated method stub
-		return null;
-	}
-
-	@Override
-	public ChooseAction duplicate(boolean with_state)
-	{
-		return new ChooseAction();
-	}
-
-	@Override
-	public void tell(Set<Object> objects)
-	{
-		m_contents = objects;
-	}
-}
+/**
+ * Classes that enable Synthia to operate as a fuzz testing tool. The two
+ * main classes in this package are:
+ * <ul>
+ * <li>{@link Assert}, which can fuzz-test a function given a Boolean oracle,
+ * and then perform automated shrinking of any value that violates the
+ * condition</li> 
+ * <li>{@link Monkey}, which can do monkey testing on a reactive
+ * component, and  and then perform automated shrinking of any sequence of
+ * actions that causes an exception to be thrown</li> 
+ * </ul>
+ * @ingroup API
+ */
+package ca.uqac.lif.synthia.test;

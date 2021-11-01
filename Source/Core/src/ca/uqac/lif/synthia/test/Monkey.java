@@ -16,7 +16,7 @@
     You should have received a copy of the GNU Lesser General Public License
     along with this program.  If not, see <http://www.gnu.org/licenses/>.
  */
-package ca.uqac.lif.synthia.widget;
+package ca.uqac.lif.synthia.test;
 
 import java.io.PrintStream;
 import java.util.ArrayList;
@@ -26,7 +26,31 @@ import ca.uqac.lif.synthia.Picker;
 import ca.uqac.lif.synthia.Resettable;
 import ca.uqac.lif.synthia.SequenceShrinkable;
 import ca.uqac.lif.synthia.sequence.Record;
+import ca.uqac.lif.synthia.util.Delay;
 
+/**
+ * Performs <a href="https://en.wikipedia.org/wiki/Monkey_testing">monkey
+ * testing</a> by interacting with a component. The monkey works as
+ * follows:
+ * <ol>
+ * <li>The monkey starts with a <em>discovery phase</em>. It uses a
+ * <tt>Picker&lt;Action&gt;</tt> as a source of actions to be
+ * performed on the component. Actions provided by this picker are
+ * executed one by one.</li>
+ * <li>Exceptions that may be thrown resulting from each action are trapped.
+ * As soon as an exception is caught, the sequence of actions performed so
+ * far is stored.</li>
+ * <li>The monkey then enters in a <em>shrinking phase</em>, where shorter
+ * sub-traces of the original are repeatedly generated and tested. Whenever
+ * a shorter sequence still throws an exception, this sequence replaces the
+ * original, and the shrinking process restarts from this new reference.</li> 
+ * </ol>
+ * What the "component" can be is totally abstract. All the monkey expects
+ * is that it implements the {@link Resettable} interface. A typical component
+ * is a graphical user interface (such as a {@link JFrame}), 
+ * 
+ * @author Sylvain Hallé
+ */
 public class Monkey
 {
 	/**
@@ -43,7 +67,7 @@ public class Monkey
 	/**
 	 * The picker producing the actions to be applied.
 	 */
-	protected Picker<GuiAction> m_actionPicker;
+	protected Picker<Action> m_actionPicker;
 
 	/**
 	 * The object on which the actions are applied.
@@ -53,7 +77,7 @@ public class Monkey
 	/**
 	 * The "best" sequence of actions found by the monkey so far.
 	 */
-	protected List<GuiAction> m_bestSequence;
+	protected List<Action> m_bestSequence;
 
 	/**
 	 * The exception thrown at the end of the "best" sequence of actions found
@@ -87,13 +111,13 @@ public class Monkey
 	 * @param ps A print stream where the monkey outputs status messages during
 	 * its execution. Set it to <tt>null</tt> to disable messages.
 	 */
-	public Monkey(Resettable object, Picker<GuiAction> actions, Picker<Float> decision, PrintStream ps)
+	public Monkey(Resettable object, Picker<Action> actions, Picker<Float> decision, PrintStream ps)
 	{
 		super();
 		m_object = object;
 		m_actionPicker = actions;
 		m_decision = decision;
-		m_bestSequence = new ArrayList<GuiAction>();
+		m_bestSequence = new ArrayList<Action>();
 		m_out = ps;
 		m_bestThreshold = 4;
 		m_lastException = null;
@@ -106,7 +130,7 @@ public class Monkey
 	 * @param decision A picker passed to the action picker for the
 	 * shrinking process
 	 */
-	public Monkey(Resettable object, Picker<GuiAction> actions, Picker<Float> decision)
+	public Monkey(Resettable object, Picker<Action> actions, Picker<Float> decision)
 	{
 		this(object, actions, decision, null);
 	}
@@ -114,7 +138,7 @@ public class Monkey
 	public boolean check()
 	{
 		boolean error_found = false;
-		Record<GuiAction> rec = new Record<GuiAction>(m_actionPicker);
+		Record<Action> rec = new Record<Action>(m_actionPicker);
 		for (int try_counter = 0; try_counter < s_maxTries; try_counter++)
 		{
 			println("Attempt " + try_counter);
@@ -122,7 +146,7 @@ public class Monkey
 			{
 				for (int i = 0; i < 100; i++)
 				{
-					GuiAction a = rec.pick();
+					Action a = rec.pick();
 					a.doAction();
 					print(a);
 					//Delay.wait(0.005f); // Give time for the object to reset itself
@@ -140,7 +164,7 @@ public class Monkey
 			}
 			rec.clear();
 		}
-		SequenceShrinkable<GuiAction> reference = rec;
+		SequenceShrinkable<Action> reference = rec;
 		for (int shrinking_steps = 0; m_bestSequence.size() > m_bestThreshold && shrinking_steps < s_maxShrinkingPhases; shrinking_steps++)
 		{
 			boolean shrink_again = false;
@@ -149,7 +173,7 @@ public class Monkey
 				Exception last_ex = null;
 				for (int i = 0; i < s_maxTries; i++)
 				{
-					SequenceShrinkable<GuiAction> to_try = reference.shrink(m_decision, magnitude);
+					SequenceShrinkable<Action> to_try = reference.shrink(m_decision, magnitude);
 					boolean success = false;
 					m_object.reset();
 					Delay.wait(0.25f); // Give time for the object to reset itself
@@ -157,7 +181,7 @@ public class Monkey
 					{
 						try
 						{
-							GuiAction a = to_try.pick();
+							Action a = to_try.pick();
 							a.doAction();
 							print(a);
 							//Delay.wait(0.005f); // Give time for the object to reset itself
@@ -194,7 +218,7 @@ public class Monkey
 		return m_lastException;
 	}
 
-	public List<GuiAction> getShrunk()
+	public List<Action> getShrunk()
 	{
 		return m_bestSequence;
 	}

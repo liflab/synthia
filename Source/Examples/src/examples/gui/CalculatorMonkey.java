@@ -20,10 +20,9 @@ package examples.gui;
 
 import ca.uqac.lif.synthia.random.BiasedRandomFloat;
 import ca.uqac.lif.synthia.random.RandomFloat;
+import ca.uqac.lif.synthia.test.Action;
+import ca.uqac.lif.synthia.test.Monkey;
 import ca.uqac.lif.synthia.util.Choice;
-import ca.uqac.lif.synthia.widget.GuiAction;
-import ca.uqac.lif.synthia.widget.Monkey;
-import ca.uqac.lif.synthia.widget.WidgetAction;
 
 /**
  * Performs <a href="https://en.wikipedia.org/wiki/Monkey_testing">monkey
@@ -285,7 +284,7 @@ public class CalculatorMonkey
 	{
 		RandomFloat rf = new RandomFloat().setSeed(50000);
 		Calculator window = new Calculator().disableNumberFormatException().hasOverflow();
-		Choice<GuiAction> actions = new Choice<GuiAction>(rf);
+		Choice<Action> actions = new Choice<Action>(rf);
 		for (String label : Calculator.BUTTON_LABELS)
 		{
 			actions.add(new WidgetAction.ClickAction(window.getButton(label)), 1f / 16);

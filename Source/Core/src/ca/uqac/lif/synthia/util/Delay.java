@@ -16,44 +16,64 @@
     You should have received a copy of the GNU Lesser General Public License
     along with this program.  If not, see <http://www.gnu.org/licenses/>.
  */
-package ca.uqac.lif.synthia.widget;
-
-import java.awt.event.ActionEvent;
-import java.util.Set;
+package ca.uqac.lif.synthia.util;
 
 import ca.uqac.lif.synthia.Picker;
-import ca.uqac.lif.synthia.Reactive;
 
-public class ChooseAction implements Reactive<Set<Object>,ActionEvent>
+/**
+ * Picker that does not produce any value, but causes the thread to wait
+ * for a moment on every call to {@link #pick()}.
+ * @author Sylvain Hallé
+ */
+public class Delay implements Picker<Object>
 {
 	/**
-	 * The set of objects on which actions can be made.
+	 * The picker deciding on the time to wait, in seconds.
 	 */
-	Set<Object> m_contents;
+	protected Picker<? extends Number> m_delay;
 	
-	@Override
-	public void reset()
+	/**
+	 * Creates a new delay picker.
+	 * @param delay The picker deciding on the time to wait, in seconds
+	 */
+	public Delay(Picker<? extends Number> delay)
 	{
-		// TODO Auto-generated method stub
-		
+		super();
+		m_delay = delay;
 	}
 
 	@Override
-	public ActionEvent pick()
+	public void reset()
 	{
-		// TODO Auto-generated method stub
+		m_delay.reset();
+	}
+
+	@Override
+	public Object pick()
+	{
+		wait(m_delay.pick().floatValue());
 		return null;
 	}
 
 	@Override
-	public ChooseAction duplicate(boolean with_state)
+	public Delay duplicate(boolean with_state)
 	{
-		return new ChooseAction();
+		return new Delay(m_delay.duplicate(with_state));
 	}
-
-	@Override
-	public void tell(Set<Object> objects)
+	
+	/**
+	 * Waits for some time.
+	 * @param duration The time to wait, in seconds
+	 */
+	public static void wait(float duration)
 	{
-		m_contents = objects;
+		try
+		{
+			Thread.sleep((long) (duration * 1000));
+		}
+		catch (InterruptedException e)
+		{
+			// Do nothing
+		}
 	}
 }

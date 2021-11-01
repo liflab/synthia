@@ -24,6 +24,7 @@ import java.util.List;
 import ca.uqac.lif.synthia.collection.ComparableList;
 import ca.uqac.lif.synthia.collection.ComposeList;
 import ca.uqac.lif.synthia.random.RandomInteger;
+import ca.uqac.lif.synthia.test.Assert;
 
 /**
  * Illustrates the shrinking process when testing a procedure that sorts lists

@@ -20,6 +20,7 @@ package examples.quickcheck;
 
 import ca.uqac.lif.synthia.random.RandomFloat;
 import ca.uqac.lif.synthia.random.RandomInteger;
+import ca.uqac.lif.synthia.test.Assert;
 
 /**
  * Simple illustration of the shrinking process on randomly generated integers.

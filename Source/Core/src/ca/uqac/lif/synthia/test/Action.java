@@ -16,44 +16,19 @@
     You should have received a copy of the GNU Lesser General Public License
     along with this program.  If not, see <http://www.gnu.org/licenses/>.
  */
-package ca.uqac.lif.synthia.widget;
+package ca.uqac.lif.synthia.test;
 
-import java.awt.event.ActionEvent;
-import java.util.Set;
-
-import ca.uqac.lif.synthia.Picker;
-import ca.uqac.lif.synthia.Reactive;
-
-public class ChooseAction implements Reactive<Set<Object>,ActionEvent>
+/**
+ * Interface signaling that an object can perform an "action".
+ * 
+ * @author Sylvain Hallé
+ * @ingroup API
+ */
+public interface Action
 {
 	/**
-	 * The set of objects on which actions can be made.
+	 * Performs an action on a component. What an "action" represents depends on
+	 * the concrete class implementing the interface.
 	 */
-	Set<Object> m_contents;
-	
-	@Override
-	public void reset()
-	{
-		// TODO Auto-generated method stub
-		
-	}
-
-	@Override
-	public ActionEvent pick()
-	{
-		// TODO Auto-generated method stub
-		return null;
-	}
-
-	@Override
-	public ChooseAction duplicate(boolean with_state)
-	{
-		return new ChooseAction();
-	}
-
-	@Override
-	public void tell(Set<Object> objects)
-	{
-		m_contents = objects;
-	}
+	public void doAction();
 }

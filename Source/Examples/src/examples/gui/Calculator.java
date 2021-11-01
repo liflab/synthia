@@ -32,7 +32,7 @@ import javax.swing.JPanel;
 import javax.swing.JTextField;
 
 import ca.uqac.lif.synthia.Resettable;
-import ca.uqac.lif.synthia.widget.Monkey;
+import ca.uqac.lif.synthia.test.Monkey;
 
 /**
  * A simple calculator. The code for this window is an adaptation of the
