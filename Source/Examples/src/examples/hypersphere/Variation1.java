@@ -22,6 +22,7 @@ import ca.uqac.lif.synthia.random.AffineTransform.AffineTransformFloat;
 import ca.uqac.lif.synthia.random.RandomFloat;
 import ca.uqac.lif.synthia.random.RandomInteger;
 import ca.uqac.lif.synthia.vector.HyperspherePicker;
+import examples.util.Utilities;
 
 /**
  * Generates two-dimensional points lying along two concentric circles.
@@ -50,7 +51,7 @@ public class Variation1
 		HyperspherePicker hp = new HyperspherePicker(radius, angle);
 		for (int i = 0; i < 100; i++)
 		{
-			System.out.println(Variations.printPoint(hp.pick()));
+			Utilities.print(System.out, hp.pick());
 		}
 	}
 

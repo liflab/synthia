@@ -21,6 +21,7 @@ package examples.hypersphere;
 import ca.uqac.lif.synthia.random.GaussianFloat;
 import ca.uqac.lif.synthia.util.Constant;
 import ca.uqac.lif.synthia.vector.HyperspherePicker;
+import examples.util.Utilities;
 
 /**
  * Generates two-dimensional points lying at right angles along a randomly
@@ -49,7 +50,7 @@ public class Variation2
 		HyperspherePicker hp = new HyperspherePicker(radius, angle);
 		for (int i = 0; i < 100; i++)
 		{
-			System.out.println(Variations.printPoint(hp.pick()));
+			Utilities.print(System.out, hp.pick());
 		}
 	}
 
