@@ -30,6 +30,8 @@ package ca.uqac.lif.synthia;
  * @author Sylvain Hallé
  *
  * @param <T> The type of the objects to return
+ * @see SequenceShrinkable
+ * @ingroup API
  */
 public interface Shrinkable<T> extends Picker<T>
 {

@@ -20,7 +20,7 @@ public class RecordTest
 		{
 			results.add((int) record.pick());
 		}
-		List picked_value = record.getValues();
+		List picked_value = record.getSequence();
 
 		// Check that the values it records are indeed those it receives
 		for (int i = 0; i < results.size(); i++)
@@ -29,13 +29,13 @@ public class RecordTest
 		}
 
 		// Check that getCount returns the expected value
-		Assertions.assertEquals(results.size(), record.getValues().size());
+		Assertions.assertEquals(results.size(), record.getSequence().size());
 		Assertions.assertEquals(results.size(), record.getCount());
 
 		// Check that reset wipes the stored values and makes the recording start anew
 		results.clear();
 		record.reset();
-		Assertions.assertEquals(results.isEmpty(), record.getValues().isEmpty());
+		Assertions.assertEquals(results.isEmpty(), record.getSequence().isEmpty());
 	}
 
 	@Test
@@ -49,8 +49,8 @@ public class RecordTest
 		}
 		Record record_copy = (Record) record.duplicate(true);
 		Assertions.assertEquals(record.getCount(), record_copy.getCount());
-		List<Integer> record_list = record.getValues();
-		List<Integer> record_copy_list = record_copy.getValues();
+		List<Integer> record_list = record.getSequence();
+		List<Integer> record_copy_list = record_copy.getSequence();
 		for (int i = 0; i < record_list.size(); i++)
 		{
 			Assertions.assertEquals(record_list.get(i), record_copy_list.get(i));
@@ -74,8 +74,8 @@ public class RecordTest
 		{
 			record_copy.pick();
 		}
-		List<Integer> record_list = record.getValues();
-		List<Integer> record_copy_list = record_copy.getValues();
+		List<Integer> record_list = record.getSequence();
+		List<Integer> record_copy_list = record_copy.getSequence();
 		Assertions.assertEquals(record.getCount(), record_copy.getCount());
 		for (int i = 0; i < record_list.size(); i++)
 		{

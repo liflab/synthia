@@ -21,6 +21,7 @@ package ca.uqac.lif.synthia;
 /**
  * Signals that an object can be put back into its initial state.
  * @author Sylvain Hallé
+ * @ingroup API
  *
  */
 public interface Resettable

@@ -142,15 +142,6 @@ public class Record<T> implements Picker<T>, ExplanationQueryable, SequenceShrin
 		return m_values.size();
 	}
 	
-	/**
-	 * Gets the list of values produced by the picker so far
-	 * @return The list of values
-	 */
-	/*@ pure non_null @*/ public List<T> getValues()
-	{
-		return m_values;
-	}
-	
 	@Override
 	public PartNode getExplanation(Part p)
 	{

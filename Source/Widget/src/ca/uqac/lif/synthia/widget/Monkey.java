@@ -134,7 +134,7 @@ public class Monkey
 				// Exception thrown
 				print("\n" + e);
 				error_found = true;
-				m_bestSequence = rec.getValues();
+				m_bestSequence = rec.getSequence();
 				println("\nSequence: " + m_bestSequence);
 				break;
 			}
