@@ -19,13 +19,16 @@
 package ca.uqac.lif.synthia.sequence;
 
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.List;
 
 import ca.uqac.lif.petitpoucet.NodeFactory;
 import ca.uqac.lif.petitpoucet.Part;
 import ca.uqac.lif.petitpoucet.PartNode;
 import ca.uqac.lif.petitpoucet.function.ExplanationQueryable;
+import ca.uqac.lif.synthia.Bounded;
 import ca.uqac.lif.synthia.Picker;
+import ca.uqac.lif.synthia.SequenceShrinkable;
 import ca.uqac.lif.synthia.explanation.NthSuccessiveOutput;
 
 /**
@@ -43,7 +46,7 @@ import ca.uqac.lif.synthia.explanation.NthSuccessiveOutput;
  * @param <T> The type of objects to pick
  * @ingroup API
  */
-public class Record<T> implements Picker<T>, ExplanationQueryable
+public class Record<T> implements Picker<T>, ExplanationQueryable, SequenceShrinkable<T>
 {
 	/**
 	 * The picker that generates the values
@@ -70,6 +73,14 @@ public class Record<T> implements Picker<T>, ExplanationQueryable
 	{
 		m_picker = picker;
 		m_values = values;
+	}
+	
+	/**
+	 * Clears the values recorded so far.
+	 */
+	public void clear()
+	{
+		m_values.clear();
 	}
 
 	/**
@@ -163,5 +174,43 @@ public class Record<T> implements Picker<T>, ExplanationQueryable
 		}
 		root.addChild(f.getPartNode(p, m_picker));
 		return root;
+	}
+
+	@Override
+	public SequenceShrinkable<T> shrink(Picker<Float> d, float m)
+	{
+		List<Integer> indices = new ArrayList<Integer>();
+		int num_to_pick = (int) (m * (float) m_values.size());
+		while (indices.size() < num_to_pick)
+		{
+			int index = (int) Math.floor(d.pick() * m_values.size());
+			if (!indices.contains(index))
+			{
+				indices.add(index);
+			}
+		}
+		Collections.sort(indices);
+		List<T> values = new ArrayList<T>(indices.size());
+		for (int index : indices)
+		{
+			values.add(m_values.get(index));
+		}
+		return new Playback<T>(values);
+	}
+
+	@Override
+	public boolean isDone()
+	{
+		if (m_picker instanceof Bounded)
+		{
+			return ((Bounded<?>) m_picker).isDone();
+		}
+		return false;
+	}
+
+	@Override
+	public List<T> getSequence()
+	{
+		return m_values;
 	}
 }

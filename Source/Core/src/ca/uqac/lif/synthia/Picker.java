@@ -1,6 +1,6 @@
 /*
     Synthia, a data structure generator
-    Copyright (C) 2019-2020 Laboratoire d'informatique formelle
+    Copyright (C) 2019-2021 Laboratoire d'informatique formelle
     Université du Québec à Chicoutimi, Canada
 
     This program is free software: you can redistribute it and/or modify
@@ -33,13 +33,14 @@ package ca.uqac.lif.synthia;
  * @param <T> The type of object that the picker picks
  * @ingroup API
  */
-public interface Picker<T>
+public interface Picker<T> extends Resettable
 {
 	/**
 	 * Puts the picker back into its initial state. This means that the
 	 * sequence of calls to {@link #pick()} will produce the same values
 	 * as when the object was instantiated.
 	 */
+	@Override
 	public void reset();
 	
 	/**

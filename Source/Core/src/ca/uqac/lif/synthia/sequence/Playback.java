@@ -18,6 +18,9 @@
  */
 package ca.uqac.lif.synthia.sequence;
 
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.Collections;
 import java.util.List;
 
 import ca.uqac.lif.synthia.relative.PickSmallerComparable;
@@ -30,6 +33,7 @@ import ca.uqac.lif.petitpoucet.function.vector.NthElement;
 import ca.uqac.lif.synthia.Bounded;
 import ca.uqac.lif.synthia.NoMoreElementException;
 import ca.uqac.lif.synthia.Picker;
+import ca.uqac.lif.synthia.SequenceShrinkable;
 import ca.uqac.lif.synthia.Shrinkable;
 import ca.uqac.lif.synthia.explanation.NthSuccessiveOutput;
 import ca.uqac.lif.synthia.random.RandomFloat;
@@ -54,7 +58,7 @@ import ca.uqac.lif.synthia.random.RandomFloat;
  * @param <T> The type of objects to return
  * @ingroup API
  */
-public class Playback<T> implements Bounded<T>, Shrinkable<T>, ExplanationQueryable
+public class Playback<T> implements Bounded<T>, Shrinkable<T>, ExplanationQueryable, SequenceShrinkable<T>
 {
 	/**
 	 * The values to play back
@@ -260,5 +264,33 @@ public class Playback<T> implements Bounded<T>, Shrinkable<T>, ExplanationQuerya
 	public Shrinkable<T> shrink(T o)
 	{
 		return shrink(o, RandomFloat.instance, 1);
+	}
+
+	@Override
+	public SequenceShrinkable<T> shrink(Picker<Float> d, float m)
+	{
+		List<Integer> indices = new ArrayList<Integer>();
+		int num_to_pick = (int) (m * (float) m_values.length);
+		while (indices.size() < num_to_pick)
+		{
+			int index = (int) Math.floor(d.pick() * m_values.length);
+			if (!indices.contains(index))
+			{
+				indices.add(index);
+			}
+		}
+		Collections.sort(indices);
+		List<T> values = new ArrayList<T>(indices.size());
+		for (int index : indices)
+		{
+			values.add(m_values[index]);
+		}
+		return new Playback<T>(values);
 	} 
+	
+	@Override
+	public List<T> getSequence()
+	{
+		return Arrays.asList(m_values);
+	}
 }

@@ -45,6 +45,12 @@ public abstract class WidgetAction<T> implements GuiAction
 		{
 			m_object.doClick();
 		}
+		
+		@Override
+		public String toString()
+		{
+			return m_object.getText();
+		}
 	}
 	
 	public static class TypeAction extends WidgetAction<JTextComponent>
