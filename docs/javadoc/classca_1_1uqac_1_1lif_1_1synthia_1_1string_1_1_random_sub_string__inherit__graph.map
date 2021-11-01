@@ -1,0 +1,7 @@
+<map id="ca.uqac.lif.synthia.string.RandomSubString" name="ca.uqac.lif.synthia.string.RandomSubString">
+<area shape="rect" id="node1" title="RandomPicker that produces random substrings from an original one." alt="" coords="115,259,283,300"/>
+<area shape="rect" id="node2" href="$interfaceca_1_1uqac_1_1lif_1_1synthia_1_1_shrinkable.html" title="Interface signaling that a picker can be shrunk." alt="" coords="28,169,177,211"/>
+<area shape="rect" id="node3" href="$interfaceca_1_1uqac_1_1lif_1_1synthia_1_1_picker.html" title="Picks an object." alt="" coords="33,80,173,121"/>
+<area shape="rect" id="node4" href="$interfaceca_1_1uqac_1_1lif_1_1synthia_1_1_resettable.html" title="Signals that an object can be put back into its initial state." alt="" coords="5,5,200,32"/>
+<area shape="rect" id="node5" href="$interfaceca_1_1uqac_1_1lif_1_1synthia_1_1_seedable.html" title="Interface implemented by objects that can be seeded." alt="" coords="201,177,388,203"/>
+</map>

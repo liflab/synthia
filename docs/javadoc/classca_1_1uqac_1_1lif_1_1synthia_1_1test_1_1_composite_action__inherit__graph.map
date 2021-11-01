@@ -1,0 +1,5 @@
+<map id="ca.uqac.lif.synthia.test.CompositeAction" name="ca.uqac.lif.synthia.test.CompositeAction">
+<area shape="rect" id="node1" title="A Action that is made of a sequence of elementary actions." alt="" coords="75,95,234,136"/>
+<area shape="rect" id="node2" title=" " alt="" coords="5,5,136,47"/>
+<area shape="rect" id="node3" href="$interfaceca_1_1uqac_1_1lif_1_1synthia_1_1test_1_1_action.html" title="Interface signaling that an object can perform an &quot;action&quot;." alt="" coords="161,5,319,47"/>
+</map>

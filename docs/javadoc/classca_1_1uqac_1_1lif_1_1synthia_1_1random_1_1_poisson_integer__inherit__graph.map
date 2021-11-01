@@ -1,0 +1,7 @@
+<map id="ca.uqac.lif.synthia.random.PoissonInteger" name="ca.uqac.lif.synthia.random.PoissonInteger">
+<area shape="rect" id="node1" title="Generates integer numbers following a Poisson distribution." alt="" coords="683,39,861,80"/>
+<area shape="rect" id="node2" href="$classca_1_1uqac_1_1lif_1_1synthia_1_1random_1_1_random_picker.html" title=" " alt="" coords="446,5,625,47"/>
+<area shape="rect" id="node3" href="$interfaceca_1_1uqac_1_1lif_1_1synthia_1_1_reactive.html" title="Interface implemented by pickers whose picking of objects can be altered by external information." alt="" coords="436,71,635,112"/>
+<area shape="rect" id="node4" href="$interfaceca_1_1uqac_1_1lif_1_1synthia_1_1_picker.html" title="Picks an object." alt="" coords="248,71,388,112"/>
+<area shape="rect" id="node5" href="$interfaceca_1_1uqac_1_1lif_1_1synthia_1_1_resettable.html" title="Signals that an object can be put back into its initial state." alt="" coords="5,78,200,105"/>
+</map>

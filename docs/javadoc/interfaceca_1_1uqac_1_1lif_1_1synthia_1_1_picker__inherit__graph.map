@@ -1,0 +1,51 @@
+<map id="ca.uqac.lif.synthia.Picker&lt; T &gt;" name="ca.uqac.lif.synthia.Picker&lt; T &gt;">
+<area shape="rect" id="node1" title="Picks an object." alt="" coords="248,1399,449,1426"/>
+<area shape="rect" id="node3" href="$interfaceca_1_1uqac_1_1lif_1_1synthia_1_1_bounded.html" title="Interface used to signal that a picker enumerates all values from a set." alt="" coords="540,219,680,260"/>
+<area shape="rect" id="node11" href="$classca_1_1uqac_1_1lif_1_1synthia_1_1sequence_1_1_record.html" title="Picker that records and returns the values produced by another picker." alt="" coords="1035,519,1203,560"/>
+<area shape="rect" id="node12" href="$classca_1_1uqac_1_1lif_1_1synthia_1_1collection_1_1_compose_list.html" title=" " alt="" coords="791,463,961,519"/>
+<area shape="rect" id="node13" href="$classca_1_1uqac_1_1lif_1_1synthia_1_1collection_1_1_compose_shrunk_list.html" title="Given a reference list, picks lists that are smaller." alt="" coords="771,594,981,650"/>
+<area shape="rect" id="node14" href="$classca_1_1uqac_1_1lif_1_1synthia_1_1collection_1_1_composite_picker.html" title="Picker that merges the result of other pickers into a composite data structure." alt="" coords="497,713,723,755"/>
+<area shape="rect" id="node17" href="$classca_1_1uqac_1_1lif_1_1synthia_1_1enumerative_1_1_unbound.html" title=" " alt="" coords="513,831,707,872"/>
+<area shape="rect" id="node18" href="$classca_1_1uqac_1_1lif_1_1synthia_1_1grammar_1_1_grammar_sentence.html" title="Picker that generates sentences from a format grammar." alt="" coords="511,897,709,953"/>
+<area shape="rect" id="node19" href="$classca_1_1uqac_1_1lif_1_1synthia_1_1map_1_1_area_map_picker.html" title=" " alt="" coords="530,977,690,1033"/>
+<area shape="rect" id="node20" href="$classca_1_1uqac_1_1lif_1_1synthia_1_1random_1_1_random_picker.html" title="Picks an object based on the value of a random number generator." alt="" coords="511,1057,709,1099"/>
+<area shape="rect" id="node21" href="$interfaceca_1_1uqac_1_1lif_1_1synthia_1_1_reactive.html" title="Interface implemented by pickers whose picking of objects can be altered by external information." alt="" coords="540,1123,680,1164"/>
+<area shape="rect" id="node26" href="$classca_1_1uqac_1_1lif_1_1synthia_1_1sequence_1_1_behavior_tree.html" title="Generates a sequence of objects by following a behavior tree." alt="" coords="509,1188,711,1229"/>
+<area shape="rect" id="node30" href="$classca_1_1uqac_1_1lif_1_1synthia_1_1sequence_1_1_knit.html" title="Picker producing an &quot;interleaved&quot; sequence of objects from calls to multiple other pickers." alt="" coords="535,1253,685,1295"/>
+<area shape="rect" id="node31" href="$classca_1_1uqac_1_1lif_1_1synthia_1_1sequence_1_1_markov_chain.html" title="Generates a sequence of objects by a random walk in a Markov chain." alt="" coords="509,1319,711,1360"/>
+<area shape="rect" id="node32" href="$interfaceca_1_1uqac_1_1lif_1_1synthia_1_1_shrinkable.html" title="Interface signaling that a picker can be shrunk." alt="" coords="540,596,680,637"/>
+<area shape="rect" id="node33" href="$classca_1_1uqac_1_1lif_1_1synthia_1_1signal_1_1_periodic_signal.html" title="A signal picker that is characterized by an amplitude and a phase." alt="" coords="533,1385,687,1441"/>
+<area shape="rect" id="node34" href="$classca_1_1uqac_1_1lif_1_1synthia_1_1string_1_1_as_string.html" title="Utility picker that converts an input into a string." alt="" coords="521,1465,699,1507"/>
+<area shape="rect" id="node35" href="$classca_1_1uqac_1_1lif_1_1synthia_1_1tree_1_1_colored_node_picker.html" title=" " alt="" coords="523,1531,697,1587"/>
+<area shape="rect" id="node36" href="$classca_1_1uqac_1_1lif_1_1synthia_1_1tree_1_1_graph_picker.html" title=" " alt="" coords="523,1611,697,1667"/>
+<area shape="rect" id="node37" href="$classca_1_1uqac_1_1lif_1_1synthia_1_1tree_1_1_node_picker.html" title=" " alt="" coords="525,1691,695,1747"/>
+<area shape="rect" id="node38" href="$classca_1_1uqac_1_1lif_1_1synthia_1_1tree_1_1_tree_picker.html" title="Generates a tree of labeled nodes." alt="" coords="527,1771,693,1827"/>
+<area shape="rect" id="node39" href="$classca_1_1uqac_1_1lif_1_1synthia_1_1util_1_1_as_int.html" title="Utility picker that converts an input into an integer." alt="" coords="535,1852,685,1893"/>
+<area shape="rect" id="node40" href="$classca_1_1uqac_1_1lif_1_1synthia_1_1util_1_1_as_long.html" title="Utility picker that converts an input into a long integer." alt="" coords="535,1917,685,1959"/>
+<area shape="rect" id="node41" href="$classca_1_1uqac_1_1lif_1_1synthia_1_1util_1_1_delay.html" title="Picker that does not produce any value, but causes the thread to wait for a moment on every call to p..." alt="" coords="535,1983,685,2024"/>
+<area shape="rect" id="node42" href="$classca_1_1uqac_1_1lif_1_1synthia_1_1util_1_1_discard_ratio.html" title="A utility picker to calculate the discard ratio of a PickIf picker." alt="" coords="540,2049,680,2105"/>
+<area shape="rect" id="node43" href="$classca_1_1uqac_1_1lif_1_1synthia_1_1util_1_1_mutator.html" title="A picker that applies a transformation (&quot;mutation&quot;) on the value produced by another picker." alt="" coords="540,404,680,445"/>
+<area shape="rect" id="node44" href="$classca_1_1uqac_1_1lif_1_1synthia_1_1util_1_1_once.html" title="Picker that returns the first value fetched from another picker, and then null afterwards." alt="" coords="540,2129,680,2171"/>
+<area shape="rect" id="node45" href="$classca_1_1uqac_1_1lif_1_1synthia_1_1util_1_1_share_1_1_queue_picker.html" title="A picker that acts as a proxy for the values obtained by the parent Share picker." alt="" coords="508,2195,712,2236"/>
+<area shape="rect" id="node46" href="$classca_1_1uqac_1_1lif_1_1synthia_1_1util_1_1_tick.html" title="Generates a sequence of monotonically increasing numerical values." alt="" coords="535,2260,685,2301"/>
+<area shape="rect" id="node47" href="$interfaceca_1_1uqac_1_1lif_1_1synthia_1_1vector_1_1_vector_picker.html" title="Interface for pickers that generate arrays of floating&#45;point numbers." alt="" coords="535,2326,685,2382"/>
+<area shape="rect" id="node48" href="$classexamples_1_1apache_1_1_visitor_picker.html" title="A picker producing instances of visitors." alt="" coords="515,2407,705,2448"/>
+<area shape="rect" id="node49" title="Picker that produces log lines." alt="" coords="523,2473,697,2529"/>
+<area shape="rect" id="node2" href="$interfaceca_1_1uqac_1_1lif_1_1synthia_1_1_resettable.html" title="Signals that an object can be put back into its initial state." alt="" coords="5,1399,200,1426"/>
+<area shape="rect" id="node4" href="$classca_1_1uqac_1_1lif_1_1synthia_1_1enumerative_1_1_all_booleans.html" title="Picker who implements EnumerativePicker." alt="" coords="787,251,965,307"/>
+<area shape="rect" id="node5" href="$classca_1_1uqac_1_1lif_1_1synthia_1_1enumerative_1_1_all_elements.html" title=" " alt="" coords="1257,71,1468,112"/>
+<area shape="rect" id="node6" href="$classca_1_1uqac_1_1lif_1_1synthia_1_1enumerative_1_1_all_integers.html" title="Picker who implements EnumerativePicker." alt="" coords="791,91,961,147"/>
+<area shape="rect" id="node7" href="$classca_1_1uqac_1_1lif_1_1synthia_1_1enumerative_1_1_all_pickers.html" title="Picker who implements Bounded." alt="" coords="792,171,960,227"/>
+<area shape="rect" id="node8" href="$classca_1_1uqac_1_1lif_1_1synthia_1_1enumerative_1_1_bound.html" title="Return the value picked by a picker a defined number of times." alt="" coords="787,397,965,439"/>
+<area shape="rect" id="node9" href="$classca_1_1uqac_1_1lif_1_1synthia_1_1sequence_1_1_playback.html" title="Picker that returns values taken from a list." alt="" coords="1029,245,1209,287"/>
+<area shape="rect" id="node10" href="$interfaceca_1_1uqac_1_1lif_1_1synthia_1_1_sequence_shrinkable.html" title="Signals that a picker can shrink the sequence of values it has produced since its last reset." alt="" coords="785,332,967,373"/>
+<area shape="rect" id="node15" href="$classca_1_1uqac_1_1lif_1_1synthia_1_1string_1_1_string_pattern.html" title="Generates a string according to a predefined pattern." alt="" coords="803,674,949,730"/>
+<area shape="rect" id="node16" href="$classca_1_1uqac_1_1lif_1_1synthia_1_1util_1_1_array_picker.html" title="Picker that merges the result of other pickers into an array." alt="" coords="781,755,971,796"/>
+<area shape="rect" id="node22" href="$classca_1_1uqac_1_1lif_1_1synthia_1_1random_1_1_poisson_integer.html" title="Generates integer numbers following a Poisson distribution." alt="" coords="792,875,960,931"/>
+<area shape="rect" id="node23" href="$classca_1_1uqac_1_1lif_1_1synthia_1_1random_1_1_random_boolean.html" title="Picks a Boolean value." alt="" coords="787,955,965,1011"/>
+<area shape="rect" id="node24" href="$classca_1_1uqac_1_1lif_1_1synthia_1_1random_1_1_random_integer.html" title="Picks an integer uniformly in an interval." alt="" coords="791,1035,961,1091"/>
+<area shape="rect" id="node25" href="$classca_1_1uqac_1_1lif_1_1synthia_1_1widget_1_1_choose_action.html" title=" " alt="" coords="773,1115,979,1171"/>
+<area shape="rect" id="node27" title="Leaf node of a behavior tree." alt="" coords="791,1195,961,1251"/>
+<area shape="rect" id="node28" title="Selector node in a behavior tree." alt="" coords="791,1275,961,1331"/>
+<area shape="rect" id="node29" title="Sequence node in a behavior tree." alt="" coords="791,1355,961,1411"/>
+</map>

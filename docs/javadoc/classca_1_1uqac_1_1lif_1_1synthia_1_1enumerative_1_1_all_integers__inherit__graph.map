@@ -1,0 +1,7 @@
+<map id="ca.uqac.lif.synthia.enumerative.AllIntegers" name="ca.uqac.lif.synthia.enumerative.AllIntegers">
+<area shape="rect" id="node1" title="Picker who implements EnumerativePicker." alt="" coords="94,259,301,300"/>
+<area shape="rect" id="node2" href="$interfaceca_1_1uqac_1_1lif_1_1synthia_1_1_bounded.html" title="Interface used to signal that a picker enumerates all values from a set." alt="" coords="30,169,175,211"/>
+<area shape="rect" id="node3" href="$interfaceca_1_1uqac_1_1lif_1_1synthia_1_1_picker.html" title="Picks an object." alt="" coords="33,80,173,121"/>
+<area shape="rect" id="node4" href="$interfaceca_1_1uqac_1_1lif_1_1synthia_1_1_resettable.html" title="Signals that an object can be put back into its initial state." alt="" coords="5,5,200,32"/>
+<area shape="rect" id="node5" href="$interfaceca_1_1uqac_1_1lif_1_1synthia_1_1_seedable.html" title="Interface implemented by objects that can be seeded." alt="" coords="200,177,387,203"/>
+</map>

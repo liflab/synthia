@@ -1,0 +1,5 @@
+<map id="ca.uqac.lif.synthia.CannotShrinkException" name="ca.uqac.lif.synthia.CannotShrinkException">
+<area shape="rect" id="node1" title="An exception to throw when a picker can&#39;t pick an other element." alt="" coords="5,169,180,211"/>
+<area shape="rect" id="node2" href="$classca_1_1uqac_1_1lif_1_1synthia_1_1_picker_exception.html" title="Generic runtime exception thrown by the Picker interface." alt="" coords="8,80,177,121"/>
+<area shape="rect" id="node3" title=" " alt="" coords="28,5,157,32"/>
+</map>

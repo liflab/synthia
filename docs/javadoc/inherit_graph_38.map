@@ -1,0 +1,7 @@
+<map id="Graphical Class Hierarchy" name="Graphical Class Hierarchy">
+<area shape="rect" id="node1" title=" " alt="" coords="5,78,135,105"/>
+<area shape="rect" id="node2" href="$classca_1_1uqac_1_1lif_1_1synthia_1_1_picker_exception.html" title="Generic runtime exception thrown by the Picker interface." alt="" coords="183,71,352,112"/>
+<area shape="rect" id="node3" href="$classca_1_1uqac_1_1lif_1_1synthia_1_1_cannot_shrink_exception.html" title="An exception to throw when a picker can&#39;t pick an other element." alt="" coords="402,5,577,47"/>
+<area shape="rect" id="node4" href="$classca_1_1uqac_1_1lif_1_1synthia_1_1_give_up_exception.html" title="An exception to throw to prevent the pick method of a PickIf picker from falling into an infinite loo..." alt="" coords="410,71,569,112"/>
+<area shape="rect" id="node5" href="$classca_1_1uqac_1_1lif_1_1synthia_1_1_no_more_element_exception.html" title="An exception to throw when a picker can&#39;t pick an other element." alt="" coords="400,136,579,177"/>
+</map>

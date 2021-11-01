@@ -1,0 +1,5 @@
+<map id="ca.uqac.lif.synthia.tree.GraphCrawler&lt; T &gt;" name="ca.uqac.lif.synthia.tree.GraphCrawler&lt; T &gt;">
+<area shape="rect" id="node1" title=" " alt="" coords="5,39,164,80"/>
+<area shape="rect" id="node2" href="$classca_1_1uqac_1_1lif_1_1synthia_1_1tree_1_1_graph_renderer.html" title="Renders a tree of labeled nodes as a Graphviz input file." alt="" coords="212,5,392,47"/>
+<area shape="rect" id="node3" href="$classca_1_1uqac_1_1lif_1_1synthia_1_1tree_1_1_markov_reader.html" title="Converts a graph into an equivalent Markov chain." alt="" coords="213,71,391,112"/>
+</map>

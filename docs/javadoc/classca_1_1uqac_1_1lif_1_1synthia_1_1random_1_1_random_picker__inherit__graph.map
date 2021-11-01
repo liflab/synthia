@@ -1,0 +1,7 @@
+<map id="ca.uqac.lif.synthia.random.RandomPicker&lt; T &gt;" name="ca.uqac.lif.synthia.random.RandomPicker&lt; T &gt;">
+<area shape="rect" id="node1" title="Picks an object based on the value of a random number generator." alt="" coords="483,64,661,105"/>
+<area shape="rect" id="node2" href="$interfaceca_1_1uqac_1_1lif_1_1synthia_1_1_picker.html" title="Picks an object." alt="" coords="271,5,411,47"/>
+<area shape="rect" id="node3" href="$interfaceca_1_1uqac_1_1lif_1_1synthia_1_1_resettable.html" title="Signals that an object can be put back into its initial state." alt="" coords="5,13,200,39"/>
+<area shape="rect" id="node4" href="$interfaceca_1_1uqac_1_1lif_1_1synthia_1_1_seedable.html" title="Interface implemented by objects that can be seeded." alt="" coords="248,71,435,98"/>
+<area shape="rect" id="node5" title=" " alt="" coords="267,122,416,149"/>
+</map>

@@ -1,0 +1,7 @@
+<map id="ca.uqac.lif.synthia.collection.ComposeShrunkList&lt; T &gt;" name="ca.uqac.lif.synthia.collection.ComposeShrunkList&lt; T &gt;">
+<area shape="rect" id="node1" title="Given a reference list, picks lists that are smaller." alt="" coords="652,39,843,80"/>
+<area shape="rect" id="node2" href="$interfaceca_1_1uqac_1_1lif_1_1synthia_1_1_picker.html" title="Picks an object." alt="" coords="448,5,592,47"/>
+<area shape="rect" id="node3" href="$interfaceca_1_1uqac_1_1lif_1_1synthia_1_1_resettable.html" title="Signals that an object can be put back into its initial state." alt="" coords="5,46,200,73"/>
+<area shape="rect" id="node5" href="$interfaceca_1_1uqac_1_1lif_1_1synthia_1_1_picker.html" title="Picks an object." alt="" coords="248,68,388,109"/>
+<area shape="rect" id="node4" href="$interfaceca_1_1uqac_1_1lif_1_1synthia_1_1_shrinkable.html" title="Interface signaling that a picker can be shrunk." alt="" coords="436,71,604,112"/>
+</map>

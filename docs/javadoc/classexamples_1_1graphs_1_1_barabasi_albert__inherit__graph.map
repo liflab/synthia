@@ -1,0 +1,6 @@
+<map id="examples.graphs.BarabasiAlbert&lt; T &gt;" name="examples.graphs.BarabasiAlbert&lt; T &gt;">
+<area shape="rect" id="node1" title="Generates a graph following the Barabási–Albert model." alt="" coords="15,259,191,300"/>
+<area shape="rect" id="node2" href="$classca_1_1uqac_1_1lif_1_1synthia_1_1tree_1_1_graph_picker.html" title=" " alt="" coords="21,169,185,211"/>
+<area shape="rect" id="node3" href="$interfaceca_1_1uqac_1_1lif_1_1synthia_1_1_picker.html" title="Picks an object." alt="" coords="25,80,180,121"/>
+<area shape="rect" id="node4" href="$interfaceca_1_1uqac_1_1lif_1_1synthia_1_1_resettable.html" title="Signals that an object can be put back into its initial state." alt="" coords="5,5,200,32"/>
+</map>

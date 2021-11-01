@@ -1,0 +1,4 @@
+<map id="ca.uqac.lif.synthia.util.Offset" name="ca.uqac.lif.synthia.util.Offset">
+<area shape="rect" id="node1" title="Takes the numerical value of a picker, and offsets it by an amount determined by another picker." alt="" coords="5,95,159,136"/>
+<area shape="rect" id="node2" href="$classca_1_1uqac_1_1lif_1_1synthia_1_1util_1_1_mutator.html" title=" " alt="" coords="5,5,159,47"/>
+</map>

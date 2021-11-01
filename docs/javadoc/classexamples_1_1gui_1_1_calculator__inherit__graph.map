@@ -1,0 +1,5 @@
+<map id="examples.gui.Calculator" name="examples.gui.Calculator">
+<area shape="rect" id="node1" title="A simple calculator." alt="" coords="35,80,197,107"/>
+<area shape="rect" id="node2" title=" " alt="" coords="5,5,72,32"/>
+<area shape="rect" id="node3" href="$interfaceca_1_1uqac_1_1lif_1_1synthia_1_1_resettable.html" title="Signals that an object can be put back into its initial state." alt="" coords="96,5,291,32"/>
+</map>

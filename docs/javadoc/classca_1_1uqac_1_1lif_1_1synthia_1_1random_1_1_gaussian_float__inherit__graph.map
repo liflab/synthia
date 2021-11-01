@@ -1,0 +1,4 @@
+<map id="ca.uqac.lif.synthia.random.GaussianFloat" name="ca.uqac.lif.synthia.random.GaussianFloat">
+<area shape="rect" id="node1" title="Produces a float picked from a Gaussian probability distribution." alt="" coords="5,95,184,136"/>
+<area shape="rect" id="node2" href="$classca_1_1uqac_1_1lif_1_1synthia_1_1random_1_1_random_picker.html" title=" " alt="" coords="5,5,184,47"/>
+</map>

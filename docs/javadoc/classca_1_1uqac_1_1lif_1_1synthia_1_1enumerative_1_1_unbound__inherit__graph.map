@@ -1,0 +1,5 @@
+<map id="ca.uqac.lif.synthia.enumerative.Unbound&lt; T &gt;" name="ca.uqac.lif.synthia.enumerative.Unbound&lt; T &gt;">
+<area shape="rect" id="node1" title=" " alt="" coords="5,169,212,211"/>
+<area shape="rect" id="node2" href="$interfaceca_1_1uqac_1_1lif_1_1synthia_1_1_picker.html" title="Picks an object." alt="" coords="39,80,179,121"/>
+<area shape="rect" id="node3" href="$interfaceca_1_1uqac_1_1lif_1_1synthia_1_1_resettable.html" title="Signals that an object can be put back into its initial state." alt="" coords="11,5,206,32"/>
+</map>

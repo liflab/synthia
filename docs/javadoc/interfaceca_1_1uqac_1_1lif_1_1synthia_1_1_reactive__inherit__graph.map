@@ -1,0 +1,9 @@
+<map id="ca.uqac.lif.synthia.Reactive&lt; U, T &gt;" name="ca.uqac.lif.synthia.Reactive&lt; U, T &gt;">
+<area shape="rect" id="node1" title="Interface implemented by pickers whose picking of objects can be altered by external information." alt="" coords="436,133,620,174"/>
+<area shape="rect" id="node4" href="$classca_1_1uqac_1_1lif_1_1synthia_1_1random_1_1_poisson_integer.html" title="Generates integer numbers following a Poisson distribution." alt="" coords="687,5,855,61"/>
+<area shape="rect" id="node5" href="$classca_1_1uqac_1_1lif_1_1synthia_1_1random_1_1_random_boolean.html" title="Picks a Boolean value." alt="" coords="683,85,860,141"/>
+<area shape="rect" id="node6" href="$classca_1_1uqac_1_1lif_1_1synthia_1_1random_1_1_random_integer.html" title="Picks an integer uniformly in an interval." alt="" coords="686,165,857,221"/>
+<area shape="rect" id="node7" href="$classca_1_1uqac_1_1lif_1_1synthia_1_1widget_1_1_choose_action.html" title=" " alt="" coords="668,245,875,301"/>
+<area shape="rect" id="node2" href="$interfaceca_1_1uqac_1_1lif_1_1synthia_1_1_picker.html" title="Picks an object." alt="" coords="248,133,388,174"/>
+<area shape="rect" id="node3" href="$interfaceca_1_1uqac_1_1lif_1_1synthia_1_1_resettable.html" title="Signals that an object can be put back into its initial state." alt="" coords="5,140,200,167"/>
+</map>

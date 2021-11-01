@@ -1,0 +1,4 @@
+<map id="ca.uqac.lif.synthia.explanation.NthSuccessiveOutput" name="ca.uqac.lif.synthia.explanation.NthSuccessiveOutput">
+<area shape="rect" id="node1" title="A Part pointing to the n&#45;th output produced by a picker since its last call to reset()." alt="" coords="5,80,208,121"/>
+<area shape="rect" id="node2" title=" " alt="" coords="83,5,130,32"/>
+</map>

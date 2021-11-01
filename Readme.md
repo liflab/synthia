@@ -1,6 +1,8 @@
 Synthia: synthesize data structures in Java
 ===========================================
 
+![Synthia logo](Logo.jpg?raw=true)
+
 [![Build Status](https://app.travis-ci.com/liflab/synthia.svg?branch=master)](https://app.travis-ci.com/liflab/synthia)
 
 Synthia is a flexible generator of data structures. With Synthia, it is
@@ -9,7 +11,10 @@ grammar, random walks in a finite-state machine, or any other user-defined
 object. More importantly, all these basic "generators" can be combined to
 create complex structures and behaviors.
 
-Synthia can be used to generate test inputs for
+Synthia comes with a library of dozens of
+[code examples](https://liflab.github.io/synthia/javadoc/group___examples.html)
+illustrating what can be done with it.
+Among other things can be used to generate test inputs for
 [fuzzing](https://en.wikipedia.org/wiki/Fuzzing), create a
 [test stub](https://en.wikipedia.org/wiki/Test_stub) that provides more
 flexible responses than simple "canned answers", or create a semi-realistic

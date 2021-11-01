@@ -1,0 +1,6 @@
+<map id="ca.uqac.lif.synthia.random.RandomSubList&lt; T &gt;" name="ca.uqac.lif.synthia.random.RandomSubList&lt; T &gt;">
+<area shape="rect" id="node1" title="An equivalent of RandomSubString but for lists." alt="" coords="13,259,192,300"/>
+<area shape="rect" id="node2" href="$interfaceca_1_1uqac_1_1lif_1_1synthia_1_1_shrinkable.html" title="Interface signaling that a picker can be shrunk." alt="" coords="19,169,187,211"/>
+<area shape="rect" id="node3" href="$interfaceca_1_1uqac_1_1lif_1_1synthia_1_1_picker.html" title="Picks an object." alt="" coords="33,80,173,121"/>
+<area shape="rect" id="node4" href="$interfaceca_1_1uqac_1_1lif_1_1synthia_1_1_resettable.html" title="Signals that an object can be put back into its initial state." alt="" coords="5,5,200,32"/>
+</map>

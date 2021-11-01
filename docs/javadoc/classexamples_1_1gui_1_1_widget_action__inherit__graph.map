@@ -1,0 +1,4 @@
+<map id="examples.gui.WidgetAction&lt; T &gt;" name="examples.gui.WidgetAction&lt; T &gt;">
+<area shape="rect" id="node1" title="A Action that performs a concrete action on a widget." alt="" coords="5,95,219,121"/>
+<area shape="rect" id="node2" href="$interfaceca_1_1uqac_1_1lif_1_1synthia_1_1test_1_1_action.html" title="Interface signaling that an object can perform an &quot;action&quot;." alt="" coords="33,5,191,47"/>
+</map>

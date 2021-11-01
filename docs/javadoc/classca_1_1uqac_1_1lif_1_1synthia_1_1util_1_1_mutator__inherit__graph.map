@@ -1,0 +1,15 @@
+<map id="ca.uqac.lif.synthia.util.Mutator&lt; T &gt;" name="ca.uqac.lif.synthia.util.Mutator&lt; T &gt;">
+<area shape="rect" id="node1" title="A picker that applies a transformation (&quot;mutation&quot;) on the value produced by another picker." alt="" coords="436,279,589,321"/>
+<area shape="rect" id="node4" href="$classca_1_1uqac_1_1lif_1_1synthia_1_1collection_1_1_delete_element.html" title="Mutator that receives a list and selects an element to delete from it." alt="" coords="651,5,830,61"/>
+<area shape="rect" id="node5" href="$classca_1_1uqac_1_1lif_1_1synthia_1_1collection_1_1_mutate_element.html" title="Picker that selects an element of a list and applies the result of a mutator on this element." alt="" coords="650,85,831,141"/>
+<area shape="rect" id="node6" href="$classca_1_1uqac_1_1lif_1_1synthia_1_1collection_1_1_swap.html" title="Mutator that receives a list and selects two elements to be swapped." alt="" coords="661,165,820,221"/>
+<area shape="rect" id="node7" href="$classca_1_1uqac_1_1lif_1_1synthia_1_1enumerative_1_1_bound.html" title="Return the value picked by a picker a defined number of times." alt="" coords="651,246,830,287"/>
+<area shape="rect" id="node8" href="$classca_1_1uqac_1_1lif_1_1synthia_1_1random_1_1_affine_transform.html" title="Applies an affine transform to a value produced by another picker." alt="" coords="637,311,844,353"/>
+<area shape="rect" id="node9" href="$classca_1_1uqac_1_1lif_1_1synthia_1_1relative_1_1_pick_if.html" title="Returns object from a picker satisfying a condition." alt="" coords="667,377,814,418"/>
+<area shape="rect" id="node12" href="$classca_1_1uqac_1_1lif_1_1synthia_1_1util_1_1_mutate.html" title="Transforms an object from a picker by selecting a mutator and applying it to an object." alt="" coords="671,442,811,483"/>
+<area shape="rect" id="node13" href="$classca_1_1uqac_1_1lif_1_1synthia_1_1util_1_1_replace.html" title=" " alt="" coords="671,507,811,549"/>
+<area shape="rect" id="node2" href="$interfaceca_1_1uqac_1_1lif_1_1synthia_1_1_picker.html" title="Picks an object." alt="" coords="248,279,388,321"/>
+<area shape="rect" id="node3" href="$interfaceca_1_1uqac_1_1lif_1_1synthia_1_1_resettable.html" title="Signals that an object can be put back into its initial state." alt="" coords="5,287,200,313"/>
+<area shape="rect" id="node10" href="$classca_1_1uqac_1_1lif_1_1synthia_1_1relative_1_1_pick_smaller_comparable.html" title="A variant of PickIf that selects an element if it is smaller than a reference object." alt="" coords="892,345,1144,386"/>
+<area shape="rect" id="node11" href="$classca_1_1uqac_1_1lif_1_1synthia_1_1relative_1_1_pick_smaller_comparator.html" title="A variant of PickIf that selects an element if it is smaller than a reference object." alt="" coords="893,410,1143,451"/>
+</map>

@@ -1,0 +1,8 @@
+<map id="ca.uqac.lif.synthia.sequence.Record&lt; T &gt;" name="ca.uqac.lif.synthia.sequence.Record&lt; T &gt;">
+<area shape="rect" id="node1" title="Picker that records and returns the values produced by another picker." alt="" coords="853,35,1045,76"/>
+<area shape="rect" id="node2" href="$interfaceca_1_1uqac_1_1lif_1_1synthia_1_1_picker.html" title="Picks an object." alt="" coords="248,5,388,47"/>
+<area shape="rect" id="node6" href="$interfaceca_1_1uqac_1_1lif_1_1synthia_1_1_bounded.html" title="Interface used to signal that a picker enumerates all values from a set." alt="" coords="436,35,576,76"/>
+<area shape="rect" id="node3" href="$interfaceca_1_1uqac_1_1lif_1_1synthia_1_1_resettable.html" title="Signals that an object can be put back into its initial state." alt="" coords="5,13,200,39"/>
+<area shape="rect" id="node4" title=" " alt="" coords="640,101,789,127"/>
+<area shape="rect" id="node5" href="$interfaceca_1_1uqac_1_1lif_1_1synthia_1_1_sequence_shrinkable.html" title="Signals that a picker can shrink the sequence of values it has produced since its last reset." alt="" coords="624,35,805,76"/>
+</map>

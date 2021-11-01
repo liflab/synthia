@@ -1,0 +1,5 @@
+<map id="ca.uqac.lif.synthia.GiveUpException" name="ca.uqac.lif.synthia.GiveUpException">
+<area shape="rect" id="node1" title="An exception to throw to prevent the pick method of a PickIf picker from falling into an infinite loo..." alt="" coords="11,169,169,211"/>
+<area shape="rect" id="node2" href="$classca_1_1uqac_1_1lif_1_1synthia_1_1_picker_exception.html" title="Generic runtime exception thrown by the Picker interface." alt="" coords="5,80,175,121"/>
+<area shape="rect" id="node3" title=" " alt="" coords="25,5,155,32"/>
+</map>

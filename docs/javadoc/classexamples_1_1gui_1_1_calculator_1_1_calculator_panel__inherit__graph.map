@@ -1,0 +1,6 @@
+<map id="examples.gui.Calculator.CalculatorPanel" name="examples.gui.Calculator.CalculatorPanel">
+<area shape="rect" id="node1" title="The actual panel containing the interface of the calculator." alt="" coords="62,80,227,121"/>
+<area shape="rect" id="node2" title=" " alt="" coords="5,5,68,32"/>
+<area shape="rect" id="node3" title=" " alt="" coords="92,5,197,32"/>
+<area shape="rect" id="node4" href="$interfaceca_1_1uqac_1_1lif_1_1synthia_1_1_resettable.html" title="Signals that an object can be put back into its initial state." alt="" coords="222,5,417,32"/>
+</map>

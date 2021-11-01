@@ -1,0 +1,8 @@
+<map id="ca.uqac.lif.synthia.sequence.BehaviorTree&lt; T &gt;" name="ca.uqac.lif.synthia.sequence.BehaviorTree&lt; T &gt;">
+<area shape="rect" id="node1" title="Generates a sequence of objects by following a behavior tree." alt="" coords="436,93,628,134"/>
+<area shape="rect" id="node4" title="Leaf node of a behavior tree." alt="" coords="676,5,847,61"/>
+<area shape="rect" id="node5" title="Selector node in a behavior tree." alt="" coords="676,85,847,141"/>
+<area shape="rect" id="node6" title="Sequence node in a behavior tree." alt="" coords="676,165,847,221"/>
+<area shape="rect" id="node2" href="$interfaceca_1_1uqac_1_1lif_1_1synthia_1_1_picker.html" title="Picks an object." alt="" coords="248,93,388,134"/>
+<area shape="rect" id="node3" href="$interfaceca_1_1uqac_1_1lif_1_1synthia_1_1_resettable.html" title="Signals that an object can be put back into its initial state." alt="" coords="5,100,200,127"/>
+</map>

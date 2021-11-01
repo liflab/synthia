@@ -1,0 +1,5 @@
+<map id="examples.apache.VisitorPicker" name="examples.apache.VisitorPicker">
+<area shape="rect" id="node1" title="A picker producing instances of visitors." alt="" coords="5,169,208,196"/>
+<area shape="rect" id="node2" href="$interfaceca_1_1uqac_1_1lif_1_1synthia_1_1_picker.html" title="Picks an object." alt="" coords="8,80,205,121"/>
+<area shape="rect" id="node3" href="$interfaceca_1_1uqac_1_1lif_1_1synthia_1_1_resettable.html" title="Signals that an object can be put back into its initial state." alt="" coords="9,5,204,32"/>
+</map>

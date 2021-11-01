@@ -1,0 +1,8 @@
+<map id="ca.uqac.lif.synthia.random.RandomBoolean" name="ca.uqac.lif.synthia.random.RandomBoolean">
+<area shape="rect" id="node1" title="Picks a Boolean value." alt="" coords="675,71,853,112"/>
+<area shape="rect" id="node2" href="$classca_1_1uqac_1_1lif_1_1synthia_1_1random_1_1_random_picker.html" title=" " alt="" coords="442,5,621,47"/>
+<area shape="rect" id="node3" href="$interfaceca_1_1uqac_1_1lif_1_1synthia_1_1_shrinkable.html" title="Interface signaling that a picker can be shrunk." alt="" coords="450,71,613,112"/>
+<area shape="rect" id="node4" href="$interfaceca_1_1uqac_1_1lif_1_1synthia_1_1_picker.html" title="Picks an object." alt="" coords="248,104,388,145"/>
+<area shape="rect" id="node6" href="$interfaceca_1_1uqac_1_1lif_1_1synthia_1_1_reactive.html" title="Interface implemented by pickers whose picking of objects can be altered by external information." alt="" coords="436,136,627,177"/>
+<area shape="rect" id="node5" href="$interfaceca_1_1uqac_1_1lif_1_1synthia_1_1_resettable.html" title="Signals that an object can be put back into its initial state." alt="" coords="5,111,200,138"/>
+</map>

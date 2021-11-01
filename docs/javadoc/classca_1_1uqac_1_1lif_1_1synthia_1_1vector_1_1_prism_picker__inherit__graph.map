@@ -1,0 +1,7 @@
+<map id="ca.uqac.lif.synthia.vector.PrismPicker" name="ca.uqac.lif.synthia.vector.PrismPicker">
+<area shape="rect" id="node1" title="Generates a vector by independently picking a value for each of its coordinates." alt="" coords="109,259,280,300"/>
+<area shape="rect" id="node2" href="$interfaceca_1_1uqac_1_1lif_1_1synthia_1_1vector_1_1_vector_picker.html" title="Interface for pickers that generate arrays of floating&#45;point numbers." alt="" coords="17,169,188,211"/>
+<area shape="rect" id="node3" href="$interfaceca_1_1uqac_1_1lif_1_1synthia_1_1_picker.html" title="Picks an object." alt="" coords="33,80,173,121"/>
+<area shape="rect" id="node4" href="$interfaceca_1_1uqac_1_1lif_1_1synthia_1_1_resettable.html" title="Signals that an object can be put back into its initial state." alt="" coords="5,5,200,32"/>
+<area shape="rect" id="node5" title=" " alt="" coords="212,177,361,203"/>
+</map>

@@ -1,0 +1,11 @@
+<map id="ca.uqac.lif.synthia.Seedable" name="ca.uqac.lif.synthia.Seedable">
+<area shape="rect" id="node1" title="Interface implemented by objects that can be seeded." alt="" coords="5,177,192,203"/>
+<area shape="rect" id="node2" href="$classca_1_1uqac_1_1lif_1_1synthia_1_1enumerative_1_1_all_elements.html" title=" " alt="" coords="240,5,447,47"/>
+<area shape="rect" id="node3" href="$classca_1_1uqac_1_1lif_1_1synthia_1_1enumerative_1_1_all_integers.html" title="Picker who implements EnumerativePicker." alt="" coords="240,71,447,112"/>
+<area shape="rect" id="node4" href="$classca_1_1uqac_1_1lif_1_1synthia_1_1random_1_1_random_picker.html" title="Picks an object based on the value of a random number generator." alt="" coords="254,136,433,177"/>
+<area shape="rect" id="node5" href="$classca_1_1uqac_1_1lif_1_1synthia_1_1string_1_1_random_prefix.html" title="Like RandomSubString, but this time, the Picker returns a prefix of the original strings of randomly ..." alt="" coords="259,201,427,243"/>
+<area shape="rect" id="node8" href="$classca_1_1uqac_1_1lif_1_1synthia_1_1string_1_1_random_string.html" title="Generates a random character string." alt="" coords="259,267,427,308"/>
+<area shape="rect" id="node9" href="$classca_1_1uqac_1_1lif_1_1synthia_1_1string_1_1_random_sub_string.html" title="RandomPicker that produces random substrings from an original one." alt="" coords="259,332,427,373"/>
+<area shape="rect" id="node6" href="$classca_1_1uqac_1_1lif_1_1synthia_1_1string_1_1_random_suffix.html" title="Just like RandomPrefix but for suffixes." alt="" coords="495,169,663,211"/>
+<area shape="rect" id="node7" href="$classca_1_1uqac_1_1lif_1_1synthia_1_1string_1_1_random_trim.html" title="A combination of RandomPrefix and RandomSuffix." alt="" coords="495,235,663,276"/>
+</map>

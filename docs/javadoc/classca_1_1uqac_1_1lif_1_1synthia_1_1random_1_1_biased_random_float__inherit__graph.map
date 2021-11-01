@@ -1,0 +1,8 @@
+<map id="ca.uqac.lif.synthia.random.BiasedRandomFloat" name="ca.uqac.lif.synthia.random.BiasedRandomFloat">
+<area shape="rect" id="node1" title="Generates pseudo&#45;random floating&#45;point numbers in the interval [0,1], but according to a probability ..." alt="" coords="889,39,1068,80"/>
+<area shape="rect" id="node2" href="$classca_1_1uqac_1_1lif_1_1synthia_1_1random_1_1_random_float.html" title="Picks a floating point number uniformly in an interval." alt="" coords="663,39,841,80"/>
+<area shape="rect" id="node3" href="$classca_1_1uqac_1_1lif_1_1synthia_1_1random_1_1_random_picker.html" title=" " alt="" coords="436,5,615,47"/>
+<area shape="rect" id="node4" href="$interfaceca_1_1uqac_1_1lif_1_1synthia_1_1_shrinkable.html" title="Interface signaling that a picker can be shrunk." alt="" coords="453,71,597,112"/>
+<area shape="rect" id="node5" href="$interfaceca_1_1uqac_1_1lif_1_1synthia_1_1_picker.html" title="Picks an object." alt="" coords="248,71,388,112"/>
+<area shape="rect" id="node6" href="$interfaceca_1_1uqac_1_1lif_1_1synthia_1_1_resettable.html" title="Signals that an object can be put back into its initial state." alt="" coords="5,78,200,105"/>
+</map>

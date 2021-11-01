@@ -1,0 +1,4 @@
+<map id="ca.uqac.lif.synthia.collection.SetPicker" name="ca.uqac.lif.synthia.collection.SetPicker">
+<area shape="rect" id="node1" title="Picker that merges the result of other pickers into a set." alt="" coords="24,95,215,136"/>
+<area shape="rect" id="node2" href="$classca_1_1uqac_1_1lif_1_1synthia_1_1collection_1_1_composite_picker.html" title=" " alt="" coords="5,5,233,47"/>
+</map>

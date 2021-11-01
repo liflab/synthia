@@ -1,0 +1,7 @@
+<map id="ca.uqac.lif.synthia.util.ArrayPicker" name="ca.uqac.lif.synthia.util.ArrayPicker">
+<area shape="rect" id="node1" title="Picker that merges the result of other pickers into an array." alt="" coords="677,50,831,91"/>
+<area shape="rect" id="node2" href="$classca_1_1uqac_1_1lif_1_1synthia_1_1collection_1_1_composite_picker.html" title="Picker that merges the result of other pickers into a composite data structure." alt="" coords="436,5,629,61"/>
+<area shape="rect" id="node3" href="$interfaceca_1_1uqac_1_1lif_1_1synthia_1_1_picker.html" title="Picks an object." alt="" coords="248,50,388,91"/>
+<area shape="rect" id="node5" href="$interfaceca_1_1uqac_1_1lif_1_1synthia_1_1_shrinkable.html" title="Interface signaling that a picker can be shrunk." alt="" coords="454,86,611,127"/>
+<area shape="rect" id="node4" href="$interfaceca_1_1uqac_1_1lif_1_1synthia_1_1_resettable.html" title="Signals that an object can be put back into its initial state." alt="" coords="5,57,200,84"/>
+</map>

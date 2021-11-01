@@ -1,0 +1,28 @@
+<map id="ca.uqac.lif.synthia.Shrinkable&lt; T &gt;" name="ca.uqac.lif.synthia.Shrinkable&lt; T &gt;">
+<area shape="rect" id="node1" title="Interface signaling that a picker can be shrunk." alt="" coords="436,691,661,717"/>
+<area shape="rect" id="node4" href="$classca_1_1uqac_1_1lif_1_1synthia_1_1collection_1_1_compose_list.html" title=" " alt="" coords="750,5,921,61"/>
+<area shape="rect" id="node5" href="$classca_1_1uqac_1_1lif_1_1synthia_1_1collection_1_1_compose_shrunk_list.html" title="Given a reference list, picks lists that are smaller." alt="" coords="730,85,941,141"/>
+<area shape="rect" id="node6" href="$classca_1_1uqac_1_1lif_1_1synthia_1_1enumerative_1_1_bound.html" title="Return the value picked by a picker a defined number of times." alt="" coords="746,166,925,207"/>
+<area shape="rect" id="node7" href="$classca_1_1uqac_1_1lif_1_1synthia_1_1random_1_1_affine_transform.html" title="Applies an affine transform to a value produced by another picker." alt="" coords="732,231,939,273"/>
+<area shape="rect" id="node8" href="$classca_1_1uqac_1_1lif_1_1synthia_1_1random_1_1_random_boolean.html" title="Picks a Boolean value." alt="" coords="747,297,924,353"/>
+<area shape="rect" id="node9" href="$classca_1_1uqac_1_1lif_1_1synthia_1_1random_1_1_random_float.html" title="Picks a floating point number uniformly in an interval." alt="" coords="756,377,915,433"/>
+<area shape="rect" id="node11" href="$classca_1_1uqac_1_1lif_1_1synthia_1_1random_1_1_random_integer.html" title="Picks an integer uniformly in an interval." alt="" coords="750,457,921,513"/>
+<area shape="rect" id="node12" href="$classca_1_1uqac_1_1lif_1_1synthia_1_1random_1_1_random_sub_list.html" title="An equivalent of RandomSubString but for lists." alt="" coords="748,537,923,593"/>
+<area shape="rect" id="node13" href="$classca_1_1uqac_1_1lif_1_1synthia_1_1relative_1_1_pick_smaller_comparable.html" title="A variant of PickIf that selects an element if it is smaller than a reference object." alt="" coords="709,618,961,659"/>
+<area shape="rect" id="node14" href="$classca_1_1uqac_1_1lif_1_1synthia_1_1sequence_1_1_playback.html" title="Picker that returns values taken from a list." alt="" coords="745,683,925,725"/>
+<area shape="rect" id="node16" href="$classca_1_1uqac_1_1lif_1_1synthia_1_1string_1_1_random_prefix.html" title="Like RandomSubString, but this time, the Picker returns a prefix of the original strings of randomly ..." alt="" coords="759,749,912,805"/>
+<area shape="rect" id="node19" href="$classca_1_1uqac_1_1lif_1_1synthia_1_1string_1_1_random_string.html" title="Generates a random character string." alt="" coords="759,829,912,885"/>
+<area shape="rect" id="node20" href="$classca_1_1uqac_1_1lif_1_1synthia_1_1string_1_1_random_sub_string.html" title="RandomPicker that produces random substrings from an original one." alt="" coords="747,909,923,965"/>
+<area shape="rect" id="node21" href="$classca_1_1uqac_1_1lif_1_1synthia_1_1string_1_1_string_pattern.html" title="Generates a string according to a predefined pattern." alt="" coords="762,989,909,1045"/>
+<area shape="rect" id="node22" href="$classca_1_1uqac_1_1lif_1_1synthia_1_1util_1_1_array_picker.html" title="Picker that merges the result of other pickers into an array." alt="" coords="741,1070,930,1111"/>
+<area shape="rect" id="node23" href="$classca_1_1uqac_1_1lif_1_1synthia_1_1util_1_1_choice.html" title="Picks an element from a collection, where the probability of picking each element can be user&#45;defined..." alt="" coords="765,1135,905,1177"/>
+<area shape="rect" id="node24" href="$classca_1_1uqac_1_1lif_1_1synthia_1_1util_1_1_constant.html" title="Picker that returns the same object every time." alt="" coords="765,1201,905,1242"/>
+<area shape="rect" id="node25" href="$classca_1_1uqac_1_1lif_1_1synthia_1_1util_1_1_freeze.html" title="Picker that returns the first object fetched from another picker and repeats it endlessly." alt="" coords="765,1266,905,1307"/>
+<area shape="rect" id="node26" href="$classca_1_1uqac_1_1lif_1_1synthia_1_1util_1_1_nothing_picker.html" title="A RelativePicker that only throws a NoMoreElementException when the pick() method is called." alt="" coords="751,1331,920,1373"/>
+<area shape="rect" id="node2" href="$interfaceca_1_1uqac_1_1lif_1_1synthia_1_1_picker.html" title="Picks an object." alt="" coords="248,683,388,725"/>
+<area shape="rect" id="node3" href="$interfaceca_1_1uqac_1_1lif_1_1synthia_1_1_resettable.html" title="Signals that an object can be put back into its initial state." alt="" coords="5,691,200,717"/>
+<area shape="rect" id="node10" href="$classca_1_1uqac_1_1lif_1_1synthia_1_1random_1_1_biased_random_float.html" title="Generates pseudo&#45;random floating&#45;point numbers in the interval [0,1], but according to a probability ..." alt="" coords="1025,385,1204,426"/>
+<area shape="rect" id="node15" href="$classca_1_1uqac_1_1lif_1_1synthia_1_1enumerative_1_1_all_elements.html" title=" " alt="" coords="1009,683,1220,725"/>
+<area shape="rect" id="node17" href="$classca_1_1uqac_1_1lif_1_1synthia_1_1string_1_1_random_suffix.html" title="Just like RandomPrefix but for suffixes." alt="" coords="1031,753,1199,794"/>
+<area shape="rect" id="node18" href="$classca_1_1uqac_1_1lif_1_1synthia_1_1string_1_1_random_trim.html" title="A combination of RandomPrefix and RandomSuffix." alt="" coords="1031,818,1199,859"/>
+</map>

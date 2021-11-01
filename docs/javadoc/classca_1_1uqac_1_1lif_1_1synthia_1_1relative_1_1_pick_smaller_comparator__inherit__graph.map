@@ -1,0 +1,8 @@
+<map id="ca.uqac.lif.synthia.relative.PickSmallerComparator&lt; T &gt;" name="ca.uqac.lif.synthia.relative.PickSmallerComparator&lt; T &gt;">
+<area shape="rect" id="node1" title="A variant of PickIf that selects an element if it is smaller than a reference object." alt="" coords="91,348,283,389"/>
+<area shape="rect" id="node2" href="$classca_1_1uqac_1_1lif_1_1synthia_1_1relative_1_1_pick_if.html" title="Returns object from a picker satisfying a condition." alt="" coords="113,259,260,300"/>
+<area shape="rect" id="node3" href="$classca_1_1uqac_1_1lif_1_1synthia_1_1util_1_1_mutator.html" title="A picker that applies a transformation (&quot;mutation&quot;) on the value produced by another picker." alt="" coords="33,169,173,211"/>
+<area shape="rect" id="node4" href="$interfaceca_1_1uqac_1_1lif_1_1synthia_1_1_picker.html" title="Picks an object." alt="" coords="33,80,173,121"/>
+<area shape="rect" id="node5" href="$interfaceca_1_1uqac_1_1lif_1_1synthia_1_1_resettable.html" title="Signals that an object can be put back into its initial state." alt="" coords="5,5,200,32"/>
+<area shape="rect" id="node6" title=" " alt="" coords="197,177,347,203"/>
+</map>

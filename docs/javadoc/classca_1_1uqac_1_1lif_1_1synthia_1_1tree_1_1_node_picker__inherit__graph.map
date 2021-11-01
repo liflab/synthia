@@ -1,0 +1,5 @@
+<map id="ca.uqac.lif.synthia.tree.NodePicker&lt; T &gt;" name="ca.uqac.lif.synthia.tree.NodePicker&lt; T &gt;">
+<area shape="rect" id="node1" title=" " alt="" coords="23,169,182,211"/>
+<area shape="rect" id="node2" href="$interfaceca_1_1uqac_1_1lif_1_1synthia_1_1_picker.html" title="Picks an object." alt="" coords="25,80,180,121"/>
+<area shape="rect" id="node3" href="$interfaceca_1_1uqac_1_1lif_1_1synthia_1_1_resettable.html" title="Signals that an object can be put back into its initial state." alt="" coords="5,5,200,32"/>
+</map>

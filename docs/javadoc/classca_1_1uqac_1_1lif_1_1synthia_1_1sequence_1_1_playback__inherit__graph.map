@@ -1,0 +1,10 @@
+<map id="ca.uqac.lif.synthia.sequence.Playback&lt; T &gt;" name="ca.uqac.lif.synthia.sequence.Playback&lt; T &gt;">
+<area shape="rect" id="node1" title="Picker that returns values taken from a list." alt="" coords="853,57,1045,99"/>
+<area shape="rect" id="node8" href="$classca_1_1uqac_1_1lif_1_1synthia_1_1enumerative_1_1_all_elements.html" title=" " alt="" coords="1093,57,1304,99"/>
+<area shape="rect" id="node2" href="$interfaceca_1_1uqac_1_1lif_1_1synthia_1_1_bounded.html" title="Interface used to signal that a picker enumerates all values from a set." alt="" coords="436,21,576,63"/>
+<area shape="rect" id="node7" href="$interfaceca_1_1uqac_1_1lif_1_1synthia_1_1_sequence_shrinkable.html" title="Signals that a picker can shrink the sequence of values it has produced since its last reset." alt="" coords="624,28,805,69"/>
+<area shape="rect" id="node3" href="$interfaceca_1_1uqac_1_1lif_1_1synthia_1_1_picker.html" title="Picks an object." alt="" coords="248,55,388,96"/>
+<area shape="rect" id="node5" href="$interfaceca_1_1uqac_1_1lif_1_1synthia_1_1_shrinkable.html" title="Interface signaling that a picker can be shrunk." alt="" coords="436,87,576,128"/>
+<area shape="rect" id="node4" href="$interfaceca_1_1uqac_1_1lif_1_1synthia_1_1_resettable.html" title="Signals that an object can be put back into its initial state." alt="" coords="5,62,200,89"/>
+<area shape="rect" id="node6" title=" " alt="" coords="640,145,789,171"/>
+</map>

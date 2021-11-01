@@ -1,0 +1,7 @@
+<map id="ca.uqac.lif.synthia.vector.VectorPicker" name="ca.uqac.lif.synthia.vector.VectorPicker">
+<area shape="rect" id="node1" title="Interface for pickers that generate arrays of floating&#45;point numbers." alt="" coords="436,39,607,80"/>
+<area shape="rect" id="node4" href="$classca_1_1uqac_1_1lif_1_1synthia_1_1vector_1_1_hypersphere_picker.html" title="Generates n&#45;dimensional vectors with a given modulus." alt="" coords="655,5,825,47"/>
+<area shape="rect" id="node5" href="$classca_1_1uqac_1_1lif_1_1synthia_1_1vector_1_1_prism_picker.html" title="Generates a vector by independently picking a value for each of its coordinates." alt="" coords="655,71,825,112"/>
+<area shape="rect" id="node2" href="$interfaceca_1_1uqac_1_1lif_1_1synthia_1_1_picker.html" title="Picks an object." alt="" coords="248,39,388,80"/>
+<area shape="rect" id="node3" href="$interfaceca_1_1uqac_1_1lif_1_1synthia_1_1_resettable.html" title="Signals that an object can be put back into its initial state." alt="" coords="5,46,200,73"/>
+</map>

@@ -1,0 +1,6 @@
+<map id="ca.uqac.lif.synthia.util.Constant&lt; T &gt;" name="ca.uqac.lif.synthia.util.Constant&lt; T &gt;">
+<area shape="rect" id="node1" title="Picker that returns the same object every time." alt="" coords="26,259,179,300"/>
+<area shape="rect" id="node2" href="$interfaceca_1_1uqac_1_1lif_1_1synthia_1_1_shrinkable.html" title="Interface signaling that a picker can be shrunk." alt="" coords="33,169,173,211"/>
+<area shape="rect" id="node3" href="$interfaceca_1_1uqac_1_1lif_1_1synthia_1_1_picker.html" title="Picks an object." alt="" coords="33,80,173,121"/>
+<area shape="rect" id="node4" href="$interfaceca_1_1uqac_1_1lif_1_1synthia_1_1_resettable.html" title="Signals that an object can be put back into its initial state." alt="" coords="5,5,200,32"/>
+</map>

@@ -1,0 +1,8 @@
+<map id="ca.uqac.lif.synthia.collection.ComposeList&lt; T &gt;" name="ca.uqac.lif.synthia.collection.ComposeList&lt; T &gt;">
+<area shape="rect" id="node1" title=" " alt="" coords="656,68,847,109"/>
+<area shape="rect" id="node2" href="$interfaceca_1_1uqac_1_1lif_1_1synthia_1_1_picker.html" title="Picks an object." alt="" coords="248,5,392,47"/>
+<area shape="rect" id="node3" href="$interfaceca_1_1uqac_1_1lif_1_1synthia_1_1_resettable.html" title="Signals that an object can be put back into its initial state." alt="" coords="5,46,200,73"/>
+<area shape="rect" id="node5" href="$interfaceca_1_1uqac_1_1lif_1_1synthia_1_1_picker.html" title="Picks an object." alt="" coords="250,71,390,112"/>
+<area shape="rect" id="node4" href="$interfaceca_1_1uqac_1_1lif_1_1synthia_1_1_shrinkable.html" title="Interface signaling that a picker can be shrunk." alt="" coords="440,68,608,109"/>
+<area shape="rect" id="node6" title=" " alt="" coords="449,134,599,161"/>
+</map>
