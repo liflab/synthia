@@ -35,7 +35,7 @@ import ca.uqac.lif.synthia.vector.PrismPicker;
  * <img src="{@docRoot}/doc-files/oscilloscope/Signal.png" alt="Signal" />
  * <img src="{@docRoot}/doc-files/oscilloscope/AM_Carrier.png" alt="Carrier" />
  * <p>
- * The wiring diagram of pickers corresponding to frequency modulation is
+ * The wiring diagram of pickers corresponding to amplitude modulation is
  * as follows:
  * <p>
  * <img src="{@docRoot}/doc-files/oscilloscope/AMRadio.png" alt="Picker wiring diagram" />

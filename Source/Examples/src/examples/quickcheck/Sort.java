@@ -60,7 +60,8 @@ public class Sort
 	public static void main(String[] args)
 	{
 		FaultySort<Integer> fs = new FaultySort<Integer>();
-		Assert<List<Integer>> a = new Assert<List<Integer>>(new ComposeList<Integer>(new RandomInteger(0, 1000), new RandomInteger(0, 2000))) {
+		Assert<List<Integer>> a = new Assert<List<Integer>>(
+				new ComposeList<Integer>(new RandomInteger(0, 1000), new RandomInteger(0, 2000))) {
 			protected boolean evaluate(List<Integer> x) {
 				return isSorted(fs.sort(x));
 			}

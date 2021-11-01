@@ -18,7 +18,7 @@
  */
 
 /**
- * Examples showing the object mutation functionality of some pickers.
+ * Simple examples involving only basic pickers.
  * @ingroup Examples
  */
-package examples.mutation;
+package examples.basic;

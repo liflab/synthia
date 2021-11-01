@@ -18,7 +18,10 @@
  */
 
 /**
- * Examples showing the object mutation functionality of some pickers.
+ * Generates values based on derivations of a formal grammar in
+ * <a href="https://en.wikipedia.org/wiki/Backus%E2%80%93Naur_form">Backus-Naur
+ * form</a>.
+ * 
  * @ingroup Examples
  */
-package examples.mutation;
+package examples.grammar;
