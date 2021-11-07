@@ -22,9 +22,11 @@ import java.io.PrintStream;
 import java.util.ArrayList;
 import java.util.List;
 
+import ca.uqac.lif.synthia.NoMoreElementException;
 import ca.uqac.lif.synthia.Picker;
 import ca.uqac.lif.synthia.Resettable;
 import ca.uqac.lif.synthia.SequenceShrinkable;
+import ca.uqac.lif.synthia.sequence.Playback;
 import ca.uqac.lif.synthia.sequence.Record;
 import ca.uqac.lif.synthia.util.Delay;
 
@@ -47,11 +49,14 @@ import ca.uqac.lif.synthia.util.Delay;
  * </ol>
  * What the "component" can be is totally abstract. All the monkey expects
  * is that it implements the {@link Resettable} interface. A typical component
- * is a graphical user interface (such as a {@link JFrame}), 
+ * is a graphical user interface (such as a {@link JFrame}).
+ * <p>
+ * The shrinking phase is optional, and may be disabled by calling
+ * {@link #shrink(boolean)}.
  * 
  * @author Sylvain Hallé
  */
-public class Monkey
+public abstract class Monkey
 {
 	/**
 	 * The maximum number of shrinking phases the monkey will attempt.
@@ -63,12 +68,7 @@ public class Monkey
 	 * shrinking phase.
 	 */
 	protected static final int s_maxTries = 5;
-
-	/**
-	 * The picker producing the actions to be applied.
-	 */
-	protected Picker<Action> m_actionPicker;
-
+	
 	/**
 	 * The object on which the actions are applied.
 	 */
@@ -101,6 +101,11 @@ public class Monkey
 	 * searching.
 	 */
 	protected int m_bestThreshold;
+	
+	/**
+	 * A flag telling the monkey whether it should shrink the original sequence.
+	 */
+	protected boolean m_shrink;
 
 	/**
 	 * Creates a new instance of the monkey.
@@ -111,16 +116,16 @@ public class Monkey
 	 * @param ps A print stream where the monkey outputs status messages during
 	 * its execution. Set it to <tt>null</tt> to disable messages.
 	 */
-	public Monkey(Resettable object, Picker<Action> actions, Picker<Float> decision, PrintStream ps)
+	public Monkey(Resettable object, Picker<Float> decision, PrintStream ps)
 	{
 		super();
 		m_object = object;
-		m_actionPicker = actions;
 		m_decision = decision;
 		m_bestSequence = new ArrayList<Action>();
 		m_out = ps;
 		m_bestThreshold = 4;
 		m_lastException = null;
+		m_shrink = true;
 	}
 
 	/**
@@ -130,17 +135,30 @@ public class Monkey
 	 * @param decision A picker passed to the action picker for the
 	 * shrinking process
 	 */
-	public Monkey(Resettable object, Picker<Action> actions, Picker<Float> decision)
+	public Monkey(Resettable object, Picker<Float> decision)
 	{
-		this(object, actions, decision, null);
+		this(object, decision, null);
+	}
+	
+	/**
+	 * Tells the monkey whether a failing sequence should be shrunk afterwards.
+	 * @param b Set to <tt>true</tt> to enable shrinking, <tt>false</tt>
+	 * otherwise.
+	 * @return This monkey
+	 */
+	public Monkey shrink(boolean b)
+	{
+		m_shrink = b;
+		return this;
 	}
 
 	public boolean check()
 	{
 		boolean error_found = false;
-		Record<Action> rec = new Record<Action>(m_actionPicker);
+		Record<Action> rec = null;
 		for (int try_counter = 0; try_counter < s_maxTries; try_counter++)
 		{
+			rec = restart(rec);
 			println("Attempt " + try_counter);
 			try
 			{
@@ -153,16 +171,26 @@ public class Monkey
 				}
 				println("");
 			}
+			catch (NoMoreElementException e)
+			{
+				// Sequence is over, try again
+				continue;
+			}
 			catch (Exception e)
 			{
 				// Exception thrown
 				print("\n" + e);
 				error_found = true;
 				m_bestSequence = rec.getSequence();
+				m_lastException = e;
 				println("\nSequence: " + m_bestSequence);
 				break;
 			}
-			rec.clear();
+		}
+		if (!m_shrink)
+		{
+			// Shrinking disabled, we are done
+			return !error_found;
 		}
 		SequenceShrinkable<Action> reference = rec;
 		for (int shrinking_steps = 0; m_bestSequence.size() > m_bestThreshold && shrinking_steps < s_maxShrinkingPhases; shrinking_steps++)
@@ -244,6 +272,90 @@ public class Monkey
 		if (m_out != null)
 		{
 			m_out.println(message);
+		}
+	}
+	
+	/**
+	 * Restarts the process of finding a faulty sequence. The {@link ActionMonkey}
+	 * and {@link SequenceMonkey} implement this method differently. This is the
+	 * only difference in the operation of both pickers.
+	 * @param rec The picker used to record the sequence of actions played.
+	 * @return A new instance of recording picker.
+	 */
+	protected abstract Record<Action> restart(Record<Action> rec);
+	
+	/**
+	 * A {@link Monkey} that is given a picker producing individual actions.
+	 */
+	public static class ActionMonkey extends Monkey
+	{
+		/**
+		 * The picker producing the actions to be applied.
+		 */
+		protected Picker<Action> m_actionPicker;
+		
+		/**
+		 * Creates a new instance of the monkey.
+		 * @param object The object on which the actions are applied
+		 * @param actions The picker producing the actions to be applied
+		 * @param decision A picker passed to the action picker for the
+		 * shrinking process
+		 * @param ps A print stream where the monkey outputs status messages during
+		 * its execution. Set it to <tt>null</tt> to disable messages.
+		 */
+		public ActionMonkey(Resettable object, Picker<Action> actions, Picker<Float> decision, PrintStream ps)
+		{
+			super(object, decision, ps);
+			m_actionPicker = actions;
+		}
+		
+		@Override
+		protected Record<Action> restart(Record<Action> rec)
+		{
+			if (rec == null)
+			{
+				rec = new Record<Action>(m_actionPicker);
+			}
+			else
+			{
+				rec.reset();
+			}
+			return rec;
+		}
+	}
+	
+	/**
+	 * A {@link Monkey} that is given a picker producing action <em>sequences</em>.
+	 */
+	public static class SequenceMonkey extends Monkey
+	{
+		/**
+		 * The picker producing the action sequences to be applied.
+		 */
+		protected Picker<List<Action>> m_actionSequencePicker;
+		
+		/**
+		 * Creates a new instance of the monkey.
+		 * @param object The object on which the actions are applied
+		 * @param actions The picker producing the list of actions to be applied
+		 * @param decision A picker passed to the action picker for the
+		 * shrinking process
+		 * @param ps A print stream where the monkey outputs status messages during
+		 * its execution. Set it to <tt>null</tt> to disable messages.
+		 */
+		public SequenceMonkey(Resettable object, Picker<List<Action>> actions, Picker<Float> decision, PrintStream ps)
+		{
+			super(object, decision, ps);
+			m_actionSequencePicker = actions;
+		}
+		
+		@Override
+		protected Record<Action> restart(Record<Action> rec)
+		{
+			List<Action> actions = m_actionSequencePicker.pick();
+			Playback<Action> play = new Playback<Action>(actions);
+			Record<Action> new_rec = new Record<Action>(play);
+			return new_rec;
 		}
 	}
 }

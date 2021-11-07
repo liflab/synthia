@@ -22,6 +22,7 @@ import ca.uqac.lif.synthia.random.BiasedRandomFloat;
 import ca.uqac.lif.synthia.random.RandomFloat;
 import ca.uqac.lif.synthia.test.Action;
 import ca.uqac.lif.synthia.test.Monkey;
+import ca.uqac.lif.synthia.test.Monkey.ActionMonkey;
 import ca.uqac.lif.synthia.util.Choice;
 
 /**
@@ -277,8 +278,10 @@ import ca.uqac.lif.synthia.util.Choice;
  * triggers the error (division, zero, followed by any operator).
  * 
  * @author Sylvain Hallé
+ * @ingroup Examples
+ * @see CalculatorMonkeyGrammar
  */
-public class CalculatorMonkey
+public class CalculatorMonkeyRandom
 {
 	public static void main(String[] args)
 	{
@@ -290,7 +293,7 @@ public class CalculatorMonkey
 			actions.add(new WidgetAction.ClickAction(window.getButton(label)), 1f / 16);
 		}
 		RandomFloat b_rf = new BiasedRandomFloat(2).setSeed(0);
-		Monkey m = new Monkey(window, actions, b_rf, System.out);
+		Monkey m = new ActionMonkey(window, actions, b_rf, System.out);
 		window.setVisible(true);
 		if (m.check())
 		{

@@ -57,7 +57,14 @@ import ca.uqac.lif.synthia.test.Monkey;
  * {@link OverflowException}. The calculator can obviously manipulate larger
  * values; this limitation is artificial. It is enabled by calling 
  * {@link #hasOverflow()}.</li>
+ * <li>If {@link #checkSyntax()} is called, the calculator rejects sequences
+ * of buttons that correspond to a syntactically invalid expression. For
+ * example, <tt>2.5.4&div;3</tt> is invalid (two decimal periods in the
+ * first operand), as is <tt>+3=</tt> (missing first operand) or
+ * <tt>2+5&minus;+</tt> (two successive operators without an operand in
+ * between).</li>
  * </ul>
+ * @ingroup Examples
  */
 public class Calculator extends JFrame implements Resettable
 {
@@ -86,6 +93,11 @@ public class Calculator extends JFrame implements Resettable
 	 * A flag specifying if the calculator checks the format of numbers.
 	 */
 	protected boolean m_checkFormat;
+	
+	/**
+	 * A flag specifying if the calculator checks the syntax of operations.
+	 */
+	protected boolean m_checkSyntax;
 
 	/**
 	 * A flag specifying if the calculator produces an overflow exception.
@@ -108,6 +120,7 @@ public class Calculator extends JFrame implements Resettable
 		contentPane.add(m_panel);
 		m_checkFormat = false;
 		m_hasOverflow = false;
+		m_checkSyntax = false;
 	}
 
 	/**
@@ -124,11 +137,21 @@ public class Calculator extends JFrame implements Resettable
 	/**
 	 * Instructs the calculator to check the format of numbers and ignore
 	 * parsing errors.
-	 * @return
+	 * @return This calculator
 	 */
 	public Calculator disableNumberFormatException()
 	{
 		m_checkFormat = true;
+		return this;
+	}
+	
+	/**
+	 * Instructs the calculator to check the syntax of operations.
+	 * @return This calculator
+	 */
+	public Calculator checkSyntax()
+	{
+		m_checkSyntax = true;
 		return this;
 	}
 
@@ -157,6 +180,13 @@ public class Calculator extends JFrame implements Resettable
 	public static void main(String[] args)
 	{
 		Calculator c = new Calculator();
+		for (String s : args)
+		{
+			if (s.compareTo("-s") == 0)
+			{
+				c.checkSyntax();
+			}
+		}
 		c.setVisible(true);
 	}
 
@@ -174,6 +204,11 @@ public class Calculator extends JFrame implements Resettable
 		private double result = 0;
 		private String operator = "=";
 		private boolean calculating = true;
+		
+		/**
+		 * A flag indicating if a number has been entered since the last operator.
+		 */
+		private boolean m_hasNumber;
 
 		public CalculatorPanel() 
 		{
@@ -190,6 +225,7 @@ public class Calculator extends JFrame implements Resettable
 				b.addActionListener(this);
 			}
 			add(panel, "Center");
+			m_hasNumber = false;
 		}
 
 		@Override
@@ -198,18 +234,31 @@ public class Calculator extends JFrame implements Resettable
 			String cmd = evt.getActionCommand();
 			if ('0' <= cmd.charAt(0) && cmd.charAt(0) <= '9' || cmd.equals(".")) 
 			{
+				m_hasNumber = true;
 				if (calculating)
 				{
 					display.setText(cmd);
 				}
 				else
 				{
+					if (m_checkSyntax && cmd.equals(".") && display.getText().contains("."))
+					{
+						throw new IllegalArgumentException("Invalid number format");
+					}
 					display.setText(display.getText() + cmd);
 				}
 				calculating = false;
 			}
 			else 
 			{
+				if (m_checkSyntax && !m_hasNumber)
+				{
+					throw new IllegalArgumentException("Cannot punch an operator now");
+				}
+				if (!cmd.equals("="))
+				{
+					m_hasNumber = false;
+				}
 				if (calculating) 
 				{
 					if (cmd.equals("-")) 
@@ -284,6 +333,7 @@ public class Calculator extends JFrame implements Resettable
 			operator = "=";
 			calculating = true;
 			display.setText("0");
+			m_hasNumber = false;
 		}
 	}
 
