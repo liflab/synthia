@@ -170,6 +170,12 @@ public class Record<T> implements Picker<T>, ExplanationQueryable, SequenceShrin
 	@Override
 	public SequenceShrinkable<T> shrink(Picker<Float> d, float m)
 	{
+		if (m_picker instanceof SequenceShrinkable)
+		{
+			// If the source can shrink its sequence, we ask it directly
+			return ((SequenceShrinkable<T>) m_picker).shrink(d, m);
+		}
+		// Otherwise, we shrink by picking a subsequence
 		List<Integer> indices = new ArrayList<Integer>();
 		int num_to_pick = (int) (m * (float) m_values.size());
 		while (indices.size() < num_to_pick)

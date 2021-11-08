@@ -63,7 +63,7 @@ public class Playback<T> implements Bounded<T>, Shrinkable<T>, ExplanationQuerya
 	/**
 	 * The values to play back
 	 */
-	/*@ non_null @*/ protected T[] m_values;
+	/*@ non_null @*/ protected List<T> m_values;
 
 	/**
 	 * The index of the current value
@@ -79,7 +79,42 @@ public class Playback<T> implements Bounded<T>, Shrinkable<T>, ExplanationQuerya
 	 * Whether to loop through the values
 	 */
 	protected boolean m_loop;
-
+	
+	/**
+	 * An optional reference to a {@link Shrinkable} object at the origin of the
+	 * array of values to play back.
+	 */
+	/*@ null @*/ protected Shrinkable<List<T>> m_shrinkable;
+	
+	/**
+	 * Creates a new Playback picker
+	 * @param shrinkable A reference to a {@link Shrinkable} object at the origin of the
+	 * array of values to play back. Can be null.
+	 * @param start_index The position of the first value to return
+	 * @param values The list of values to play back
+	 */
+	public Playback(/*@ null @*/ Shrinkable<List<T>> shrinkable, int start_index, /*@ non_null @*/ List<T> values)
+	{
+		m_shrinkable = shrinkable;
+		m_values = values;
+		m_index = start_index;
+		m_startIndex = start_index;
+		m_loop = true;
+	}
+	
+	/**
+	 * Creates a new Playback picker
+	 * @param shrinkable A reference to a {@link Shrinkable} object at the origin of the
+	 * array of values to play back. Can be null.
+	 * @param start_index The position of the first value to return
+	 * @param values The values to play back
+	 */
+	@SuppressWarnings("unchecked")
+	public Playback(/*@ null @*/ Shrinkable<List<T>> shrinkable, int start_index, /*@ non_null @*/ T ... values)
+	{
+		this(shrinkable, start_index, Arrays.asList(values));
+	}
+	
 	/**
 	 * Creates a new Playback picker
 	 * @param start_index The position of the first value to return
@@ -88,10 +123,7 @@ public class Playback<T> implements Bounded<T>, Shrinkable<T>, ExplanationQuerya
 	@SuppressWarnings("unchecked")
 	public Playback(int start_index, /*@ non_null @*/ T ... values)
 	{
-		m_values = values;
-		m_index = start_index;
-		m_startIndex = start_index;
-		m_loop = true;
+		this(null, start_index, values);
 	}
 
 	/**
@@ -109,10 +141,9 @@ public class Playback<T> implements Bounded<T>, Shrinkable<T>, ExplanationQuerya
 	 * @param start_index The position of the first value to return
 	 * @param values The values to play back
 	 */
-	@SuppressWarnings("unchecked")
 	public Playback(int start_index, /*@ non_null @*/ List<T> values)
 	{
-		m_values = (T[]) values.toArray();
+		m_values = values;
 		m_index = start_index;
 		m_startIndex = start_index;
 	}
@@ -137,13 +168,13 @@ public class Playback<T> implements Bounded<T>, Shrinkable<T>, ExplanationQuerya
 	@Override
 	public T pick()
 	{
-		if (m_index >= m_values.length && !m_loop)
+		if (m_index >= m_values.size() && !m_loop)
 		{
 			throw new NoMoreElementException();
 		}
-		T f = m_values[m_index];
+		T f = m_values.get(m_index);
 		m_index++;
-		if (m_index == m_values.length && m_loop)
+		if (m_index == m_values.size() && m_loop)
 		{
 			m_index = 0;
 		}
@@ -207,7 +238,7 @@ public class Playback<T> implements Bounded<T>, Shrinkable<T>, ExplanationQuerya
 	@Override
 	public boolean isDone()
 	{
-		return (m_index >= (m_values.length)) && !m_loop;
+		return (m_index >= (m_values.size())) && !m_loop;
 	}
 
 	@Override
@@ -232,12 +263,12 @@ public class Playback<T> implements Bounded<T>, Shrinkable<T>, ExplanationQuerya
 		{
 			index = ((NthSuccessiveOutput) head).getIndex();
 		}
-		if (index < 0 || (!m_loop && index > m_values.length))
+		if (index < 0 || (!m_loop && index > m_values.size()))
 		{
 			// Not a valid part, end there
 			return root;
 		}
-		int actual_index = index % m_values.length;
+		int actual_index = index % m_values.size();
 		Part new_p = ComposedPart.compose(new NthElement(actual_index), new NthSuccessiveOutput(index));
 		root.addChild(f.getPartNode(new_p, m_values));
 		return root;
@@ -248,13 +279,13 @@ public class Playback<T> implements Bounded<T>, Shrinkable<T>, ExplanationQuerya
 	{
 		StringBuilder out = new StringBuilder();
 		out.append("Playback [");
-		for (int i = 0; i < m_values.length; i++)
+		for (int i = 0; i < m_values.size(); i++)
 		{
 			if (i > 0)
 			{
 				out.append(",");
 			}
-			out.append(m_values[i]);
+			out.append(m_values.get(i));
 		}
 		out.append("]");
 		return out.toString();
@@ -269,11 +300,17 @@ public class Playback<T> implements Bounded<T>, Shrinkable<T>, ExplanationQuerya
 	@Override
 	public SequenceShrinkable<T> shrink(Picker<Float> d, float m)
 	{
+		if (m_shrinkable != null)
+		{
+			// The source of the values is shrinkable, so ask it
+			Shrinkable<List<T>> shrunk = m_shrinkable.shrink(m_values);
+			return new Playback<T>(shrunk, 0, shrunk.pick()).setLoop(false);
+		}
 		List<Integer> indices = new ArrayList<Integer>();
-		int num_to_pick = (int) (m * (float) m_values.length);
+		int num_to_pick = (int) (m * (float) m_values.size());
 		while (indices.size() < num_to_pick)
 		{
-			int index = (int) Math.floor(d.pick() * m_values.length);
+			int index = (int) Math.floor(d.pick() * m_values.size());
 			if (!indices.contains(index))
 			{
 				indices.add(index);
@@ -283,14 +320,24 @@ public class Playback<T> implements Bounded<T>, Shrinkable<T>, ExplanationQuerya
 		List<T> values = new ArrayList<T>(indices.size());
 		for (int index : indices)
 		{
-			values.add(m_values[index]);
+			values.add(m_values.get(index));
 		}
-		return new Playback<T>(values);
+		return new Playback<T>(values).setLoop(false);
 	} 
+	
+	/**
+	 * Gets the complete sequence of values that this picker is programmed to
+	 * produce. 
+	 * @return The list of values
+	 */
+	public List<T> getProgrammedSequence()
+	{
+		return m_values;
+	}
 	
 	@Override
 	public List<T> getSequence()
 	{
-		return Arrays.asList(m_values);
+		return m_values.subList(m_startIndex, m_index);
 	}
 }

@@ -98,6 +98,17 @@ public abstract class WidgetAction<T> implements Action
 		{
 			return m_object.getText();
 		}
+		
+		@Override
+		public boolean equals(Object o)
+		{
+			if (o == null || !(o instanceof ClickAction))
+			{
+				return false;
+			}
+			ClickAction c = (ClickAction) o;
+			return m_object.equals(c.m_object);
+		}
 	}
 	
 	/**
@@ -160,6 +171,17 @@ public abstract class WidgetAction<T> implements Action
 		public String toString()
 		{
 			return "Type \"" + m_text + "\" into " + m_object;
+		}
+		
+		@Override
+		public boolean equals(Object o)
+		{
+			if (o == null || !(o instanceof ClickAction))
+			{
+				return false;
+			}
+			TypeAction c = (TypeAction) o;
+			return m_object.equals(c.m_object) && m_text.equals(c.m_text);
 		}
 	}
 }

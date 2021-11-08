@@ -26,7 +26,7 @@ public class AllElements<T> extends Playback<T> implements Bounded<T>, Seedable
 	protected RandomInteger m_indexPicker;
 
 	@SuppressWarnings("unchecked")
-	private AllElements(T[] values, boolean scramble, RandomInteger index_picker
+	private AllElements(List<T> values, boolean scramble, RandomInteger index_picker
 			, List<Integer> indexes, boolean loop, int index, int start_index)
 	{
 		m_values = values;
@@ -49,14 +49,14 @@ public class AllElements<T> extends Playback<T> implements Bounded<T>, Seedable
 		if(scramble)
 		{
 			initializeIndexes();
-			m_indexPicker.setInterval(0, m_values.length);
+			m_indexPicker.setInterval(0, m_values.size());
 		}
 
 	}
 
 	private void initializeIndexes()
 	{
-		for (int i = 0; i < m_values.length; i++)
+		for (int i = 0; i < m_values.size(); i++)
 		{
 			m_indexes.add(i);
 		}
@@ -90,7 +90,7 @@ public class AllElements<T> extends Playback<T> implements Bounded<T>, Seedable
 		}
 
 		int picked_index = m_indexPicker.pick();
-		T picked_value = (T) m_values[m_indexes.get(picked_index)];
+		T picked_value = (T) m_values.get(m_indexes.get(picked_index));
 
 		m_indexes.remove(picked_index);
 
@@ -134,7 +134,7 @@ public class AllElements<T> extends Playback<T> implements Bounded<T>, Seedable
 			}
 			else
 			{
-				return (m_index >= (m_values.length));
+				return (m_index >= (m_values.size()));
 			}
 		}
 	}

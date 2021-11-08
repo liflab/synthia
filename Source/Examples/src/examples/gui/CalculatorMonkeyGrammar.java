@@ -61,12 +61,27 @@ import ca.uqac.lif.synthia.test.Monkey.SequenceMonkey;
  * following:
  * <pre>
  * Attempt 0
- * 3−7−97−679630
+ * 84−33×7×309509017
  * examples.gui.Calculator$OverflowException: Overflow
- * Sequence: [3, −, 7, −, 9, 7, −, 6, 7, 9, 6, 3, 0, =]
+ * Sequence: [8, 4, −, 3, 3, ×, 7, ×, 3, 0, 9, 5, 0, 9, 0, 1, 7, −]
+ * 84−3×7×309
+ * Sequence: [8, 4, −, 3, ×, 7, ×, 3, 0, 9, −]
+ * 8−3×7×3−8=
+ * 8−3×7×309−87006=
+ * 84−3×7×3−8=
+ * 84−3×7×3−87=
+ * 84−3×7×3098−3×7×309−87=
+ * 
  * Found a examples.gui.Calculator$OverflowException: Overflow
- * Sequence : [3, −, 7, −, 9, 7, −, 6, 7, 9, 6, 3, 0, =]
+ * Sequence : [8, 4, −, 3, ×, 7, ×, 3, 0, 9, −]                                                                         
  * </pre>
+ * Note that the shrinking step takes the grammar into account. That is,
+ * it does not randomly chop elements from the original faulty sequence, as
+ * this would, again, likely result in sequences throwing an exception
+ * because they are invalid. Rather, the {@link GrammarSequence} produces
+ * sub-sequences of the original that are still valid derivations according to
+ * the grammar.
+ * <p>
  * One can change the filename to <tt>calculator-invalid.bnf</tt>, which
  * contains this alternate grammar:
  * <pre>
@@ -85,7 +100,6 @@ import ca.uqac.lif.synthia.test.Monkey.SequenceMonkey;
  * Sequence : [÷]
  * </pre>
  * As one can see, the monkey does not even get past the first click.
- * 
  * @author Sylvain Hallé
  * @see CalculatorMonkeyRandom
  * @ingroup Examples
@@ -100,14 +114,17 @@ public class CalculatorMonkeyGrammar
 		parser.setStartRule("<S>");
 		
 		Calculator window = new Calculator().disableNumberFormatException().hasOverflow().checkSyntax();
-		RandomFloat b_rf = new BiasedRandomFloat(2).setSeed(0);
-		RandomInteger b_ri = new RandomInteger().setSeed(0);
+		RandomFloat b_rf = new BiasedRandomFloat(2).setSeed(10000);
+		RandomInteger b_ri = new RandomInteger().setSeed(10000);
 		GrammarSequence<Action> actions = new GrammarSequence<Action>(parser, b_ri) {
-			public Action get(String token) {
+			protected Action getObject(String token) {
 				return new WidgetAction.ClickAction(window.getButton(token));
 			}
+			protected String getToken(Action a) {
+				return ((WidgetAction.ClickAction) a).toString();
+			}
 		};
-		Monkey m = new SequenceMonkey(window, actions, b_rf, System.out).shrink(false);
+		Monkey m = new SequenceMonkey(window, actions, b_rf, System.out).shrink(true);
 		window.setVisible(true);
 		if (m.check())
 		{

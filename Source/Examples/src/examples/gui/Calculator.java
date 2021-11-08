@@ -294,6 +294,12 @@ public class Calculator extends JFrame implements Resettable
 
 		private void calculate(double n)
 		{
+			if (m_hasOverflow && (n > 100000 || result > 100000))
+			{
+				// Artificial overflow
+				display.setText("OF");
+				throw new OverflowException();
+			}
 			switch (operator)
 			{
 			case "+":
@@ -317,7 +323,7 @@ public class Calculator extends JFrame implements Resettable
 				result = n;
 				break;
 			}
-			if (m_hasOverflow && n > 100000)
+			if (m_hasOverflow && (n > 100000 || result > 100000))
 			{
 				// Artificial overflow
 				display.setText("OF");

@@ -20,12 +20,15 @@ package ca.uqac.lif.synthia.test;
 
 import java.io.PrintStream;
 import java.util.ArrayList;
+import java.util.HashSet;
 import java.util.List;
+import java.util.Set;
 
 import ca.uqac.lif.synthia.NoMoreElementException;
 import ca.uqac.lif.synthia.Picker;
 import ca.uqac.lif.synthia.Resettable;
 import ca.uqac.lif.synthia.SequenceShrinkable;
+import ca.uqac.lif.synthia.Shrinkable;
 import ca.uqac.lif.synthia.sequence.Playback;
 import ca.uqac.lif.synthia.sequence.Record;
 import ca.uqac.lif.synthia.util.Delay;
@@ -156,6 +159,7 @@ public abstract class Monkey
 	{
 		boolean error_found = false;
 		Record<Action> rec = null;
+		Set<List<Action>> already_tried = new HashSet<List<Action>>();
 		for (int try_counter = 0; try_counter < s_maxTries; try_counter++)
 		{
 			rec = restart(rec);
@@ -184,6 +188,7 @@ public abstract class Monkey
 				m_bestSequence = rec.getSequence();
 				m_lastException = e;
 				println("\nSequence: " + m_bestSequence);
+				already_tried.add(m_bestSequence);
 				break;
 			}
 		}
@@ -202,6 +207,18 @@ public abstract class Monkey
 				for (int i = 0; i < s_maxTries; i++)
 				{
 					SequenceShrinkable<Action> to_try = reference.shrink(m_decision, magnitude);
+					if (to_try instanceof Playback)
+					{
+						List<Action> actions = ((Playback<Action>) to_try).getProgrammedSequence();
+						if (contains(already_tried, actions))
+						{
+							continue;
+						}
+						else
+						{
+							already_tried.add(actions);
+						}
+					}
 					boolean success = false;
 					m_object.reset();
 					Delay.wait(0.25f); // Give time for the object to reset itself
@@ -239,6 +256,38 @@ public abstract class Monkey
 		}
 		println("");
 		return !error_found;
+	}
+	
+	/**
+	 * Checks if a set of lists of actions contains a given list of actions.
+	 * @param set The set
+	 * @param list The list
+	 * @return {@code true} if the set contains the list, {@code false}
+	 * otherwise
+	 */
+	protected static boolean contains(Set<List<Action>> set, List<Action> list)
+	{
+		for (List<Action> l : set)
+		{
+			if (l.size() != list.size())
+			{
+				continue;
+			}
+			for (int i = 0; i < l.size(); i++)
+			{
+				boolean same = true;
+				if (!l.get(i).equals(list.get(i)))
+				{
+					same = false;
+					break;
+				}
+				if (same)
+				{
+					return true;
+				}
+			}
+		}
+		return false;
 	}
 
 	public Exception getException()
@@ -353,7 +402,15 @@ public abstract class Monkey
 		protected Record<Action> restart(Record<Action> rec)
 		{
 			List<Action> actions = m_actionSequencePicker.pick();
-			Playback<Action> play = new Playback<Action>(actions);
+			Playback<Action> play = null;
+			if (m_actionSequencePicker instanceof Shrinkable)
+			{
+				play = new Playback<Action>((Shrinkable<List<Action>>) m_actionSequencePicker, 0, actions).setLoop(false);
+			}
+			else
+			{
+				play = new Playback<Action>(actions).setLoop(false);
+			}
 			Record<Action> new_rec = new Record<Action>(play);
 			return new_rec;
 		}
