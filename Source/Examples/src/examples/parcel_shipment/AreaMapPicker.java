@@ -1,11 +1,11 @@
-package ca.uqac.lif.synthia.map;
+package examples.parcel_shipment;
 
 import ca.uqac.lif.synthia.Picker;
 import ca.uqac.lif.synthia.random.RandomInteger;
-
 import java.util.ArrayList;
 import java.util.List;
 
+//Test
 public class AreaMapPicker implements Picker<AreaMap>
 {
 	protected Picker<Integer> m_widthPicker;
