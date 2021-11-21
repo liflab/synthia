@@ -21,6 +21,7 @@ package examples.quickcheck;
 import ca.uqac.lif.synthia.random.RandomFloat;
 import ca.uqac.lif.synthia.random.RandomInteger;
 import ca.uqac.lif.synthia.test.Assert;
+import ca.uqac.lif.synthia.test.Testable;
 
 /**
  * Simple illustration of the shrinking process on randomly generated integers.
@@ -32,11 +33,8 @@ public class Prime
 {
 	public static void main(String[] args)
 	{
-		Assert<Integer> a = new Assert<Integer>(new RandomInteger(0, Integer.MAX_VALUE), new RandomFloat()) {
-			protected boolean evaluate(Integer x) {
-				return !isPrime(x);
-			}
-		};
+		Assert<Integer> a = new Assert<Integer>(new IsPrime(), 
+				new RandomInteger(0, Integer.MAX_VALUE), new RandomFloat());
 		if (!a.check())
 		{
 			System.out.println("Assertion is false");
@@ -47,23 +45,26 @@ public class Prime
 	}
 
 	/**
-	 * Checks if an integer is prime.
-	 * @param n The integer
-	 * @return {@code true} if the integer is prime, {@code false} otherwise
+	 * A {@link Testable} object that checks if an integer is prime.
 	 */
-	public static boolean isPrime(int n)
+	protected static class IsPrime implements Testable
 	{
-		if (n < 2)
+		@Override
+		public boolean test(Object ... parameters)
 		{
-			return false;
-		}
-		for (int x = 2; x < n / x; x++)
-		{
-			if (n % x == 0)
+			int n = (Integer) parameters[0];
+			if (n < 2)
 			{
 				return false;
 			}
+			for (int x = 2; x < n / x; x++)
+			{
+				if (n % x == 0)
+				{
+					return false;
+				}
+			}
+			return true;
 		}
-		return true;
 	}
 }
