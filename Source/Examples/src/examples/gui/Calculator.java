@@ -114,6 +114,7 @@ public class Calculator extends JFrame implements Resettable
 		setTitle("Calculator");
 		setSize(200, 200);
 		setLocationRelativeTo(null);
+		setResizable(false);
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		Container contentPane = getContentPane();
 		m_panel = new CalculatorPanel();

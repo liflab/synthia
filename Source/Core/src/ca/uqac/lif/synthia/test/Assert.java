@@ -35,36 +35,84 @@ import ca.uqac.lif.synthia.random.RandomFloat;
  */
 public class Assert<T>
 {
+	/**
+	 * The maximum number of times the process of finding an <em>initial</em>
+	 * failing test input can be restarted.
+	 */
 	protected static final int MAX_STARTS = 100;
 
+	/**
+	 * The maximum number of times the shrinking process can be repeated before
+	 * stopping.
+	 */
 	protected static final int MAX_CYCLES = 100;
 
+	/**
+	 * The maximum number of times an input is asked in each phase.
+	 */
 	protected static final int MAX_TRIES = 10;
+	
+	/**
+	 * The object that is being tested.
+	 */
+	protected Testable m_sut;
 
+	/**
+	 * A picker producing test inputs that can be shrunk.
+	 */
 	protected Shrinkable<T> m_input;
 
+	/**
+	 * The list of progressively smaller values collected during the shrinking
+	 * process.
+	 */
 	protected List<T> m_shrunk;
 
+	/**
+	 * A float picker used as a source of choice. This picker is merely passed
+	 * to the shrinkable picker in its calls to
+	 * {@link Shrinkable#shrink(Object, Picker, float)}.
+	 */
 	protected Picker<Float> m_decision;
 
-	public Assert(Shrinkable<T> input, Picker<Float> decision)
+	/**
+	 * Creates a new assertion object.
+	 * @param sut The object that is being tested
+	 * @param input A picker producing test inputs that can be shrunk
+	 * @param decision A float picker used as a source of choice
+	 */
+	public Assert(Testable sut, Shrinkable<T> input, Picker<Float> decision)
 	{
 		super();
+		m_sut = sut;
 		m_input = input;
 		m_shrunk = new ArrayList<T>();
 		m_decision = decision;
 	}
 
-	public Assert(Shrinkable<T> input)
+	/**
+	 * Creates a new assertion object.
+	 * @param sut The object that is being tested
+	 * @param input A picker producing test inputs that can be shrunk
+	 */
+	public Assert(Testable sut, Shrinkable<T> input)
 	{
-		this(input, RandomFloat.instance);
+		this(sut, input, RandomFloat.instance);
 	}
 
+	/**
+	 * Gets the total number of shrinking iterations conducted by the object.
+	 * @return The number of iterations
+	 */
 	public List<T> getIterations()
 	{
 		return m_shrunk;
 	}
 
+	/**
+	 * Gets the initial input causing the test to fail.
+	 * @return The input
+	 */
 	public T getInitial()
 	{
 		if (m_shrunk.isEmpty())
@@ -74,6 +122,11 @@ public class Assert<T>
 		return m_shrunk.get(0);
 	}
 
+	/**
+	 * Gets the final input causing the test to fail at the end of the shrinking
+	 * process.
+	 * @return The input
+	 */
 	public T getShrunk()
 	{
 		if (m_shrunk.isEmpty())
@@ -83,6 +136,11 @@ public class Assert<T>
 		return m_shrunk.get(m_shrunk.size() - 1);
 	}
 
+	/**
+	 * Starts the search for a failing test input.
+	 * @return The value {@code false} if a failing input has been found,
+	 * {@code true} otherwise. 
+	 */
 	@SuppressWarnings("unchecked")
 	public boolean check()
 	{
@@ -97,7 +155,7 @@ public class Assert<T>
 				for (int i = 0; i < MAX_TRIES; i++)
 				{
 					o = m_input.pick();
-					if (!evaluate(o))
+					if (!m_sut.test(o))
 					{
 						found = true;
 						break;
@@ -130,7 +188,7 @@ public class Assert<T>
 						for (j = 0; j < MAX_TRIES; j++)
 						{
 							o = p.pick();
-							if (!evaluate(o))
+							if (!m_sut.test(o))
 							{
 								shrunk.add(o);
 								new_found = true;
@@ -162,10 +220,5 @@ public class Assert<T>
 			}
 		}
 		return m_shrunk.isEmpty();
-	}
-
-	protected boolean evaluate(T o)
-	{
-		return true;
 	}
 }

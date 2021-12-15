@@ -25,6 +25,7 @@ import ca.uqac.lif.synthia.collection.ComparableList;
 import ca.uqac.lif.synthia.collection.ComposeList;
 import ca.uqac.lif.synthia.random.RandomInteger;
 import ca.uqac.lif.synthia.test.Assert;
+import ca.uqac.lif.synthia.test.Testable;
 
 /**
  * Illustrates the shrinking process when testing a procedure that sorts lists
@@ -60,12 +61,8 @@ public class Sort
 	public static void main(String[] args)
 	{
 		FaultySort<Integer> fs = new FaultySort<Integer>();
-		Assert<List<Integer>> a = new Assert<List<Integer>>(
-				new ComposeList<Integer>(new RandomInteger(0, 1000), new RandomInteger(0, 2000))) {
-			protected boolean evaluate(List<Integer> x) {
-				return isSorted(fs.sort(x));
-			}
-		};
+		Assert<List<Integer>> a = new Assert<List<Integer>>(new IsSorted(),
+				new ComposeList<Integer>(new RandomInteger(0, 1000), new RandomInteger(0, 2000)));
 		if (!a.check())
 		{
 			System.out.println("Assertion is false");
@@ -75,10 +72,39 @@ public class Sort
 		}
 	}
 	
+	protected static class IsSorted implements Testable
+	{
+		@Override
+		@SuppressWarnings("unchecked")
+		public boolean test(Object ... parameters)
+		{
+			FaultySort<Integer> fs = new FaultySort<Integer>();
+			List<Integer> list = (List<Integer>) parameters[0];
+			list = fs.sort(list);
+			for (int i = 0; i < list.size() - 1; i++)
+			{
+				Object o1 = list.get(i);
+				Object o2 = list.get(i + 1);
+				if (o1 instanceof Comparable)
+				{
+					if (((Comparable<Object>) o1).compareTo(o2) > 0)
+					{
+						return false;
+					}
+				}
+				else
+				{
+					return false;
+				}
+			}
+			return true;
+		}
+	}
+	
 	/**
 	 * A deliberately faulty implementation of insertion sort.
 	 *
-	 * @param <T>
+	 * @param <T> The type of the elements to sort.
 	 */
 	protected static class FaultySort<T>
 	{
@@ -123,27 +149,5 @@ public class Sort
 			}
 			return new_list;
 		}
-	}
-	
-	@SuppressWarnings("unchecked")
-	public static boolean isSorted(List<?> list)
-	{
-		for (int i = 0; i < list.size() - 1; i++)
-		{
-			Object o1 = list.get(i);
-			Object o2 = list.get(i + 1);
-			if (o1 instanceof Comparable)
-			{
-				if (((Comparable<Object>) o1).compareTo(o2) > 0)
-				{
-					return false;
-				}
-			}
-			else
-			{
-				return false;
-			}
-		}
-		return true;
 	}
 }

@@ -51,7 +51,7 @@ public class Variation1
 		HyperspherePicker hp = new HyperspherePicker(radius, angle);
 		for (int i = 0; i < 100; i++)
 		{
-			Utilities.print(System.out, hp.pick());
+			Utilities.println(System.out, hp.pick());
 		}
 	}
 

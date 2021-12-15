@@ -46,8 +46,8 @@ public class Offset extends Mutator<Number>
 	@Override
 	public Float pick()
 	{
-		float n = (float) m_picker.pick();
-		float o = (float) m_offset.pick();
+		float n = (Float) m_picker.pick();
+		float o = (Float) m_offset.pick();
 		return (Float) (n + o);
 	}
 
