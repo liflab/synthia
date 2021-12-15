@@ -47,7 +47,7 @@ public class Bound<T> extends Mutator<T> implements Bounded<T>, Shrinkable<T>
 		m_currentLength = 0;
 	}
 	
-	public Bound(Picker<T> source, int length)
+	public Bound(Picker<? extends T> source, int length)
 	{
 		this(source, new Constant<Integer>(length));
 	}
@@ -67,7 +67,7 @@ public class Bound<T> extends Mutator<T> implements Bounded<T>, Shrinkable<T>
 		{
 			throw new NoMoreElementException();
 		}
-		m_chosenLength++;
+		m_currentLength++;
 		return m_picker.pick();
 	}
 
