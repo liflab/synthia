@@ -60,7 +60,7 @@
       <name>Bullwinkle</name>
       <classname>ca.uqac.lif.bullwinkle.BnfParser</classname>
       <files>
-        <jar>https://github.com/sylvainhalle/Bullwinkle/releases/download/v1.4.5/bullwinkle.jar</jar>
+        <jar>https://github.com/sylvainhalle/Bullwinkle/releases/download/v1.4.6/bullwinkle.jar</jar>
       </files>
       <!-- The following parameter is mandatory. Set it to false if you don't
            want this library to be bundled into the compiled JAR. -->
