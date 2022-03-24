@@ -5,6 +5,8 @@ Synthia: synthesize data structures in Java
 
 [![Build Status](https://app.travis-ci.com/liflab/synthia.svg?branch=master)](https://app.travis-ci.com/liflab/synthia)
 
+<iframe width="373" height="210" src="https://www.youtube.com/embed/r2knLhZI5vM" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+
 Synthia is a flexible generator of data structures. With Synthia, it is
 possible to generate numbers, strings, lists, sentences from a predefined
 grammar, random walks in a finite-state machine, or any other user-defined
