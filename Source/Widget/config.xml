@@ -30,7 +30,7 @@
   <author>Sylvain Hallé, Marc-Antoine Plourde</author>
   
   <!-- The project's main class -->
-  <mainclass>ca.uqac.lif.synthia.widget.ChooseAction</mainclass>
+  <mainclass>ca.uqac.lif.synthia.widget.Main</mainclass>
 
   <!-- Default folders -->
   <srcdir>src</srcdir>

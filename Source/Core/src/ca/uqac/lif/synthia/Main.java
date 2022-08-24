@@ -34,7 +34,7 @@ public class Main
 	public static void main(String[] args)
 	{
 		System.out.println("Synthia - A data structure generator");
-		System.out.println("(C) 2019-2021 Laboratoire d'informatique formelle");
+		System.out.println("(C) 2019-2022 Laboratoire d'informatique formelle");
 		System.out.println("Université du Québec à Chicoutimi, Canada");
 	}
 }

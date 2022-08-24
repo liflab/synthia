@@ -16,7 +16,7 @@
     You should have received a copy of the GNU Lesser General Public License
     along with this program.  If not, see <http://www.gnu.org/licenses/>.
  */
-package ca.uqac.lif.synthia.grammar;
+package ca.uqac.lif.synthia.widget;
 
 /**
  * Dummy main file. This file, when run, only displays a message
@@ -34,7 +34,7 @@ public class Main
 	
 	public static void main(String[] args)
 	{
-		System.out.println("Synthia - A data structure generator - Grammar plugin");
+		System.out.println("Synthia - A data structure generator - Widget plugin");
 		System.out.println("(C) 2019-2021 Laboratoire d'informatique formelle");
 		System.out.println("Université du Québec à Chicoutimi, Canada");
 	}

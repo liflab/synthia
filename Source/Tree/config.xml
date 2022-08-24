@@ -30,7 +30,7 @@
   <author>Sylvain Hallé, Marc-Antoine Plourde</author>
   
   <!-- The project's main class -->
-  <mainclass>ca.uqac.lif.synthia.tree.Node</mainclass>
+  <mainclass>ca.uqac.lif.synthia.tree.Main</mainclass>
 
   <!-- Default folders -->
   <srcdir>src</srcdir>
