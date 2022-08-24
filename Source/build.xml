@@ -34,6 +34,8 @@
     <ant dir="Grammar" target="jar" />
     <!-- Copy Grammar to Examples -->
     <copy file="synthia-grammar.jar" todir="Examples/lib" />
+    <!-- Copy Tree to Examples -->
+    <copy file="synthia-tree.jar" todir="Examples/lib" />
     <!-- Compile Examples -->
     <ant dir="Examples" target="jar" />
   </target>
@@ -41,6 +43,15 @@
   <target name="download-deps">
     <ant dir="Core" target="download-deps" />
     <ant dir="Examples" target="download-deps" />
+  </target>
+  
+  <target name="download-rt8">
+    <ant dir="Core" target="download-rt8" />
+    <!-- Copy rt.jar to other projects -->
+    <copy file="Core/rt.jar" todir="Grammar" />
+    <copy file="Core/rt.jar" todir="Tree" />
+    <copy file="Core/rt.jar" todir="Widget" />
+    <copy file="Core/rt.jar" todir="Examples" />
   </target>
   
   <target name="test">
@@ -51,7 +62,17 @@
   <target name="clean">
     <ant dir="Core" target="clean" />
     <ant dir="Grammar" target="clean" />
+    <ant dir="Tree" target="clean" />
+    <ant dir="Widget" target="clean" />
     <ant dir="Examples" target="clean" />
+  </target>
+  
+  <target name="wipe">
+    <ant dir="Core" target="wipe" />
+    <ant dir="Grammar" target="wipe" />
+    <ant dir="Tree" target="wipe" />
+    <ant dir="Widget" target="wipe" />
+    <ant dir="Examples" target="wipe" />
   </target>
   
   <target name="javadoc">
