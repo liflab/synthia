@@ -29,13 +29,21 @@
     <ant dir="Core" target="jar" />
     <!-- Copy core to other projects -->
     <copy file="synthia-core.jar" todir="Grammar/lib" />
+    <copy file="synthia-core.jar" todir="Tree/lib" />
+    <copy file="synthia-core.jar" todir="Widget/lib" />
     <copy file="synthia-core.jar" todir="Examples/lib" />
     <!-- Compile Grammar -->
     <ant dir="Grammar" target="jar" />
     <!-- Copy Grammar to Examples -->
     <copy file="synthia-grammar.jar" todir="Examples/lib" />
+    <!-- Compile Tree -->
+    <ant dir="Tree" target="jar" />
     <!-- Copy Tree to Examples -->
     <copy file="synthia-tree.jar" todir="Examples/lib" />
+    <!-- Compile Widget -->
+    <ant dir="Widget" target="jar" />
+    <!-- Copy Widget to Examples -->
+    <copy file="synthia-widget.jar" todir="Examples/lib" />
     <!-- Compile Examples -->
     <ant dir="Examples" target="jar" />
   </target>
