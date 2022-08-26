@@ -1,6 +1,6 @@
 /*
     Synthia, a data structure generator
-    Copyright (C) 2019-2021 Laboratoire d'informatique formelle
+    Copyright (C) 2019-2022 Laboratoire d'informatique formelle
     Université du Québec à Chicoutimi, Canada
 
     This program is free software: you can redistribute it and/or modify
@@ -214,6 +214,15 @@ public class Choice<T> implements Shrinkable<T>
 		/*@ pure @*/ public float getProbability()
 		{
 			return m_probability;
+		}
+		
+		/**
+		 * Gets the picker for this association
+		 * @return The probability
+		 */
+		/*@ pure @*/ public Picker<T> getPicker()
+		{
+			return m_object;
 		}
 		
 		/**
