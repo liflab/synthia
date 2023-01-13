@@ -1,6 +1,6 @@
 /*
     Synthia, a data structure generator
-    Copyright (C) 2019-2020 Laboratoire d'informatique formelle
+    Copyright (C) 2019-2023 Laboratoire d'informatique formelle
     Université du Québec à Chicoutimi, Canada
 
     This program is free software: you can redistribute it and/or modify
@@ -32,6 +32,7 @@ import java.util.List;
 /**
  * Generates a random character string.
  * 
+ * @author Marc-Antoine Plourde
  * @ingroup API
  */
 public class RandomString implements Shrinkable<String>, Seedable
@@ -41,9 +42,15 @@ public class RandomString implements Shrinkable<String>, Seedable
 	 */
 	protected Picker<Integer> m_lengthPicker;
 
-	protected RandomInteger m_charIndexPicker;
+	/**
+	 * A picker used to choose the index in the array of characters.
+	 */
+	protected final Picker<Integer> m_charIndexPicker;
 
-	protected char[] m_chars;
+	/**
+	 * The characters to pick from.
+	 */
+	protected final char[] m_chars;
 
 	/**
 	 * Creates a new RandomString picker with a default alphanumeric values array
@@ -53,7 +60,7 @@ public class RandomString implements Shrinkable<String>, Seedable
 	public RandomString(Picker<Integer> length)
 	{
 		super();
-		defaultCharArrayInitialize();
+		m_chars = defaultCharArrayInitialize();
 		m_lengthPicker = length;
 		m_charIndexPicker = new RandomInteger(0, m_chars.length);
 	}
@@ -79,7 +86,7 @@ public class RandomString implements Shrinkable<String>, Seedable
 	 * @param char_index_picker The picker used to generate random strings.
 	 * @param char_array        An array containing the characters allowed in the random string.
 	 */
-	private RandomString(Picker<Integer> length, RandomInteger char_index_picker, char[] char_array)
+	public RandomString(Picker<Integer> length, Picker<Integer> char_index_picker, char[] char_array)
 	{
 		super();
 		m_lengthPicker = length;
@@ -95,7 +102,7 @@ public class RandomString implements Shrinkable<String>, Seedable
 	public RandomString(int length)
 	{
 		super();
-		defaultCharArrayInitialize();
+		m_chars = defaultCharArrayInitialize();
 		m_lengthPicker = new Constant<>(length);
 		m_charIndexPicker = new RandomInteger(0, m_chars.length);
 	}
@@ -117,9 +124,9 @@ public class RandomString implements Shrinkable<String>, Seedable
 	/**
 	 * A private method to initialize the default characters array
 	 */
-	private void defaultCharArrayInitialize()
+	private static char[] defaultCharArrayInitialize()
 	{
-		m_chars = new char[62];
+		char[] m_chars = new char[62];
 		int i;
 
 		// 0 to 9
@@ -134,6 +141,7 @@ public class RandomString implements Shrinkable<String>, Seedable
 			m_chars[i + 10] = (char) (i + 65);
 			m_chars[i + 36] = (char) (i + 97);
 		}
+		return m_chars;
 	}
 
 	/**
@@ -211,7 +219,14 @@ public class RandomString implements Shrinkable<String>, Seedable
 	@Override
 	public RandomString setSeed(int seed)
 	{
-		m_charIndexPicker.setSeed(seed);
+		if (m_charIndexPicker instanceof Seedable)
+		{
+			((Seedable) m_charIndexPicker).setSeed(seed);
+		}
+		if (m_lengthPicker instanceof Seedable)
+		{
+			((Seedable) m_lengthPicker).setSeed(seed);
+		}
 		return this;
 	}
 	
@@ -225,13 +240,7 @@ public class RandomString implements Shrinkable<String>, Seedable
 	public void setInterval(int min, int max)
 	{
 
-		if ( m_lengthPicker.getClass().getSimpleName().equals("RandomInteger"))
-		{
-			RandomInteger random_integer_copy = (RandomInteger) m_lengthPicker.duplicate(true);
-			random_integer_copy.setInterval(min, max);
-			m_lengthPicker = random_integer_copy;
-		}
-		else if (m_lengthPicker.getClass().getSimpleName().equals("RandomIndex"))
+		if (m_lengthPicker instanceof RandomInteger)
 		{
 			RandomInteger random_integer_copy = (RandomInteger) m_lengthPicker.duplicate(true);
 			random_integer_copy.setInterval(min, max);
@@ -244,5 +253,4 @@ public class RandomString implements Shrinkable<String>, Seedable
 	{
 		return shrink(o, RandomFloat.instance, 1);
 	}
-
 }
