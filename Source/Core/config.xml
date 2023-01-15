@@ -31,6 +31,9 @@
   
   <!-- The project's main class -->
   <mainclass>ca.uqac.lif.synthia.Main</mainclass>
+  
+  <!-- The target JDK version for compilation -->
+  <targetjdk>8</targetjdk>
 
   <!-- Default folders -->
   <srcdir>src</srcdir>

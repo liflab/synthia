@@ -43,6 +43,9 @@
     <filename>../synthia-widget.jar</filename>
   </jar>
   
+  <!-- The target JDK version for compilation -->
+  <targetjdk>8</targetjdk>
+  
   <test>
     <srcdir>srctest</srcdir>
     <bindir>bintest</bindir>

@@ -43,6 +43,9 @@
     <filename>../synthia-examples.jar</filename>
   </jar>
   
+  <!-- The target JDK version for compilation -->
+  <targetjdk>8</targetjdk>
+  
   <test>
     <srcdir>src</srcdir> <!-- Actually, no test for Examples project -->
     <depdir>dep</depdir>
