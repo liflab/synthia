@@ -143,7 +143,7 @@ public class Sort
 				ini_list.remove(index_to_remove);
 			}
 			// This part below is the injection of a fault in the sorting
-			if (list.size() > 4 && ((int) list.get(3)) + ((int) list.get(4)) > 1000)
+			if (list.size() > 4 && ((Integer) list.get(3)) + ((Integer) list.get(4)) > 1000)
 			{
 				Collections.swap(new_list, 3, 4);
 			}
