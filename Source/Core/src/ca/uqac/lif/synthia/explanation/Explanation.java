@@ -28,10 +28,10 @@ import ca.uqac.lif.dag.LabelledNode;
 import ca.uqac.lif.dag.NestedNode.NestedNodeCrawler;
 import ca.uqac.lif.dag.Node;
 import ca.uqac.lif.dag.Pin;
-import ca.uqac.lif.petitpoucet.NodeFactory;
 import ca.uqac.lif.petitpoucet.Part;
 import ca.uqac.lif.petitpoucet.PartNode;
 import ca.uqac.lif.petitpoucet.function.ExplanationQueryable;
+import ca.uqac.lif.petitpoucet.function.RelationNodeFactory;
 import ca.uqac.lif.synthia.Picker;
 
 /**
@@ -43,7 +43,7 @@ public class Explanation
 {
 	public static PartNode explain(Part part, Picker<?> picker)
 	{
-		NodeFactory factory = NodeFactory.getFactory().getFactory(part, picker);
+		RelationNodeFactory factory = RelationNodeFactory.getFactory().getFactory(part, picker);
 		Queue<PartNode> to_visit = new ArrayDeque<PartNode>();
 		PartNode root = factory.getPartNode(part, picker);
 		to_visit.add(root);

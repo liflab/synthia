@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
 <!--
-	A build script for a super-project containing multiple sub-projects
-    Copyright (C) 2019  Sylvain Hallé
+    A build script for a super-project containing multiple sub-projects
+    Copyright (C) 2019-2023  Sylvain Hallé
 
     This program is free software: you can redistribute it and/or modify
     it under the terms of the GNU General Public License as published by
@@ -16,55 +16,107 @@
     You should have received a copy of the GNU General Public License
     along with this program.  If not, see <http://www.gnu.org/licenses/>.
 -->
-<project name="SuperProject" default="all" basedir=".">
+<project
+  name="SuperProject"
+  default="all"
+  basedir="."
+  xmlns:jacoco="antlib:org.jacoco.ant">
 
-  <!-- The project's display name -->
+<!-- The project's display name -->
   <property name="build.name" value="Synthia"/>
   
   <!-- The author -->
   <property name="build.author" value="Sylvain Hallé and Marc-Antoine Plourde"/>
   
+  <!-- The folder containing lib files for this super-script -->
+  <property name="build.libdir" value="lib"/>
+  
+  <!-- Versions of various dependencies -->
+  <property name="versions.jacoco" value="0.8.8"/>
+  
+  <target name="init">
+    <!-- Nothing to do at the moment -->
+  </target>
+  
   <target name="all">
     <!-- Compile core -->
     <ant dir="Core" target="jar" />
     <!-- Copy core to other projects -->
-    <copy file="synthia-core.jar" todir="Grammar/lib" />
-    <copy file="synthia-core.jar" todir="Tree/lib" />
-    <copy file="synthia-core.jar" todir="Widget/lib" />
-    <copy file="synthia-core.jar" todir="Examples/lib" />
+    <copy todir="Grammar/lib">
+      <fileset dir=".">
+        <include name="synthia-core*.jar"/>
+        <exclude name="*javadoc.jar"/>
+        <exclude name="*sources.jar"/>
+      </fileset>
+    </copy>
+    <copy todir="Tree/lib">
+      <fileset dir=".">
+        <include name="synthia-core*.jar"/>
+        <exclude name="*javadoc.jar"/>
+        <exclude name="*sources.jar"/>
+      </fileset>
+    </copy>
+    <copy todir="Widget/lib">
+      <fileset dir=".">
+        <include name="synthia-core*.jar"/>
+        <exclude name="*javadoc.jar"/>
+        <exclude name="*sources.jar"/>
+      </fileset>
+    </copy>
+    <copy todir="Examples/lib">
+      <fileset dir=".">
+        <include name="synthia-core*.jar"/>
+        <exclude name="*javadoc.jar"/>
+        <exclude name="*sources.jar"/>
+      </fileset>
+    </copy>
     <!-- Compile Grammar -->
     <ant dir="Grammar" target="jar" />
     <!-- Copy Grammar to Examples -->
-    <copy file="synthia-grammar.jar" todir="Examples/lib" />
+    <copy todir="Examples/lib">
+      <fileset dir=".">
+        <include name="synthia-grammar*.jar"/>
+        <exclude name="*javadoc.jar"/>
+        <exclude name="*sources.jar"/>
+      </fileset>
+    </copy>
     <!-- Compile Tree -->
     <ant dir="Tree" target="jar" />
     <!-- Copy Tree to Examples -->
-    <copy file="synthia-tree.jar" todir="Examples/lib" />
+    <copy todir="Examples/lib">
+      <fileset dir=".">
+        <include name="synthia-tree*.jar"/>
+        <exclude name="*javadoc.jar"/>
+        <exclude name="*sources.jar"/>
+      </fileset>
+    </copy>
     <!-- Compile Widget -->
     <ant dir="Widget" target="jar" />
     <!-- Copy Widget to Examples -->
-    <copy file="synthia-widget.jar" todir="Examples/lib" />
+    <copy todir="Examples/lib">
+      <fileset dir=".">
+        <include name="synthia-widget*.jar"/>
+        <exclude name="*javadoc.jar"/>
+        <exclude name="*sources.jar"/>
+      </fileset>
+    </copy>
     <!-- Compile Examples -->
     <ant dir="Examples" target="jar" />
   </target>
   
   <target name="download-deps">
     <ant dir="Core" target="download-deps" />
+    <ant dir="Grammar" target="download-deps" />
+    <ant dir="Tree" target="download-deps" />
+    <ant dir="Widget" target="download-deps" />
     <ant dir="Examples" target="download-deps" />
-  </target>
-  
-  <target name="download-rt8">
-    <ant dir="Core" target="download-rt8" />
-    <!-- Copy rt.jar to other projects -->
-    <copy file="Core/rt.jar" todir="Grammar" />
-    <copy file="Core/rt.jar" todir="Tree" />
-    <copy file="Core/rt.jar" todir="Widget" />
-    <copy file="Core/rt.jar" todir="Examples" />
   </target>
   
   <target name="test">
     <ant dir="Core" target="test" />
     <ant dir="Grammar" target="test" />
+    <ant dir="Tree" target="test" />
+    <ant dir="Widget" target="test" />
   </target>
   
   <target name="clean">
@@ -81,6 +133,73 @@
     <ant dir="Tree" target="wipe" />
     <ant dir="Widget" target="wipe" />
     <ant dir="Examples" target="wipe" />
+  </target>
+  
+  <target name="junit-report">
+    <!-- For the junit-report task, it is sufficient to call the task of a single sub-project -->
+    <ant dir="Core" usenativebasedir="true" target="junit-report" />
+  </target>
+
+  <target name="jacoco-report" depends="jacoco">
+    <!-- Call the jacoco-report task on children -->
+    <ant dir="Core" usenativebasedir="true" target="jacoco-report" />
+    <ant dir="Functions" usenativebasedir="true" target="jacoco-report" />
+    <!-- Load JaCoCo -->
+    <taskdef uri="antlib:org.jacoco.ant" resource="org/jacoco/ant/antlib.xml">
+      <classpath path="${build.libdir}/jacocoant.jar"/>
+    </taskdef>
+    <mkdir dir="coverage"/>
+    <jacoco:merge destfile="coverage/merged.exec">
+        <fileset dir="Core/tests/coverage" includes="*.exec"/>
+        <fileset dir="Functions/tests/coverage" includes="*.exec"/>
+    </jacoco:merge>
+    <jacoco:report>
+      <executiondata>
+        <file file="coverage/merged.exec"/>
+      </executiondata>
+      <structure name="${build.name}">
+        <classfiles>
+            <fileset dir="Core/bin"/>
+            <fileset dir="Grammar/bin"/>
+            <fileset dir="Tree/bin"/>
+            <fileset dir="Widget/bin"/>
+        </classfiles>
+        <sourcefiles encoding="UTF-8">
+          <fileset dir="Core/src"/>
+          <fileset dir="Grammar/src"/>
+          <fileset dir="Tree/src"/>
+          <fileset dir="Widget/src"/>
+        </sourcefiles>
+      </structure>
+      <html destdir="coverage"/>
+      <xml destfile="tests/report.xml"/>
+    </jacoco:report>
+  </target>
+  
+  <target name="report" depends="junit-report,jacoco-report">
+    <!-- Just call the two dependent tasks -->
+  </target>
+  
+  <target name="show-properties">
+    <ant dir="Core" usenativebasedir="true" target="show-properties" />
+  </target>
+  
+  <!-- Target: jacoco
+       Download JaCoCo if not present, and put it in the lib folder
+  -->
+  <property name="jacoco.jarname" value="jacocoant.jar"/>
+  <condition property="jacoco.absent" value="false" else="true">
+    <available file="${build.libdir}/${jacoco.jarname}"/>
+  </condition>
+  <target name="jacoco" if="${jacoco.absent}" description="Install JaCoCo if not present">
+    <mkdir dir="${build.libdir}"/>
+    <get src="https://github.com/jacoco/jacoco/releases/download/v${versions.jacoco}/jacoco-${versions.jacoco}.zip" dest="${build.libdir}/jacoco.zip"/>
+    <unzip src="${build.libdir}/jacoco.zip" dest="${build.libdir}">
+      <patternset>
+        <include name="**/*.jar"/>
+      </patternset>
+      <mapper type="flatten"/>
+    </unzip>
   </target>
   
   <target name="javadoc">
@@ -104,7 +223,9 @@
       <link href="https://docs.oracle.com/en/java/javase/11/docs/api/"/>
       <sourcepath>
         <pathelement path="Core/src"/>
-        <pathelement path="Examples/src"/>
+        <pathelement path="Grammar/src"/>
+        <pathelement path="Tree/src"/>
+        <pathelement path="Widget/src"/>
       </sourcepath>
       <classpath>
         <fileset dir="Core/dep">
@@ -116,6 +237,8 @@
       </classpath>
       <group title="Core" packages="ca.uqac.lif.synthia"/>
       <group title="Grammar" packages="ca.uqac.lif.synthia.grammar"/>
+      <group title="Tree" packages="ca.uqac.lif.synthia.tree"/>
+      <group title="Widget" packages="ca.uqac.lif.synthia.widget"/>
       <group title="Examples" packages="examples:examples.*"/>
     </javadoc>
     <copy todir="../docs/javadoc/doc-files">

@@ -1,6 +1,6 @@
 /*
     Synthia, a data structure generator
-    Copyright (C) 2019-2020 Laboratoire d'informatique formelle
+    Copyright (C) 2019-2023 Laboratoire d'informatique formelle
     Université du Québec à Chicoutimi, Canada
 
     This program is free software: you can redistribute it and/or modify
@@ -18,10 +18,10 @@
  */
 package ca.uqac.lif.synthia.util;
 
-import ca.uqac.lif.petitpoucet.NodeFactory;
 import ca.uqac.lif.petitpoucet.Part;
 import ca.uqac.lif.petitpoucet.PartNode;
 import ca.uqac.lif.petitpoucet.function.ExplanationQueryable;
+import ca.uqac.lif.petitpoucet.function.RelationNodeFactory;
 import ca.uqac.lif.synthia.Picker;
 import ca.uqac.lif.synthia.Shrinkable;
 import ca.uqac.lif.synthia.explanation.NthSuccessiveOutput;
@@ -120,11 +120,11 @@ public class Freeze<T> implements Shrinkable<T>, ExplanationQueryable
 	@Override
 	public PartNode getExplanation(Part p)
 	{
-		return getExplanation(p, NodeFactory.getFactory());
+		return getExplanation(p, RelationNodeFactory.getFactory());
 	}
 
 	@Override
-	public PartNode getExplanation(Part p, NodeFactory f)
+	public PartNode getExplanation(Part p, RelationNodeFactory f)
 	{
 		PartNode root = f.getPartNode(p, this);
 		PartNode child = f.getPartNode(NthSuccessiveOutput.replaceOutIndexBy(p, 0), m_innerPicker);

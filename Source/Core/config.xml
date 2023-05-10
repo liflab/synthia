@@ -25,6 +25,12 @@
   <!-- The project's name -->
   <name>Synthia</name>
   
+  <!-- The project's version number -->
+  <version>0.3.2</version>
+  
+  <!-- The project's package (with a trailing slash) -->
+  <package>ca/uqac/lif/synthia/</package>
+  
   <!-- The project's author. Currently this only
   shows up in the footer of the Javadoc documentation. -->
   <author>Sylvain Hallé, Marc-Antoine Plourde</author>
@@ -40,10 +46,11 @@
   <libdir>lib</libdir>
   <depdir>dep</depdir>
   <bindir>bin</bindir>
+  <docdir>doc</docdir>
 
   <!-- JAR filename -->
   <jar>
-    <filename>../synthia-core.jar</filename>
+    <filename>../synthia-core</filename>
   </jar>
   
   <test>
@@ -66,7 +73,7 @@
       <name>Petit Poucet Core</name>
       <classname>ca.uqac.lif.petitpoucet.Part</classname>
       <files>
-        <jar>https://github.com/liflab/petitpoucet/releases/download/v2.2/petitpoucet-core.jar</jar>
+        <jar>https://github.com/liflab/petitpoucet/releases/download/v2.3/petitpoucet-core-2.3.jar</jar>
       </files>
       <bundle>true</bundle>
     </dependency>
@@ -77,7 +84,7 @@
       <name>Petit Poucet Functions</name>
       <classname>ca.uqac.lif.petitpoucet.function.Function</classname>
       <files>
-        <jar>https://github.com/liflab/petitpoucet/releases/download/v2.2/petitpoucet-functions.jar</jar>
+        <jar>https://github.com/liflab/petitpoucet/releases/download/v2.3/petitpoucet-functions-2.3.jar</jar>
       </files>
       <bundle>true</bundle>
     </dependency>

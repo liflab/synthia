@@ -1,6 +1,6 @@
 /*
     Synthia, a data structure generator
-    Copyright (C) 2019-2020 Laboratoire d'informatique formelle
+    Copyright (C) 2019-2023 Laboratoire d'informatique formelle
     Université du Québec à Chicoutimi, Canada
 
     This program is free software: you can redistribute it and/or modify
@@ -171,6 +171,11 @@ public class MarkovChain<T> implements Picker<T>
 	 */
 	protected int selectTransition(float p)
 	{
+		if (!m_transitions.containsKey(m_currentState))
+		{
+			// No transition defined
+			return -1;
+		}
 		List<Transition> transitions = m_transitions.get(m_currentState);
 		float sum_prob = 0f;
 		int last_state = -1;

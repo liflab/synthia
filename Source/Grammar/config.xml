@@ -23,7 +23,13 @@
        script's default values -->
 
   <!-- The project's name -->
-  <name>Synthia</name>
+  <name>Synthia - Grammar plugin</name>
+  
+  <!-- The project's version number -->
+  <version>0.3.2</version>
+  
+  <!-- The project's package (with a trailing slash) -->
+  <package>ca/uqac/lif/synthia/grammar</package>
   
   <!-- The project's author. Currently this only
   shows up in the footer of the Javadoc documentation. -->
@@ -37,10 +43,11 @@
   <libdir>lib</libdir>
   <depdir>dep</depdir>
   <bindir>bin</bindir>
+  <docdir>doc</docdir>
 
   <!-- JAR filename -->
   <jar>
-    <filename>../synthia-grammar.jar</filename>
+    <filename>../synthia-grammar</filename>
   </jar>
   
   <!-- The target JDK version for compilation -->

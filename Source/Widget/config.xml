@@ -25,6 +25,12 @@
   <!-- The project's name -->
   <name>Synthia - Widget Plugin</name>
   
+  <!-- The project's version number -->
+  <version>0.3.2</version>
+  
+  <!-- The project's package (with a trailing slash) -->
+  <package>ca/uqac/lif/synthia/widget</package>
+  
   <!-- The project's author. Currently this only
   shows up in the footer of the Javadoc documentation. -->
   <author>Sylvain Hallé, Marc-Antoine Plourde</author>
@@ -40,7 +46,7 @@
 
   <!-- JAR filename -->
   <jar>
-    <filename>../synthia-widget.jar</filename>
+    <filename>../synthia-widget</filename>
   </jar>
   
   <!-- The target JDK version for compilation -->

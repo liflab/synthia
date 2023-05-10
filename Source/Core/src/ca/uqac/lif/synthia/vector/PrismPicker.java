@@ -1,6 +1,6 @@
 /*
     Synthia, a data structure generator
-    Copyright (C) 2019-2021 Laboratoire d'informatique formelle
+    Copyright (C) 2019-2023 Laboratoire d'informatique formelle
     Université du Québec à Chicoutimi, Canada
 
     This program is free software: you can redistribute it and/or modify
@@ -19,10 +19,10 @@
 package ca.uqac.lif.synthia.vector;
 
 import ca.uqac.lif.petitpoucet.AndNode;
-import ca.uqac.lif.petitpoucet.NodeFactory;
 import ca.uqac.lif.petitpoucet.Part;
 import ca.uqac.lif.petitpoucet.PartNode;
 import ca.uqac.lif.petitpoucet.function.ExplanationQueryable;
+import ca.uqac.lif.petitpoucet.function.RelationNodeFactory;
 import ca.uqac.lif.petitpoucet.function.vector.NthElement;
 import ca.uqac.lif.synthia.Picker;
 import ca.uqac.lif.synthia.explanation.NthSuccessiveOutput;
@@ -97,11 +97,11 @@ public class PrismPicker implements VectorPicker, ExplanationQueryable
 	@Override
 	public PartNode getExplanation(Part p)
 	{
-		return getExplanation(p, NodeFactory.getFactory());
+		return getExplanation(p, RelationNodeFactory.getFactory());
 	}
 
 	@Override
-	public PartNode getExplanation(Part p, NodeFactory f)
+	public PartNode getExplanation(Part p, RelationNodeFactory f)
 	{
 		int index = NthSuccessiveOutput.mentionedOutput(p), part_index = NthElement.mentionedElement(p);
 		PartNode root = f.getPartNode(p, this);

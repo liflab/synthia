@@ -25,6 +25,12 @@
   <!-- The project's name -->
   <name>Synthia - Tree plugin</name>
   
+  <!-- The project's version number -->
+  <version>0.3.2</version>
+  
+  <!-- The project's package (with a trailing slash) -->
+  <package>ca/uqac/lif/synthia/tree</package>
+  
   <!-- The project's author. Currently this only
   shows up in the footer of the Javadoc documentation. -->
   <author>Sylvain Hallé, Marc-Antoine Plourde</author>
@@ -37,10 +43,11 @@
   <libdir>lib</libdir>
   <depdir>dep</depdir>
   <bindir>bin</bindir>
+  <docdir>doc</docdir>
 
   <!-- JAR filename -->
   <jar>
-    <filename>../synthia-tree.jar</filename>
+    <filename>../synthia-tree</filename>
   </jar>
   
   <!-- The target JDK version for compilation -->
