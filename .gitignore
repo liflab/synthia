@@ -13,7 +13,7 @@
 .DS_Store
 
 # Auto-generated folders
-/doc/
+**/doc/
 **/lib/
 **/dep/
 **/tests/
