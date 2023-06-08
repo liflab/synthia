@@ -1,4 +1,4 @@
-package ca.uqac.lif.synthia.map;
+package examples.parcel_shipment;
 
 public class Point
 {
