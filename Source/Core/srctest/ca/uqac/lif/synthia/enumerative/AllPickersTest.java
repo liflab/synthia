@@ -1,15 +1,51 @@
+/*
+    Synthia, a data structure generator
+    Copyright (C) 2019-2023 Laboratoire d'informatique formelle
+    Université du Québec à Chicoutimi, Canada
+
+    This program is free software: you can redistribute it and/or modify
+    it under the terms of the GNU Lesser General Public License as published
+    by the Free Software Foundation, either version 3 of the License, or
+    (at your option) any later version.
+
+    This program is distributed in the hope that it will be useful,
+    but WITHOUT ANY WARRANTY; without even the implied warranty of
+    MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+    GNU Lesser General Public License for more details.
+
+    You should have received a copy of the GNU Lesser General Public License
+    along with this program.  If not, see <http://www.gnu.org/licenses/>.
+ */
 package ca.uqac.lif.synthia.enumerative;
 
 import ca.uqac.lif.synthia.Bounded;
 import ca.uqac.lif.synthia.NoMoreElementException;
+import ca.uqac.lif.synthia.sequence.Playback;
+
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.function.Executable;
 
+import static org.junit.Assert.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertThrows;
 
+/**
+ * Unit tests for {@link AllPickers}.
+ */
 public class AllPickersTest
 {
+	@Test
+	public void test1()
+	{
+		AllPickers ap = new AllPickers(new Bounded<?>[] {new Playback<Object>(true).setLoop(false)});
+		int i;
+		for (i = 0; !ap.isDone(); i++)
+		{
+			ap.pick();
+		}
+		assertEquals(1, i);
+	}
+	
 	private void throwNoMoreException(AllPickers picker)
 	{
 		assertThrows(NoMoreElementException.class, new Executable()

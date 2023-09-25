@@ -1,18 +1,36 @@
+/*
+    Synthia, a data structure generator
+    Copyright (C) 2019-2023 Laboratoire d'informatique formelle
+    Université du Québec à Chicoutimi, Canada
+
+    This program is free software: you can redistribute it and/or modify
+    it under the terms of the GNU Lesser General Public License as published
+    by the Free Software Foundation, either version 3 of the License, or
+    (at your option) any later version.
+
+    This program is distributed in the hope that it will be useful,
+    but WITHOUT ANY WARRANTY; without even the implied warranty of
+    MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+    GNU Lesser General Public License for more details.
+
+    You should have received a copy of the GNU Lesser General Public License
+    along with this program.  If not, see <http://www.gnu.org/licenses/>.
+ */
 package ca.uqac.lif.synthia.enumerative;
 
 import ca.uqac.lif.synthia.Bounded;
 import ca.uqac.lif.synthia.NoMoreElementException;
 
 /**
- * Picker who implements {@link Bounded}. This picker enumerates all the possibility of
- * of combinaisons of picked value from an array of Enumerative pickers. For example, an
+ * Enumerates all the
+ * of combinations of picked values from an array of enumerative pickers. For example, an
  * AllPickers containing an array of 2 {@link AllBooleans} will generates one array
  * in the following order :
  * <ol>
- *   <li>[<Boolean>false</Boolean>, <Boolean>false</Boolean>]</li>
- *   <li>[<Boolean>true</Boolean>, <Boolean>false</Boolean>]</li>
- *   <li>[<Boolean>false</Boolean>, <Boolean>true</Boolean>]</li>
- *   <li>[<Boolean>true</Boolean>, <Boolean>true</Boolean>]</li>
+ *   <li>[<tt>false</tt>, <tt>false</tt>]</li>
+ *   <li>[<tt>true</tt>, <tt>false</tt>]</li>
+ *   <li>[<tt>false</tt>, <tt>true</tt>]</li>
+ *   <li>[<tt>true</tt>, <tt>true</tt>]</li>
  * </ol>
  * After that, the picker will throw a {@link NoMoreElementException} if the pick method is called
  * one more time.
@@ -171,6 +189,7 @@ public class AllPickers implements Bounded<Object[]>
 			m_values[i] = m_enumPickers[i].pick();
 		}
 		m_firstPick = false;
+		m_done = internalIsDone();
 	}
 
 	@SuppressWarnings("rawtypes")
