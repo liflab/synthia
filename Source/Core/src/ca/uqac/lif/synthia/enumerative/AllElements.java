@@ -86,6 +86,7 @@ public class AllElements<T> extends Playback<T> implements Bounded<T>, Seedable
 			else
 			{
 				initializeIndexes();
+				m_indexPicker.setInterval(0, m_values.size());
 			}
 		}
 
@@ -122,6 +123,10 @@ public class AllElements<T> extends Playback<T> implements Bounded<T>, Seedable
 	@Override
 	public boolean isDone()
 	{
+	  if (m_values.isEmpty())
+	  {
+	    return true;
+	  }
 		if(m_loop)
 		{
 			return false;

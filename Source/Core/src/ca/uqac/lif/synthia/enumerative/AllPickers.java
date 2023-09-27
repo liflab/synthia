@@ -90,12 +90,11 @@ public class AllPickers implements Bounded<Object[]>
 	{
 		m_firstPick = true;
 		m_values = new Object[m_enumPickers.length];
-		m_done = false;
-
 		for (Bounded<?> m_enumPicker : m_enumPickers)
 		{
 			m_enumPicker.reset();
 		}
+		m_done = isOneDone(m_enumPickers);
 	}
 
 	@Override

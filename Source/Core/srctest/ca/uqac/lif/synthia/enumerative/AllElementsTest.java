@@ -7,6 +7,7 @@ import org.junit.Test;
 
 
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
 
 
@@ -141,5 +142,23 @@ public class AllElementsTest
 		all_elements.setLoop(false);
 
 		all_elements.pick();
+	}
+	
+	@Test
+	public void testNoLoop()
+	{
+		AllElements<Integer> all_elements = new AllElements<Integer>(Arrays.asList(1, 2), true, false);
+		Assert.assertFalse(all_elements.isDone());
+		all_elements.pick();
+		Assert.assertFalse(all_elements.isDone());
+		all_elements.pick();
+		Assert.assertTrue(all_elements.isDone());
+	}
+	
+	@Test
+	public void testEmpty()
+	{
+		AllElements<Integer> all_elements = new AllElements<Integer>(new ArrayList<Integer>(),true,false);
+		Assert.assertTrue(all_elements.isDone());
 	}
 }
