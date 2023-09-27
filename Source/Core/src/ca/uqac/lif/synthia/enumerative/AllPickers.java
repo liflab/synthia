@@ -76,10 +76,7 @@ public class AllPickers implements Bounded<Object[]>
 
 	public AllPickers(Bounded<?>[] enum_pickers)
 	{
-		m_enumPickers = enum_pickers;
-		m_firstPick = true;
-		m_values = new Object[m_enumPickers.length];
-		m_done = false;
+		this(enum_pickers, true, new Object[enum_pickers.length], isOneDone(enum_pickers));
 	}
 
 	@Override
@@ -176,6 +173,18 @@ public class AllPickers implements Bounded<Object[]>
 			}
 		}
 		return counter == m_enumPickers.length;
+	}
+	
+	protected static boolean isOneDone(Bounded<?>[] pickers)
+	{
+		for (Bounded<?> p : pickers)
+		{
+			if (p.isDone())
+			{
+				return true;
+			}
+		}
+		return false;
 	}
 
 	/**

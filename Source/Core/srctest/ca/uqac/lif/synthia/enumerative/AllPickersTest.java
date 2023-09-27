@@ -180,4 +180,11 @@ public class AllPickersTest
 
 		throwNoMoreException(all_picks);
 	}
+	
+	@Test
+	public void testEmpty()
+	{
+		AllPickers all_picks = new AllPickers(new Bounded[] {new AllBooleans(), new Playback<Object>()});
+		Assertions.assertTrue(all_picks.isDone());
+	}
 }
