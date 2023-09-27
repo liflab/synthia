@@ -238,7 +238,7 @@ public class Playback<T> implements Bounded<T>, Shrinkable<T>, ExplanationQuerya
 	@Override
 	public boolean isDone()
 	{
-		return (m_index >= (m_values.size())) && !m_loop;
+		return m_values.isEmpty() || ((m_index >= (m_values.size())) && !m_loop);
 	}
 
 	@Override

@@ -71,12 +71,20 @@ public class PlaybackTest
       Integer[] int_array = new Integer[] { 1, 2, 1 };
       Playback int_pb = new Playback<Integer>(int_array);
       int_pb.setLoop(false);
-      for (int i = 0; i < int_array.length; i++)
-      {
-      		Assertions.assertEquals(false,int_pb.isDone());
-          int_pb.pick();
-      }
-      Assertions.assertEquals(true, int_pb.isDone());
+      Assertions.assertEquals(false,int_pb.isDone());
+      int_pb.pick();
+      Assertions.assertEquals(false,int_pb.isDone());
+      int_pb.pick();
+      Assertions.assertEquals(false,int_pb.isDone());
+      int_pb.pick();
+      Assertions.assertEquals(true,int_pb.isDone());
   }
+	
+	@Test
+	public void testEmpty()
+	{
+		Playback<Object> pb = new Playback<Object>();
+		Assertions.assertTrue(pb.isDone());
+	}
 
 }
