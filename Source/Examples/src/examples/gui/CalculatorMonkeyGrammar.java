@@ -114,8 +114,8 @@ public class CalculatorMonkeyGrammar
 		parser.setStartRule("<S>");
 		
 		Calculator window = new Calculator().disableNumberFormatException().hasOverflow().checkSyntax();
-		RandomFloat b_rf = new BiasedRandomFloat(2).setSeed(80);
-		RandomInteger b_ri = new RandomInteger().setSeed(1000);
+		RandomFloat b_rf = new BiasedRandomFloat(2).setSeed(800);
+		RandomInteger b_ri = new RandomInteger().setSeed(10000);
 		GrammarSequence<Action> actions = new GrammarSequence<Action>(parser, b_ri) {
 			protected Action getObject(String token) {
 				return new WidgetAction.ClickAction(window.getButton(token));

@@ -26,7 +26,7 @@
   <name>Synthia</name>
   
   <!-- The project's version number -->
-  <version>0.3.2</version>
+  <version>0.3.3</version>
   
   <!-- The project's package (with a trailing slash) -->
   <package>ca/uqac/lif/synthia/</package>
@@ -75,7 +75,7 @@
       <files>
         <jar>https://github.com/liflab/petitpoucet/releases/download/v2.3/petitpoucet-core-2.3.jar</jar>
       </files>
-      <bundle>true</bundle>
+      <bundle>false</bundle>
     </dependency>
     <dependency>
       <!--
@@ -86,7 +86,7 @@
       <files>
         <jar>https://github.com/liflab/petitpoucet/releases/download/v2.3/petitpoucet-functions-2.3.jar</jar>
       </files>
-      <bundle>true</bundle>
+      <bundle>false</bundle>
     </dependency>
   </dependencies>
 </build>

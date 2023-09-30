@@ -26,7 +26,7 @@
   <name>Synthia - Grammar plugin</name>
   
   <!-- The project's version number -->
-  <version>0.3.2</version>
+  <version>0.3.3</version>
   
   <!-- The project's package (with a trailing slash) -->
   <package>ca/uqac/lif/synthia/grammar</package>
