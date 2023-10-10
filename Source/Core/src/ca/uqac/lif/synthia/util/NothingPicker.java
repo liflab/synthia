@@ -22,6 +22,7 @@ import ca.uqac.lif.petitpoucet.Part;
 import ca.uqac.lif.petitpoucet.PartNode;
 import ca.uqac.lif.petitpoucet.function.ExplanationQueryable;
 import ca.uqac.lif.petitpoucet.function.RelationNodeFactory;
+import ca.uqac.lif.synthia.Bounded;
 import ca.uqac.lif.synthia.NoMoreElementException;
 import ca.uqac.lif.synthia.Picker;
 import ca.uqac.lif.synthia.Shrinkable;
@@ -33,7 +34,7 @@ import ca.uqac.lif.synthia.Shrinkable;
  * @param <T> The type of the picker (but not really important here).
  * @ingroup API
  */
-public class NothingPicker<T> implements Shrinkable<T>, ExplanationQueryable
+public class NothingPicker<T> implements Bounded<T>, Shrinkable<T>, ExplanationQueryable
 {
 	/**
 	 * Creates a new instance of the picker.
@@ -84,5 +85,11 @@ public class NothingPicker<T> implements Shrinkable<T>, ExplanationQueryable
 	public Shrinkable<T> shrink(T o)
 	{
 		return shrink(o, null, 1);
+	}
+
+	@Override
+	public boolean isDone()
+	{
+		return true;
 	}
 }
