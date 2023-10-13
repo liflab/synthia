@@ -19,7 +19,6 @@
 package ca.uqac.lif.synthia.relative;
 
 import ca.uqac.lif.synthia.Bounded;
-import ca.uqac.lif.synthia.GiveUpException;
 import ca.uqac.lif.synthia.NoMoreElementException;
 
 /**
@@ -63,13 +62,16 @@ public class BoundedPickIf<T> extends PickIf<T> implements Bounded<T>
 	@Override
 	public T pick()
 	{
-		if (isDone())
-		{
-			throw new NoMoreElementException("Picker cannot produce any more elements");
-		}
-		T o = m_next;
-		m_next = null;
-		return o;
+	  if (m_next == null)
+	  {
+	    if (isDone())
+	    {
+	      throw new NoMoreElementException();
+	    }
+	  }
+	  T o = m_next;
+	  m_next = null;
+	  return o;
 	}
 	
 	@SuppressWarnings("unchecked")
@@ -101,19 +103,20 @@ public class BoundedPickIf<T> extends PickIf<T> implements Bounded<T>
 		{
 			return false;
 		}
-		try
+		while (m_next == null && !((Bounded<?>) m_picker).isDone())
 		{
-			m_next = super.pick();
-			return false;
+		  T o = m_picker.pick();
+		  if (select(o))
+		  {
+		    m_next = o;
+		    break;
+		  }
 		}
-		catch (NoMoreElementException e)
+		if (m_next == null)
 		{
-			return true;
+		  return true;
 		}
-		catch (GiveUpException e)
-		{
-			return true;
-		}
+		return false;
 	}
 	
 	protected void copyInto(BoundedPickIf<T> pi, boolean with_state)

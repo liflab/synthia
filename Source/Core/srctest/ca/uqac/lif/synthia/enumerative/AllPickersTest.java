@@ -20,6 +20,7 @@ package ca.uqac.lif.synthia.enumerative;
 
 import ca.uqac.lif.synthia.Bounded;
 import ca.uqac.lif.synthia.NoMoreElementException;
+import ca.uqac.lif.synthia.relative.BoundedPickIf;
 import ca.uqac.lif.synthia.sequence.Playback;
 
 import org.junit.jupiter.api.Assertions;
@@ -28,6 +29,8 @@ import org.junit.jupiter.api.function.Executable;
 
 import static org.junit.Assert.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertThrows;
+
+import java.util.Arrays;
 
 /**
  * Unit tests for {@link AllPickers}.
@@ -42,6 +45,19 @@ public class AllPickersTest
 		for (i = 0; !ap.isDone(); i++)
 		{
 			ap.pick();
+		}
+		assertEquals(1, i);
+	}
+	
+	@Test
+	public void test2()
+	{
+		AllPickers ap = new AllPickers(new Bounded<?>[] {new BoundedPickIf<Object>(new Playback<Object>(0, Arrays.asList("a")).setLoop(false)), new Playback<Object>(0, Arrays.asList("b")).setLoop(false)});
+		int i;
+		for (i = 0; !ap.isDone(); i++)
+		{
+			Object[] ob = ap.pick();
+			System.out.println(Arrays.toString(ob));
 		}
 		assertEquals(1, i);
 	}
@@ -122,7 +138,7 @@ public class AllPickersTest
 	@Test
 	public void DuplicateWithoutState()
 	{
-		Bounded[] enum_picks = new Bounded[]{new AllBooleans(), new AllBooleans()
+		Bounded<?>[] enum_picks = new Bounded[]{new AllBooleans(), new AllBooleans()
 				, new AllBooleans()};
 		AllPickers all_picks = new AllPickers(enum_picks);
 
@@ -153,16 +169,12 @@ public class AllPickersTest
 	@Test
 	public void isDone()
 	{
-		Bounded[] enum_picks = new Bounded[]{new AllBooleans(), new AllBooleans()
-				, new AllBooleans()};
-		AllPickers all_picks = new AllPickers(enum_picks);
-
+		AllPickers all_picks = new AllPickers(new Bounded[] {new AllBooleans(), new AllBooleans(), new AllBooleans()});
 		for (int i = 0; i < 8; i++)
 		{
 			Assertions.assertEquals(false, all_picks.isDone());
-			all_picks.pick();
+			System.out.println(Arrays.toString(all_picks.pick()));
 		}
-
 		Assertions.assertEquals(true, all_picks.isDone());
 	}
 
