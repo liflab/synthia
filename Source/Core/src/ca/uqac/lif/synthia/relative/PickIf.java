@@ -1,6 +1,6 @@
 /*
     Synthia, a data structure generator
-    Copyright (C) 2019-2021 Laboratoire d'informatique formelle
+    Copyright (C) 2019-2023 Laboratoire d'informatique formelle
     Université du Québec à Chicoutimi, Canada
 
     This program is free software: you can redistribute it and/or modify
@@ -85,7 +85,7 @@ public class PickIf<T> extends Mutator<T> implements ExplanationQueryable
 	 * @param element The element to check
 	 * @return <tt>true</tt> if the condition is satisfied and <tt>false</tt> if it's not the case.
 	 */
-	private boolean canChoose(T element)
+	protected boolean canChoose(T element)
 	{
 		int index = m_rejected.size() - 1;
 		if (!select(element))
