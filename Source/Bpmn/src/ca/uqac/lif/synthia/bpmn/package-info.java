@@ -1,0 +1,1 @@
+package ca.uqac.lif.synthia.bpmn;
