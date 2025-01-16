@@ -1,6 +1,6 @@
 /*
     Synthia, a data structure generator
-    Copyright (C) 2019-2020 Laboratoire d'informatique formelle
+    Copyright (C) 2019-2025 Laboratoire d'informatique formelle
     Université du Québec à Chicoutimi, Canada
 
     This program is free software: you can redistribute it and/or modify
@@ -27,11 +27,12 @@ import ca.uqac.lif.synthia.util.NothingPicker;
  * Picks an integer uniformly in an interval.
  * 
  * @ingroup API
+ * @author Marc-Antoine Plourde, Sylvain Hallé
  */
 public class RandomInteger extends RandomPicker<Integer> implements Shrinkable<Integer>, Reactive<Integer,Integer>
 {
 	/**
-	 * The lower bound of the interval
+	 * The lower bound of the interval.
 	 */
 	protected int m_min;
 	
@@ -46,7 +47,7 @@ public class RandomInteger extends RandomPicker<Integer> implements Shrinkable<I
 	public RandomInteger()
 	{
 		super();
-		setInterval(0,1);
+		setInterval(0,Integer.MAX_VALUE);
 	}
 
 
