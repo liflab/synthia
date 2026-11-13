@@ -26,7 +26,7 @@
   <name>Synthia</name>
   
   <!-- The project's version number -->
-  <version>0.3.3</version>
+  <version>0.3.4</version>
   
   <!-- The project's package (with a trailing slash) -->
   <package>ca/uqac/lif/synthia/</package>
@@ -39,25 +39,31 @@
   <mainclass>ca.uqac.lif.synthia.Main</mainclass>
   
   <!-- The target JDK version for compilation -->
-  <targetjdk>8</targetjdk>
+  <targetjdk>11</targetjdk>
 
   <!-- Default folders -->
   <srcdir>src</srcdir>
-  <libdir>lib</libdir>
+  <libdir>../lib</libdir>
   <depdir>dep</depdir>
   <bindir>bin</bindir>
   <docdir>doc</docdir>
 
-  <!-- JAR filename -->
+    <!-- All test reports merged into one -->
+  <report>
+    <junitdir>../tests</junitdir>
+  </report>
+  
+  <!-- Output jar -->
   <jar>
-    <filename>../synthia-core</filename>
+    <filename>../jars/synthia-core</filename>
+    <withdoc>false</withdoc>
   </jar>
   
   <test>
     <srcdir>srctest</srcdir>
     <bindir>bintest</bindir>
     <depdir>dep</depdir>
-    <libdir>lib</libdir>
+    <libdir>../lib</libdir>
     <!-- The filename pattern to recognize test files -->
     <filenamepattern>**/*Test.java</filenamepattern>
   </test>
@@ -73,7 +79,7 @@
       <name>Petit Poucet Core</name>
       <classname>ca.uqac.lif.petitpoucet.Part</classname>
       <files>
-        <jar>https://github.com/liflab/petitpoucet/releases/download/v2.3.2/petitpoucet-core-2.3.2.jar</jar>
+        <jar>https://github.com/liflab/petitpoucet/releases/download/v2.3.3/petitpoucet-core-2.3.3.jar</jar>
       </files>
       <bundle>false</bundle>
     </dependency>
@@ -84,7 +90,7 @@
       <name>Petit Poucet Functions</name>
       <classname>ca.uqac.lif.petitpoucet.function.Function</classname>
       <files>
-        <jar>https://github.com/liflab/petitpoucet/releases/download/v2.3.2/petitpoucet-functions-2.3.2.jar</jar>
+        <jar>https://github.com/liflab/petitpoucet/releases/download/v2.3.3/petitpoucet-functions-2.3.3.jar</jar>
       </files>
       <bundle>false</bundle>
     </dependency>

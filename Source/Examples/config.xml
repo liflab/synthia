@@ -26,7 +26,7 @@
   <name>Synthia</name>
   
   <!-- The project's version number -->
-  <version>0.3.3</version>
+  <version>0.3.4</version>
   
   <!-- The project's package (with a trailing slash) -->
   <package>ca/uqac/lif/synthia/examples</package>
@@ -40,23 +40,29 @@
 
   <!-- Default folders -->
   <srcdir>src</srcdir>
-  <libdir>lib</libdir>
+  <libdir>../lib</libdir>
   <depdir>dep</depdir>
   <bindir>bin</bindir>
   <docdir>doc</docdir>
 
-  <!-- JAR filename -->
+    <!-- All test reports merged into one -->
+  <report>
+    <junitdir>../tests</junitdir>
+  </report>
+  
+  <!-- Output jar -->
   <jar>
-    <filename>../synthia-examples</filename>
+    <filename>../jars/synthia-examples</filename>
+    <withdoc>false</withdoc>
   </jar>
   
   <!-- The target JDK version for compilation -->
-  <targetjdk>8</targetjdk>
+  <targetjdk>11</targetjdk>
   
   <test>
     <srcdir>src</srcdir> <!-- Actually, no test for Examples project -->
     <depdir>dep</depdir>
-    <libdir>lib</libdir>
+    <libdir>../lib</libdir>
     <bindir>bin</bindir>
     <!-- The filename pattern to recognize test files -->
     <filenamepattern>**/*Test.java</filenamepattern>

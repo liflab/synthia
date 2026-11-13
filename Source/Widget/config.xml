@@ -26,7 +26,7 @@
   <name>Synthia - Widget Plugin</name>
   
   <!-- The project's version number -->
-  <version>0.3.3</version>
+  <version>0.3.4</version>
   
   <!-- The project's package (with a trailing slash) -->
   <package>ca/uqac/lif/synthia/widget</package>
@@ -40,23 +40,29 @@
 
   <!-- Default folders -->
   <srcdir>src</srcdir>
-  <libdir>lib</libdir>
+  <libdir>../lib</libdir>
   <depdir>dep</depdir>
   <bindir>bin</bindir>
 
-  <!-- JAR filename -->
+  <!-- All test reports merged into one -->
+  <report>
+    <junitdir>../tests</junitdir>
+  </report>
+  
+  <!-- Output jar -->
   <jar>
-    <filename>../synthia-widget</filename>
+    <filename>../jars/synthia-widget</filename>
+    <withdoc>false</withdoc>
   </jar>
   
   <!-- The target JDK version for compilation -->
-  <targetjdk>8</targetjdk>
+  <targetjdk>11</targetjdk>
   
   <test>
     <srcdir>srctest</srcdir>
     <bindir>bintest</bindir>
     <depdir>dep</depdir>
-    <libdir>lib</libdir>
+    <libdir>../lib</libdir>
     <!-- The filename pattern to recognize test files -->
     <filenamepattern>**/*Test.java</filenamepattern>
   </test>
@@ -65,5 +71,6 @@
     Write JAR dependencies here.
   -->
   <dependencies>
+    <project>Synthia Core</project>
   </dependencies>
 </build>

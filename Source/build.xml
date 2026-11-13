@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
 <!--
-    A build script for a super-project containing multiple sub-projects
-    Copyright (C) 2019-2023  Sylvain Hallé
+	A build script for a super-project containing multiple sub-projects
+    Copyright (C) 2019-2026  Sylvain Hallé
 
     This program is free software: you can redistribute it and/or modify
     it under the terms of the GNU General Public License as published by
@@ -21,167 +21,63 @@
   default="all"
   basedir="."
   xmlns:jacoco="antlib:org.jacoco.ant">
+  
+  <!-- Load project properties from XML file. Any properties not defined
+       in that file will take the default values specified below. -->
+  <xmlproperty file="config.xml"/>
+  
+  <!-- The bundle's version -->
+  <property name="superbuild.version" value="0"/>
 
-<!-- The project's display name -->
-  <property name="build.name" value="Synthia"/>
+  <!-- The project's display name -->
+  <property name="build.name" value="SuperProject"/>
   
   <!-- The author -->
-  <property name="build.author" value="Sylvain Hallé and Marc-Antoine Plourde"/>
-  
+  <property name="build.author" value="Fred Flintstone"/>
+
   <!-- The folder containing lib files for this super-script -->
   <property name="build.libdir" value="lib"/>
   
-  <!-- Versions of various dependencies -->
-  <property name="versions.jacoco" value="0.8.8"/>
+  <!-- The folder containing the compiled JAR files -->
+  <property name="build.jardir" value="jars"/>
   
-  <target name="init">
-    <!-- Nothing to do at the moment -->
-  </target>
-  
-  <target name="all">
-    <!-- Compile core -->
-    <ant dir="Core" target="jar" />
-    <!-- Copy core to other projects -->
-    <copy todir="Grammar/lib">
-      <fileset dir=".">
-        <include name="synthia-core*.jar"/>
-        <exclude name="*javadoc.jar"/>
-        <exclude name="*sources.jar"/>
-      </fileset>
-    </copy>
-    <copy todir="Tree/lib">
-      <fileset dir=".">
-        <include name="synthia-core*.jar"/>
-        <exclude name="*javadoc.jar"/>
-        <exclude name="*sources.jar"/>
-      </fileset>
-    </copy>
-    <copy todir="Widget/lib">
-      <fileset dir=".">
-        <include name="synthia-core*.jar"/>
-        <exclude name="*javadoc.jar"/>
-        <exclude name="*sources.jar"/>
-      </fileset>
-    </copy>
-    <copy todir="Examples/lib">
-      <fileset dir=".">
-        <include name="synthia-core*.jar"/>
-        <exclude name="*javadoc.jar"/>
-        <exclude name="*sources.jar"/>
-      </fileset>
-    </copy>
-    <!-- Compile Grammar -->
-    <ant dir="Grammar" target="jar" />
-    <!-- Copy Grammar to Examples -->
-    <copy todir="Examples/lib">
-      <fileset dir=".">
-        <include name="synthia-grammar*.jar"/>
-        <exclude name="*javadoc.jar"/>
-        <exclude name="*sources.jar"/>
-      </fileset>
-    </copy>
-    <!-- Compile Tree -->
-    <ant dir="Tree" target="jar" />
-    <!-- Copy Tree to Examples -->
-    <copy todir="Examples/lib">
-      <fileset dir=".">
-        <include name="synthia-tree*.jar"/>
-        <exclude name="*javadoc.jar"/>
-        <exclude name="*sources.jar"/>
-      </fileset>
-    </copy>
-    <!-- Compile Widget -->
-    <ant dir="Widget" target="jar" />
-    <!-- Copy Widget to Examples -->
-    <copy todir="Examples/lib">
-      <fileset dir=".">
-        <include name="synthia-widget*.jar"/>
-        <exclude name="*javadoc.jar"/>
-        <exclude name="*sources.jar"/>
-      </fileset>
-    </copy>
-    <!-- Compile Examples -->
-    <ant dir="Examples" target="jar" />
-  </target>
-  
-  <target name="download-deps">
-    <ant dir="Core" target="download-deps" />
-    <ant dir="Grammar" target="download-deps" />
-    <ant dir="Tree" target="download-deps" />
-    <ant dir="Widget" target="download-deps" />
-    <ant dir="Examples" target="download-deps" />
-  </target>
-  
-  <target name="test">
-    <ant dir="Core" target="test" />
-    <ant dir="Grammar" target="test" />
-    <ant dir="Tree" target="test" />
-    <ant dir="Widget" target="test" />
-  </target>
-  
-  <target name="clean">
-    <ant dir="Core" target="clean" />
-    <ant dir="Grammar" target="clean" />
-    <ant dir="Tree" target="clean" />
-    <ant dir="Widget" target="clean" />
-    <ant dir="Examples" target="clean" />
-  </target>
-  
-  <target name="wipe">
-    <ant dir="Core" target="wipe" />
-    <ant dir="Grammar" target="wipe" />
-    <ant dir="Tree" target="wipe" />
-    <ant dir="Widget" target="wipe" />
-    <ant dir="Examples" target="wipe" />
-  </target>
-  
-  <target name="junit-report">
-    <!-- For the junit-report task, it is sufficient to call the task of a single sub-project -->
-    <ant dir="Core" usenativebasedir="true" target="junit-report" />
-  </target>
+  <!-- The default compilation ordering -->
+  <property name="superbuild.order.phase" value="*"/>
 
-  <target name="jacoco-report" depends="jacoco">
-    <!-- Call the jacoco-report task on children -->
-    <ant dir="Core" usenativebasedir="true" target="jacoco-report" />
-    <ant dir="Functions" usenativebasedir="true" target="jacoco-report" />
-    <!-- Load JaCoCo -->
-    <taskdef uri="antlib:org.jacoco.ant" resource="org/jacoco/ant/antlib.xml">
-      <classpath path="${build.libdir}/jacocoant.jar"/>
-    </taskdef>
-    <mkdir dir="coverage"/>
-    <jacoco:merge destfile="coverage/merged.exec">
-        <fileset dir="Core/tests/coverage" includes="*.exec"/>
-        <fileset dir="Functions/tests/coverage" includes="*.exec"/>
-    </jacoco:merge>
-    <jacoco:report>
-      <executiondata>
-        <file file="coverage/merged.exec"/>
-      </executiondata>
-      <structure name="${build.name}">
-        <classfiles>
-            <fileset dir="Core/bin"/>
-            <fileset dir="Grammar/bin"/>
-            <fileset dir="Tree/bin"/>
-            <fileset dir="Widget/bin"/>
-        </classfiles>
-        <sourcefiles encoding="UTF-8">
-          <fileset dir="Core/src"/>
-          <fileset dir="Grammar/src"/>
-          <fileset dir="Tree/src"/>
-          <fileset dir="Widget/src"/>
-        </sourcefiles>
-      </structure>
-      <html destdir="coverage"/>
-      <xml destfile="tests/report.xml"/>
-    </jacoco:report>
+  <!--Javadoc folder. Used to place the files generated by the javadoc task -->
+  <property name="build.rootdocdir" value="docs/javadoc"/>
+  
+  <!-- The target JDK used for the build -->
+  <property name="build.targetjdk" value="11"/>
+  
+  <!-- Versions of various dependencies -->
+  <property name="versions.jacoco" value="0.8.14"/>
+  
+  <!-- Pattern designating a test file (source or binary) -->
+  <property name="build.test.filenamepattern" value="**/*Test.*"/>
+  
+  <!-- Check if ant-contrib is present -->
+  <available file="${build.libdir}/ant-contrib-1.0b3.jar" property="antcontrib.present"/>
+  
+  <!-- Load ant-contrib -->
+  <target name="init" depends="ant-contrib">
+    <taskdef resource="net/sf/antcontrib/antlib.xml"
+      classpath="${build.libdir}/ant-contrib-1.0b3.jar"/>
   </target>
   
-  <target name="report" depends="junit-report,jacoco-report">
-    <!-- Just call the two dependent tasks -->
-  </target>
-  
-  <target name="show-properties">
-    <ant dir="Core" usenativebasedir="true" target="show-properties" />
+  <!-- Download ant-contrib -->
+  <target name="ant-contrib" unless="antcontrib.present"
+    description="Install ant-contrib if not present">
+    <echo message="ant-contrib is not installed. Downloading..." level="info"/>
+    <mkdir dir="${build.libdir}"/>
+    <get src="http://sylvainhalle.github.io/AntRun/dependencies/ant-contrib-1.0b3-bin.zip" 
+      dest="${build.libdir}/ant-contrib-1.0b3-bin.zip"/>
+    <unzip src="${build.libdir}/ant-contrib-1.0b3-bin.zip" dest="${build.libdir}">
+      <patternset>
+      <include name="**/*.jar"/>
+      </patternset>
+      <mapper type="flatten"/>
+    </unzip>
   </target>
   
   <!-- Target: jacoco
@@ -202,14 +98,282 @@
     </unzip>
   </target>
   
-  <target name="javadoc">
-    <mkdir dir="../docs/javadoc"/>
-    <mkdir dir="../docs/javadoc/doc-files"/>
+  <!-- Create paths -->
+  <mkdir dir="${build.libdir}"/>
+  <mkdir dir="${build.jardir}"/>
+  
+  <!-- Calls an Ant sub-task on each subfolder having a "build.xml" -->
+  <macrodef name="subtask">
+    <attribute name="task"/>
+    <attribute name="parallel" default="true"/>
+    <attribute name="usenativebasedir" default="false"/>
+    <element name="dirs"/>
+    <sequential>
+    <for param="subdir" parallel="@{parallel}">
+      <dirs/>
+      <sequential>
+        <if>
+          <available file="@{subdir}/build.xml"/>
+          <then>
+            <trycatch>
+              <try>
+                <ant dir="@{subdir}" target="@{task}" inheritAll="false"/>
+              </try>
+              <catch>
+                <echo message="Task @{task} failed in folder @{subdir}"/>
+                <property name="build.onefailed" value="true"/>
+                <property name="build.whofailed" value="@{subdir}"/>
+              </catch>
+            </trycatch>
+          </then>
+        </if>
+      </sequential>
+    </for>
+    <fail message="Task @{task} failed in folder ${build.whofailed}" if="build.onefailed"/>
+    </sequential>
+  </macrodef>
+	
+	<!-- Target: pull
+	     Pulls the current repository -->
+	<target name="pull" depends="init" description="Pulls the current repository">
+	  <subtask task="pull">
+	    <dirs>
+          <dirset dir="." includes="*"/>
+        </dirs>
+      </subtask>
+	</target>
+	
+	<!-- Target: push
+	     Pushes the current repository -->
+	<target name="push" depends="init" description="Pushes the current repository">
+	  <subtask task="push">
+	    <dirs>
+          <dirset dir="." includes="*"/>
+        </dirs>
+      </subtask>
+	</target>
+  
+  <!-- Target: copy
+       Copy a local version of the phase 1 builds in each palette. It is assumed that
+       the JAR files are in a "sibling" folder to the current one, called
+       `core`. -->
+  <target name="copy" depends="init" description="Copy a local version of BeepBeep in each palette">
+    <copy todir="lib" preservelastmodified="true" overwrite="true">
+      <fileset dir="../core" includes="beepbeep-*.jar"/>
+    </copy>
+  </target>
+
+  <!-- Calls the "jar" task in each subfolder -->  
+  <target name="jar" depends="init"
+  description="Build all projects in configured phases">
+  <for list="${superbuild.order.phase}"
+    param="phase" delimiter="," trim="true" parallel="false">
+    <sequential>
+      <echo message="Building phase: @{phase}"/>
+      <subtask task="jar">
+        <dirs>
+          <dirset dir="." includes="@{phase}"/>
+        </dirs>
+      </subtask>
+      <copy todir="${build.libdir}"
+        preservelastmodified="true"
+        overwrite="true" failonerror="false">
+        <fileset dir="${build.jardir}" includes="*.jar"/>
+      </copy>
+    </sequential>
+  </for>
+  </target>
+  
+  <!-- Creates a "fat JAR" including the JARs of all palettes -->
+  <target name="fat-jar">
+    <zip destfile="beepbeep-palettes-${superbuild.version}.jar">
+      <zipgroupfileset dir="${build.jardir}" includes="*-${superbuild.version}.jar"/>
+    </zip>
+    <zip destfile="beepbeep-palettes-${superbuild.version}-sources.jar">
+      <zipgroupfileset dir="${build.jardir}" includes="*-${superbuild.version}-sources.jar"/>
+    </zip>
+    <zip destfile="beepbeep-palettes-${superbuild.version}-javadoc.jar">
+      <zipgroupfileset dir="${build.jardir}" includes="*-${superbuild.version}-javadoc.jar"/>
+    </zip>
+  </target>
+  
+  <!-- Calls the "show-properties" task in each subfolder -->
+  <target name="show-properties" depends="init" description="Shows the properties defined in each project">
+    <subtask task="show-properties">
+      <dirs>
+        <dirset dir="." includes="*" />
+      </dirs>
+    </subtask>
+  </target>
+  
+  <!-- Calls the "download-deps" task in each subfolder -->
+  <target name="download-deps" depends="init" description="Downloads the dependencies in each project">
+    <subtask task="download-deps">
+      <dirs>
+        <dirset dir="." includes="*"/>
+      </dirs>
+    </subtask>
+  </target>
+  
+  <!-- Calls the "eclipse" task in each subfolder -->
+  <target name="eclipse" depends="init" description="Calls the eclipse target in each project">
+    <subtask task="eclipse">
+      <dirs>
+        <dirset dir="." includes="*"/>
+      </dirs>
+    </subtask>
+  </target>
+
+  <!-- Calls the "clean-eclipse" task in each subfolder -->
+  <target name="clean-eclipse" depends="init" description="Calls the clean-eclipse target in each project">
+    <subtask task="clean-eclipse">
+      <dirs>
+        <dirset dir="." includes="*"/>
+      </dirs>
+    </subtask>
+  </target>
+  
+  <!-- Calls the "test" task in each subfolder -->
+  <target name="test" depends="init" description="Runs the tests in each project">
+    <subtask task="test">
+      <dirs>
+        <dirset dir="." includes="*"/>
+      </dirs>
+    </subtask>
+  </target>
+  
+  <target name="junit-report" description="Generates the report from JUnit tests">
+    <!-- For the junit-report task, it is sufficient to call the task of a single sub-project -->
+    <ant dir="Core" usenativebasedir="true" target="junit-report" inheritAll="false" />
+  </target>
+  
+  <target name="jacoco-report" depends="init,jacoco" description="Generates the code coverage report">
+    <!-- Call the jacoco-report task on children -->
+    <subtask task="test" usenativebasedir="true">
+      <dirs>
+        <dirset dir="." includes="*"/>
+      </dirs>
+    </subtask>
+    <!-- Load JaCoCo -->
+    <taskdef uri="antlib:org.jacoco.ant" resource="org/jacoco/ant/antlib.xml">
+      <classpath path="${build.libdir}/jacocoant.jar"/>
+    </taskdef>
+    <mkdir dir="coverage"/>
+    <jacoco:merge destfile="coverage/merged.exec">
+      <fileset dir=".">
+        <include name="**/*.exec"/>
+      </fileset>
+    </jacoco:merge>
+    <jacoco:report>
+      <executiondata>
+        <file file="coverage/merged.exec"/>
+      </executiondata>
+      <structure name="${superbuild.name}">
+        <classfiles>
+            <fileset dir=".">
+              <include name="**/*.class"/>
+              <exclude name="${build.test.filenamepattern}"/>
+            </fileset>
+        </classfiles>
+        <sourcefiles encoding="UTF-8">
+          <fileset dir=".">
+            <include name="**/src/**/*.java"/>
+          </fileset>
+        </sourcefiles>
+      </structure>
+      <html destdir="coverage"/>
+      <xml destfile="tests/report.xml"/>
+    </jacoco:report>
+  </target>
+  
+  <!-- Makes a report of both coverage and unit test results -->
+  <target name="report" depends="junit-report,jacoco-report" description="Makes a report of both coverage and unit test results">
+    <!-- Just call the two dependent tasks -->
+  </target>
+  
+  <!-- Target: clean-jars
+       Cleans the lib folder -->
+  <target name="clean-jars" description="Cleans the lib folder of generated JARs">
+    <delete quiet="true">
+      <!-- This is somewhat a hack. We detect generated jars by the fact
+           that they end with the bundle's version number. The unlikely
+           situation where other JARs end with the same suffix is not much
+           of a problem, as any attempt at recompiling will download them
+           again. -->
+      <fileset dir="${build.libdir}" includes="*-${superbuild.version}.jar,*-${superbuild.version}-sources.jar,*-${superbuild.version}-javadoc.jar"/>
+    </delete>
+  </target>
+  
+  <!-- Calls the "clean" task in each subfolder -->
+  <target name="clean" depends="init,clean-jars" description="Calls the clean target in each project">
+    <subtask task="clean" parallel="false">
+      <dirs>
+        <dirset dir="." includes="*"/>
+      </dirs>
+    </subtask>
+    <echo message="Deleting jars dir" />
+    <delete dir="${build.jardir}" includes="*.jar" />
+    <delete dir="docs" />
+  </target>
+  
+  <!-- Calls the "wipe" task in each subfolder -->
+  <target name="wipe" depends="init" description="Calls the wipe target in each project">
+    <subtask task="wipe">
+      <dirs>
+        <dirset dir="." includes="*"/>
+      </dirs>
+    </subtask>
+  </target>
+
+  <!-- Calls the jar task for each project -->
+  <target name="all" depends="init,jar"  description="Builds everything">
+  </target>
+  
+  <!-- Prints project names according to compilation phase -->
+  <target name="print-phases" depends="init"
+  description="Print the configured compilation phases">
+  <for list="${superbuild.order.phase}"
+    param="phase" delimiter="," trim="true">
+    <sequential>
+      <echo message="Phase: @{phase}"/>
+      <for param="subdir">
+        <dirset dir="." includes="@{phase}"/>
+        <sequential>
+          <if>
+            <available file="@{subdir}/build.xml"/>
+            <then>
+              <echo message="  @{subdir}"/>
+            </then>
+          </if>
+        </sequential>
+      </for>
+    </sequential>
+  </for>
+  </target>
+
+  <!-- Prints the name of each subfolder that has a build script -->
+  <target name="print-folders" depends="init" description="Prints the name of each subfolder that has a build script">
+    <for param="subdir">
+     <dirset dir="." includes="*"/>
+     <sequential>
+      <if>
+        <available file="@{subdir}/build.xml"/>
+        <then>
+          <echo message="@{subdir}"/>
+        </then>
+      </if>
+     </sequential>
+    </for>
+  </target>
+  
+    
+  <!-- Builds the javadoc for the palettes -->
+  <target name="javadoc" depends="init" description="Builds Javadoc for all projects in the same tree">
+    <mkdir dir="${build.rootdocdir}"/>
+    <mkdir dir="${build.rootdocdir}/doc-files"/>
     <javadoc
       overview="project-overview.html"
-      destdir="../docs/javadoc"
-      packagenames="*"
-      excludepackagenames=""
+      destdir="${build.rootdocdir}"
       defaultexcludes="yes"
       author="true"
       version="true"
@@ -217,33 +381,25 @@
       Encoding="utf8"
       docencoding="utf8"
       charset="utf8"
-      windowtitle="Synthia Documentation">
-      <doctitle><![CDATA[<h1>]]>${build.name}<![CDATA[ Documentation</h1>]]></doctitle>
-      <bottom><![CDATA[<i>Copyright&nbsp;&#169; ]]>${build.author}<![CDATA[. All Rights Reserved.</i>]]></bottom>
-      <link href="https://docs.oracle.com/en/java/javase/11/docs/api/"/>
-      <sourcepath>
-        <pathelement path="Core/src"/>
-        <pathelement path="Grammar/src"/>
-        <pathelement path="Tree/src"/>
-        <pathelement path="Widget/src"/>
-      </sourcepath>
+      windowtitle="BeepBeep 3 Palettes API Reference">
+      <doctitle><![CDATA[<h1>]]>${superbuild.name}<![CDATA[ Documentation</h1>]]></doctitle>
+      <bottom><![CDATA[<i>Copyright&nbsp;&#169; ]]>${superbuild.author}<![CDATA[. All Rights Reserved.</i>]]></bottom>
+      <link href="http://docs.oracle.com/javase/${build.targetjdk}/docs/api/"/>
+      <fileset dir=".">
+        <include name="**/src/**/*.java"/>
+        <exclude name="**/*Test.java"/>
+      </fileset>
       <classpath>
-        <fileset dir="Core/dep">
-          <include name="**/*.jar"/>
-        </fileset>
-        <fileset dir="Core/lib">
-          <include name="**/*.jar"/>
+        <fileset file="${build.libdir}/beepbeep*.jar"/>
+        <fileset dir=".">
+          <include name="**/dep/*.jar"/>
         </fileset>
       </classpath>
-      <group title="Core" packages="ca.uqac.lif.synthia"/>
-      <group title="Grammar" packages="ca.uqac.lif.synthia.grammar"/>
-      <group title="Tree" packages="ca.uqac.lif.synthia.tree"/>
-      <group title="Widget" packages="ca.uqac.lif.synthia.widget"/>
-      <group title="Examples" packages="examples:examples.*"/>
     </javadoc>
-    <copy todir="../docs/javadoc/doc-files">
-      <fileset dir="Grammar/src/doc-files"/>
-      <fileset dir="Examples/src/doc-files"/>
+    <copy todir="docs/javadoc/doc-files">
+      <fileset dir="." includes="**/src/doc-files/*"/>
     </copy>
   </target>
+
 </project>
+<!-- :tabWidth=2: -->

@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<!--
+  Configuration file for a super-build script
+-->
+<superbuild>
+
+  <!-- The version of the bundle being compiled -->
+  <version>0.3.4</version>
+  
+  <!-- The name of the bundle being compiled -->
+  <name>Synthia</name>
+  
+  <!-- The author of the bundle being compiled -->
+  <author>Sylvain Hallé</author>
+  
+  <!-- Compilation dependencies -->
+  <order>
+    <phase>Core</phase>
+    <phase>Grammar Tree Widget</phase>
+    <phase>Examples</phase>
+  </order>
+</superbuild>
+<!-- :tabWidth=2:mode=ant: -->

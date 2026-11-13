@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
 <!--
     AntRun, a general-purpose Ant build script
-    Copyright (C) 2015-2023  Sylvain Hallé
+    Copyright (C) 2015-2025  Sylvain Hallé
 
     This program is free software: you can redistribute it and/or modify
     it under the terms of the GNU General Public License as published by
@@ -26,14 +26,14 @@
   <antversion property="antversion.running" />
   
   <!-- The build script's version number. Do not edit! -->
-  <property name="antrun.version" value="1.10.4"/>
+  <property name="antrun.version" value="1.13"/>
   
   <!-- Load project properties from XML file -->
   <xmlproperty file="config.xml"/>
   
   <!-- Versions of various dependencies -->
-  <property name="versions.jacoco" value="0.8.8"/>
-  <property name="versions.junit" value="1.9.2"/>
+  <property name="versions.jacoco" value="0.8.14"/>
+  <property name="versions.junit" value="1.14.1"/>
   
   <!--
     Default values. Note that Ant's properties cannot be overwritten once
@@ -110,6 +110,11 @@
   <!-- The filename pattern to recognize test binary files -->
   <property name="build.test.filenamepattern.bin" value="**/*Test.class"/>
   
+  <!-- The location of XSLT files (only required by the eclipse target) -->
+  <property name="xslt.dir" value="lib/xslt"/>
+  <property name="eclipse.project" value=".project"/>
+  <property name="eclipse.classpath" value=".classpath"/>
+  
   <!-- Target: initialization
        All other targets should ultimately
        depend on this one (except perhaps very simple ones such as
@@ -150,6 +155,42 @@
     <!-- Create empty doc folders -->
     <mkdir dir="${build.docdir}"/>
     <mkdir dir="${build.docdir}/doc-files"/>
+  </target>
+  
+  <!-- Target: check-javadoc
+       Sets the property javadoc.uptodate if the generated documentation
+       is newer than any source file -->
+  <target name="check-javadoc" depends="init">
+    <uptodate property="javadoc.uptodate"
+              targetfile="${build.docdir}/.javadoc.stamp">
+      <srcfiles dir="${build.srcdir}"
+                includes="**/*.java"
+                excludes="${build.test.filenamepattern.src}"/>
+    </uptodate>
+  </target>
+  
+  <!-- Target: check-test
+       Sets the property test.uptodate if the generated test reports are
+       newer than any source file -->
+  <target name="check-test" depends="init">
+    <!-- Only claim uptodate if the stamp exists -->
+    <available file="${basedir}/${build.report.junitdir}/.test.stamp"
+             property="test.stamp.present"/>
+
+    <uptodate property="test.uptodate"
+            targetfile="${basedir}/${build.report.junitdir}/.test.stamp">
+      <!-- Rerun tests if any Java source changes (including *Test.java, since
+           tests and prod sources are co-located in your project) -->
+      <srcfiles dir="${build.srcdir}" includes="**/*.java"/>
+    </uptodate>
+
+    <!-- If no stamp, force test.uptodate to be false (by clearing it) -->
+    <condition property="test.uptodate.effective">
+      <and>
+        <isset property="test.stamp.present"/>
+        <isset property="test.uptodate"/>
+      </and>
+    </condition>
   </target>
   
   <!-- Target: zip
@@ -206,13 +247,10 @@
   <!-- Target: javadoc
        Generates the javadoc associated to the project
   -->
-  <target name="javadoc" depends="init" description="Generate the documentation">
+  <target name="javadoc" depends="check-javadoc" description="Generate the documentation" unless="javadoc.uptodate">
     <mkdir dir="${build.docdir}"/>
     <mkdir dir="${build.docdir}/doc-files"/>
-    <javadoc sourcepath="${build.srcdir}"
-             destdir="${build.docdir}"
-             packagenames="*"
-             excludepackagenames=""
+    <javadoc destdir="${build.docdir}"
              defaultexcludes="yes"
              author="true"
              version="true"
@@ -221,9 +259,11 @@
              docencoding="utf8"
              charset="utf8"
              windowtitle="${build.name} Documentation">
+      <fileset dir="${build.srcdir}" includes="**/*.java"
+           excludes="${build.test.filenamepattern.src}"/>
       <doctitle><![CDATA[<h1>]]>${build.name}<![CDATA[ Documentation</h1>]]></doctitle>
       <bottom><![CDATA[<i>Copyright&nbsp;&#169; ]]>${build.author}<![CDATA[. All Rights Reserved.</i>]]></bottom>
-      <link href="http://docs.oracle.com/javase/8/docs/api/"/>
+      <link href="http://docs.oracle.com/javase/${build.targetjdk}/docs/api/"/>
       <classpath refid="build.classpath"/>
     </javadoc>
     <if>
@@ -234,6 +274,7 @@
       	</copy>
       </then>
     </if>
+    <touch file="${build.docdir}/.javadoc.stamp"/>
   </target>
   
   <!-- Target: jar
@@ -283,7 +324,7 @@
   <!-- Target: test
        Performs tests with jUnit
   -->
-  <target name="test" depends="junit,jacoco,compile,compile-tests" description="Perform unit tests">
+  <target name="test" depends="junit,jacoco,compile,compile-tests,check-test" description="Perform unit tests" unless="test.uptodate.effective">
     <!-- JaCoCo coverage srequires Ant 1.10.6 -->
     <fail message="Ant 1.10.6+ is required. Consider using test-legacy as a workaround.">
       <condition><not><antversion atleast="1.10.6"/></not></condition>
@@ -312,6 +353,7 @@
         </fork>
       </testclasses>
     </junitlauncher>
+    <touch file="${basedir}/${build.report.junitdir}/.test.stamp"/>
     <fail if="test.failed"/>
   </target>
   
@@ -336,6 +378,7 @@
       <arg line="--scan-classpath" />
       <arg line="--reports-dir ${build.report.junitdir}" />
     </java>
+    <touch file="${basedir}/${build.report.junitdir}/.test.stamp"/>
     <fail if="test.failed"/>
   </target>
   
@@ -349,7 +392,7 @@
   <!-- Target: junit-report
        Generates JUnit HTML report and code coverage report with JaCoCo
   -->
-  <target name="junit-report" depends="init" description="Generate unit test reports">
+  <target name="junit-report" depends="test,junit,check-test" description="Generate unit test reports">
     <!-- Don't run if no report fiels are present -->
     <fail message="No test report files seem to be present. Run ant test first.">
       <condition>
@@ -369,7 +412,7 @@
   <!-- Target: jacoco-report
        Generates JUnit code coverage report with JaCoCo
   -->
-  <target name="jacoco-report" depends="init,jacoco" description="Generate coverage reports">
+  <target name="jacoco-report" depends="test,jacoco,check-test" description="Generate coverage reports">
     <!-- Don't run if no report fiels are present -->
     <fail message="No test report files seem to be present. Run ant test first.">
       <condition>
@@ -535,6 +578,74 @@
       <mapper type="flatten"/>
     </unzip>
   </target>
+
+  <!-- Generate Eclipse .classpath from config.xml -->
+  <target name="gen-classpath" depends="init">
+    <xslt in="config.xml" out="${eclipse.classpath}" style="classpath.xsl">
+      <!-- You can pass parameters if needed -->
+    </xslt>
+    <echo>.classpath generated</echo>
+  </target>
+
+  <!-- Generate Eclipse .project from config.xml -->
+  <target name="gen-project" depends="init">
+    <xslt in="config.xml" out="${eclipse.project}" style="project.xsl"/>
+    <echo>.project generated</echo>
+  </target>
+
+  <!-- Remove generated Eclipse metadata -->
+  <target name="clean-eclipse">
+    <delete file="${eclipse.project}"/>
+    <delete file="${eclipse.classpath}"/>
+    <delete dir=".metadata"/>
+    <delete dir=".settings"/>
+  </target>
+
+  <!-- Target: eclipse
+       Generates boilerplate .classpath and .project files to import in Eclipse
+  -->
+  <target name="eclipse" depends="gen-classpath,gen-project"/>
+  
+  <!-- Macro to call git -->
+    <macrodef name="git">
+		<attribute name="command" />
+		<attribute name="options" default="" />
+		<attribute name="dir" default="" />
+		<attribute name="failerror" default="false" />
+		<element name="args" optional="true" />
+		<sequential>
+			<echo message="git dir @{dir}" />
+			<echo message="git @{command}" />
+			<exec executable="git" dir="@{dir}" failonerror="@{failerror}">
+				<arg line="@{command} @{options}" />
+				<args />
+			</exec>
+		</sequential>
+	</macrodef>
+	
+	<!-- Macro to call git pull -->
+	<macrodef name="git-pull">
+		<attribute name="failerror" default="false" />
+		<sequential><git command="pull" failerror="@{failerror}" /></sequential>
+	</macrodef>
+	
+	<!-- Macro to call git push -->
+	<macrodef name="git-push">
+		<attribute name="failerror" default="false" />
+		<sequential><git command="push" failerror="@{failerror}" /></sequential>
+	</macrodef>
+	
+	<!-- Target: pull
+	     Pulls the current repository -->
+	<target name="pull" depends="init" description="Pulls the current repository">
+	  <git-pull />
+	</target>
+	
+    <!-- Target: push
+	     Pushes the current repository -->
+	<target name="push" depends="init" description="Pulls the current repository">
+	  <git-push />
+	</target>
   
   <!-- Task: check-deps
        Loops through all dependencies specified in config.xml; checks if
