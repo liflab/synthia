@@ -2,7 +2,6 @@ package ca.uqac.lif.synthia.relative;
 
 import ca.uqac.lif.synthia.Shrinkable;
 import ca.uqac.lif.synthia.random.RandomFloat;
-import ca.uqac.lif.synthia.random.RandomInteger;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
 

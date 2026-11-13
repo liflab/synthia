@@ -18,13 +18,11 @@
  */
 package ca.uqac.lif.synthia.util;
 
-import ca.uqac.lif.petitpoucet.AndNode;
-import ca.uqac.lif.petitpoucet.Part;
-import ca.uqac.lif.petitpoucet.PartNode;
-import ca.uqac.lif.petitpoucet.function.ExplanationQueryable;
-import ca.uqac.lif.petitpoucet.function.RelationNodeFactory;
+
+
+
+
 import ca.uqac.lif.synthia.Picker;
-import ca.uqac.lif.synthia.explanation.NthSuccessiveOutput;
 import ca.uqac.lif.synthia.random.RandomFloat;
 
 /**
@@ -48,7 +46,7 @@ import ca.uqac.lif.synthia.random.RandomFloat;
  * number randomly chosen between 0.5 and 1.5.
  * @ingroup API
  */
-public class Tick implements Picker<Number>, ExplanationQueryable
+public class Tick implements Picker<Number>
 {
 	/**
 	 * Picker that determines the start value
@@ -203,39 +201,5 @@ public class Tick implements Picker<Number>, ExplanationQueryable
 	public String toString()
 	{
 		return "Tick(" + m_startValue + "," + m_increment + ")";
-	}
-
-	@Override
-	public PartNode getExplanation(Part p)
-	{
-		return getExplanation(p, RelationNodeFactory.getFactory());
-	}
-
-	@Override
-	public PartNode getExplanation(Part p, RelationNodeFactory f)
-	{
-		PartNode root = f.getPartNode(p, this);
-		int index = NthSuccessiveOutput.mentionedOutput(p);
-		if (index < 0)
-		{
-			return root;
-		}
-		if (index == 0)
-		{
-			Part new_p = NthSuccessiveOutput.replaceOutIndexBy(p, 0);
-			root.addChild(f.getPartNode(new_p, m_startValue));
-			return root;
-		}
-		AndNode and = f.getAndNode();
-		{
-			Part new_p = NthSuccessiveOutput.replaceOutIndexBy(p, index - 1);
-			and.addChild(f.getPartNode(new_p, this));
-		}
-		{
-			Part new_p = NthSuccessiveOutput.replaceOutIndexBy(p, index - 1);
-			and.addChild(f.getPartNode(new_p, m_increment));
-		}
-		root.addChild(and);
-		return root;
 	}
 }

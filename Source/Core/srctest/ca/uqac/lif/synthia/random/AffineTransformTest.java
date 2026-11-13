@@ -188,7 +188,7 @@ public class AffineTransformTest
 		for (int i = 0; i < 100; i++)
 		{
 			RandomInteger random_integer = new RandomInteger(0, 1000);
-			int random_val = random_integer.pick();
+			random_integer.pick();
 			RandomInteger random_integer1 = new RandomInteger(0, 1000);
 
 			AffineTransform.AffineTransformInteger affine_transform_integer = new AffineTransform

@@ -21,13 +21,12 @@ package ca.uqac.lif.synthia.relative;
 import java.util.ArrayList;
 import java.util.List;
 
-import ca.uqac.lif.petitpoucet.NodeFactory;
-import ca.uqac.lif.petitpoucet.Part;
-import ca.uqac.lif.petitpoucet.PartNode;
-import ca.uqac.lif.petitpoucet.function.ExplanationQueryable;
+
+
+
+
 import ca.uqac.lif.synthia.GiveUpException;
 import ca.uqac.lif.synthia.Picker;
-import ca.uqac.lif.synthia.explanation.NthSuccessiveOutput;
 import ca.uqac.lif.synthia.util.Mutator;
 
 /**
@@ -36,7 +35,7 @@ import ca.uqac.lif.synthia.util.Mutator;
  * @param <T> The object type returned by the picker.
  * @ingroup API
  */
-public class PickIf<T> extends Mutator<T> implements ExplanationQueryable
+public class PickIf<T> extends Mutator<T> 
 {
 	/**
 	 * The maximal number of iteration that the while loop of the {@link #pick()} method can do.
@@ -183,25 +182,6 @@ public class PickIf<T> extends Mutator<T> implements ExplanationQueryable
 		m_rejected.add(0);
 	}
 
-	@Override
-	public PartNode getExplanationForOutput(int index, Part p, NodeFactory f)
-	{
-		PartNode root = f.getPartNode(p, this);
-		if (index >= m_rejected.size() - 1)
-		{
-			// Not a valid part, end there
-			return root;
-		}
-		int current_index = m_rejected.get(0);
-		for (int i = 1; i < index; i++)
-		{
-			current_index += m_rejected.get(i);
-		}
-		Part new_p = NthSuccessiveOutput.replaceOutIndexBy(p, current_index + index);
-		root.addChild(f.getPartNode(new_p, m_picker));
-		return root;
-	}
-	
 	@Override
 	public String toString()
 	{

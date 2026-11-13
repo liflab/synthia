@@ -1,7 +1,6 @@
 package ca.uqac.lif.synthia.sequence;
 
 import ca.uqac.lif.synthia.random.RandomInteger;
-import ca.uqac.lif.synthia.sequence.Record;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
 
@@ -67,8 +66,8 @@ public class RecordTest
 			record.pick();
 		}
 		Record record_copy = record.duplicate(false);
-		int a = record.getCount();
-		int b = record_copy.getCount();
+		record.getCount();
+		record_copy.getCount();
 		Assertions.assertNotEquals(record.getCount(), record_copy.getCount());
 		for (int i = 0; i < 10; i++)
 		{

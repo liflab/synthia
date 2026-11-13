@@ -4,8 +4,6 @@ import ca.uqac.lif.synthia.NoMoreElementException;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.function.Executable;
-import org.junit.runner.RunWith;
-
 import static org.junit.jupiter.api.Assertions.assertThrows;
 
 public class AllBooleansTest

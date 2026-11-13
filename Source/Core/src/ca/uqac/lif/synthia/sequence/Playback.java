@@ -24,18 +24,16 @@ import java.util.Collections;
 import java.util.List;
 
 import ca.uqac.lif.synthia.relative.PickSmallerComparable;
-import ca.uqac.lif.petitpoucet.ComposedPart;
-import ca.uqac.lif.petitpoucet.Part;
-import ca.uqac.lif.petitpoucet.PartNode;
-import ca.uqac.lif.petitpoucet.function.ExplanationQueryable;
-import ca.uqac.lif.petitpoucet.function.RelationNodeFactory;
-import ca.uqac.lif.petitpoucet.function.vector.NthElement;
+
+
+
+
+
 import ca.uqac.lif.synthia.Bounded;
 import ca.uqac.lif.synthia.NoMoreElementException;
 import ca.uqac.lif.synthia.Picker;
 import ca.uqac.lif.synthia.SequenceShrinkable;
 import ca.uqac.lif.synthia.Shrinkable;
-import ca.uqac.lif.synthia.explanation.NthSuccessiveOutput;
 import ca.uqac.lif.synthia.random.RandomFloat;
 
 //TODO check constructors whit a list as parameter for m_values
@@ -58,7 +56,7 @@ import ca.uqac.lif.synthia.random.RandomFloat;
  * @param <T> The type of objects to return
  * @ingroup API
  */
-public class Playback<T> implements Bounded<T>, Shrinkable<T>, ExplanationQueryable, SequenceShrinkable<T>
+public class Playback<T> implements Bounded<T>, Shrinkable<T>, SequenceShrinkable<T>
 {
 	/**
 	 * The values to play back
@@ -245,33 +243,6 @@ public class Playback<T> implements Bounded<T>, Shrinkable<T>, ExplanationQuerya
 	public Shrinkable<T> shrink(T o, Picker<Float> decision, float m)
 	{
 		return new PickSmallerComparable<T>(this, o);
-	}
-
-	@Override
-	public PartNode getExplanation(Part p)
-	{
-		return getExplanation(p, RelationNodeFactory.getFactory());
-	}
-
-	@Override
-	public PartNode getExplanation(Part p, RelationNodeFactory f)
-	{
-		PartNode root = f.getPartNode(p, this);
-		int index = -1;
-		Part head = p.head();
-		if (head != null && head instanceof NthSuccessiveOutput)
-		{
-			index = ((NthSuccessiveOutput) head).getIndex();
-		}
-		if (index < 0 || (!m_loop && index > m_values.size()))
-		{
-			// Not a valid part, end there
-			return root;
-		}
-		int actual_index = index % m_values.size();
-		Part new_p = ComposedPart.compose(new NthElement(actual_index), new NthSuccessiveOutput(index));
-		root.addChild(f.getPartNode(new_p, m_values));
-		return root;
 	}
 
 	@Override

@@ -18,14 +18,12 @@
  */
 package ca.uqac.lif.synthia.vector;
 
-import ca.uqac.lif.petitpoucet.AndNode;
-import ca.uqac.lif.petitpoucet.Part;
-import ca.uqac.lif.petitpoucet.PartNode;
-import ca.uqac.lif.petitpoucet.function.ExplanationQueryable;
-import ca.uqac.lif.petitpoucet.function.RelationNodeFactory;
-import ca.uqac.lif.petitpoucet.function.vector.NthElement;
+
+
+
+
+
 import ca.uqac.lif.synthia.Picker;
-import ca.uqac.lif.synthia.explanation.NthSuccessiveOutput;
 
 /**
  * Generates a vector by independently picking a value for each of
@@ -35,7 +33,7 @@ import ca.uqac.lif.synthia.explanation.NthSuccessiveOutput;
  * 
  * @ingroup API
  */
-public class PrismPicker implements VectorPicker, ExplanationQueryable
+public class PrismPicker implements VectorPicker
 {
 	/**
 	 * The pickers for each dimension of the vector
@@ -94,40 +92,6 @@ public class PrismPicker implements VectorPicker, ExplanationQueryable
 		return m_dimensions.length;
 	}
 
-	@Override
-	public PartNode getExplanation(Part p)
-	{
-		return getExplanation(p, RelationNodeFactory.getFactory());
-	}
-
-	@Override
-	public PartNode getExplanation(Part p, RelationNodeFactory f)
-	{
-		int index = NthSuccessiveOutput.mentionedOutput(p), part_index = NthElement.mentionedElement(p);
-		PartNode root = f.getPartNode(p, this);
-		if (index < 0)
-		{
-			return null; // Invalid part
-		}
-		if (part_index < 0)
-		{
-			// p points at the whole vector
-			AndNode and = f.getAndNode();
-			NthSuccessiveOutput in_out = new NthSuccessiveOutput(index);
-			for (int i = 0; i < m_dimensions.length; i++)
-			{
-				PartNode pn = f.getPartNode(in_out, m_dimensions[i]);
-				and.addChild(pn);
-			}
-			root.addChild(and);
-			return root;
-		}
-		// p points at a number inside the vector
-		Part new_p = NthSuccessiveOutput.removeNthElement(p);
-		root.addChild(f.getPartNode(new_p, m_dimensions[part_index]));
-		return root;
-	}
-	
 	@Override
 	public String toString()
 	{

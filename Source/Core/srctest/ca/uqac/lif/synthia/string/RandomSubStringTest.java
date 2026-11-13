@@ -1,7 +1,6 @@
 package ca.uqac.lif.synthia.string;
 
 import ca.uqac.lif.synthia.Shrinkable;
-import ca.uqac.lif.synthia.random.RandomFloat;
 import ca.uqac.lif.synthia.relative.SubStrings;
 
 import org.junit.jupiter.api.Assertions;
@@ -28,7 +27,7 @@ public class RandomSubStringTest
 	@Test
 	public void duplicateWithState()
 	{
-		List<String> substrings = new SubStrings("abbc").getSubStrings();
+		new SubStrings("abbc").getSubStrings();
 		RandomSubString random_substring = new RandomSubString("abbc");
 
 		for (int i = 0; i < 100; i++)
@@ -50,7 +49,7 @@ public class RandomSubStringTest
 	@Test
 	public void duplicateWithoutState()
 	{
-		List<String> substrings = new SubStrings("abbc").getSubStrings();
+		new SubStrings("abbc").getSubStrings();
 		RandomSubString random_substring = new RandomSubString("abbc");
 
 		for (int i = 0; i < 1000; i++)
@@ -84,7 +83,7 @@ public class RandomSubStringTest
 	@Test
 	public void shrink()
 	{
-		List<String> substrings = new SubStrings("foobarbaz").getSubStrings();
+		new SubStrings("foobarbaz").getSubStrings();
 		RandomSubString random_substring = new RandomSubString("foobarbaz");
 
 		String smaller_string = random_substring.pick();

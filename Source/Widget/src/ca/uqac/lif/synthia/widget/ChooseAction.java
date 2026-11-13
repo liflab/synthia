@@ -21,7 +21,6 @@ package ca.uqac.lif.synthia.widget;
 import java.awt.event.ActionEvent;
 import java.util.Set;
 
-import ca.uqac.lif.synthia.Picker;
 import ca.uqac.lif.synthia.Reactive;
 
 public class ChooseAction implements Reactive<Set<Object>,ActionEvent>

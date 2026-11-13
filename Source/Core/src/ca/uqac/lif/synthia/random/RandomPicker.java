@@ -19,10 +19,9 @@
  */
 package ca.uqac.lif.synthia.random;
 
-import ca.uqac.lif.petitpoucet.Part;
-import ca.uqac.lif.petitpoucet.PartNode;
-import ca.uqac.lif.petitpoucet.function.ExplanationQueryable;
-import ca.uqac.lif.petitpoucet.function.RelationNodeFactory;
+
+
+
 import ca.uqac.lif.synthia.Picker;
 import ca.uqac.lif.synthia.Seedable;
 
@@ -40,7 +39,7 @@ import ca.uqac.lif.synthia.Seedable;
  * 
  * @ingroup API
  */
-public abstract class RandomPicker<T> implements Picker<T>, Seedable, ExplanationQueryable
+public abstract class RandomPicker<T> implements Picker<T>, Seedable
 {
 	/**
 	 * A random number generator used to set the seed when none is
@@ -72,17 +71,5 @@ public abstract class RandomPicker<T> implements Picker<T>, Seedable, Explanatio
 	public void reset()
 	{
 		m_random = new Random(m_seed);
-	}
-	
-	@Override
-	public PartNode getExplanation(Part p)
-	{
-		return getExplanation(p, RelationNodeFactory.getFactory());
-	}
-
-	@Override
-	public PartNode getExplanation(Part p, RelationNodeFactory f)
-	{
-		return f.getPartNode(p, this);
 	}
 }

@@ -58,7 +58,7 @@ public class ArrayPickerTest
 	{
 		RandomInteger random_integer = new RandomInteger(0, 10000);
 		RandomFloat random_float = new RandomFloat();
-		RandomBoolean random_boolean = new RandomBoolean();
+		new RandomBoolean();
 		RandomString random_string = new RandomString(10);
 		Picker[] random_pickers= new Picker[] {random_integer, random_float,
 				random_string};

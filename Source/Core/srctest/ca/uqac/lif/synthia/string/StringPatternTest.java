@@ -2,8 +2,6 @@ package ca.uqac.lif.synthia.string;
 
 import ca.uqac.lif.synthia.random.RandomInteger;
 import ca.uqac.lif.synthia.sequence.Playback;
-import ca.uqac.lif.synthia.string.StringPattern;
-
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
 

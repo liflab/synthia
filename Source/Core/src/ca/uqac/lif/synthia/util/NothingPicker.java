@@ -18,10 +18,9 @@
  */
 package ca.uqac.lif.synthia.util;
 
-import ca.uqac.lif.petitpoucet.Part;
-import ca.uqac.lif.petitpoucet.PartNode;
-import ca.uqac.lif.petitpoucet.function.ExplanationQueryable;
-import ca.uqac.lif.petitpoucet.function.RelationNodeFactory;
+
+
+
 import ca.uqac.lif.synthia.Bounded;
 import ca.uqac.lif.synthia.NoMoreElementException;
 import ca.uqac.lif.synthia.Picker;
@@ -34,7 +33,7 @@ import ca.uqac.lif.synthia.Shrinkable;
  * @param <T> The type of the picker (but not really important here).
  * @ingroup API
  */
-public class NothingPicker<T> implements Bounded<T>, Shrinkable<T>, ExplanationQueryable
+public class NothingPicker<T> implements Bounded<T>, Shrinkable<T>
 {
 	/**
 	 * Creates a new instance of the picker.
@@ -66,19 +65,6 @@ public class NothingPicker<T> implements Bounded<T>, Shrinkable<T>, ExplanationQ
 	public Picker<T> duplicate(boolean with_state)
 	{
 		return new NothingPicker<T>();
-	}
-
-	@Override
-	public PartNode getExplanation(Part p)
-	{
-		return getExplanation(p, RelationNodeFactory.getFactory());
-	}
-
-	@Override
-	public PartNode getExplanation(Part p, RelationNodeFactory arg1)
-	{
-		// Nothing is the end of the chain
-		return null;
 	}
 
 	@Override

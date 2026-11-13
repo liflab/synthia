@@ -21,17 +21,10 @@ package ca.uqac.lif.synthia.collection;
 import java.util.ArrayList;
 import java.util.List;
 
-import ca.uqac.lif.petitpoucet.AndNode;
-import ca.uqac.lif.petitpoucet.NodeFactory;
-import ca.uqac.lif.petitpoucet.Part;
-import ca.uqac.lif.petitpoucet.PartNode;
-import ca.uqac.lif.petitpoucet.function.ExplanationQueryable;
-import ca.uqac.lif.petitpoucet.function.RelationNodeFactory;
-import ca.uqac.lif.petitpoucet.function.vector.NthElement;
+
 import ca.uqac.lif.synthia.CannotShrinkException;
 import ca.uqac.lif.synthia.Picker;
 import ca.uqac.lif.synthia.Shrinkable;
-import ca.uqac.lif.synthia.explanation.NthSuccessiveOutput;
 import ca.uqac.lif.synthia.random.RandomFloat;
 import ca.uqac.lif.synthia.util.Constant;
 
@@ -42,7 +35,7 @@ import ca.uqac.lif.synthia.util.Constant;
  * @param <T>
  * @ingroup API
  */
-public class ComposeList<T> implements Picker<List<T>>, Shrinkable<List<T>>, ExplanationQueryable
+public class ComposeList<T> implements Picker<List<T>>, Shrinkable<List<T>>
 {
 	/**
 	 * The picker providing elements for the list.
@@ -56,8 +49,6 @@ public class ComposeList<T> implements Picker<List<T>>, Shrinkable<List<T>>, Exp
 
 	/**
 	 * A list keeping track of the length of each list produced by the picker.
-	 * This list is used to answer calls to
-	 * {@link #getExplanation(Part, NodeFactory) getExplanation()}.
 	 */
 	/*@ non_null @*/ protected List<Integer> m_lengths;
 
@@ -114,12 +105,6 @@ public class ComposeList<T> implements Picker<List<T>>, Shrinkable<List<T>>, Exp
 		}
 		return cl;
 	}
-
-	@Override
-	public PartNode getExplanation(Part p)
-	{
-		return getExplanation(p, RelationNodeFactory.getFactory());
-	}
 	
 	@Override
 	public String toString()
@@ -127,43 +112,7 @@ public class ComposeList<T> implements Picker<List<T>>, Shrinkable<List<T>>, Exp
 		return "ComposeList";
 	}
 
-	@Override
-	public PartNode getExplanation(Part p, RelationNodeFactory f)
-	{
-		PartNode root = f.getPartNode(p, this);
-		AndNode and = f.getAndNode();
-		root.addChild(and);
-		int index = NthSuccessiveOutput.mentionedOutput(p), part_index = NthElement.mentionedElement(p);
-		if (index < 0 || index >= m_lengths.size())
-		{
-			return null; // Invalid part
-		}
-		int offset = 0;
-		for (int i = 0; i < index; i++)
-		{
-			offset += m_lengths.size();
-		}
-		if (part_index < 0)
-		{
-			// p points at the whole list
-			for (int i = 0; i < m_lengths.get(index); i++)
-			{
-				Part new_p = NthSuccessiveOutput.replaceOutIndexBy(p, offset + i);
-				and.addChild(f.getPartNode(new_p, m_elements));
-			}
-			return root;
-		}
-		// p points at an element of the list
-		if (part_index >= m_lengths.get(index))
-		{
-			// Nonexistent element
-			return root;
-		}
-		Part new_p = NthSuccessiveOutput.removeNthElement(p);
-		new_p = NthSuccessiveOutput.replaceOutIndexBy(new_p, offset + part_index);
-		and.addChild(f.getPartNode(new_p, m_elements));
-		return root;
-	}
+	
 
 	@Override
 	public Shrinkable<List<T>> shrink(List<T> o, Picker<Float> decision, float magnitude)

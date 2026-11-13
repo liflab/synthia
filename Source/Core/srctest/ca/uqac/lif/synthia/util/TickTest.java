@@ -1,7 +1,5 @@
 package ca.uqac.lif.synthia.util;
 
-import ca.uqac.lif.synthia.util.Tick;
-
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.Assertions;
 

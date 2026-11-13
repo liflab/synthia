@@ -1,7 +1,6 @@
 package ca.uqac.lif.synthia.random;
 
 import java.util.concurrent.atomic.AtomicLong;
-import ca.uqac.lif.synthia.random.Random;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
 
@@ -10,7 +9,7 @@ public class RandomTest
 	@Test
 	public void helloWorld()
 	{
-		Random random = new Random();
+		new Random();
 	}
 
 	@Test

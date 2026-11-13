@@ -22,14 +22,12 @@ import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
 
-import ca.uqac.lif.petitpoucet.Part;
-import ca.uqac.lif.petitpoucet.PartNode;
-import ca.uqac.lif.petitpoucet.function.ExplanationQueryable;
-import ca.uqac.lif.petitpoucet.function.RelationNodeFactory;
+
+
+
 import ca.uqac.lif.synthia.Bounded;
 import ca.uqac.lif.synthia.Picker;
 import ca.uqac.lif.synthia.SequenceShrinkable;
-import ca.uqac.lif.synthia.explanation.NthSuccessiveOutput;
 
 /**
  * Picker that records and returns the values produced by another picker.
@@ -46,7 +44,7 @@ import ca.uqac.lif.synthia.explanation.NthSuccessiveOutput;
  * @param <T> The type of objects to pick
  * @ingroup API
  */
-public class Record<T> implements Picker<T>, ExplanationQueryable, SequenceShrinkable<T>
+public class Record<T> implements Picker<T>, SequenceShrinkable<T>
 {
 	/**
 	 * The picker that generates the values
@@ -142,31 +140,6 @@ public class Record<T> implements Picker<T>, ExplanationQueryable, SequenceShrin
 		return m_values.size();
 	}
 	
-	@Override
-	public PartNode getExplanation(Part p)
-	{
-		return getExplanation(p, RelationNodeFactory.getFactory());
-	}
-
-	@Override
-	public PartNode getExplanation(Part p, RelationNodeFactory f)
-	{
-		PartNode root = f.getPartNode(p, this);
-		int index = -1;
-		Part head = p.head();
-		if (head != null && head instanceof NthSuccessiveOutput)
-		{
-			index = ((NthSuccessiveOutput) head).getIndex();
-		}
-		if (index < 0 || index > m_values.size())
-		{
-			// Not a valid part, end there
-			return root;
-		}
-		root.addChild(f.getPartNode(p, m_picker));
-		return root;
-	}
-
 	@Override
 	public SequenceShrinkable<T> shrink(Picker<Float> d, float m)
 	{
