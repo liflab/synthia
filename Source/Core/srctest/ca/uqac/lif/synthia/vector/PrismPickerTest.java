@@ -1,6 +1,5 @@
 package ca.uqac.lif.synthia.vector;
 
-import ca.uqac.lif.synthia.Picker;
 import ca.uqac.lif.synthia.random.RandomFloat;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
@@ -10,7 +9,7 @@ public class PrismPickerTest
 	@Test
 	public void interval1()
 	{
-		Picker[] pickers = new Picker[10];
+		RandomFloat[] pickers = new RandomFloat[10];
 		for (int i = 0; i < pickers.length; i++)
 		{
 			pickers[i] = new RandomFloat();
@@ -29,7 +28,7 @@ public class PrismPickerTest
 	@Test
 	public void interval2()
 	{
-		Picker[] pickers = new Picker[10];
+		RandomFloat[] pickers = new RandomFloat[10];
 		int min = 1;
 		int max = 25;
 		for (int i = 0; i < pickers.length; i++)
@@ -50,7 +49,7 @@ public class PrismPickerTest
 	@Test
 	public void duplicateWithState()
 	{
-		Picker[] pickers = new Picker[10];
+		RandomFloat[] pickers = new RandomFloat[10];
 		int min = 1;
 		int max = 25;
 		for (int i = 0; i < pickers.length; i++)
@@ -75,7 +74,7 @@ public class PrismPickerTest
 	@Test
 	public void duplicateWithoutState()
 	{
-		Picker[] pickers = new Picker[10];
+		RandomFloat[] pickers = new RandomFloat[10];
 		int min = 1;
 		int max = 25;
 		for (int i = 0; i < pickers.length; i++)

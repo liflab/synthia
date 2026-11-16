@@ -12,7 +12,7 @@ public class StringPatternTest
 		String[] names = new String[] { "Sylvain", "Raphael", "Fabio", "Sebastien" };
 		String[] result_strings = new String[] { "Hello Sylvain!", "Hello Raphael!", "Hello Fabio!",
 				"Hello Sebastien!" };
-		Playback names_playback = new Playback(names);
+		Playback<String> names_playback = new Playback<String>(names);
 		StringPattern spatern = new StringPattern("Hello {$0}!", names_playback);
 		for (String result_string : result_strings)
 		{
@@ -61,7 +61,7 @@ public class StringPatternTest
 	public void duplicateWithState()
 	{
 		String[] names = new String[] { "Sylvain", "Raphael", "Fabio", "Sebastien" };
-		Playback names_playback = new Playback(names);
+		Playback<String> names_playback = new Playback<String>(names);
 		StringPattern string_patern = new StringPattern("Hello {$0}!", names_playback);
 		string_patern.pick();
 		string_patern.pick();
@@ -76,7 +76,7 @@ public class StringPatternTest
 	public void duplicateWithoutState()
 	{
 		String[] names = new String[] { "Sylvain", "Raphael", "Fabio", "Sebastien" };
-		Playback names_playback = new Playback(names);
+		Playback<String> names_playback = new Playback<String>(names);
 		StringPattern string_patern = new StringPattern("Hello {$0}!", names_playback);
 		string_patern.pick();
 		string_patern.pick();

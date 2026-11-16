@@ -47,7 +47,7 @@ public class RandomSubListTest
 	@Test
 	public void subList()
 	{
-		RandomSubList random_sublist = new RandomSubList(getList(), new RandomSubString(null));
+		RandomSubList<String> random_sublist = new RandomSubList<String>(getList(), new RandomSubString(null));
 		for (int i = 0; i < 10; i++)
 		{
 			System.out.println(random_sublist.pick());
@@ -58,8 +58,8 @@ public class RandomSubListTest
 	@Test
 	public void duplicateWithState()
 	{
-		RandomSubList random_sublist = new RandomSubList(getList(), new RandomSubString(null));
-		RandomSubList random_sublist_copy = (RandomSubList) random_sublist.duplicate(true);
+		RandomSubList<String> random_sublist = new RandomSubList<String>(getList(), new RandomSubString(null));
+		RandomSubList<String> random_sublist_copy = (RandomSubList<String>) random_sublist.duplicate(true);
 
 		for (int i = 0; i < 1000; i++)
 		{
@@ -71,7 +71,7 @@ public class RandomSubListTest
 	@Test
 	public void duplicateWithoutState()
 	{
-		RandomSubList random_sublist = new RandomSubList(getList(), new RandomSubString(null));
+		RandomSubList<String> random_sublist = new RandomSubList<String>(getList(), new RandomSubString(null));
 
 
 		for (int i = 0; i < 100; i++)
@@ -79,7 +79,7 @@ public class RandomSubListTest
 			random_sublist.pick();
 		}
 
-		RandomSubList random_sublist_copy = (RandomSubList) random_sublist.duplicate(false);
+		RandomSubList<String> random_sublist_copy = (RandomSubList<String>) random_sublist.duplicate(false);
 
 		int counter = 0;
 		for (int i = 0; i < 1000; i++)
@@ -109,7 +109,7 @@ public class RandomSubListTest
 	@Test
 	public void shrinkFromARandomSublistGeneratedList()
 	{
-		RandomSubList random_sublist = new RandomSubList(getList(), new RandomSubString(null));
+		RandomSubList<String> random_sublist = new RandomSubList<String>(getList(), new RandomSubString(null));
 
 		int cast_exception_counter = 0; // shrink returns a NothingPicker
 		int no_more_element_counter = 0;
@@ -119,7 +119,7 @@ public class RandomSubListTest
 
 			try
 			{
-				RandomSubList random_sublist2 = (RandomSubList) random_sublist
+				RandomSubList<String> random_sublist2 = (RandomSubList<String>) random_sublist
 						.shrink(random_sublist.pick());
 				random_sublist2.pick();
 				no_error_counter ++;

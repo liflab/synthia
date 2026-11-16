@@ -103,11 +103,11 @@ public class AffineTransformTest
 		Float[] affine_t_float_results = new Float[] { (((float) 7 * (float) 3.57) + (float) 10),
 				(((float) 14 * (float) 3.57) + (float) 10), (((float) 21 * (float) 3.57) + (float) 10),
 				(((float) 28 * (float) 3.57) + (float) 10) };
-		Playback playback_int = new Playback(integers);
-		Playback playback_float = new Playback(floats);
-		AffineTransform affine_transform_int = new AffineTransform.AffineTransformInteger(playback_int,
+		Playback<Integer> playback_int = new Playback<Integer>(integers);
+		Playback<Float> playback_float = new Playback<Float>(floats);
+		AffineTransform<Integer> affine_transform_int = new AffineTransform.AffineTransformInteger(playback_int,
 				m, b);
-		AffineTransform affine_transform_float = new AffineTransform.AffineTransformFloat(
+		AffineTransform<Float> affine_transform_float = new AffineTransform.AffineTransformFloat(
 				playback_float, m1, b1);
 		for (int i = 0; i < affine_t_int_results.length; i++)
 		{

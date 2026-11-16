@@ -21,7 +21,7 @@ public class ConstantTest<T> {
     }
 
     @Parameterized.Parameters
-    public static Collection dataSet(){
+    public static Collection<Object[]> dataSet(){
         RandomInteger randomInteger=new RandomInteger(0,100);
 
         return Arrays.asList(new Object[][]{
@@ -35,7 +35,7 @@ public class ConstantTest<T> {
 
     @Test
     public void test(){
-        Constant constant=new Constant(m_constantValue);
+        Constant<T> constant=new Constant<T>(m_constantValue);
         for(int i=0;i<100;i++){
             Assertions.assertEquals(constant.pick(),m_constantValue);
         }

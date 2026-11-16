@@ -13,13 +13,13 @@ public class RecordTest
 	public void propertiesValidation()
 	{
 		RandomInteger random_integer = new RandomInteger(0, 100);
-		Record record = new Record(random_integer);
+		Record<Integer> record = new Record<Integer>(random_integer);
 		List<Integer> results = new ArrayList<Integer>();
 		for (int i = 0; i < 10; i++)
 		{
-			results.add((int) record.pick());
+			results.add(record.pick());
 		}
-		List picked_value = record.getSequence();
+		List<Integer> picked_value = record.getSequence();
 
 		// Check that the values it records are indeed those it receives
 		for (int i = 0; i < results.size(); i++)
@@ -41,12 +41,12 @@ public class RecordTest
 	public void duplicateWithState()
 	{
 		RandomInteger random_integer = new RandomInteger(0, 100);
-		Record record = new Record(random_integer);
+		Record<Integer> record = new Record<Integer>(random_integer);
 		for (int i = 0; i < 10; i++)
 		{
 			record.pick();
 		}
-		Record record_copy = (Record) record.duplicate(true);
+		Record<Integer> record_copy = record.duplicate(true);
 		Assertions.assertEquals(record.getCount(), record_copy.getCount());
 		List<Integer> record_list = record.getSequence();
 		List<Integer> record_copy_list = record_copy.getSequence();
@@ -60,12 +60,12 @@ public class RecordTest
 	public void duplicateWithoutState()
 	{
 		RandomInteger random_integer = new RandomInteger(0, 100);
-		Record record = new Record(random_integer);
+		Record<Integer> record = new Record<Integer>(random_integer);
 		for (int i = 0; i < 10; i++)
 		{
 			record.pick();
 		}
-		Record record_copy = record.duplicate(false);
+		Record<Integer> record_copy = record.duplicate(false);
 		record.getCount();
 		record_copy.getCount();
 		Assertions.assertNotEquals(record.getCount(), record_copy.getCount());

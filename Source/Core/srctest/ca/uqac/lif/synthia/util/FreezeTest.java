@@ -33,14 +33,14 @@ public class FreezeTest
 			ba[i] = rb.pick();
 		}
 
-		Playback ip = new Playback<Integer>(ia);
-		Freeze iF = new Freeze(ip);
-		Playback sp = new Playback<String>(sa);
-		Freeze sf = new Freeze(sp);
-		Playback fp = new Playback<Float>(fa);
-		Freeze ff = new Freeze(fp);
-		Playback bp = new Playback<Boolean>(ba);
-		Freeze bf = new Freeze(bp);
+		Playback<Integer> ip = new Playback<Integer>(ia);
+		Freeze<Integer> iF = new Freeze<Integer>(ip);
+		Playback<String> sp = new Playback<String>(sa);
+		Freeze<String> sf = new Freeze<String>(sp);
+		Playback<Float> fp = new Playback<Float>(fa);
+		Freeze<Float> ff = new Freeze<Float>(fp);
+		Playback<Boolean> bp = new Playback<Boolean>(ba);
+		Freeze<Boolean> bf = new Freeze<Boolean>(bp);
 
 		int initialIntPick = 0;
 		float initialFloatPick = 0;
@@ -49,10 +49,10 @@ public class FreezeTest
 
 		for (int i = 0; i < 3; i++)
 		{
-			int intValue = (int) iF.pick();
-			float floatValue = (float) ff.pick();
-			String stringValue = (String) sf.pick();
-			boolean booleanValue = (boolean) bf.pick();
+			int intValue = iF.pick();
+			float floatValue = ff.pick();
+			String stringValue = sf.pick();
+			boolean booleanValue = bf.pick();
 			if (i == 0)
 			{
 				initialIntPick = intValue;
@@ -70,7 +70,7 @@ public class FreezeTest
 			{
 				Assertions.assertEquals(intValue, (int) iF.pick());
 				Assertions.assertEquals(floatValue, (float) ff.pick());
-				Assertions.assertEquals(stringValue, (String) sf.pick());
+				Assertions.assertEquals(stringValue, sf.pick());
 				Assertions.assertEquals(initialBooleanPick, (boolean) bf.pick());
 
 			}
@@ -83,7 +83,7 @@ public class FreezeTest
 
 			Assertions.assertEquals(initialIntPick, (int) iF.pick());
 			Assertions.assertEquals(initialFloatPick, (float) ff.pick());
-			Assertions.assertEquals(initialStringPick, (String) sf.pick());
+			Assertions.assertEquals(initialStringPick, sf.pick());
 			Assertions.assertEquals(initialBooleanPick, (boolean) bf.pick());
 		}
 	}
@@ -92,9 +92,9 @@ public class FreezeTest
 	public void duplicateWithState()
 	{
 		RandomFloat random_float = new RandomFloat();
-		Freeze freeze = new Freeze(random_float);
+		Freeze<Float> freeze = new Freeze<Float>(random_float);
 		freeze.pick();
-		Freeze freeze_copy = freeze.duplicate(true);
+		Freeze<Float> freeze_copy = freeze.duplicate(true);
 		Assertions.assertEquals(freeze.pick(), freeze_copy.pick());
 	}
 
@@ -103,9 +103,9 @@ public class FreezeTest
 	public void duplicateWithoutState()
 	{
 		RandomFloat random_float = new RandomFloat();
-		Freeze freeze = new Freeze(random_float);
+		Freeze<Float> freeze = new Freeze<Float>(random_float);
 		freeze.pick();
-		Freeze freeze_copy = freeze.duplicate(false);
+		Freeze<Float> freeze_copy = freeze.duplicate(false);
 		freeze.reset();
 		freeze_copy.reset();
 		Assertions.assertEquals(freeze.pick(), freeze_copy.pick());

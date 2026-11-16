@@ -20,7 +20,7 @@ public class ListPickerTest
 		RandomFloat random_float = new RandomFloat();
 		RandomBoolean random_boolean = new RandomBoolean();
 		RandomString random_string = new RandomString(10);
-		Picker[] random_pickers= new Picker[] {random_integer, random_float ,random_boolean,
+		Picker<?>[] random_pickers= new Picker<?>[] {random_integer, random_float ,random_boolean,
 				random_string};
 		ListPicker list_picker = new ListPicker(random_pickers);
 		List<Object> list_picker_res = list_picker.pick();
@@ -37,13 +37,13 @@ public class ListPickerTest
 		RandomInteger random_integer = new RandomInteger(0, 10000);
 		RandomFloat random_float = new RandomFloat();
 		RandomString random_string = new RandomString(10);
-		Picker[] random_pickers= new Picker[] {random_integer, random_float, random_string};
+		Picker<?>[] random_pickers= new Picker<?>[] {random_integer, random_float, random_string};
 		ListPicker list_picker = new ListPicker(random_pickers);
 		for (int i = 0; i < random_pickers.length; i++)
 		{
 			list_picker.pick();
 		}
-		ListPicker list_picker_copy = (ListPicker) list_picker.duplicate(true);
+		ListPicker list_picker_copy = list_picker.duplicate(true);
 		List<Object> list_picker_res = list_picker.pick();
 		List<Object> list_picker_copy_res = list_picker_copy.pick();
 		for (int i = 0; i < list_picker_res.size(); i++)
@@ -58,13 +58,13 @@ public class ListPickerTest
 		RandomInteger random_integer = new RandomInteger(0, 10000);
 		RandomFloat random_float = new RandomFloat();
 		RandomString random_string = new RandomString(10);
-		Picker[] random_pickers= new Picker[] {random_integer, random_float, random_string};
+		Picker<?>[] random_pickers= new Picker<?>[] {random_integer, random_float, random_string};
 		ListPicker list_picker = new ListPicker(random_pickers);
 		for (int i = 0; i < random_pickers.length; i++)
 		{
 			list_picker.pick();
 		}
-		ListPicker list_picker_copy = (ListPicker) list_picker.duplicate(false);
+		ListPicker list_picker_copy = list_picker.duplicate(false);
 		List<Object> list_picker_res = list_picker.pick();
 		List<Object> list_picker_copy_res = list_picker_copy.pick();
 		for (int i = 0; i < list_picker_res.size(); i++)
@@ -90,10 +90,10 @@ public class ListPickerTest
 		RandomInteger random_integer = new RandomInteger(0, 10000);
 		RandomFloat random_float = new RandomFloat();
 		RandomString random_string = new RandomString(10);
-		Picker[] random_pickers= new Picker[] {random_integer, random_float, random_string};
+		Picker<?>[] random_pickers= new Picker<?>[] {random_integer, random_float, random_string};
 
 		Integer[] int_array = new Integer[] { 3, 6, 7 };
-		Playback size_picker = new Playback(int_array);
+		Playback<Integer> size_picker = new Playback<Integer>(int_array);
 		size_picker.setLoop(false);
 
 		ListPicker list_picker = new ListPicker(size_picker, random_pickers);

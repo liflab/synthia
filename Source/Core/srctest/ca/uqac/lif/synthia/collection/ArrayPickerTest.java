@@ -19,7 +19,7 @@ public class ArrayPickerTest
 		RandomFloat random_float = new RandomFloat();
 		RandomBoolean random_boolean = new RandomBoolean();
 		RandomString random_string = new RandomString(10);
-		Picker[] random_pickers= new Picker[] {random_integer, random_float ,random_boolean,
+		Picker<?>[] random_pickers= new Picker<?>[] {random_integer, random_float ,random_boolean,
 				random_string};
 		ArrayPicker array_picker = new ArrayPicker(random_pickers);
 		Object[] array_picker_res = array_picker.pick();
@@ -37,7 +37,7 @@ public class ArrayPickerTest
 		RandomFloat random_float = new RandomFloat();
 		RandomBoolean random_boolean = new RandomBoolean();
 		RandomString random_string = new RandomString(10);
-		Picker[] random_pickers= new Picker[] {random_integer, random_float ,random_boolean,
+		Picker<?>[] random_pickers= new Picker<?>[] {random_integer, random_float ,random_boolean,
 				random_string};
 		ArrayPicker array_picker = new ArrayPicker(random_pickers);
 		for (int i = 0; i < random_pickers.length; i++)
@@ -60,7 +60,7 @@ public class ArrayPickerTest
 		RandomFloat random_float = new RandomFloat();
 		new RandomBoolean();
 		RandomString random_string = new RandomString(10);
-		Picker[] random_pickers= new Picker[] {random_integer, random_float,
+		Picker<?>[] random_pickers= new Picker<?>[] {random_integer, random_float,
 				random_string};
 		ArrayPicker array_picker = new ArrayPicker(random_pickers);
 		for (int i = 0; i < random_pickers.length; i++)

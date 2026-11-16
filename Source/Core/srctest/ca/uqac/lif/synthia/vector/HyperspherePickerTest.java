@@ -1,6 +1,5 @@
 package ca.uqac.lif.synthia.vector;
 
-import ca.uqac.lif.synthia.Picker;
 import ca.uqac.lif.synthia.random.RandomFloat;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
@@ -10,7 +9,7 @@ public class HyperspherePickerTest
 	@Test
 	public void interval()
 	{
-		Picker[] pickers = new Picker[10];
+		RandomFloat[] pickers = new RandomFloat[10];
 		int min = 1;
 		int max = 25;
 		int modulus = 10;
@@ -30,7 +29,7 @@ public class HyperspherePickerTest
 	@Test
 	public void duplicateWithState()
 	{
-		Picker[] pickers = new Picker[10];
+		RandomFloat[] pickers = new RandomFloat[10];
 		int min = 1;
 		int max = 25;
 		int modulus = 10;
@@ -53,7 +52,7 @@ public class HyperspherePickerTest
 	@Test
 	public void duplicateWithoutState()
 	{
-		Picker[] pickers = new Picker[10];
+		RandomFloat[] pickers = new RandomFloat[10];
 		int min = 1;
 		int max = 25;
 		int modulus = 10;

@@ -11,7 +11,7 @@ import static org.junit.jupiter.api.Assertions.assertThrows;
 
 public class NothingPickerTest
 {
-	private void noMoreElementThrow(NothingPicker picker)
+	private void noMoreElementThrow(NothingPicker<?> picker)
 	{assertThrows(NoMoreElementException.class, new Executable()
 		{
 			@Override
@@ -25,7 +25,7 @@ public class NothingPickerTest
 	@Test                                                                                              
 	public void pick()
 	{
-		NothingPicker picker = new NothingPicker();
+		NothingPicker<Integer> picker = new NothingPicker<Integer>();
 		noMoreElementThrow(picker);
 	}
 
@@ -33,7 +33,7 @@ public class NothingPickerTest
 	public void shrink()
 	{
 		int element = 2;
-		NothingPicker picker = new NothingPicker();
-		noMoreElementThrow((NothingPicker) picker.shrink(element, new RandomFloat(), 1));
+		NothingPicker<Integer> picker = new NothingPicker<Integer>();
+		noMoreElementThrow(picker.shrink(element, new RandomFloat(), 1));
 	}
 }

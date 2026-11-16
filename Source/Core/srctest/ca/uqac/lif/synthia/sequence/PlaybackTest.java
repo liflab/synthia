@@ -14,7 +14,7 @@ public class PlaybackTest
   public void loop()
 	{
 		Integer[] int_array = new Integer[] { 1, 2, 1 };
-		Playback int_pb = new Playback<Integer>(int_array);
+		Playback<Integer> int_pb = new Playback<Integer>(int_array);
 
 		for (int i = 0; i < 100; i++)
 		{
@@ -30,7 +30,7 @@ public class PlaybackTest
 	{
 
 		Integer[] int_array = new Integer[] { 1, 2, 1 };
-		Playback int_pb = new Playback<Integer>(int_array);
+		Playback<Integer> int_pb = new Playback<Integer>(int_array);
 		int_pb.setLoop(false);
 		for (int i = 0; i < int_array.length; i++)
 		{
@@ -50,13 +50,13 @@ public class PlaybackTest
   public void duplicate()
 	{
 		Integer[] intarray = new Integer[] { 1, 2, 1 };
-		Playback intpb = new Playback<Integer>(intarray);
+		Playback<Integer> intpb = new Playback<Integer>(intarray);
 		intpb.setLoop(false);
 		for (int i = 0; i < intarray.length; i++)
 		{
 			intpb.pick();
 		}
-		Playback intpb2 = intpb.duplicate(true);
+		Playback<Integer> intpb2 = intpb.duplicate(true);
 		assertThrows(NoMoreElementException.class, new Executable()
 		{
 			@Override public void execute() throws Throwable
@@ -69,7 +69,7 @@ public class PlaybackTest
 	@Test
   public void isDone(){
       Integer[] int_array = new Integer[] { 1, 2, 1 };
-      Playback int_pb = new Playback<Integer>(int_array);
+      Playback<Integer> int_pb = new Playback<Integer>(int_array);
       int_pb.setLoop(false);
       Assertions.assertEquals(false,int_pb.isDone());
       int_pb.pick();

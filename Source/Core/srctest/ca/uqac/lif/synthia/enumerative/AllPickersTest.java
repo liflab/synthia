@@ -86,11 +86,10 @@ public class AllPickersTest
 
 
 
-	@SuppressWarnings("rawtypes")
 	@Test
 	public void property()
 	{
-		Bounded[] enum_picks = new Bounded[]{new AllBooleans(), new AllBooleans()
+		Bounded<?>[] enum_picks = new Bounded<?>[]{new AllBooleans(), new AllBooleans()
 		, new AllBooleans()};
 		AllPickers all_picks = new AllPickers(enum_picks);
 		Object[] results = getResultsArray();
@@ -111,7 +110,7 @@ public class AllPickersTest
 	@Test
 	public void DuplicateWithState()
 	{
-		Bounded[] enum_picks = new Bounded[]{new AllBooleans(), new AllBooleans()
+		Bounded<?>[] enum_picks = new Bounded<?>[]{new AllBooleans(), new AllBooleans()
 				, new AllBooleans()};
 		AllPickers all_picks = new AllPickers(enum_picks);
 
@@ -138,7 +137,7 @@ public class AllPickersTest
 	@Test
 	public void DuplicateWithoutState()
 	{
-		Bounded<?>[] enum_picks = new Bounded[]{new AllBooleans(), new AllBooleans()
+		Bounded<?>[] enum_picks = new Bounded<?>[]{new AllBooleans(), new AllBooleans()
 				, new AllBooleans()};
 		AllPickers all_picks = new AllPickers(enum_picks);
 
@@ -169,7 +168,7 @@ public class AllPickersTest
 	@Test
 	public void isDone()
 	{
-		AllPickers all_picks = new AllPickers(new Bounded[] {new AllBooleans(), new AllBooleans(), new AllBooleans()});
+		AllPickers all_picks = new AllPickers(new Bounded<?>[] {new AllBooleans(), new AllBooleans(), new AllBooleans()});
 		for (int i = 0; i < 8; i++)
 		{
 			Assertions.assertEquals(false, all_picks.isDone());
@@ -181,7 +180,7 @@ public class AllPickersTest
 	@Test
 	public void NoMoreException()
 	{
-		Bounded[] enum_picks = new Bounded[]{new AllBooleans(), new AllBooleans()
+		Bounded<?>[] enum_picks = new Bounded<?>[]{new AllBooleans(), new AllBooleans()
 				, new AllBooleans()};
 		AllPickers all_picks = new AllPickers(enum_picks);
 
@@ -196,7 +195,7 @@ public class AllPickersTest
 	@Test
 	public void testEmpty()
 	{
-		AllPickers all_picks = new AllPickers(new Bounded[] {new AllBooleans(), new Playback<Object>()});
+		AllPickers all_picks = new AllPickers(new Bounded<?>[] {new AllBooleans(), new Playback<Object>()});
 		Assertions.assertTrue(all_picks.isDone());
 	}
 }
